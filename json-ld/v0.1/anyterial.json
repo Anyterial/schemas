@@ -1,0 +1,16 @@
+{
+    "@context": {
+        "id": "@id",
+        "type": "@type",
+        "data": "@graph",
+        "attributes": "@nest",
+        "spacegroup": {
+            "@id": "https://schemas.anyterial.se/json-ld/v0.1/nodetypes/anyterial/spacegroup",
+            "@context": "https://schemas.anyterial.se/json-ld/v0.1/nodetypes/anyterial/spacegroup.json"
+        },
+        "pointgroup": {
+            "@id": "https://schemas.anyterial.se/json-ld/v0.1/nodetypes/anyterial/pointgroup",
+            "@context": "https://schemas.anyterial.se/json-ld/v0.1/nodetypes/anyterial/pointgroup.json"
+        }
+    }
+}

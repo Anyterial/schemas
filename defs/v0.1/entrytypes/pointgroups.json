@@ -1,0 +1,1548 @@
+{
+    "$id": "https://schemas.anyterial.se/defs/v0.1/entrytypes/pointgroups",
+    "$schema": "https://schemas.optimade.org/meta/v1.2/optimade/entrytype_definition.json",
+    "type": "object",
+    "title": "Anyterial point group symmetry fields",
+    "x-optimade-definition": {
+        "kind": "entrytype",
+        "format": "1.3",
+        "version": "0.1.0",
+        "name": "pointgroups",
+        "label": "pointgroups_entrytype_anyterial"
+    },
+    "properties": {
+        "id": {
+            "$id": "https://schemas.optimade.org/defs/v1.2/properties/core/id",
+            "x-optimade-requirements": {
+                "support": "must",
+                "sortable": true,
+                "query-support": "all mandatory",
+                "response-level": "always"
+            },
+            "title": "ID",
+            "x-optimade-type": "string",
+            "x-optimade-definition": {
+                "label": "id_core",
+                "kind": "property",
+                "version": "1.2.0",
+                "format": "1.2",
+                "name": "id"
+            },
+            "type": [
+                "string"
+            ],
+            "description": "A unique string referencing a specific entry in the database.\n\n**Requirements/Conventions:**\n\n- Taken together, the ID and entry type MUST uniquely identify the entry.\n- Reasonably short IDs are encouraged and SHOULD NOT be longer than 255 characters.\n- IDs MAY change over time.",
+            "examples": [
+                "db/1234567",
+                "cod/2000000",
+                "cod/2000000@1234567",
+                "nomad/L1234567890",
+                "42"
+            ],
+            "x-optimade-unit": "inapplicable"
+        },
+        "type": {
+            "$id": "https://schemas.optimade.org/defs/v1.2/properties/core/type",
+            "x-optimade-requirements": {
+                "support": "must",
+                "sortable": true,
+                "query-support": "all mandatory",
+                "response-level": "always"
+            },
+            "title": "type",
+            "x-optimade-type": "string",
+            "x-optimade-definition": {
+                "label": "type_core",
+                "kind": "property",
+                "version": "1.2.0",
+                "format": "1.2",
+                "name": "type"
+            },
+            "type": [
+                "string"
+            ],
+            "description": "The name of the type of an entry.\n\n**Requirements/Conventions:**\n\n- MUST be an existing entry type.\n- The entry of type <type> and ID <id> MUST be returned in response to a request for /<type>/<id> under the versioned or unversioned base URL serving the API.",
+            "examples": [
+                "structures"
+            ],
+            "x-optimade-unit": "inapplicable"
+        },
+        "immutable_id": {
+            "$id": "https://schemas.optimade.org/defs/v1.2/properties/core/immutable_id",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "all mandatory",
+                "response-level": "may"
+            },
+            "title": "immutable ID",
+            "x-optimade-type": "string",
+            "x-optimade-definition": {
+                "label": "immutable_id_core",
+                "kind": "property",
+                "version": "1.2.0",
+                "format": "1.2",
+                "name": "immutable_id"
+            },
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "The entry's immutable ID (e.g., a UUID).\n\n**Requirements/Conventions:**\n\n- This is important for databases having preferred IDs that point to \"the latest version\" of a record, but still offer access to older variants.\n- This ID maps to the version-specific record, in case it changes in the future.",
+            "examples": [
+                "8bd3e750-b477-41a0-9b11-3a799f21b44f",
+                "fjeiwoj,54;@=%<>#32"
+            ],
+            "x-optimade-unit": "inapplicable"
+        },
+        "last_modified": {
+            "$id": "https://schemas.optimade.org/defs/v1.2/properties/core/last_modified",
+            "x-optimade-requirements": {
+                "support": "should",
+                "sortable": false,
+                "query-support": "all mandatory",
+                "response-level": "must"
+            },
+            "title": "last modified",
+            "x-optimade-type": "timestamp",
+            "x-optimade-definition": {
+                "label": "last_modified_core",
+                "kind": "property",
+                "version": "1.2.0",
+                "format": "1.2",
+                "name": "last_modified"
+            },
+            "type": [
+                "string",
+                "null"
+            ],
+            "format": "date-time",
+            "description": "Date and time representing when the entry was last modified.",
+            "examples": [
+                "2007-04-05T14:30:20Z"
+            ],
+            "x-optimade-unit": "inapplicable"
+        },
+        "character_table_complex": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_complex",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Character Table Complex",
+            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+            "x-optimade-type": "list",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "character_table_complex",
+                "label": "character_table_complex_pointgroups"
+            },
+            "type": [
+                "array",
+                "null"
+            ],
+            "description": "Complex irreducible character table of the crystallographic point group. Rows correspond to complex irreducible representations and columns follow the order of `conjugacy_classes`.",
+            "x-optimade-unit": "inapplicable",
+            "items": {
+                "x-optimade-type": "dictionary",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "One row of a point-group character table.",
+                "properties": {
+                    "label": {
+                        "x-optimade-type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Irreducible-representation label.",
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "label_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
+                        "title": "String markups",
+                        "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "string_markups",
+                            "label": "string_markups_core"
+                        },
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+                        "properties": {
+                            "html": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "HTML rendering of the sibling string."
+                            },
+                            "latex": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "LaTeX rendering of the sibling string."
+                            },
+                            "unicode": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Unicode rendering of the sibling string."
+                            }
+                        },
+                        "examples": [
+                            {
+                                "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                "latex": "\\mathit{P}\\,2_{1}/c",
+                                "unicode": "P2\u2081/c"
+                            }
+                        ]
+                    },
+                    "dimension": {
+                        "x-optimade-type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Dimension of the irreducible representation.",
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "characters": {
+                        "x-optimade-type": "list",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Characters for the conjugacy classes in table order.",
+                        "items": {
+                            "x-optimade-type": "dictionary",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "One complex character value represented as exact real and imaginary parts.",
+                            "x-optimade-unit": "inapplicable",
+                            "properties": {
+                                "re": {
+                                    "x-optimade-type": "string",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Exact real part represented as a string.",
+                                    "x-optimade-unit": "inapplicable"
+                                },
+                                "im": {
+                                    "x-optimade-type": "string",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Exact imaginary part represented as a string.",
+                                    "x-optimade-unit": "inapplicable"
+                                }
+                            }
+                        },
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "frobenius_schur_indicator": {
+                        "x-optimade-type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Frobenius-Schur indicator of the representation.",
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "basis_linear": {
+                        "x-optimade-type": "list",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Linear basis functions transforming as this representation.",
+                        "items": {
+                            "x-optimade-type": "string",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "One basis function.",
+                            "x-optimade-unit": "inapplicable"
+                        },
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "basis_rotation": {
+                        "x-optimade-type": "list",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Rotational basis functions transforming as this representation.",
+                        "items": {
+                            "x-optimade-type": "string",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "One rotational basis function.",
+                            "x-optimade-unit": "inapplicable"
+                        },
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "basis_quadratic": {
+                        "x-optimade-type": "list",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Quadratic basis functions transforming as this representation.",
+                        "items": {
+                            "x-optimade-type": "string",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "One quadratic basis function.",
+                            "x-optimade-unit": "inapplicable"
+                        },
+                        "x-optimade-unit": "inapplicable"
+                    }
+                },
+                "x-optimade-unit": "inapplicable"
+            },
+            "examples": [
+                [
+                    {
+                        "label": "A",
+                        "dimension": 1,
+                        "characters": [
+                            1
+                        ],
+                        "frobenius_schur_indicator": 1,
+                        "label_markup": {
+                            "latex": "A",
+                            "unicode": "A"
+                        }
+                    }
+                ],
+                [
+                    {
+                        "label": "Ag",
+                        "dimension": 1,
+                        "characters": [
+                            1,
+                            1
+                        ],
+                        "frobenius_schur_indicator": 1,
+                        "label_markup": {
+                            "latex": "A_{g}",
+                            "unicode": "Ag"
+                        }
+                    },
+                    {
+                        "label": "Au",
+                        "dimension": 1,
+                        "characters": [
+                            1,
+                            -1
+                        ],
+                        "frobenius_schur_indicator": 1,
+                        "label_markup": {
+                            "latex": "A_{u}",
+                            "unicode": "Au"
+                        }
+                    }
+                ]
+            ]
+        },
+        "character_table_real": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_real",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Character Table Real",
+            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+            "x-optimade-type": "list",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "character_table_real",
+                "label": "character_table_real_pointgroups"
+            },
+            "type": [
+                "array",
+                "null"
+            ],
+            "description": "Real irreducible character table of the crystallographic point group. Rows correspond to real irreducible representations and columns follow the order of `conjugacy_classes`.",
+            "x-optimade-unit": "inapplicable",
+            "items": {
+                "x-optimade-type": "dictionary",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "One row of a point-group character table.",
+                "properties": {
+                    "label": {
+                        "x-optimade-type": "string",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Irreducible-representation label.",
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "label_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
+                        "title": "String markups",
+                        "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "string_markups",
+                            "label": "string_markups_core"
+                        },
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+                        "properties": {
+                            "html": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "HTML rendering of the sibling string."
+                            },
+                            "latex": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "LaTeX rendering of the sibling string."
+                            },
+                            "unicode": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Unicode rendering of the sibling string."
+                            }
+                        },
+                        "examples": [
+                            {
+                                "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                "latex": "\\mathit{P}\\,2_{1}/c",
+                                "unicode": "P2\u2081/c"
+                            }
+                        ]
+                    },
+                    "dimension": {
+                        "x-optimade-type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Dimension of the irreducible representation.",
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "characters": {
+                        "x-optimade-type": "list",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Characters for the conjugacy classes in table order.",
+                        "items": {
+                            "x-optimade-type": "integer",
+                            "type": [
+                                "integer",
+                                "null"
+                            ],
+                            "description": "One real character value represented as an exact integer.",
+                            "x-optimade-unit": "inapplicable"
+                        },
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "frobenius_schur_indicator": {
+                        "x-optimade-type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Frobenius-Schur indicator of the representation.",
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "basis_linear": {
+                        "x-optimade-type": "list",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Linear basis functions transforming as this representation.",
+                        "items": {
+                            "x-optimade-type": "string",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "One basis function.",
+                            "x-optimade-unit": "inapplicable"
+                        },
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "basis_rotation": {
+                        "x-optimade-type": "list",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Rotational basis functions transforming as this representation.",
+                        "items": {
+                            "x-optimade-type": "string",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "One rotational basis function.",
+                            "x-optimade-unit": "inapplicable"
+                        },
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "basis_quadratic": {
+                        "x-optimade-type": "list",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Quadratic basis functions transforming as this representation.",
+                        "items": {
+                            "x-optimade-type": "string",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "One quadratic basis function.",
+                            "x-optimade-unit": "inapplicable"
+                        },
+                        "x-optimade-unit": "inapplicable"
+                    }
+                },
+                "x-optimade-unit": "inapplicable"
+            },
+            "examples": [
+                [
+                    {
+                        "label": "A",
+                        "dimension": 1,
+                        "characters": [
+                            1
+                        ],
+                        "basis_linear": [
+                            "x",
+                            "y"
+                        ],
+                        "basis_rotation": [
+                            "Rx",
+                            "Ry"
+                        ],
+                        "basis_quadratic": [
+                            "x^2",
+                            "y^2"
+                        ],
+                        "label_markup": {
+                            "latex": "A",
+                            "unicode": "A"
+                        }
+                    }
+                ],
+                [
+                    {
+                        "label": "Ag",
+                        "dimension": 1,
+                        "characters": [
+                            1,
+                            1
+                        ],
+                        "basis_rotation": [
+                            "Rx",
+                            "Ry"
+                        ],
+                        "basis_quadratic": [
+                            "x^2",
+                            "y^2"
+                        ],
+                        "label_markup": {
+                            "latex": "A_{g}",
+                            "unicode": "Ag"
+                        }
+                    },
+                    {
+                        "label": "Au",
+                        "dimension": 1,
+                        "characters": [
+                            1,
+                            -1
+                        ],
+                        "basis_linear": [
+                            "x",
+                            "y"
+                        ],
+                        "label_markup": {
+                            "latex": "A_{u}",
+                            "unicode": "Au"
+                        }
+                    }
+                ]
+            ]
+        },
+        "conjugacy_classes": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/conjugacy_classes",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Conjugacy Classes",
+            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+            "x-optimade-type": "list",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "conjugacy_classes",
+                "label": "conjugacy_classes_pointgroups"
+            },
+            "type": [
+                "array",
+                "null"
+            ],
+            "description": "Conjugacy classes of a crystallographic point group. Each class lists its member operation indices, a representative operation, a conventional class label, and operation-type metadata used by the character tables.",
+            "x-optimade-unit": "inapplicable",
+            "items": {
+                "x-optimade-type": "dictionary",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "One conjugacy class of a crystallographic point group.",
+                "properties": {
+                    "label": {
+                        "x-optimade-type": "dictionary",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "description": "Rendered class label.",
+                        "properties": {
+                            "ascii": {
+                                "x-optimade-type": "string",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Plain-text rendering intended for logs, command-line output, or compact display.",
+                                "x-optimade-unit": "inapplicable"
+                            },
+                            "unicode": {
+                                "x-optimade-type": "string",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Unicode rendering of the same label.",
+                                "x-optimade-unit": "inapplicable"
+                            },
+                            "latex": {
+                                "x-optimade-type": "string",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "LaTeX rendering of the same label.",
+                                "x-optimade-unit": "inapplicable"
+                            }
+                        },
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "size": {
+                        "x-optimade-type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of point-group operations in the class.",
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "members": {
+                        "x-optimade-type": "list",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Indices of operations belonging to this class.",
+                        "items": {
+                            "x-optimade-type": "integer",
+                            "type": [
+                                "integer",
+                                "null"
+                            ],
+                            "description": "Operation index.",
+                            "x-optimade-unit": "inapplicable"
+                        },
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "representative": {
+                        "x-optimade-type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Index of a representative operation for the class.",
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "op_type": {
+                        "x-optimade-type": "integer",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Numeric operation type code of the representative.",
+                        "x-optimade-unit": "inapplicable"
+                    },
+                    "op_axis": {
+                        "x-optimade-type": "list",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Three integer components.",
+                        "items": {
+                            "x-optimade-type": "integer",
+                            "type": [
+                                "integer",
+                                "null"
+                            ],
+                            "description": "One integer component.",
+                            "x-optimade-unit": "inapplicable"
+                        },
+                        "x-optimade-unit": "inapplicable"
+                    }
+                },
+                "x-optimade-unit": "inapplicable"
+            },
+            "examples": [
+                [
+                    {
+                        "label": {
+                            "ascii": "E",
+                            "unicode": "E",
+                            "latex": "E"
+                        },
+                        "size": 1,
+                        "members": [
+                            0
+                        ],
+                        "representative": 0,
+                        "op_type": 1,
+                        "op_axis": [
+                            0,
+                            0
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "label": {
+                            "ascii": "E",
+                            "unicode": "E",
+                            "latex": "E"
+                        },
+                        "size": 1,
+                        "members": [
+                            0
+                        ],
+                        "representative": 0,
+                        "op_type": 1,
+                        "op_axis": [
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "label": {
+                            "ascii": "i",
+                            "unicode": "i",
+                            "latex": "i"
+                        },
+                        "size": 1,
+                        "members": [
+                            1
+                        ],
+                        "representative": 1,
+                        "op_type": -1,
+                        "op_axis": [
+                            0,
+                            0
+                        ]
+                    }
+                ]
+            ]
+        },
+        "crystal_system": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/crystal_system",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Crystal System",
+            "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+            "x-optimade-type": "string",
+            "x-compatibility": [
+                "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.crystal_system.html"
+            ],
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "crystal_system",
+                "label": "crystal_system_pointgroups"
+            },
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "The crystal system of the space group or point group.\n\nValues use the conventional crystallographic system names such as triclinic, monoclinic, orthorhombic, tetragonal, trigonal, hexagonal, and cubic.",
+            "x-optimade-unit": "inapplicable",
+            "examples": [
+                "triclinic",
+                "monoclinic"
+            ]
+        },
+        "hm_symbol": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/hm_symbol",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Hermann-Mauguin Symbol",
+            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+            "x-optimade-type": "string",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "hm_symbol",
+                "label": "hm_symbol_pointgroups"
+            },
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Hermann-Mauguin point-group symbol used as the key and display symbol for a point-group record.",
+            "x-optimade-unit": "inapplicable",
+            "examples": [
+                "1",
+                "-1"
+            ]
+        },
+        "is_centrosymmetric": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/is_centrosymmetric",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Is Centrosymmetric",
+            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+            "x-optimade-type": "boolean",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "is_centrosymmetric",
+                "label": "is_centrosymmetric_pointgroups"
+            },
+            "type": [
+                "boolean",
+                "null"
+            ],
+            "description": "Boolean flag indicating whether the point group contains inversion symmetry.",
+            "x-optimade-unit": "inapplicable",
+            "examples": [
+                false,
+                true
+            ]
+        },
+        "laue_class": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/laue_class",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Laue Class",
+            "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+            "x-optimade-type": "string",
+            "x-compatibility": [
+                "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.Laue_class.html"
+            ],
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "laue_class",
+                "label": "laue_class_pointgroups"
+            },
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "The Laue class associated with the space group or point group.\n\nThe Laue class groups point groups that become equivalent when inversion symmetry is included.",
+            "x-optimade-unit": "inapplicable",
+            "examples": [
+                "-1",
+                "2/m"
+            ]
+        },
+        "n_conjugacy_classes": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_conjugacy_classes",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "N Conjugacy Classes",
+            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+            "x-optimade-type": "integer",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "n_conjugacy_classes",
+                "label": "n_conjugacy_classes_pointgroups"
+            },
+            "type": [
+                "integer",
+                "null"
+            ],
+            "description": "Number of conjugacy classes in the crystallographic point group.",
+            "x-optimade-unit": "inapplicable",
+            "examples": [
+                1,
+                2
+            ]
+        },
+        "order": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Order",
+            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+            "x-optimade-type": "integer",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "order",
+                "label": "order_pointgroups"
+            },
+            "type": [
+                "integer",
+                "null"
+            ],
+            "description": "Order of the point group, i.e. the number of operations in the finite point group.",
+            "x-optimade-unit": "inapplicable",
+            "examples": [
+                1,
+                2
+            ]
+        },
+        "pointgroups": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/pointgroups",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Point groups",
+            "$comment": "Anyterial top-level ordered point-group table.",
+            "x-optimade-type": "list",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "pointgroups",
+                "label": "pointgroups_pointgroups"
+            },
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "array",
+                "null"
+            ],
+            "description": "Ordered table of crystallographic point-group records.\nEach item contains point-group classification, finite point-group operations, conjugacy classes, and real and complex character tables generated from cctbx and spgrep.\n\n**Requirements/Conventions**:\n\n- The table covers the 32 crystallographic point groups.\n- The point-group records are independent of any particular space-group setting.\n- Character-table rows use Mulliken labels and include formatted label variants when available.",
+            "items": {
+                "x-optimade-type": "dictionary",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "One crystallographic point-group record.",
+                "properties": {}
+            },
+            "examples": [
+                [
+                    {
+                        "hm_symbol": "2/m",
+                        "order": 4
+                    }
+                ]
+            ]
+        },
+        "schoenflies": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Schoenflies Symbol",
+            "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+            "x-optimade-type": "string",
+            "x-compatibility": [
+                "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_Schoenflies.html"
+            ],
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "schoenflies",
+                "label": "schoenflies_pointgroups"
+            },
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "The Schoenflies symbol for the space-group type.\n\nThe ASCII form follows the CIF convention for `_space_group.name_Schoenflies`, using a period to separate the Schoenflies point-group symbol from the superscript index.",
+            "x-optimade-unit": "inapplicable",
+            "examples": [
+                "C1.1",
+                "C2.3"
+            ]
+        },
+        "symops": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/symops",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Symmetry operations",
+            "$comment": "Anyterial property definition using the common reusable symop object definition.",
+            "x-optimade-type": "list",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "symops",
+                "label": "symops_pointgroups"
+            },
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "array",
+                "null"
+            ],
+            "description": "Full list of symmetry-operation descriptors for a point group.\nEach list member is a `symop` object as defined by `/properties/symmetry/symop`.\nFor point-group operations, generated data currently uses `matrix` and `type`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/properties/symmetry/symop`.",
+            "items": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/symop",
+                "title": "Symmetry operation",
+                "$comment": "Reusable Anyterial source definition for one crystallographic symmetry-operation descriptor used inside point-group and space-group operation lists.",
+                "x-optimade-type": "dictionary",
+                "x-optimade-definition": {
+                    "kind": "property",
+                    "version": "0.1.0",
+                    "format": "1.3",
+                    "name": "symop",
+                    "label": "symop_symmetry"
+                },
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "A single crystallographic symmetry-operation descriptor.\nSpace-group operation lists currently store the operation type, axis, sense, and screw/glide decomposition.\nPoint-group operation lists currently store the full integer operation matrix under the legacy key `matrix` together with an integer operation-type code under `type`.\nFuture generated data may also use the semantic `rmat` key for the linear matrix part.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n      This is the preferred symbolic operation-type field in space-group operation descriptors.\n\n    - **type**: OPTIONAL; Integer.\n      Legacy numeric operation-type code used by point-group operation descriptors.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **matrix**: OPTIONAL; Integer 3x3 matrix.\n      Legacy full point-group operation matrix.\n\n    - **rmat**: OPTIONAL; Exact 3x3 matrix.\n      Semantic linear matrix part of an affine operation when emitted by a parent table.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the operation in `x,y,z` notation when available.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                "properties": {
+                    "rot_type": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Symbolic crystallographic operation-type label for the linear part."
+                    },
+                    "type": {
+                        "x-optimade-type": "integer",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Legacy numeric point-group operation-type code."
+                    },
+                    "axis": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "x-optimade-dimensions": {
+                            "names": [
+                                "dim_lattice"
+                            ],
+                            "sizes": [
+                                3
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Integer-vector axis or invariant-direction descriptor for the operation.",
+                        "items": {
+                            "x-optimade-type": "integer",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "integer"
+                            ],
+                            "description": "One integer component of the axis vector."
+                        }
+                    },
+                    "sense": {
+                        "x-optimade-type": "integer",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Rotation sense/sign convention returned by the generator."
+                    },
+                    "screw_glide": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "x-optimade-dimensions": {
+                            "names": [
+                                "dim_lattice"
+                            ],
+                            "sizes": [
+                                3
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                            "title": "fraction",
+                            "x-optimade-type": "string",
+                            "x-optimade-definition": {
+                                "label": "fraction_core",
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "fraction"
+                            },
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "A fraction represented as a string.",
+                            "examples": [
+                                "2/3",
+                                "5/42",
+                                "10",
+                                "0"
+                            ],
+                            "x-optimade-unit": "inapplicable"
+                        }
+                    },
+                    "origin_shift": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "x-optimade-dimensions": {
+                            "names": [
+                                "dim_lattice"
+                            ],
+                            "sizes": [
+                                3
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                            "title": "fraction",
+                            "x-optimade-type": "string",
+                            "x-optimade-definition": {
+                                "label": "fraction_core",
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "fraction"
+                            },
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "A fraction represented as a string.",
+                            "examples": [
+                                "2/3",
+                                "5/42",
+                                "10",
+                                "0"
+                            ],
+                            "x-optimade-unit": "inapplicable"
+                        }
+                    },
+                    "matrix": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "x-optimade-dimensions": {
+                            "names": [
+                                "dim_lattice",
+                                "dim_lattice"
+                            ],
+                            "sizes": [
+                                3,
+                                3
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Legacy integer 3 by 3 operation matrix used by point-group symops.",
+                        "items": {
+                            "x-optimade-type": "list",
+                            "x-optimade-unit": "inapplicable",
+                            "x-optimade-dimensions": {
+                                "names": [
+                                    "dim_lattice"
+                                ],
+                                "sizes": [
+                                    3
+                                ]
+                            },
+                            "type": [
+                                "array"
+                            ],
+                            "description": "One row of the integer operation matrix.",
+                            "items": {
+                                "x-optimade-type": "integer",
+                                "x-optimade-unit": "dimensionless",
+                                "type": [
+                                    "integer"
+                                ],
+                                "description": "One integer matrix entry."
+                            }
+                        }
+                    },
+                    "rmat": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/rmat",
+                        "title": "Symmetry operation linear matrix",
+                        "$comment": "Reusable Anyterial definition for the linear part of a same-setting affine operation.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "rmat",
+                            "label": "rmat_symmetry"
+                        },
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Linear matrix part of a same-setting affine operation acting on fractional coordinates.\nThe matrix is represented exactly as three rows with three entries per row.\nEntries are strings in transformation tables because affine-normalizer candidates may be generated and serialized through exact arithmetic.\n\n**Requirements/Conventions**:\n\n- It MUST be a 3 by 3 matrix represented as a list of three row lists.\n- Each row MUST contain three exact matrix entries represented as strings.\n- For point-group operation matrices that are emitted as integers under the legacy key `matrix`, the parent property describes that separate shape.",
+                        "x-optimade-dimensions": {
+                            "names": [
+                                "dim_lattice",
+                                "dim_lattice"
+                            ],
+                            "sizes": [
+                                3,
+                                3
+                            ]
+                        },
+                        "items": {
+                            "x-optimade-type": "list",
+                            "x-optimade-unit": "inapplicable",
+                            "x-optimade-dimensions": {
+                                "names": [
+                                    "dim_lattice"
+                                ],
+                                "sizes": [
+                                    3
+                                ]
+                            },
+                            "type": [
+                                "array"
+                            ],
+                            "description": "One row of the 3 by 3 operation matrix.",
+                            "items": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string"
+                                ],
+                                "description": "One exact matrix entry."
+                            }
+                        },
+                        "examples": [
+                            [
+                                [
+                                    "1",
+                                    "0",
+                                    "0"
+                                ],
+                                [
+                                    "0",
+                                    "1",
+                                    "0"
+                                ],
+                                [
+                                    "0",
+                                    "0",
+                                    "1"
+                                ]
+                            ],
+                            [
+                                [
+                                    "-1",
+                                    "0",
+                                    "0"
+                                ],
+                                [
+                                    "0",
+                                    "-1",
+                                    "0"
+                                ],
+                                [
+                                    "0",
+                                    "0",
+                                    "1"
+                                ]
+                            ]
+                        ]
+                    },
+                    "xyz": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Operation in `x,y,z` coordinate notation."
+                    },
+                    "is_proper": {
+                        "x-optimade-type": "boolean",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Whether the linear operation is proper."
+                    }
+                },
+                "examples": [
+                    {
+                        "rot_type": "2",
+                        "sense": 0,
+                        "axis": [
+                            0,
+                            1,
+                            0
+                        ],
+                        "screw_glide": [
+                            "0",
+                            "0",
+                            "0"
+                        ],
+                        "origin_shift": [
+                            "0",
+                            "0",
+                            "0"
+                        ]
+                    },
+                    {
+                        "matrix": [
+                            [
+                                1,
+                                0,
+                                0
+                            ],
+                            [
+                                0,
+                                1,
+                                0
+                            ],
+                            [
+                                0,
+                                0,
+                                1
+                            ]
+                        ],
+                        "xyz": "x,y,z",
+                        "type": 1,
+                        "is_proper": true,
+                        "axis": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "sense": 0
+                    }
+                ]
+            },
+            "examples": [
+                [
+                    {
+                        "rot_type": "1",
+                        "sense": 0,
+                        "axis": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "screw_glide": [
+                            "0",
+                            "0",
+                            "0"
+                        ],
+                        "origin_shift": [
+                            "0",
+                            "0",
+                            "0"
+                        ]
+                    }
+                ]
+            ]
+        },
+        "schoenflies_markup": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies_markup",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Schoenflies symbol markups",
+            "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "schoenflies_markup",
+                "label": "schoenflies_markup_pointgroups"
+            },
+            "description": "Display-oriented renderings of the Schoenflies symbol in `schoenflies`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+            "x-optimade-type": "dictionary",
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "html": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "HTML rendering of the sibling string."
+                },
+                "latex": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "LaTeX rendering of the sibling string."
+                },
+                "unicode": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Unicode rendering of the sibling string."
+                }
+            },
+            "examples": [
+                {
+                    "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                    "latex": "\\mathit{P}\\,2_{1}/c",
+                    "unicode": "P2\u2081/c"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,64 @@
+{
+    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/tvec",
+    "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
+    "title": "Symmetry operation translation vector",
+    "$comment": "Reusable Anyterial definition for the translation part of a same-setting affine operation.",
+    "x-optimade-type": "list",
+    "x-optimade-definition": {
+        "kind": "property",
+        "version": "0.1.0",
+        "format": "1.3",
+        "name": "tvec",
+        "label": "tvec_symmetry"
+    },
+    "x-optimade-unit": "inapplicable",
+    "type": [
+        "array",
+        "null"
+    ],
+    "description": "Translation part of a same-setting affine operation acting on fractional coordinates.\nThe vector is represented in fractional coordinates using exact fraction strings.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of three exact fractional-coordinate components.\n- Each component MUST be represented as a fraction string.\n- Together with `rmat`, this vector represents an affine operation within one coordinate setting.",
+    "x-optimade-dimensions": {
+        "names": [
+            "dim_lattice"
+        ],
+        "sizes": [
+            3
+        ]
+    },
+    "items": {
+        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+        "title": "fraction",
+        "x-optimade-type": "string",
+        "x-optimade-definition": {
+            "label": "fraction_core",
+            "kind": "property",
+            "version": "0.1.0",
+            "format": "1.3",
+            "name": "fraction"
+        },
+        "type": [
+            "string",
+            "null"
+        ],
+        "description": "A fraction represented as a string.",
+        "examples": [
+            "2/3",
+            "5/42",
+            "10",
+            "0"
+        ],
+        "x-optimade-unit": "inapplicable"
+    },
+    "examples": [
+        [
+            "0",
+            "0",
+            "0"
+        ],
+        [
+            "1/2",
+            "1/2",
+            "0"
+        ]
+    ]
+}

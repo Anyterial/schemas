@@ -1,0 +1,83 @@
+# Bärnighausen subgroup transforms (property)
+
+This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
+
+**ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/baernighausen`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/baernighausen.md)**  
+**Definition name:** `baernighausen`
+
+**Property name:** Bärnighausen subgroup transforms  
+**Description:** Bärnighausen subgroup transform table. Entries describe generated embeddings of a subgroup setting into a supergroup setting.
+The outer dictionary is keyed by the parent table convention, for example Hall entries or IT numbers.
+Transform records use `pmat` and `pvec` as defined by `/properties/symmetry/basis_transform`.  
+**Type:** dictionary  
+
+**Requirements/Conventions**:
+
+- Dynamic outer keys identify parent settings or space groups according to the containing dataset.
+- Values are either dictionaries containing an `items` list of transform records or direct maps to lists of transform records.
+- Each transform record SHOULD follow `/properties/symmetry/basis_transform` for its matrix and vector fields.
+
+**Examples:**
+
+- `{"c_2y": {"items": [{"index": 2, "pmat": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "pvec": ["0", "0", "0"]}]}}`
+
+**Formats:** [[JSON](baernighausen.json)] [[MD](baernighausen.md)]
+
+**JSON definition:**
+
+``` json
+{
+    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/baernighausen",
+    "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
+    "title": "B\u00e4rnighausen subgroup transforms",
+    "$comment": "Anyterial transform collection property using the common basis-transform definition for transform items.",
+    "x-optimade-type": "dictionary",
+    "x-optimade-definition": {
+        "kind": "property",
+        "version": "0.1.0",
+        "format": "1.3",
+        "name": "baernighausen",
+        "label": "baernighausen_spacegroups"
+    },
+    "x-optimade-unit": "inapplicable",
+    "type": [
+        "object",
+        "null"
+    ],
+    "description": "B\u00e4rnighausen subgroup transform table. Entries describe generated embeddings of a subgroup setting into a supergroup setting.\nThe outer dictionary is keyed by the parent table convention, for example Hall entries or IT numbers.\nTransform records use `pmat` and `pvec` as defined by `/properties/symmetry/basis_transform`.\n\n**Requirements/Conventions**:\n\n- Dynamic outer keys identify parent settings or space groups according to the containing dataset.\n- Values are either dictionaries containing an `items` list of transform records or direct maps to lists of transform records.\n- Each transform record SHOULD follow `/properties/symmetry/basis_transform` for its matrix and vector fields.",
+    "properties": {},
+    "examples": [
+        {
+            "c_2y": {
+                "items": [
+                    {
+                        "index": 2,
+                        "pmat": [
+                            [
+                                "1",
+                                "0",
+                                "0"
+                            ],
+                            [
+                                "0",
+                                "1",
+                                "0"
+                            ],
+                            [
+                                "0",
+                                "0",
+                                "2"
+                            ]
+                        ],
+                        "pvec": [
+                            "0",
+                            "0",
+                            "0"
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}
+```

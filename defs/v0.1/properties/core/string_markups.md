@@ -1,0 +1,91 @@
+# String markups (property)
+
+This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
+
+**ID: [`https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups`](https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups.md)**  
+**Definition name:** `string_markups`
+
+**Property name:** String markups  
+**Description:** Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.
+The object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.  
+**Type:** dictionary  
+
+**Requirements/Conventions**:
+
+- It MUST be a dictionary with the following keys:
+
+    - **html**: OPTIONAL; String.
+      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.
+
+    - **latex**: OPTIONAL; String.
+      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.
+
+    - **unicode**: OPTIONAL; String.
+      Unicode rendering of the sibling string, using Unicode code points for display features where practical.
+
+**Examples:**
+
+- `{"html": "<i>P</i> 2<sub>1</sub>/<i>c</i>", "latex": "\\mathit{P}\\,2_{1}/c", "unicode": "P2\u2081/c"}`
+
+**Formats:** [[JSON](string_markups.json)] [[MD](string_markups.md)]
+
+**JSON definition:**
+
+``` json
+{
+    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
+    "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
+    "title": "String markups",
+    "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
+    "x-optimade-type": "dictionary",
+    "x-optimade-definition": {
+        "kind": "property",
+        "version": "0.1.0",
+        "format": "1.3",
+        "name": "string_markups",
+        "label": "string_markups_core"
+    },
+    "x-optimade-unit": "inapplicable",
+    "type": [
+        "object",
+        "null"
+    ],
+    "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+    "properties": {
+        "html": {
+            "x-optimade-type": "string",
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "HTML rendering of the sibling string."
+        },
+        "latex": {
+            "x-optimade-type": "string",
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "LaTeX rendering of the sibling string."
+        },
+        "unicode": {
+            "x-optimade-type": "string",
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Unicode rendering of the sibling string."
+        }
+    },
+    "examples": [
+        {
+            "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+            "latex": "\\mathit{P}\\,2_{1}/c",
+            "unicode": "P2\u2081/c"
+        }
+    ]
+}
+```

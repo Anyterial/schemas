@@ -1,0 +1,274 @@
+# Character Table Real (property)
+
+This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
+
+**ID: [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_real`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_real.md)**  
+**Definition name:** `character_table_real`
+
+**Property name:** Character Table Real  
+**Description:** Real irreducible character table of the crystallographic point group. Rows correspond to real irreducible representations and columns follow the order of `conjugacy_classes`.  
+**Type:** list  
+
+
+
+**Examples:**
+
+- `[{"label": "A", "dimension": 1, "characters": [1], "basis_linear": ["x", "y"], "basis_rotation": ["Rx", "Ry"], "basis_quadratic": ["x^2", "y^2"], "label_markup": {"latex": "A", "unicode": "A"}}]`
+- `[{"label": "Ag", "dimension": 1, "characters": [1, 1], "basis_rotation": ["Rx", "Ry"], "basis_quadratic": ["x^2", "y^2"], "label_markup": {"latex": "A_{g}", "unicode": "Ag"}}, {"label": "Au", "dimension": 1, "characters": [1, -1], "basis_linear": ["x", "y"], "label_markup": {"latex": "A_{u}", "unicode": "Au"}}]`
+
+**Formats:** [[JSON](character_table_real.json)] [[MD](character_table_real.md)]
+
+**JSON definition:**
+
+``` json
+{
+    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_real",
+    "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
+    "title": "Character Table Real",
+    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+    "x-optimade-type": "list",
+    "x-optimade-definition": {
+        "kind": "property",
+        "version": "0.1.0",
+        "format": "1.3",
+        "name": "character_table_real",
+        "label": "character_table_real_pointgroups"
+    },
+    "type": [
+        "array",
+        "null"
+    ],
+    "description": "Real irreducible character table of the crystallographic point group. Rows correspond to real irreducible representations and columns follow the order of `conjugacy_classes`.",
+    "x-optimade-unit": "inapplicable",
+    "items": {
+        "x-optimade-type": "dictionary",
+        "type": [
+            "object",
+            "null"
+        ],
+        "description": "One row of a point-group character table.",
+        "properties": {
+            "label": {
+                "x-optimade-type": "string",
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Irreducible-representation label.",
+                "x-optimade-unit": "inapplicable"
+            },
+            "label_markup": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
+                "title": "String markups",
+                "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
+                "x-optimade-type": "dictionary",
+                "x-optimade-definition": {
+                    "kind": "property",
+                    "version": "0.1.0",
+                    "format": "1.3",
+                    "name": "string_markups",
+                    "label": "string_markups_core"
+                },
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+                "properties": {
+                    "html": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "HTML rendering of the sibling string."
+                    },
+                    "latex": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "LaTeX rendering of the sibling string."
+                    },
+                    "unicode": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Unicode rendering of the sibling string."
+                    }
+                },
+                "examples": [
+                    {
+                        "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                        "latex": "\\mathit{P}\\,2_{1}/c",
+                        "unicode": "P2\u2081/c"
+                    }
+                ]
+            },
+            "dimension": {
+                "x-optimade-type": "integer",
+                "type": [
+                    "integer",
+                    "null"
+                ],
+                "description": "Dimension of the irreducible representation.",
+                "x-optimade-unit": "inapplicable"
+            },
+            "characters": {
+                "x-optimade-type": "list",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Characters for the conjugacy classes in table order.",
+                "items": {
+                    "x-optimade-type": "integer",
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "One real character value represented as an exact integer.",
+                    "x-optimade-unit": "inapplicable"
+                },
+                "x-optimade-unit": "inapplicable"
+            },
+            "frobenius_schur_indicator": {
+                "x-optimade-type": "integer",
+                "type": [
+                    "integer",
+                    "null"
+                ],
+                "description": "Frobenius-Schur indicator of the representation.",
+                "x-optimade-unit": "inapplicable"
+            },
+            "basis_linear": {
+                "x-optimade-type": "list",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Linear basis functions transforming as this representation.",
+                "items": {
+                    "x-optimade-type": "string",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "One basis function.",
+                    "x-optimade-unit": "inapplicable"
+                },
+                "x-optimade-unit": "inapplicable"
+            },
+            "basis_rotation": {
+                "x-optimade-type": "list",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Rotational basis functions transforming as this representation.",
+                "items": {
+                    "x-optimade-type": "string",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "One rotational basis function.",
+                    "x-optimade-unit": "inapplicable"
+                },
+                "x-optimade-unit": "inapplicable"
+            },
+            "basis_quadratic": {
+                "x-optimade-type": "list",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Quadratic basis functions transforming as this representation.",
+                "items": {
+                    "x-optimade-type": "string",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "One quadratic basis function.",
+                    "x-optimade-unit": "inapplicable"
+                },
+                "x-optimade-unit": "inapplicable"
+            }
+        },
+        "x-optimade-unit": "inapplicable"
+    },
+    "examples": [
+        [
+            {
+                "label": "A",
+                "dimension": 1,
+                "characters": [
+                    1
+                ],
+                "basis_linear": [
+                    "x",
+                    "y"
+                ],
+                "basis_rotation": [
+                    "Rx",
+                    "Ry"
+                ],
+                "basis_quadratic": [
+                    "x^2",
+                    "y^2"
+                ],
+                "label_markup": {
+                    "latex": "A",
+                    "unicode": "A"
+                }
+            }
+        ],
+        [
+            {
+                "label": "Ag",
+                "dimension": 1,
+                "characters": [
+                    1,
+                    1
+                ],
+                "basis_rotation": [
+                    "Rx",
+                    "Ry"
+                ],
+                "basis_quadratic": [
+                    "x^2",
+                    "y^2"
+                ],
+                "label_markup": {
+                    "latex": "A_{g}",
+                    "unicode": "Ag"
+                }
+            },
+            {
+                "label": "Au",
+                "dimension": 1,
+                "characters": [
+                    1,
+                    -1
+                ],
+                "basis_linear": [
+                    "x",
+                    "y"
+                ],
+                "label_markup": {
+                    "latex": "A_{u}",
+                    "unicode": "Au"
+                }
+            }
+        ]
+    ]
+}
+```

@@ -1,0 +1,48 @@
+# Hermann-Mauguin Cctbx Universal (property)
+
+This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
+
+**ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal.md)**  
+**Definition name:** `hm_cctbx_universal`
+
+**Property name:** Hermann-Mauguin Cctbx Universal  
+**Description:** Universal Hermann-Mauguin symbol returned by cctbx for this setting.  
+**Type:** string  
+
+This field records the cctbx-internal universal symbol used during generation. It is useful for diagnostics and for tracing generator behavior, but it is not the International Tables preferred symbol. Prefer `hm_short`, `hm_full`, and `hm_extended` for table-facing symbol data.
+
+**Examples:**
+
+- `"P 1"`
+- `"P -1"`
+
+**Formats:** [[JSON](hm_cctbx_universal.json)] [[MD](hm_cctbx_universal.md)]
+
+**JSON definition:**
+
+``` json
+{
+    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal",
+    "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
+    "title": "Hermann-Mauguin Cctbx Universal",
+    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+    "x-optimade-type": "string",
+    "x-optimade-definition": {
+        "kind": "property",
+        "version": "0.1.0",
+        "format": "1.3",
+        "name": "hm_cctbx_universal",
+        "label": "hm_cctbx_universal_spacegroups"
+    },
+    "type": [
+        "string",
+        "null"
+    ],
+    "description": "Universal Hermann-Mauguin symbol returned by cctbx for this setting.\n\nThis field records the cctbx-internal universal symbol used during generation. It is useful for diagnostics and for tracing generator behavior, but it is not the International Tables preferred symbol. Prefer `hm_short`, `hm_full`, and `hm_extended` for table-facing symbol data.",
+    "x-optimade-unit": "inapplicable",
+    "examples": [
+        "P 1",
+        "P -1"
+    ]
+}
+```

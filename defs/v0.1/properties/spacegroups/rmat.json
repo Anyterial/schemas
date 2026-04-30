@@ -1,0 +1,90 @@
+{
+    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/rmat",
+    "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
+    "title": "Symmetry operation linear matrix",
+    "$comment": "Anyterial space-group property definition inheriting the common semantic `rmat` definition.",
+    "x-optimade-definition": {
+        "kind": "property",
+        "version": "0.1.0",
+        "format": "1.3",
+        "name": "rmat",
+        "label": "rmat_spacegroups"
+    },
+    "description": "Linear matrix part of a same-setting affine operation.\nThis emitted space-group property uses the common `/properties/symmetry/rmat` definition for its nested value shape and dimensional metadata.",
+    "x-optimade-type": "list",
+    "x-optimade-unit": "inapplicable",
+    "type": [
+        "array",
+        "null"
+    ],
+    "x-optimade-dimensions": {
+        "names": [
+            "dim_lattice",
+            "dim_lattice"
+        ],
+        "sizes": [
+            3,
+            3
+        ]
+    },
+    "items": {
+        "x-optimade-type": "list",
+        "x-optimade-unit": "inapplicable",
+        "x-optimade-dimensions": {
+            "names": [
+                "dim_lattice"
+            ],
+            "sizes": [
+                3
+            ]
+        },
+        "type": [
+            "array"
+        ],
+        "description": "One row of the 3 by 3 operation matrix.",
+        "items": {
+            "x-optimade-type": "string",
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "string"
+            ],
+            "description": "One exact matrix entry."
+        }
+    },
+    "examples": [
+        [
+            [
+                "1",
+                "0",
+                "0"
+            ],
+            [
+                "0",
+                "1",
+                "0"
+            ],
+            [
+                "0",
+                "0",
+                "1"
+            ]
+        ],
+        [
+            [
+                "-1",
+                "0",
+                "0"
+            ],
+            [
+                "0",
+                "-1",
+                "0"
+            ],
+            [
+                "0",
+                "0",
+                "1"
+            ]
+        ]
+    ]
+}
