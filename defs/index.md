@@ -87,6 +87,11 @@
                 
                 Bounded affine normalizer coset representatives modulo the space group, generated from bounded unimodular integer linear parts. This is a finite representative table, not a complete infinite affine normalizer.
 
+            * **[Affine normalizer coset data](v0.1/properties/spacegroups/affine_normalizer_coset_data.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_coset_data`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_coset_data.md)
+                
+                Ordered table of affine normalizer coset representative data by Hall setting.
+                Each row contains the finite listed coset representatives used by the symmetry-finder runtime for one Hall setting, plus counts and candidate-set metadata.
+
             * **[Affine normalizer cosets](v0.1/properties/spacegroups/affine_normalizer_cosets.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_cosets`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_cosets.md)
                 
                 Runtime list of bounded affine normalizer coset representatives modulo the space group.
@@ -197,6 +202,11 @@
                 
                 Display-oriented renderings of the Hall symbol in `hall`.
                 The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.
+
+            * **[Hall-symbol to affine normalizer coset data index](v0.1/properties/spacegroups/hall_symbol_to_affine_normalizer_coset_data.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_symbol_to_affine_normalizer_coset_data`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_symbol_to_affine_normalizer_coset_data.md)
+                
+                Index from normalized Hall entries to row positions in the top-level `affine_normalizer_coset_data` table.
+                It allows consumers to look up affine normalizer coset data by Hall entry while keeping `affine_normalizer_coset_data` as a compact ordered list.
 
             * **[Harker planes](v0.1/properties/spacegroups/harker_planes.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/harker_planes`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/harker_planes.md)
                 
@@ -450,6 +460,11 @@
             * **[Setting Plaintext](v0.1/properties/spacegroups/setting_plaintext.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_plaintext`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_plaintext.md)
                 
                 Human-readable description of the International Tables coordinate-system setting.
+
+            * **[Space-group symbols](v0.1/properties/spacegroups/spacegroup_symbols.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroup_symbols`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroup_symbols.md)
+                
+                Ordered table of conventional space-group symbol rows.
+                Each row describes one Hall setting where the International Tables symbol data is available, including the IT coordinate-system code, Hall symbol, IT number, and Hermann-Mauguin symbols.
 
             * **[Space groups](v0.1/properties/spacegroups/spacegroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroups`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroups.md)
                 

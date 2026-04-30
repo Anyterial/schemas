@@ -991,6 +991,54 @@
                         }
                     ]
                 },
+                "affine_normalizer_coset_data": {
+                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_coset_data",
+                    "x-optimade-requirements": {
+                        "support": "may",
+                        "sortable": false,
+                        "query-support": "none",
+                        "response-level": "may"
+                    },
+                    "title": "Affine normalizer coset data",
+                    "$comment": "Ordered Anyterial table of affine normalizer coset data by Hall setting.",
+                    "x-optimade-type": "list",
+                    "x-optimade-definition": {
+                        "kind": "property",
+                        "version": "0.1.0",
+                        "format": "1.3",
+                        "name": "affine_normalizer_coset_data",
+                        "label": "affine_normalizer_coset_data_spacegroups"
+                    },
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Ordered table of affine normalizer coset representative data by Hall setting.\nEach row contains the finite listed coset representatives used by the symmetry-finder runtime for one Hall setting, plus counts and candidate-set metadata.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain a `hall_entry` value that can be used with `hall_symbol_to_affine_normalizer_coset_data` to locate the same row.\n- The `affine_normalizer_cosets` field contains bounded unimodular-integer affine normalizer coset representatives modulo the space group.\n- The `orthogonal_affine_normalizer_cosets` field contains the signed-permutation subset retained for the orthogonal retry mode.\n- These are bounded finite representative tables, not complete infinite affine normalizers.",
+                    "items": {
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "description": "One Hall-setting affine normalizer coset data row.",
+                        "properties": {}
+                    },
+                    "examples": [
+                        [
+                            {
+                                "hall_entry": "p_1",
+                                "it_number": 1,
+                                "crystal_system": "triclinic",
+                                "affine_normalizer_cosets": [],
+                                "orthogonal_affine_normalizer_cosets": [],
+                                "n_cosets": 0,
+                                "n_orthogonal_cosets": 0
+                            }
+                        ]
+                    ]
+                },
                 "affine_normalizer_cosets": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_cosets",
                     "x-optimade-requirements": {
@@ -3564,6 +3612,38 @@
                         "description": "One alternate symbol string.",
                         "x-optimade-unit": "inapplicable"
                     }
+                },
+                "hall_symbol_to_affine_normalizer_coset_data": {
+                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_symbol_to_affine_normalizer_coset_data",
+                    "x-optimade-requirements": {
+                        "support": "may",
+                        "sortable": false,
+                        "query-support": "none",
+                        "response-level": "may"
+                    },
+                    "title": "Hall-symbol to affine normalizer coset data index",
+                    "$comment": "Anyterial top-level index from Hall entries to rows in the affine normalizer coset data table.",
+                    "x-optimade-type": "dictionary",
+                    "x-optimade-definition": {
+                        "kind": "property",
+                        "version": "0.1.0",
+                        "format": "1.3",
+                        "name": "hall_symbol_to_affine_normalizer_coset_data",
+                        "label": "hall_symbol_to_affine_normalizer_coset_data_spacegroups"
+                    },
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "description": "Index from normalized Hall entries to row positions in the top-level `affine_normalizer_coset_data` table.\nIt allows consumers to look up affine normalizer coset data by Hall entry while keeping `affine_normalizer_coset_data` as a compact ordered list.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary whose keys are normalized Hall entries using the same computer notation as the `hall_entry` field, with underscores replacing spaces.\n- Each value MUST be a zero-based integer index into the top-level `affine_normalizer_coset_data` list.\n- For every key-value pair, `affine_normalizer_coset_data[value].hall_entry` MUST equal the key.",
+                    "properties": {},
+                    "examples": [
+                        {
+                            "p_1": 0,
+                            "-p_1": 1
+                        }
+                    ]
                 },
                 "hall_entry": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
@@ -6426,6 +6506,53 @@
                         "unique axis c"
                     ]
                 },
+                "spacegroup_symbols": {
+                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroup_symbols",
+                    "x-optimade-requirements": {
+                        "support": "may",
+                        "sortable": false,
+                        "query-support": "none",
+                        "response-level": "may"
+                    },
+                    "title": "Space-group symbols",
+                    "$comment": "Ordered Anyterial table of conventional space-group symbols.",
+                    "x-optimade-type": "list",
+                    "x-optimade-definition": {
+                        "kind": "property",
+                        "version": "0.1.0",
+                        "format": "1.3",
+                        "name": "spacegroup_symbols",
+                        "label": "spacegroup_symbols_spacegroups"
+                    },
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Ordered table of conventional space-group symbol rows.\nEach row describes one Hall setting where the International Tables symbol data is available, including the IT coordinate-system code, Hall symbol, IT number, and Hermann-Mauguin symbols.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary SHOULD contain the setting identifier `setting_it_nc`, the Hall symbol `hall`, the International Tables number `it_number`, and the setting-specific Hermann-Mauguin symbols `hm_short`, `hm_full`, and `hm_extended` when available.\n- The order SHOULD follow the conventional ITA/Hall setting order used by the generated `symmetry_basics` space-group table.",
+                    "items": {
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "description": "One space-group symbol row.",
+                        "properties": {}
+                    },
+                    "examples": [
+                        [
+                            {
+                                "setting_it_nc": "1",
+                                "hall": "P 1",
+                                "it_number": 1,
+                                "hm_short": "P 1",
+                                "hm_full": "P 1",
+                                "hm_extended": "P 1"
+                            }
+                        ]
+                    ]
+                },
                 "spacegroups": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroups",
                     "x-optimade-requirements": {
@@ -6449,7 +6576,7 @@
                         "array",
                         "null"
                     ],
-                    "description": "Ordered table of crystallographic space-group setting records.\nEach item describes one concrete Hall/International Tables setting of a space group, including symbols, classifications, symmetry operations, asymmetric-unit information, Wyckoff positions, and related auxiliary data.\nThe companion `index_hall_entry_to_spacegroups` property maps normalized Hall entries to indices in this list.\n\n**Requirements/Conventions**:\n\n- Items MUST be ordered in the same setting order as `symbols.json.gz`, with additional cctbx-only Hall settings kept in their IT-number block.\n- A single IT number can occur in several items.\n- The `setting_it_nc` property gives the corresponding International Tables `n:c` setting code when applicable.",
+                    "description": "Ordered table of crystallographic space-group setting records.\nEach item describes one concrete Hall/International Tables setting of a space group, including symbols, classifications, symmetry operations, asymmetric-unit information, Wyckoff positions, and related auxiliary data.\nThe companion `index_hall_entry_to_spacegroups` property maps normalized Hall entries to indices in this list.\n\n**Requirements/Conventions**:\n\n- Items MUST be ordered in the same setting order as `spacegroup_symbols.json.gz`, with additional cctbx-only Hall settings kept in their IT-number block.\n- A single IT number can occur in several items.\n- The `setting_it_nc` property gives the corresponding International Tables `n:c` setting code when applicable.",
                     "items": {
                         "x-optimade-type": "dictionary",
                         "x-optimade-unit": "inapplicable",
