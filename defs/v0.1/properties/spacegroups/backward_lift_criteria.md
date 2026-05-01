@@ -6,20 +6,19 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `backward_lift_criteria`
 
 **Property name:** Backward lift criteria  
-**Description:** Criteria table used to lift occupied Wyckoff data from a subgroup back to a supergroup along a chosen Bärnighausen transform.
-The outer map is keyed by supergroup IT number and the next map is keyed by subgroup IT number.
+**Description:** Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen Bärnighausen transform.
+The map is keyed by subgroup IT number.
 Values are lists of transform records carrying a basis transform and a dictionary of Wyckoff-letter criteria.  
 **Type:** dictionary  
 
 **Requirements/Conventions**:
 
-- Dynamic outer keys MUST be supergroup IT numbers represented as strings.
-- Dynamic second-level keys MUST be subgroup IT numbers represented as strings.
+- Dynamic keys MUST be subgroup IT numbers represented as strings.
 - Transform records SHOULD include `index`, `pmat`, `pvec`, and `criteria`.
 
 **Examples:**
 
-- `{"1": {"2": [{"index": 2, "pmat": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "pvec": ["0", "0", "0"], "criteria": {"a": [{"roles": [["a", 0]], "coeffs": [[["1", "0", "0"]]], "target": ["0", "0", "0"]}]}}]}}`
+- `{"2": [{"index": 2, "pmat": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "pvec": ["0", "0", "0"], "criteria": {"a": [{"roles": [["a", 0]], "coeffs": [[["1", "0", "0"]]], "target": ["0", "0", "0"]}]}}]}`
 
 **Formats:** [[JSON](backward_lift_criteria.json)] [[MD](backward_lift_criteria.md)]
 
@@ -44,65 +43,63 @@ Values are lists of transform records carrying a basis transform and a dictionar
         "object",
         "null"
     ],
-    "description": "Criteria table used to lift occupied Wyckoff data from a subgroup back to a supergroup along a chosen B\u00e4rnighausen transform.\nThe outer map is keyed by supergroup IT number and the next map is keyed by subgroup IT number.\nValues are lists of transform records carrying a basis transform and a dictionary of Wyckoff-letter criteria.\n\n**Requirements/Conventions**:\n\n- Dynamic outer keys MUST be supergroup IT numbers represented as strings.\n- Dynamic second-level keys MUST be subgroup IT numbers represented as strings.\n- Transform records SHOULD include `index`, `pmat`, `pvec`, and `criteria`.",
+    "description": "Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen B\u00e4rnighausen transform.\nThe map is keyed by subgroup IT number.\nValues are lists of transform records carrying a basis transform and a dictionary of Wyckoff-letter criteria.\n\n**Requirements/Conventions**:\n\n- Dynamic keys MUST be subgroup IT numbers represented as strings.\n- Transform records SHOULD include `index`, `pmat`, `pvec`, and `criteria`.",
     "properties": {},
     "examples": [
         {
-            "1": {
-                "2": [
-                    {
-                        "index": 2,
-                        "pmat": [
-                            [
-                                "1",
-                                "0",
-                                "0"
-                            ],
-                            [
-                                "0",
-                                "1",
-                                "0"
-                            ],
-                            [
-                                "0",
-                                "0",
-                                "2"
-                            ]
-                        ],
-                        "pvec": [
-                            "0",
+            "2": [
+                {
+                    "index": 2,
+                    "pmat": [
+                        [
+                            "1",
                             "0",
                             "0"
                         ],
-                        "criteria": {
-                            "a": [
-                                {
-                                    "roles": [
-                                        [
-                                            "a",
-                                            0
-                                        ]
-                                    ],
-                                    "coeffs": [
-                                        [
-                                            [
-                                                "1",
-                                                "0",
-                                                "0"
-                                            ]
-                                        ]
-                                    ],
-                                    "target": [
-                                        "0",
-                                        "0",
-                                        "0"
+                        [
+                            "0",
+                            "1",
+                            "0"
+                        ],
+                        [
+                            "0",
+                            "0",
+                            "2"
+                        ]
+                    ],
+                    "pvec": [
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "criteria": {
+                        "a": [
+                            {
+                                "roles": [
+                                    [
+                                        "a",
+                                        0
                                     ]
-                                }
-                            ]
-                        }
+                                ],
+                                "coeffs": [
+                                    [
+                                        [
+                                            "1",
+                                            "0",
+                                            "0"
+                                        ]
+                                    ]
+                                ],
+                                "target": [
+                                    "0",
+                                    "0",
+                                    "0"
+                                ]
+                            }
+                        ]
                     }
-                ]
-            }
+                }
+            ]
         }
     ]
 }

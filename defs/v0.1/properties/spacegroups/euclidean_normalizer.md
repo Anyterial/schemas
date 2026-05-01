@@ -6,35 +6,43 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `euclidean_normalizer`
 
 **Property name:** Euclidean normalizer  
-**Description:** Finite Euclidean normalizer operations of a Hall setting, generated from cctbx. These are metric-preserving operations that normalize the space group in the chosen setting.  
+**Description:** Finite Euclidean normalizer operations for one crystallographic space-group setting.
+The Euclidean normalizer consists of metric-preserving affine operations that normalize the space group in the chosen setting.
+These operations are useful for algorithms that need to compare or enumerate equivalent descriptions of the same setting under rigid crystallographic changes of coordinates.  
 **Type:** dictionary  
+
+This object is generated from the finite Euclidean normalizer operations exposed by cctbx.
+It is not a bounded candidate search table.
+Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `bounds` do not belong to this property.
 
 **Requirements/Conventions**:
 
 - It MUST be a dictionary with the following keys:
 
-    - **items**: REQUIRED; List of dictionaries.
-      Listed normalizer operations or coset representatives.
-      Each item follows `/properties/symmetry/normalizer_representative`.
+    - **normalizer\_kind**: REQUIRED; String.
+      Kind label for this normalizer contribution.
+      For this property the value is `euclidean`.
 
-    - **n\_cosets**: OPTIONAL; Integer.
-      Number of listed coset representatives when the parent table is a coset table.
+    - **n\_centering\_translations**: REQUIRED; Integer.
+      Number of centering translations represented in the underlying Euclidean normalizer operation construction.
 
-    - **n\_orthogonal\_cosets**: OPTIONAL; Integer.
-      Number of listed representatives whose linear part is orthogonal.
+    - **n\_pointgroup\_symops**: REQUIRED; Integer.
+      Number of point-group symmetry operations represented before centering translations are combined with them.
 
-    - **candidate\_set**: OPTIONAL; String.
-      Name of the candidate set used for generation.
+    - **n\_symops**: REQUIRED; Integer.
+      Number of Euclidean normalizer operations listed in `symops`.
+      This value MUST equal the length of `symops`.
 
-    - **candidate\_sets**: OPTIONAL; List of strings.
-      Candidate-set names used for generation.
+    - **n\_linear\_parts**: REQUIRED; Integer.
+      Number of distinct `rmat` linear matrix parts represented in `symops`.
 
-    - **bounds**: OPTIONAL; Dictionary.
-      Generator bounds for finite bounded candidate searches.
+    - **symops**: REQUIRED; List of dictionaries.
+      Finite Euclidean normalizer operations for the setting.
+      Each item follows `/defs/v0.1/properties/symmetry/symop`.
 
 **Examples:**
 
-- `{"items": [{"rmat": [["-1", "0", "0"], ["0", "-1", "0"], ["0", "0", "1"]], "tvec": ["0", "0", "0"], "xyz": "-x,-y,z", "rmat_det": 1, "rmat_is_orthogonal": true}], "n_cosets": 1}`
+- `{"normalizer_kind": "euclidean", "n_centering_translations": 1, "n_pointgroup_symops": 1, "n_symops": 2, "n_linear_parts": 2, "symops": [{"xyz": "-x,-y,-z", "rmat": [["-1", "0", "0"], ["0", "-1", "0"], ["0", "0", "-1"]], "tvec": ["0", "0", "0"], "rmat_det": -1, "rmat_is_orthogonal": true, "rot_type": "-1", "sense": 0, "axis": [0, 0, 0], "screw_glide": ["0", "0", "0"], "origin_shift": ["0", "0", "0"], "operation_kind": "euclidean"}]}`
 
 **Formats:** [[JSON](euclidean_normalizer.json)] [[MD](euclidean_normalizer.md)]
 
@@ -45,7 +53,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/euclidean_normalizer",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Euclidean normalizer",
-    "$comment": "Anyterial normalizer collection property using the common normalizer-representative definition.",
+    "$comment": "Anyterial finite Euclidean normalizer operation data for one space-group setting.",
     "x-optimade-type": "dictionary",
     "x-optimade-definition": {
         "kind": "property",
@@ -59,35 +67,323 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "object",
         "null"
     ],
-    "description": "Finite Euclidean normalizer operations of a Hall setting, generated from cctbx. These are metric-preserving operations that normalize the space group in the chosen setting.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **items**: REQUIRED; List of dictionaries.\n      Listed normalizer operations or coset representatives.\n      Each item follows `/properties/symmetry/normalizer_representative`.\n\n    - **n\\_cosets**: OPTIONAL; Integer.\n      Number of listed coset representatives when the parent table is a coset table.\n\n    - **n\\_orthogonal\\_cosets**: OPTIONAL; Integer.\n      Number of listed representatives whose linear part is orthogonal.\n\n    - **candidate\\_set**: OPTIONAL; String.\n      Name of the candidate set used for generation.\n\n    - **candidate\\_sets**: OPTIONAL; List of strings.\n      Candidate-set names used for generation.\n\n    - **bounds**: OPTIONAL; Dictionary.\n      Generator bounds for finite bounded candidate searches.",
+    "description": "Finite Euclidean normalizer operations for one crystallographic space-group setting.\nThe Euclidean normalizer consists of metric-preserving affine operations that normalize the space group in the chosen setting.\nThese operations are useful for algorithms that need to compare or enumerate equivalent descriptions of the same setting under rigid crystallographic changes of coordinates.\n\nThis object is generated from the finite Euclidean normalizer operations exposed by cctbx.\nIt is not a bounded candidate search table.\nTherefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `bounds` do not belong to this property.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n      For this property the value is `euclidean`.\n\n    - **n\\_centering\\_translations**: REQUIRED; Integer.\n      Number of centering translations represented in the underlying Euclidean normalizer operation construction.\n\n    - **n\\_pointgroup\\_symops**: REQUIRED; Integer.\n      Number of point-group symmetry operations represented before centering translations are combined with them.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of Euclidean normalizer operations listed in `symops`.\n      This value MUST equal the length of `symops`.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct `rmat` linear matrix parts represented in `symops`.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Finite Euclidean normalizer operations for the setting.\n      Each item follows `/defs/v0.1/properties/symmetry/symop`.",
     "properties": {
-        "items": {
+        "normalizer_kind": {
+            "x-optimade-type": "string",
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Kind label for this normalizer contribution."
+        },
+        "n_centering_translations": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_centering_translations",
+            "title": "N Centering Translations",
+            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+            "x-optimade-type": "integer",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "n_centering_translations",
+                "label": "n_centering_translations_spacegroups"
+            },
+            "type": [
+                "integer",
+                "null"
+            ],
+            "description": "Number of centering translations in the conventional cell of the space-group setting.",
+            "x-optimade-unit": "inapplicable",
+            "examples": [
+                1,
+                2
+            ]
+        },
+        "n_pointgroup_symops": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_pointgroup_symops",
+            "title": "N Pointgroup Symops",
+            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+            "x-optimade-type": "integer",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "n_pointgroup_symops",
+                "label": "n_pointgroup_symops_spacegroups"
+            },
+            "type": [
+                "integer",
+                "null"
+            ],
+            "description": "Number of point-group symmetry operations represented by the space group, excluding centering translations.",
+            "x-optimade-unit": "inapplicable",
+            "examples": [
+                1,
+                2
+            ]
+        },
+        "n_symops": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
+            "title": "N Symops",
+            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+            "x-optimade-type": "integer",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "n_symops",
+                "label": "n_symops_spacegroups"
+            },
+            "type": [
+                "integer",
+                "null"
+            ],
+            "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+            "x-optimade-unit": "inapplicable",
+            "examples": [
+                1,
+                2
+            ]
+        },
+        "n_linear_parts": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_linear_parts",
+            "title": "N Linear Parts",
+            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+            "x-optimade-type": "integer",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "n_linear_parts",
+                "label": "n_linear_parts_spacegroups"
+            },
+            "type": [
+                "integer",
+                "null"
+            ],
+            "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+            "x-optimade-unit": "inapplicable",
+            "examples": [
+                2,
+                4
+            ]
+        },
+        "symops": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops",
+            "title": "Symmetry operations",
+            "$comment": "Anyterial property definition using the common reusable symop object definition.",
             "x-optimade-type": "list",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "symops",
+                "label": "symops_spacegroups"
+            },
             "x-optimade-unit": "inapplicable",
             "type": [
                 "array",
                 "null"
             ],
-            "description": "Listed normalizer operations or coset representatives.",
+            "description": "Full list of symmetry-operation descriptors for a space-group setting.\nEach list member is a `symop` object as defined by `/properties/symmetry/symop`.\nFor space-group operations, generated data currently uses `rot_type`, `axis`, `sense`, `screw_glide`, and `origin_shift`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/properties/symmetry/symop`.",
             "items": {
-                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/normalizer_representative",
-                "title": "Normalizer representative",
-                "$comment": "Reusable Anyterial definition for one listed Euclidean or affine normalizer representative.",
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/symop",
+                "title": "Symmetry operation",
+                "$comment": "Reusable Anyterial source definition for one crystallographic symmetry-operation descriptor used inside point-group and space-group operation lists.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-definition": {
                     "kind": "property",
                     "version": "0.1.0",
                     "format": "1.3",
-                    "name": "normalizer_representative",
-                    "label": "normalizer_representative_symmetry"
+                    "name": "symop",
+                    "label": "symop_symmetry"
                 },
                 "x-optimade-unit": "inapplicable",
                 "type": [
                     "object",
                     "null"
                 ],
-                "description": "One listed representative of a Euclidean or affine normalizer operation or coset.\nIn affine-normalizer tables the representative is taken modulo the space group, so it should be read as one representative of an equivalence class rather than as the only operation in that class.\nBounded affine-normalizer tables enumerate only the finite candidate set documented by the generator.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **rmat**: OPTIONAL; Exact 3x3 matrix.\n      Linear part when the representative is expressed as a same-setting affine operation.\n\n    - **tvec**: OPTIONAL; List of 3 Fractions (String).\n      Translation part when the representative is expressed as a same-setting affine operation.\n\n    - **pmat**: OPTIONAL; Exact 3x3 matrix.\n      Matrix part when the representative is expressed as a basis or setting transform.\n\n    - **pvec**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift when the representative is expressed as a basis or setting transform.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for display and debugging.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which a bounded affine candidate is compatible.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the operation.\n\n    - **normalizer\\_kind**: OPTIONAL; String.\n      Classification of the normalizer contribution.",
+                "description": "A single crystallographic symmetry-operation descriptor.\nSpace-group operation lists currently store the operation type, axis, sense, and screw/glide decomposition.\nPoint-group operation lists currently store the full integer operation matrix under the legacy key `matrix` together with an integer operation-type code under `type`.\nFuture generated data may also use the semantic `rmat` key for the linear matrix part.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n      This is the preferred symbolic operation-type field in space-group operation descriptors.\n\n    - **type**: OPTIONAL; Integer.\n      Legacy numeric operation-type code used by point-group operation descriptors.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **matrix**: OPTIONAL; Integer 3x3 matrix.\n      Legacy full point-group operation matrix.\n\n    - **rmat**: OPTIONAL; Exact 3x3 matrix.\n      Semantic linear matrix part of an affine operation when emitted by a parent table.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the operation in `x,y,z` notation when available.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
                 "properties": {
+                    "rot_type": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Symbolic crystallographic operation-type label for the linear part."
+                    },
+                    "type": {
+                        "x-optimade-type": "integer",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Legacy numeric point-group operation-type code."
+                    },
+                    "axis": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "x-optimade-dimensions": {
+                            "names": [
+                                "dim_lattice"
+                            ],
+                            "sizes": [
+                                3
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Integer-vector axis or invariant-direction descriptor for the operation.",
+                        "items": {
+                            "x-optimade-type": "integer",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "integer"
+                            ],
+                            "description": "One integer component of the axis vector."
+                        }
+                    },
+                    "sense": {
+                        "x-optimade-type": "integer",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Rotation sense/sign convention returned by the generator."
+                    },
+                    "screw_glide": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "x-optimade-dimensions": {
+                            "names": [
+                                "dim_lattice"
+                            ],
+                            "sizes": [
+                                3
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                            "title": "fraction",
+                            "x-optimade-type": "string",
+                            "x-optimade-definition": {
+                                "label": "fraction_core",
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "fraction"
+                            },
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "A fraction represented as a string.",
+                            "examples": [
+                                "2/3",
+                                "5/42",
+                                "10",
+                                "0"
+                            ],
+                            "x-optimade-unit": "inapplicable"
+                        }
+                    },
+                    "origin_shift": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "x-optimade-dimensions": {
+                            "names": [
+                                "dim_lattice"
+                            ],
+                            "sizes": [
+                                3
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                            "title": "fraction",
+                            "x-optimade-type": "string",
+                            "x-optimade-definition": {
+                                "label": "fraction_core",
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "fraction"
+                            },
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "A fraction represented as a string.",
+                            "examples": [
+                                "2/3",
+                                "5/42",
+                                "10",
+                                "0"
+                            ],
+                            "x-optimade-unit": "inapplicable"
+                        }
+                    },
+                    "matrix": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "x-optimade-dimensions": {
+                            "names": [
+                                "dim_lattice",
+                                "dim_lattice"
+                            ],
+                            "sizes": [
+                                3,
+                                3
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Legacy integer 3 by 3 operation matrix used by point-group symops.",
+                        "items": {
+                            "x-optimade-type": "list",
+                            "x-optimade-unit": "inapplicable",
+                            "x-optimade-dimensions": {
+                                "names": [
+                                    "dim_lattice"
+                                ],
+                                "sizes": [
+                                    3
+                                ]
+                            },
+                            "type": [
+                                "array"
+                            ],
+                            "description": "One row of the integer operation matrix.",
+                            "items": {
+                                "x-optimade-type": "integer",
+                                "x-optimade-unit": "dimensionless",
+                                "type": [
+                                    "integer"
+                                ],
+                                "description": "One integer matrix entry."
+                            }
+                        }
+                    },
                     "rmat": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/rmat",
                         "title": "Symmetry operation linear matrix",
@@ -177,221 +473,6 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
                             ]
                         ]
                     },
-                    "tvec": {
-                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/tvec",
-                        "title": "Symmetry operation translation vector",
-                        "$comment": "Reusable Anyterial definition for the translation part of a same-setting affine operation.",
-                        "x-optimade-type": "list",
-                        "x-optimade-definition": {
-                            "kind": "property",
-                            "version": "0.1.0",
-                            "format": "1.3",
-                            "name": "tvec",
-                            "label": "tvec_symmetry"
-                        },
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "array",
-                            "null"
-                        ],
-                        "description": "Translation part of a same-setting affine operation acting on fractional coordinates.\nThe vector is represented in fractional coordinates using exact fraction strings.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of three exact fractional-coordinate components.\n- Each component MUST be represented as a fraction string.\n- Together with `rmat`, this vector represents an affine operation within one coordinate setting.",
-                        "x-optimade-dimensions": {
-                            "names": [
-                                "dim_lattice"
-                            ],
-                            "sizes": [
-                                3
-                            ]
-                        },
-                        "items": {
-                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                            "title": "fraction",
-                            "x-optimade-type": "string",
-                            "x-optimade-definition": {
-                                "label": "fraction_core",
-                                "kind": "property",
-                                "version": "0.1.0",
-                                "format": "1.3",
-                                "name": "fraction"
-                            },
-                            "type": [
-                                "string",
-                                "null"
-                            ],
-                            "description": "A fraction represented as a string.",
-                            "examples": [
-                                "2/3",
-                                "5/42",
-                                "10",
-                                "0"
-                            ],
-                            "x-optimade-unit": "inapplicable"
-                        },
-                        "examples": [
-                            [
-                                "0",
-                                "0",
-                                "0"
-                            ],
-                            [
-                                "1/2",
-                                "1/2",
-                                "0"
-                            ]
-                        ]
-                    },
-                    "pmat": {
-                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/pmat",
-                        "title": "Basis transformation matrix",
-                        "$comment": "Reusable Anyterial definition for the matrix part of a crystallographic basis or setting transformation.",
-                        "x-optimade-type": "list",
-                        "x-optimade-definition": {
-                            "kind": "property",
-                            "version": "0.1.0",
-                            "format": "1.3",
-                            "name": "pmat",
-                            "label": "pmat_symmetry"
-                        },
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "array",
-                            "null"
-                        ],
-                        "description": "Matrix part of a crystallographic basis or setting transformation.\nThe matrix is represented exactly as three rows with three entries per row.\nEntries are strings so that exact rational or algebraic values can be preserved without floating-point rounding.\n\n**Requirements/Conventions**:\n\n- It MUST be a 3 by 3 matrix represented as a list of three row lists.\n- Each row MUST contain three exact matrix entries represented as strings.\n- The parent transform definition specifies the coordinate convention and whether the matrix maps from a source setting to a target setting or conversely.",
-                        "x-optimade-dimensions": {
-                            "names": [
-                                "dim_lattice",
-                                "dim_lattice"
-                            ],
-                            "sizes": [
-                                3,
-                                3
-                            ]
-                        },
-                        "items": {
-                            "x-optimade-type": "list",
-                            "x-optimade-unit": "inapplicable",
-                            "x-optimade-dimensions": {
-                                "names": [
-                                    "dim_lattice"
-                                ],
-                                "sizes": [
-                                    3
-                                ]
-                            },
-                            "type": [
-                                "array"
-                            ],
-                            "description": "One row of the 3 by 3 basis-transformation matrix.",
-                            "items": {
-                                "x-optimade-type": "string",
-                                "x-optimade-unit": "inapplicable",
-                                "type": [
-                                    "string"
-                                ],
-                                "description": "One exact matrix entry."
-                            }
-                        },
-                        "examples": [
-                            [
-                                [
-                                    "1",
-                                    "0",
-                                    "0"
-                                ],
-                                [
-                                    "0",
-                                    "1",
-                                    "0"
-                                ],
-                                [
-                                    "0",
-                                    "0",
-                                    "1"
-                                ]
-                            ],
-                            [
-                                [
-                                    "1",
-                                    "0",
-                                    "0"
-                                ],
-                                [
-                                    "0",
-                                    "1",
-                                    "0"
-                                ],
-                                [
-                                    "0",
-                                    "0",
-                                    "2"
-                                ]
-                            ]
-                        ]
-                    },
-                    "pvec": {
-                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/pvec",
-                        "title": "Basis transformation origin shift",
-                        "$comment": "Reusable Anyterial definition for the translation/origin-shift part of a crystallographic basis or setting transformation.",
-                        "x-optimade-type": "list",
-                        "x-optimade-definition": {
-                            "kind": "property",
-                            "version": "0.1.0",
-                            "format": "1.3",
-                            "name": "pvec",
-                            "label": "pvec_symmetry"
-                        },
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "array",
-                            "null"
-                        ],
-                        "description": "Translation or origin-shift part of a crystallographic basis or setting transformation.\nThe vector is represented in fractional coordinates using exact fraction strings.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of three exact fractional-coordinate components.\n- Each component MUST be represented as a fraction string.\n- The parent transform definition specifies the source and target setting convention for the transformation.",
-                        "x-optimade-dimensions": {
-                            "names": [
-                                "dim_lattice"
-                            ],
-                            "sizes": [
-                                3
-                            ]
-                        },
-                        "items": {
-                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                            "title": "fraction",
-                            "x-optimade-type": "string",
-                            "x-optimade-definition": {
-                                "label": "fraction_core",
-                                "kind": "property",
-                                "version": "0.1.0",
-                                "format": "1.3",
-                                "name": "fraction"
-                            },
-                            "type": [
-                                "string",
-                                "null"
-                            ],
-                            "description": "A fraction represented as a string.",
-                            "examples": [
-                                "2/3",
-                                "5/42",
-                                "10",
-                                "0"
-                            ],
-                            "x-optimade-unit": "inapplicable"
-                        },
-                        "examples": [
-                            [
-                                "0",
-                                "0",
-                                "0"
-                            ],
-                            [
-                                "1/4",
-                                "1/4",
-                                "0"
-                            ]
-                        ]
-                    },
                     "xyz": {
                         "x-optimade-type": "string",
                         "x-optimade-unit": "inapplicable",
@@ -399,184 +480,103 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
                             "string",
                             "null"
                         ],
-                        "description": "Coordinate expression for the representative in `x,y,z` notation."
+                        "description": "Operation in `x,y,z` coordinate notation."
                     },
-                    "rmat_det": {
-                        "x-optimade-type": "integer",
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
-                        "description": "Determinant of the same-setting linear part, when supplied."
-                    },
-                    "rmat_is_orthogonal": {
+                    "is_proper": {
                         "x-optimade-type": "boolean",
                         "x-optimade-unit": "inapplicable",
                         "type": [
                             "boolean",
                             "null"
                         ],
-                        "description": "Whether `rmat` is orthogonal, when supplied."
-                    },
-                    "pmat_is_orthogonal": {
-                        "x-optimade-type": "boolean",
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "boolean",
-                            "null"
-                        ],
-                        "description": "Whether `pmat` is orthogonal, when supplied."
-                    },
-                    "compatible_systems": {
-                        "x-optimade-type": "list",
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "array",
-                            "null"
-                        ],
-                        "description": "Crystal metric systems compatible with the candidate representative.",
-                        "items": {
-                            "x-optimade-type": "string",
-                            "x-optimade-unit": "inapplicable",
-                            "type": [
-                                "string"
-                            ],
-                            "description": "One compatible crystal-system label."
-                        }
-                    },
-                    "operation_kind": {
-                        "x-optimade-type": "string",
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "Generator classification of the operation."
-                    },
-                    "normalizer_kind": {
-                        "x-optimade-type": "string",
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "Classification of the normalizer contribution."
+                        "description": "Whether the linear operation is proper."
                     }
                 },
                 "examples": [
                     {
-                        "rmat": [
-                            [
-                                "-1",
-                                "0",
-                                "0"
-                            ],
-                            [
-                                "0",
-                                "-1",
-                                "0"
-                            ],
-                            [
-                                "0",
-                                "0",
-                                "1"
-                            ]
+                        "rot_type": "2",
+                        "sense": 0,
+                        "axis": [
+                            0,
+                            1,
+                            0
                         ],
-                        "tvec": [
+                        "screw_glide": [
                             "0",
                             "0",
                             "0"
                         ],
-                        "xyz": "-x,-y,z",
-                        "rmat_det": 1,
-                        "rmat_is_orthogonal": true,
-                        "compatible_systems": [
-                            "monoclinic",
-                            "orthorhombic"
+                        "origin_shift": [
+                            "0",
+                            "0",
+                            "0"
+                        ]
+                    },
+                    {
+                        "matrix": [
+                            [
+                                1,
+                                0,
+                                0
+                            ],
+                            [
+                                0,
+                                1,
+                                0
+                            ],
+                            [
+                                0,
+                                0,
+                                1
+                            ]
+                        ],
+                        "xyz": "x,y,z",
+                        "type": 1,
+                        "is_proper": true,
+                        "axis": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "sense": 0
+                    }
+                ]
+            },
+            "examples": [
+                [
+                    {
+                        "rot_type": "1",
+                        "sense": 0,
+                        "axis": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "screw_glide": [
+                            "0",
+                            "0",
+                            "0"
+                        ],
+                        "origin_shift": [
+                            "0",
+                            "0",
+                            "0"
                         ]
                     }
                 ]
-            }
-        },
-        "n_cosets": {
-            "x-optimade-type": "integer",
-            "x-optimade-unit": "inapplicable",
-            "type": [
-                "integer",
-                "null"
-            ],
-            "description": "Number of listed coset representatives."
-        },
-        "n_orthogonal_cosets": {
-            "x-optimade-type": "integer",
-            "x-optimade-unit": "inapplicable",
-            "type": [
-                "integer",
-                "null"
-            ],
-            "description": "Number of listed representatives whose linear part is orthogonal."
-        },
-        "candidate_set": {
-            "x-optimade-type": "string",
-            "x-optimade-unit": "inapplicable",
-            "type": [
-                "string",
-                "null"
-            ],
-            "description": "Name of the candidate set used for generation."
-        },
-        "candidate_sets": {
-            "x-optimade-type": "list",
-            "x-optimade-unit": "inapplicable",
-            "type": [
-                "array",
-                "null"
-            ],
-            "description": "Candidate-set names used for generation.",
-            "items": {
-                "x-optimade-type": "string",
-                "x-optimade-unit": "inapplicable",
-                "type": [
-                    "string"
-                ],
-                "description": "One candidate-set label."
-            }
-        },
-        "bounds": {
-            "x-optimade-type": "dictionary",
-            "x-optimade-unit": "inapplicable",
-            "type": [
-                "object",
-                "null"
-            ],
-            "description": "Generator bounds for the finite candidate search.",
-            "properties": {
-                "max_abs_linear_entry": {
-                    "x-optimade-type": "integer",
-                    "x-optimade-unit": "inapplicable",
-                    "type": [
-                        "integer",
-                        "null"
-                    ],
-                    "description": "Maximum absolute value allowed for entries of candidate linear matrices."
-                },
-                "det_abs": {
-                    "x-optimade-type": "integer",
-                    "x-optimade-unit": "inapplicable",
-                    "type": [
-                        "integer",
-                        "null"
-                    ],
-                    "description": "Absolute determinant required for candidate matrices."
-                }
-            }
+            ]
         }
     },
     "examples": [
         {
-            "items": [
+            "normalizer_kind": "euclidean",
+            "n_centering_translations": 1,
+            "n_pointgroup_symops": 1,
+            "n_symops": 2,
+            "n_linear_parts": 2,
+            "symops": [
                 {
+                    "xyz": "-x,-y,-z",
                     "rmat": [
                         [
                             "-1",
@@ -591,7 +591,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
                         [
                             "0",
                             "0",
-                            "1"
+                            "-1"
                         ]
                     ],
                     "tvec": [
@@ -599,12 +599,28 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
                         "0",
                         "0"
                     ],
-                    "xyz": "-x,-y,z",
-                    "rmat_det": 1,
-                    "rmat_is_orthogonal": true
+                    "rmat_det": -1,
+                    "rmat_is_orthogonal": true,
+                    "rot_type": "-1",
+                    "sense": 0,
+                    "axis": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "screw_glide": [
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "origin_shift": [
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "operation_kind": "euclidean"
                 }
-            ],
-            "n_cosets": 1
+            ]
         }
     ]
 }

@@ -6,20 +6,20 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `baernighausen`
 
 **Property name:** Bärnighausen subgroup transforms  
-**Description:** Bärnighausen subgroup transform table. Entries describe generated embeddings of a subgroup setting into a supergroup setting.
-The outer dictionary is keyed by the parent table convention, for example Hall entries or IT numbers.
+**Description:** Bärnighausen subgroup transform table for one parent setting or space-group type.
+Entries describe generated embeddings of subgroup settings into the containing parent setting.
 Transform records use `pmat` and `pvec` as defined by `/properties/symmetry/basis_transform`.  
 **Type:** dictionary  
 
 **Requirements/Conventions**:
 
-- Dynamic outer keys identify parent settings or space groups according to the containing dataset.
-- Values are either dictionaries containing an `items` list of transform records or direct maps to lists of transform records.
+- Dynamic keys identify target subgroup settings or target subgroup space-group types according to the containing dataset.
+- Values are lists of transform records.
 - Each transform record SHOULD follow `/properties/symmetry/basis_transform` for its matrix and vector fields.
 
 **Examples:**
 
-- `{"c_2y": {"items": [{"index": 2, "pmat": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "pvec": ["0", "0", "0"]}]}}`
+- `{"p_1": [{"index": 2, "pmat": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "pvec": ["0", "0", "0"]}]}`
 
 **Formats:** [[JSON](baernighausen.json)] [[MD](baernighausen.md)]
 
@@ -44,39 +44,37 @@ Transform records use `pmat` and `pvec` as defined by `/properties/symmetry/basi
         "object",
         "null"
     ],
-    "description": "B\u00e4rnighausen subgroup transform table. Entries describe generated embeddings of a subgroup setting into a supergroup setting.\nThe outer dictionary is keyed by the parent table convention, for example Hall entries or IT numbers.\nTransform records use `pmat` and `pvec` as defined by `/properties/symmetry/basis_transform`.\n\n**Requirements/Conventions**:\n\n- Dynamic outer keys identify parent settings or space groups according to the containing dataset.\n- Values are either dictionaries containing an `items` list of transform records or direct maps to lists of transform records.\n- Each transform record SHOULD follow `/properties/symmetry/basis_transform` for its matrix and vector fields.",
+    "description": "B\u00e4rnighausen subgroup transform table for one parent setting or space-group type.\nEntries describe generated embeddings of subgroup settings into the containing parent setting.\nTransform records use `pmat` and `pvec` as defined by `/properties/symmetry/basis_transform`.\n\n**Requirements/Conventions**:\n\n- Dynamic keys identify target subgroup settings or target subgroup space-group types according to the containing dataset.\n- Values are lists of transform records.\n- Each transform record SHOULD follow `/properties/symmetry/basis_transform` for its matrix and vector fields.",
     "properties": {},
     "examples": [
         {
-            "c_2y": {
-                "items": [
-                    {
-                        "index": 2,
-                        "pmat": [
-                            [
-                                "1",
-                                "0",
-                                "0"
-                            ],
-                            [
-                                "0",
-                                "1",
-                                "0"
-                            ],
-                            [
-                                "0",
-                                "0",
-                                "2"
-                            ]
-                        ],
-                        "pvec": [
-                            "0",
+            "p_1": [
+                {
+                    "index": 2,
+                    "pmat": [
+                        [
+                            "1",
                             "0",
                             "0"
+                        ],
+                        [
+                            "0",
+                            "1",
+                            "0"
+                        ],
+                        [
+                            "0",
+                            "0",
+                            "2"
                         ]
-                    }
-                ]
-            }
+                    ],
+                    "pvec": [
+                        "0",
+                        "0",
+                        "0"
+                    ]
+                }
+            ]
         }
     ]
 }

@@ -195,12 +195,16 @@ Matrix/vector transform fields use <code>pmat</code> and <code>pvec</code> accor
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/affine_normalizer">Affine normalizer</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer</code></a></p>
-<p>Bounded affine normalizer coset representatives modulo the space group, generated from bounded unimodular integer linear parts. This is a finite representative table, not a complete infinite affine normalizer.</p>
+<p>Affine normalizer coset representatives for one crystallographic space-group setting.
+The representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.
+This property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/affine_normalizer_coset_data">Affine normalizer coset data</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_coset_data"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_coset_data</code></a></p>
-<p>Ordered table of affine normalizer coset representative data by Hall setting.
-Each row contains the finite listed coset representatives used by the symmetry-finder runtime for one Hall setting, plus counts and candidate-set metadata.</p>
+<p>Ordered table of bounded affine normalizer coset-representative data for crystallographic space groups, with one item for each Hall setting.
+The affine normalizer of a space group describes affine mappings that send the space group to itself.
+In practical algorithms this information is useful after a candidate space-group setting has been identified, because additional normalizer representatives can be applied to explore equivalent descriptions, equivalent origin choices, or equivalent embeddings without changing the underlying space group.
+The representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of normalizer operations rather than every operation in that class.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/affine_normalizer_cosets">Affine normalizer cosets</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_cosets"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_cosets</code></a></p>
@@ -237,14 +241,14 @@ The plain string value is stored in the corresponding unsuffixed property; this 
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/backward_lift_criteria">Backward lift criteria</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/backward_lift_criteria"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/backward_lift_criteria</code></a></p>
-<p>Criteria table used to lift occupied Wyckoff data from a subgroup back to a supergroup along a chosen Bärnighausen transform.
-The outer map is keyed by supergroup IT number and the next map is keyed by subgroup IT number.
+<p>Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen Bärnighausen transform.
+The map is keyed by subgroup IT number.
 Values are lists of transform records carrying a basis transform and a dictionary of Wyckoff-letter criteria.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/baernighausen">Bärnighausen subgroup transforms</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/baernighausen"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/baernighausen</code></a></p>
-<p>Bärnighausen subgroup transform table. Entries describe generated embeddings of a subgroup setting into a supergroup setting.
-The outer dictionary is keyed by the parent table convention, for example Hall entries or IT numbers.
+<p>Bärnighausen subgroup transform table for one parent setting or space-group type.
+Entries describe generated embeddings of subgroup settings into the containing parent setting.
 Transform records use <code>pmat</code> and <code>pvec</code> as defined by <code>/properties/symmetry/basis_transform</code>.</p>
 </li>
 <li>
@@ -283,7 +287,9 @@ The zero translation <code>(0,0,0)</code> is listed first.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/euclidean_normalizer">Euclidean normalizer</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/euclidean_normalizer"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/euclidean_normalizer</code></a></p>
-<p>Finite Euclidean normalizer operations of a Hall setting, generated from cctbx. These are metric-preserving operations that normalize the space group in the chosen setting.</p>
+<p>Finite Euclidean normalizer operations for one crystallographic space-group setting.
+The Euclidean normalizer consists of metric-preserving affine operations that normalize the space group in the chosen setting.
+These operations are useful for algorithms that need to compare or enumerate equivalent descriptions of the same setting under rigid crystallographic changes of coordinates.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hall">Hall Symbol</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall</code></a></p>
@@ -313,8 +319,10 @@ The plain string value is stored in the corresponding unsuffixed property; this 
 It allows consumers to look up affine normalizer coset data by Hall entry while keeping <code>affine_normalizer_coset_data</code> as a compact ordered list.</p>
 </li>
 <li>
-<p><strong><a href="v0.1/properties/spacegroups/hall_to_it_std_transform">Hall to IT std transform</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_to_it_std_transform"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_to_it_std_transform</code></a></p>
-<p>Hall-keyed exact change-of-basis transforms from each Hall setting to the IT-standard Hall reference setting.</p>
+<p><strong><a href="v0.1/properties/spacegroups/hall_to_it_std_transform">Hall to IT standard transform</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_to_it_std_transform"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_to_it_std_transform</code></a></p>
+<p>Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.
+This transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.
+The transform is represented by <code>pmat</code> and <code>pvec</code> using the same basis-transform convention as the other generated transformation tables.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/harker_planes">Harker planes</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/harker_planes"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/harker_planes</code></a></p>
@@ -448,9 +456,9 @@ It allows consumers to look up a space-group setting by Hall entry while keeping
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/isomorphic_subgroups">Isomorphic subgroup transforms</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/isomorphic_subgroups"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/isomorphic_subgroups</code></a></p>
-<p>Isomorphic subgroup transforms of bounded index. These transforms map a space group to a subgroup of the same space-group type, usually corresponding to an enlarged unit cell.
-The outer dictionary is keyed by the parent table convention, for example Hall entries or IT numbers.
-Transform records use <code>pmat</code> and <code>pvec</code> as defined by <code>/properties/symmetry/basis_transform</code>.</p>
+<p>Isomorphic subgroup transforms of bounded index for one parent setting or space-group type.
+An isomorphic subgroup has the same space-group type as the parent but is embedded with a finite index, usually corresponding to an enlarged unit cell or a sublattice choice.
+These transforms are useful for algorithms that need to enumerate same-type subgroup embeddings, compare structures under supercell changes, or construct bounded same-space-group refinement paths.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/it_coordinate_system_code">International Tables Coordinate-System Code</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_coordinate_system_code"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_coordinate_system_code</code></a></p>
@@ -521,7 +529,9 @@ The dictionary is keyed by supergroup IT number and each value is a list of subg
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/orthogonal_affine_normalizer">Orthogonal affine normalizer</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/orthogonal_affine_normalizer"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/orthogonal_affine_normalizer</code></a></p>
-<p>Orthogonal affine normalizer coset representatives modulo the space group from the signed-permutation subset of affine candidates.</p>
+<p>Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.
+The representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.
+This property contains the signed-permutation subset of affine normalizer representatives.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/orthogonal_affine_normalizer_cosets">Orthogonal affine normalizer cosets</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/orthogonal_affine_normalizer_cosets"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/orthogonal_affine_normalizer_cosets</code></a></p>
@@ -558,7 +568,7 @@ This emitted space-group property uses the common <code>/properties/symmetry/rma
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/same_space_group_affine_images_std">Same space group affine images std</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/same_space_group_affine_images_std"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/same_space_group_affine_images_std</code></a></p>
-<p>IT-number keyed same-space-group affine-image records for the International Tables standard settings.</p>
+<p>Same-space-group affine-image record for one International Tables standard setting.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/schoenflies">Schoenflies Symbol</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies</code></a></p>

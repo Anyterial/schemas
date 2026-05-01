@@ -95,19 +95,18 @@ overflow-wrap: break-word;
 <p><strong>ID: <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/backward_lift_criteria"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/backward_lift_criteria</code></a></strong><br>
 <strong>Definition name:</strong> <code>backward_lift_criteria</code></p>
 <p><strong>Property name:</strong> Backward lift criteria<br>
-<strong>Description:</strong> Criteria table used to lift occupied Wyckoff data from a subgroup back to a supergroup along a chosen Bärnighausen transform.
-The outer map is keyed by supergroup IT number and the next map is keyed by subgroup IT number.
+<strong>Description:</strong> Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen Bärnighausen transform.
+The map is keyed by subgroup IT number.
 Values are lists of transform records carrying a basis transform and a dictionary of Wyckoff-letter criteria.<br>
 <strong>Type:</strong> dictionary  </p>
 <p><strong>Requirements/Conventions</strong>:</p>
 <ul>
-<li>Dynamic outer keys MUST be supergroup IT numbers represented as strings.</li>
-<li>Dynamic second-level keys MUST be subgroup IT numbers represented as strings.</li>
+<li>Dynamic keys MUST be subgroup IT numbers represented as strings.</li>
 <li>Transform records SHOULD include <code>index</code>, <code>pmat</code>, <code>pvec</code>, and <code>criteria</code>.</li>
 </ul>
 <p><strong>Examples:</strong></p>
 <ul>
-<li><code>{"1": {"2": [{"index": 2, "pmat": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "pvec": ["0", "0", "0"], "criteria": {"a": [{"roles": [["a", 0]], "coeffs": [[["1", "0", "0"]]], "target": ["0", "0", "0"]}]}}]}}</code></li>
+<li><code>{"2": [{"index": 2, "pmat": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "pvec": ["0", "0", "0"], "criteria": {"a": [{"roles": [["a", 0]], "coeffs": [[["1", "0", "0"]]], "target": ["0", "0", "0"]}]}}]}</code></li>
 </ul>
 <p><strong>Formats:</strong> [<a href="backward_lift_criteria.json">JSON</a>] [<a href="backward_lift_criteria.md">MD</a>]</p>
 <p><strong>JSON definition:</strong></p>
@@ -129,65 +128,63 @@ Values are lists of transform records carrying a basis transform and a dictionar
 <span class="w">        </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="s2">&quot;null&quot;</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Criteria table used to lift occupied Wyckoff data from a subgroup back to a supergroup along a chosen B\u00e4rnighausen transform.\nThe outer map is keyed by supergroup IT number and the next map is keyed by subgroup IT number.\nValues are lists of transform records carrying a basis transform and a dictionary of Wyckoff-letter criteria.\n\n**Requirements/Conventions**:\n\n- Dynamic outer keys MUST be supergroup IT numbers represented as strings.\n- Dynamic second-level keys MUST be subgroup IT numbers represented as strings.\n- Transform records SHOULD include `index`, `pmat`, `pvec`, and `criteria`.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen B\u00e4rnighausen transform.\nThe map is keyed by subgroup IT number.\nValues are lists of transform records carrying a basis transform and a dictionary of Wyckoff-letter criteria.\n\n**Requirements/Conventions**:\n\n- Dynamic keys MUST be subgroup IT numbers represented as strings.\n- Transform records SHOULD include `index`, `pmat`, `pvec`, and `criteria`.&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
 <span class="w">    </span><span class="nt">&quot;examples&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                    </span><span class="p">{</span>
-<span class="w">                        </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">                        </span><span class="nt">&quot;pmat&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                            </span><span class="p">[</span>
-<span class="w">                                </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
-<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                                </span><span class="s2">&quot;0&quot;</span>
-<span class="w">                            </span><span class="p">],</span>
-<span class="w">                            </span><span class="p">[</span>
-<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                                </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
-<span class="w">                                </span><span class="s2">&quot;0&quot;</span>
-<span class="w">                            </span><span class="p">],</span>
-<span class="w">                            </span><span class="p">[</span>
-<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                                </span><span class="s2">&quot;2&quot;</span>
-<span class="w">                            </span><span class="p">]</span>
-<span class="w">                        </span><span class="p">],</span>
-<span class="w">                        </span><span class="nt">&quot;pvec&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                            </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;pmat&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                        </span><span class="p">[</span>
+<span class="w">                            </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s2">&quot;0&quot;</span>
 <span class="w">                        </span><span class="p">],</span>
-<span class="w">                        </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                            </span><span class="nt">&quot;a&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                                </span><span class="p">{</span>
-<span class="w">                                    </span><span class="nt">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                                        </span><span class="p">[</span>
-<span class="w">                                            </span><span class="s2">&quot;a&quot;</span><span class="p">,</span>
-<span class="w">                                            </span><span class="mi">0</span>
-<span class="w">                                        </span><span class="p">]</span>
-<span class="w">                                    </span><span class="p">],</span>
-<span class="w">                                    </span><span class="nt">&quot;coeffs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                                        </span><span class="p">[</span>
-<span class="w">                                            </span><span class="p">[</span>
-<span class="w">                                                </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
-<span class="w">                                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                                                </span><span class="s2">&quot;0&quot;</span>
-<span class="w">                                            </span><span class="p">]</span>
-<span class="w">                                        </span><span class="p">]</span>
-<span class="w">                                    </span><span class="p">],</span>
-<span class="w">                                    </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                                        </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                                        </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                                        </span><span class="s2">&quot;0&quot;</span>
+<span class="w">                        </span><span class="p">[</span>
+<span class="w">                            </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s2">&quot;0&quot;</span>
+<span class="w">                        </span><span class="p">],</span>
+<span class="w">                        </span><span class="p">[</span>
+<span class="w">                            </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s2">&quot;2&quot;</span>
+<span class="w">                        </span><span class="p">]</span>
+<span class="w">                    </span><span class="p">],</span>
+<span class="w">                    </span><span class="nt">&quot;pvec&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                        </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;0&quot;</span>
+<span class="w">                    </span><span class="p">],</span>
+<span class="w">                    </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;a&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                            </span><span class="p">{</span>
+<span class="w">                                </span><span class="nt">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                    </span><span class="p">[</span>
+<span class="w">                                        </span><span class="s2">&quot;a&quot;</span><span class="p">,</span>
+<span class="w">                                        </span><span class="mi">0</span>
 <span class="w">                                    </span><span class="p">]</span>
-<span class="w">                                </span><span class="p">}</span>
-<span class="w">                            </span><span class="p">]</span>
-<span class="w">                        </span><span class="p">}</span>
+<span class="w">                                </span><span class="p">],</span>
+<span class="w">                                </span><span class="nt">&quot;coeffs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                    </span><span class="p">[</span>
+<span class="w">                                        </span><span class="p">[</span>
+<span class="w">                                            </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                                            </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                            </span><span class="s2">&quot;0&quot;</span>
+<span class="w">                                        </span><span class="p">]</span>
+<span class="w">                                    </span><span class="p">]</span>
+<span class="w">                                </span><span class="p">],</span>
+<span class="w">                                </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                    </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                    </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                    </span><span class="s2">&quot;0&quot;</span>
+<span class="w">                                </span><span class="p">]</span>
+<span class="w">                            </span><span class="p">}</span>
+<span class="w">                        </span><span class="p">]</span>
 <span class="w">                    </span><span class="p">}</span>
-<span class="w">                </span><span class="p">]</span>
-<span class="w">            </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">]</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
