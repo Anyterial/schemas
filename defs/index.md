@@ -171,12 +171,6 @@
                 
                 The crystal system of the space group or point group.
 
-            * **[Entries](v0.1/properties/spacegroups/entries.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/entries`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/entries.md)
-                
-                Generic top-level keyed data container used by several generated JSON-LD datasets.
-                The meaning of keys and values is defined by the containing dataset metadata and by sibling fields.
-                This property is intentionally generic because `entries` is used for compact maps with different value types in different files.
-
             * **[Euclidean normalizer](v0.1/properties/spacegroups/euclidean_normalizer.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/euclidean_normalizer`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/euclidean_normalizer.md)
                 
                 Finite Euclidean normalizer operations of a Hall setting, generated from cctbx. These are metric-preserving operations that normalize the space group in the chosen setting.
@@ -207,6 +201,10 @@
                 
                 Index from normalized Hall entries to row positions in the top-level `affine_normalizer_coset_data` table.
                 It allows consumers to look up affine normalizer coset data by Hall entry while keeping `affine_normalizer_coset_data` as a compact ordered list.
+
+            * **[Hall to IT std transform](v0.1/properties/spacegroups/hall_to_it_std_transform.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_to_it_std_transform`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_to_it_std_transform.md)
+                
+                Hall-keyed exact change-of-basis transforms from each Hall setting to the IT-standard Hall reference setting.
 
             * **[Harker planes](v0.1/properties/spacegroups/harker_planes.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/harker_planes`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/harker_planes.md)
                 
@@ -305,10 +303,22 @@
                 
                 Subgroup or transform index. For subgroup transforms it is the crystallographic subgroup index `[G:H]`, equal to the determinant factor of the basis transformation when applicable.
 
+            * **[Index Hall entry to space-group symbols](v0.1/properties/spacegroups/index_hall_entry_to_spacegroup_symbols.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroup_symbols`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroup_symbols.md)
+                
+                Index from normalized Hall entries to row positions in the top-level `spacegroup_symbols` table.
+
             * **[Hall-entry to spacegroups index](v0.1/properties/spacegroups/index_hall_entry_to_spacegroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroups`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroups.md)
                 
                 Index from normalized Hall entries to row positions in the top-level `spacegroups` table.
                 It allows consumers to look up a space-group setting by Hall entry while keeping `spacegroups` as a compact ordered list.
+
+            * **[IT number to spglib default spacegroups index](v0.1/properties/spacegroups/index_it_number_to_spglib_default_spacegroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_spglib_default_spacegroups`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_spglib_default_spacegroups.md)
+                
+                IT-number keyed lookup from the default spglib Hall setting to the corresponding row index in the top-level `spacegroups` list.
+
+            * **[IT number to std spacegroups index](v0.1/properties/spacegroups/index_it_number_to_std_spacegroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_std_spacegroups`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_std_spacegroups.md)
+                
+                IT-number keyed lookup from the International Tables standard setting to the corresponding row index in the top-level `spacegroups` list.
 
             * **[Is Centric](v0.1/properties/spacegroups/is_centric.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_centric`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_centric.md)
                 
@@ -357,6 +367,11 @@
             * **[Laue Class](v0.1/properties/spacegroups/laue_class.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/laue_class`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/laue_class.md)
                 
                 The Laue class associated with the space group or point group.
+
+            * **[Maximal subgroup relations](v0.1/properties/spacegroups/maximal_subgroup_relations.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/maximal_subgroup_relations`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/maximal_subgroup_relations.md)
+                
+                Maximal non-isomorphic subgroup relations for International Tables space-group types.
+                The dictionary is keyed by supergroup IT number and each value is a list of subgroup-relation records.
 
             * **[N Centering Translations](v0.1/properties/spacegroups/n_centering_translations.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_centering_translations`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_centering_translations.md)
                 
@@ -418,11 +433,6 @@
                 Translation or origin-shift vector of a crystallographic basis or setting transformation.
                 This emitted space-group property uses the common `/properties/symmetry/pvec` definition for its nested value shape and dimensional metadata.
 
-            * **[Relation details](v0.1/properties/spacegroups/relation_details.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/relation_details`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/relation_details.md)
-                
-                Detailed metadata for generated maximal non-isomorphic subgroup relations.
-                The map is keyed by supergroup IT number and each value is a list of subgroup-relation records.
-
             * **[Symmetry operation linear matrix](v0.1/properties/spacegroups/rmat.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/rmat`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/rmat.md)
                 
                 Linear matrix part of a same-setting affine operation.
@@ -435,6 +445,10 @@
             * **[Symmetry operation rotation is orthogonal](v0.1/properties/spacegroups/rmat_is_orthogonal.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/rmat_is_orthogonal`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/rmat_is_orthogonal.md)
                 
                 Boolean flag indicating whether `rmat` is orthogonal in the conventional coordinate basis.
+
+            * **[Same space group affine images std](v0.1/properties/spacegroups/same_space_group_affine_images_std.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/same_space_group_affine_images_std`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/same_space_group_affine_images_std.md)
+                
+                IT-number keyed same-space-group affine-image records for the International Tables standard settings.
 
             * **[Schoenflies Symbol](v0.1/properties/spacegroups/schoenflies.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies.md)
                 

@@ -301,20 +301,6 @@ The zero translation `(0,0,0)` is listed first.
     Values use the conventional crystallographic system names such as triclinic, monoclinic, orthorhombic, tetragonal, trigonal, hexagonal, and cubic.
 
 
-* **[Entries](../properties/spacegroups/entries.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/entries`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/entries.md)  
-  Generic top-level keyed data container used by several generated JSON-LD datasets.
-The meaning of keys and values is defined by the containing dataset metadata and by sibling fields.
-This property is intentionally generic because `entries` is used for compact maps with different value types in different files.
-
-    **Requirements/Conventions:**  
-
-    - **Support:** OPTIONAL support in implementations, i.e., MAY be `null`.
-    - **Query:** Support for queries on this property is OPTIONAL.
-    - **Response:** MAY be included by default in the response.
-    - It MUST be a dictionary.
-    - Keys and values MUST be interpreted according to the containing dataset.
-
-
 * **[Euclidean normalizer (euclidean_normalizer)](../properties/spacegroups/euclidean_normalizer.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/euclidean_normalizer`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/euclidean_normalizer.md)  
   Finite Euclidean normalizer operations of a Hall setting, generated from cctbx. These are metric-preserving operations that normalize the space group in the chosen setting.
 
@@ -386,6 +372,58 @@ It allows consumers to look up affine normalizer coset data by Hall entry while 
     - For every key-value pair, `affine_normalizer_coset_data[value].hall_entry` MUST equal the key.
 
 
+* **[Index Hall entry to space-group symbols (index_hall_entry_to_spacegroup_symbols)](../properties/spacegroups/index_hall_entry_to_spacegroup_symbols.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroup_symbols`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroup_symbols.md)  
+  Index from normalized Hall entries to row positions in the top-level `spacegroup_symbols` table.
+
+    **Requirements/Conventions:**  
+
+    - **Support:** OPTIONAL support in implementations, i.e., MAY be `null`.
+    - **Query:** Support for queries on this property is OPTIONAL.
+    - **Response:** MAY be included by default in the response.
+    - It MUST be a dictionary whose keys are normalized Hall entries using the same computer notation as the `hall_entry` field, with underscores replacing spaces.
+    - Values MUST be non-negative integer row indices into `data.spacegroup_symbols`.
+
+
+* **[Hall-entry to spacegroups index (index_hall_entry_to_spacegroups)](../properties/spacegroups/index_hall_entry_to_spacegroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroups`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroups.md)  
+  Index from normalized Hall entries to row positions in the top-level `spacegroups` table.
+It allows consumers to look up a space-group setting by Hall entry while keeping `spacegroups` as a compact ordered list.
+
+    **Requirements/Conventions:**  
+
+    - **Support:** OPTIONAL support in implementations, i.e., MAY be `null`.
+    - **Query:** Support for queries on this property is OPTIONAL.
+    - **Response:** MAY be included by default in the response.
+    - It MUST be a dictionary whose keys are normalized Hall entries using the same computer notation as the `hall_entry` field, with underscores replacing spaces.
+    - Each value MUST be a zero-based integer index into the top-level `spacegroups` list.
+    - For every key-value pair, `spacegroups[value].hall_entry` MUST equal the key.
+
+
+* **[IT number to spglib default spacegroups index (index_it_number_to_spglib_default_spacegroups)](../properties/spacegroups/index_it_number_to_spglib_default_spacegroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_spglib_default_spacegroups`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_spglib_default_spacegroups.md)  
+  IT-number keyed lookup from the default spglib Hall setting to the corresponding row index in the top-level `spacegroups` list.
+
+    **Requirements/Conventions:**  
+
+    - **Support:** OPTIONAL support in implementations, i.e., MAY be `null`.
+    - **Query:** Support for queries on this property is OPTIONAL.
+    - **Response:** MAY be included by default in the response.
+    - It MUST be a dictionary.
+    - Keys MUST be International Tables space-group numbers encoded as strings.
+    - Values MUST be list indices into the top-level `spacegroups` array of `symmetry_basics.json.gz`.
+
+
+* **[IT number to std spacegroups index (index_it_number_to_std_spacegroups)](../properties/spacegroups/index_it_number_to_std_spacegroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_std_spacegroups`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_std_spacegroups.md)  
+  IT-number keyed lookup from the International Tables standard setting to the corresponding row index in the top-level `spacegroups` list.
+
+    **Requirements/Conventions:**  
+
+    - **Support:** OPTIONAL support in implementations, i.e., MAY be `null`.
+    - **Query:** Support for queries on this property is OPTIONAL.
+    - **Response:** MAY be included by default in the response.
+    - It MUST be a dictionary.
+    - Keys MUST be International Tables space-group numbers encoded as strings.
+    - Values MUST be list indices into the top-level `spacegroups` array of `symmetry_basics.json.gz`.
+
+
 * **[Hall entry (hall_entry)](../properties/spacegroups/hall_entry.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry.md)  
   Normalized Hall-table entry key used internally by the generated datasets.
 
@@ -400,6 +438,19 @@ It allows consumers to look up affine normalizer coset data by Hall entry while 
     
     - This field identifies a concrete Hall setting, not only an IT space-group type.
     - The same value is normally used as the key of the containing `spacegroups` map.
+
+
+* **[Hall to IT std transform (hall_to_it_std_transform)](../properties/spacegroups/hall_to_it_std_transform.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_to_it_std_transform`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_to_it_std_transform.md)  
+  Hall-keyed exact change-of-basis transforms from each Hall setting to the IT-standard Hall reference setting.
+
+    **Requirements/Conventions:**  
+
+    - **Support:** OPTIONAL support in implementations, i.e., MAY be `null`.
+    - **Query:** Support for queries on this property is OPTIONAL.
+    - **Response:** MAY be included by default in the response.
+    - It MUST be a dictionary.
+    - Keys MUST be Hall-entry identifiers encoded in computer notation.
+    - Values MUST be dictionaries describing one exact basis transform to the IT standard Hall reference setting.
 
 
 * **[Harker planes (harker_planes)](../properties/spacegroups/harker_planes.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/harker_planes`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/harker_planes.md)  
@@ -843,18 +894,18 @@ This emitted space-group property uses the common `/properties/symmetry/pvec` de
     - **Query:** Support for queries on this property is OPTIONAL.
     - **Response:** MAY be included by default in the response.
 
-* **[Relation details (relation_details)](../properties/spacegroups/relation_details.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/relation_details`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/relation_details.md)  
-  Detailed metadata for generated maximal non-isomorphic subgroup relations.
-The map is keyed by supergroup IT number and each value is a list of subgroup-relation records.
+* **[Maximal subgroup relations (maximal_subgroup_relations)](../properties/spacegroups/maximal_subgroup_relations.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/maximal_subgroup_relations`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/maximal_subgroup_relations.md)  
+  Maximal non-isomorphic subgroup relations for International Tables space-group types.
+The dictionary is keyed by supergroup IT number and each value is a list of subgroup-relation records.
 
     **Requirements/Conventions:**  
 
     - **Support:** OPTIONAL support in implementations, i.e., MAY be `null`.
     - **Query:** Support for queries on this property is OPTIONAL.
     - **Response:** MAY be included by default in the response.
-    - Dynamic keys MUST be International Tables space-group numbers represented as strings.
+    - It MUST be a dictionary whose dynamic keys are International Tables space-group numbers represented as strings.
     - Each value MUST be a list of dictionaries.
-    - Each dictionary MUST identify the subgroup IT number, subgroup index, subgroup type, and optional klassengleiche subtype.
+    - Each dictionary MUST describe one generated maximal subgroup relation and include the subgroup IT number, subgroup index, subgroup type, and optional klassengleiche subtype.
 
 
 * **[Symmetry operation linear matrix (rmat)](../properties/spacegroups/rmat.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/rmat`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/rmat.md)  
@@ -1287,6 +1338,19 @@ The plain string value is stored in the corresponding unsuffixed property; this 
     - **Support:** OPTIONAL support in implementations, i.e., MAY be `null`.
     - **Query:** Support for queries on this property is OPTIONAL.
     - **Response:** MAY be included by default in the response.
+
+* **[Same space group affine images std (same_space_group_affine_images_std)](../properties/spacegroups/same_space_group_affine_images_std.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/same_space_group_affine_images_std`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/same_space_group_affine_images_std.md)  
+  IT-number keyed same-space-group affine-image records for the International Tables standard settings.
+
+    **Requirements/Conventions:**  
+
+    - **Support:** OPTIONAL support in implementations, i.e., MAY be `null`.
+    - **Query:** Support for queries on this property is OPTIONAL.
+    - **Response:** MAY be included by default in the response.
+    - It MUST be a dictionary.
+    - Keys MUST be International Tables space-group numbers encoded as strings.
+    - Values MUST be dictionaries containing the Hall reference setting and the list of affine images for that IT number.
+
 
 
 **JSON definition:**
@@ -4215,37 +4279,6 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                 "monoclinic"
             ]
         },
-        "entries": {
-            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/entries",
-            "x-optimade-requirements": {
-                "support": "may",
-                "sortable": false,
-                "query-support": "none",
-                "response-level": "may"
-            },
-            "title": "Entries",
-            "$comment": "Generic Anyterial top-level keyed data container used by several generated datasets.",
-            "x-optimade-type": "dictionary",
-            "x-optimade-definition": {
-                "kind": "property",
-                "version": "0.1.0",
-                "format": "1.3",
-                "name": "entries",
-                "label": "entries_spacegroups"
-            },
-            "x-optimade-unit": "inapplicable",
-            "type": [
-                "object",
-                "null"
-            ],
-            "description": "Generic top-level keyed data container used by several generated JSON-LD datasets.\nThe meaning of keys and values is defined by the containing dataset metadata and by sibling fields.\nThis property is intentionally generic because `entries` is used for compact maps with different value types in different files.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary.\n- Keys and values MUST be interpreted according to the containing dataset.",
-            "properties": {},
-            "examples": [
-                {
-                    "1": "p_1"
-                }
-            ]
-        },
         "euclidean_normalizer": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/euclidean_normalizer",
             "x-optimade-requirements": {
@@ -4924,6 +4957,137 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                 }
             ]
         },
+        "index_hall_entry_to_spacegroup_symbols": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroup_symbols",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Index Hall entry to space-group symbols",
+            "$comment": "Anyterial top-level index from Hall entries to rows in the space-group symbols table.",
+            "x-optimade-type": "dictionary",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "index_hall_entry_to_spacegroup_symbols",
+                "label": "index_hall_entry_to_spacegroup_symbols_spacegroups"
+            },
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "object",
+                "null"
+            ],
+            "description": "Index from normalized Hall entries to row positions in the top-level `spacegroup_symbols` table.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary whose keys are normalized Hall entries using the same computer notation as the `hall_entry` field, with underscores replacing spaces.\n- Values MUST be non-negative integer row indices into `data.spacegroup_symbols`.",
+            "properties": {},
+            "examples": [
+                {
+                    "p_1": 0
+                }
+            ]
+        },
+        "index_hall_entry_to_spacegroups": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroups",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Hall-entry to spacegroups index",
+            "$comment": "Anyterial top-level index from Hall entries to rows in the spacegroups table.",
+            "x-optimade-type": "dictionary",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "index_hall_entry_to_spacegroups",
+                "label": "index_hall_entry_to_spacegroups_spacegroups"
+            },
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "object",
+                "null"
+            ],
+            "description": "Index from normalized Hall entries to row positions in the top-level `spacegroups` table.\nIt allows consumers to look up a space-group setting by Hall entry while keeping `spacegroups` as a compact ordered list.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary whose keys are normalized Hall entries using the same computer notation as the `hall_entry` field, with underscores replacing spaces.\n- Each value MUST be a zero-based integer index into the top-level `spacegroups` list.\n- For every key-value pair, `spacegroups[value].hall_entry` MUST equal the key.",
+            "properties": {},
+            "examples": [
+                {
+                    "p_1": 0,
+                    "-p_1": 1
+                }
+            ]
+        },
+        "index_it_number_to_spglib_default_spacegroups": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_spglib_default_spacegroups",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "IT number to spglib default spacegroups index",
+            "$comment": "Indexed lookup into symmetry_basics spacegroups for the default spglib setting of each IT number.",
+            "x-optimade-type": "dictionary",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "index_it_number_to_spglib_default_spacegroups",
+                "label": "index_it_number_to_spglib_default_spacegroups_spacegroups"
+            },
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "object",
+                "null"
+            ],
+            "description": "IT-number keyed lookup from the default spglib Hall setting to the corresponding row index in the top-level `spacegroups` list.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary.\n- Keys MUST be International Tables space-group numbers encoded as strings.\n- Values MUST be list indices into the top-level `spacegroups` array of `symmetry_basics.json.gz`.",
+            "properties": {},
+            "examples": [
+                {
+                    "1": 0
+                },
+                {
+                    "2": 1
+                }
+            ]
+        },
+        "index_it_number_to_std_spacegroups": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_std_spacegroups",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "IT number to std spacegroups index",
+            "$comment": "Indexed lookup into symmetry_basics spacegroups for the IT-standard setting of each IT number.",
+            "x-optimade-type": "dictionary",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "index_it_number_to_std_spacegroups",
+                "label": "index_it_number_to_std_spacegroups_spacegroups"
+            },
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "object",
+                "null"
+            ],
+            "description": "IT-number keyed lookup from the International Tables standard setting to the corresponding row index in the top-level `spacegroups` list.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary.\n- Keys MUST be International Tables space-group numbers encoded as strings.\n- Values MUST be list indices into the top-level `spacegroups` array of `symmetry_basics.json.gz`.",
+            "properties": {},
+            "examples": [
+                {
+                    "1": 0
+                },
+                {
+                    "2": 1
+                }
+            ]
+        },
         "hall_entry": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
             "x-optimade-requirements": {
@@ -4951,6 +5115,65 @@ The plain string value is stored in the corresponding unsuffixed property; this 
             "examples": [
                 "p_1",
                 "-p_1"
+            ]
+        },
+        "hall_to_it_std_transform": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_to_it_std_transform",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Hall to IT std transform",
+            "$comment": "Hall-keyed exact change-of-basis transforms to the IT standard Hall setting.",
+            "x-optimade-type": "dictionary",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "hall_to_it_std_transform",
+                "label": "hall_to_it_std_transform_spacegroups"
+            },
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "object",
+                "null"
+            ],
+            "description": "Hall-keyed exact change-of-basis transforms from each Hall setting to the IT-standard Hall reference setting.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary.\n- Keys MUST be Hall-entry identifiers encoded in computer notation.\n- Values MUST be dictionaries describing one exact basis transform to the IT standard Hall reference setting.",
+            "properties": {},
+            "examples": [
+                {
+                    "p_1": {
+                        "hall_entry": "p_1",
+                        "it_number": 1,
+                        "to_hall": "p_1",
+                        "to_hall_symbol": "P 1",
+                        "index": 1,
+                        "pmat": [
+                            [
+                                "1",
+                                "0",
+                                "0"
+                            ],
+                            [
+                                "0",
+                                "1",
+                                "0"
+                            ],
+                            [
+                                "0",
+                                "0",
+                                "1"
+                            ]
+                        ],
+                        "pvec": [
+                            "0",
+                            "0",
+                            "0"
+                        ]
+                    }
+                }
             ]
         },
         "harker_planes": {
@@ -7428,30 +7651,30 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                 ]
             ]
         },
-        "relation_details": {
-            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/relation_details",
+        "maximal_subgroup_relations": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/maximal_subgroup_relations",
             "x-optimade-requirements": {
                 "support": "may",
                 "sortable": false,
                 "query-support": "none",
                 "response-level": "may"
             },
-            "title": "Relation details",
-            "$comment": "Anyterial property definition for detailed maximal-subgroup relation metadata.",
+            "title": "Maximal subgroup relations",
+            "$comment": "Anyterial property definition for maximal non-isomorphic subgroup relation metadata.",
             "x-optimade-type": "dictionary",
             "x-optimade-definition": {
                 "kind": "property",
                 "version": "0.1.0",
                 "format": "1.3",
-                "name": "relation_details",
-                "label": "relation_details_spacegroups"
+                "name": "maximal_subgroup_relations",
+                "label": "maximal_subgroup_relations_spacegroups"
             },
             "x-optimade-unit": "inapplicable",
             "type": [
                 "object",
                 "null"
             ],
-            "description": "Detailed metadata for generated maximal non-isomorphic subgroup relations.\nThe map is keyed by supergroup IT number and each value is a list of subgroup-relation records.\n\n**Requirements/Conventions**:\n\n- Dynamic keys MUST be International Tables space-group numbers represented as strings.\n- Each value MUST be a list of dictionaries.\n- Each dictionary MUST identify the subgroup IT number, subgroup index, subgroup type, and optional klassengleiche subtype.",
+            "description": "Maximal non-isomorphic subgroup relations for International Tables space-group types.\nThe dictionary is keyed by supergroup IT number and each value is a list of subgroup-relation records.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary whose dynamic keys are International Tables space-group numbers represented as strings.\n- Each value MUST be a list of dictionaries.\n- Each dictionary MUST describe one generated maximal subgroup relation and include the subgroup IT number, subgroup index, subgroup type, and optional klassengleiche subtype.",
             "properties": {},
             "examples": [
                 {
@@ -10668,6 +10891,66 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                     "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
                     "latex": "\\mathit{P}\\,2_{1}/c",
                     "unicode": "P2\u2081/c"
+                }
+            ]
+        },
+        "same_space_group_affine_images_std": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/same_space_group_affine_images_std",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Same space group affine images std",
+            "$comment": "IT-number keyed same-space-group affine-image records for standard settings.",
+            "x-optimade-type": "dictionary",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "same_space_group_affine_images_std",
+                "label": "same_space_group_affine_images_std_spacegroups"
+            },
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "object",
+                "null"
+            ],
+            "description": "IT-number keyed same-space-group affine-image records for the International Tables standard settings.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary.\n- Keys MUST be International Tables space-group numbers encoded as strings.\n- Values MUST be dictionaries containing the Hall reference setting and the list of affine images for that IT number.",
+            "properties": {},
+            "examples": [
+                {
+                    "1": {
+                        "it_number": 1,
+                        "hall": "p_1",
+                        "affine_images": [
+                            {
+                                "pmat": [
+                                    [
+                                        "1",
+                                        "0",
+                                        "0"
+                                    ],
+                                    [
+                                        "0",
+                                        "1",
+                                        "0"
+                                    ],
+                                    [
+                                        "0",
+                                        "0",
+                                        "1"
+                                    ]
+                                ],
+                                "pvec": [
+                                    "0",
+                                    "0",
+                                    "0"
+                                ]
+                            }
+                        ]
+                    }
                 }
             ]
         }
