@@ -1,22 +1,73 @@
+# Operation (property)
+
+This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
+
+**ID: [`https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op`](https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op.md)**  
+**Definition name:** `op`
+
+**Property name:** Operation  
+**Description:** A classified crystallographic operation acting within one coordinate setting.
+The affine map itself is stored in the embedded `affine_transformation` field.
+The remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.  
+**Type:** dictionary  
+
+**Requirements/Conventions**:
+
+- It MUST be a dictionary with the following keys:
+
+    - **affine\_transformation**: REQUIRED; Dictionary.
+      Exact affine map for the operation.
+      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.
+
+    - **rot\_type**: OPTIONAL; String.
+      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.
+
+    - **type**: OPTIONAL; Integer.
+      Legacy numeric operation-type code used by point-group operation descriptors.
+
+    - **axis**: OPTIONAL; List of 3 Integers.
+      Operation axis or invariant direction using the integer-vector convention returned by the generator.
+
+    - **sense**: OPTIONAL; Integer.
+      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.
+
+    - **screw\_glide**: OPTIONAL; List of 3 Fractions (String).
+      Screw-axis or glide-plane component associated with a space-group affine operation.
+
+    - **origin\_shift**: OPTIONAL; List of 3 Fractions (String).
+      Origin shift associated with the screw/glide decomposition of a space-group affine operation.
+
+    - **is\_proper**: OPTIONAL; Boolean.
+      States whether the linear operation is proper, i.e., whether its determinant is +1.
+
+**Examples:**
+
+- `{"affine_transformation": {"matrix": [["-1", "0", "0"], ["0", "-1", "0"], ["0", "0", "1"]], "vector": ["0", "0", "0"], "xyz": "-x,-y,z", "det": 1, "is_orthogonal": true}, "rot_type": "2", "sense": 0, "axis": [0, 0, 1], "screw_glide": ["0", "0", "0"], "origin_shift": ["0", "0", "0"]}`
+
+**Formats:** [[JSON](op.json)] [[MD](op.md)]
+
+**JSON definition:**
+
+``` json
 {
-    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
+    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Basis transformation",
-    "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
+    "title": "Operation",
+    "$comment": "Reusable Anyterial definition for one classified crystallographic operation descriptor.",
     "x-optimade-type": "dictionary",
     "x-optimade-definition": {
         "kind": "property",
         "version": "0.1.0",
         "format": "1.3",
-        "name": "basis_transform",
-        "label": "basis_transform_symmetry"
+        "name": "op",
+        "label": "op_symmetry"
     },
     "x-optimade-unit": "inapplicable",
     "type": [
         "object",
         "null"
     ],
-    "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; Dictionary.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; Dictionary.\n      Backward-lift constraint metadata induced by the transform when available.",
+    "description": "A classified crystallographic operation acting within one coordinate setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **type**: OPTIONAL; Integer.\n      Legacy numeric operation-type code used by point-group operation descriptors.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
     "properties": {
         "affine_transformation": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
@@ -195,78 +246,148 @@
                 }
             ]
         },
-        "index": {
+        "rot_type": {
+            "x-optimade-type": "string",
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Symbolic crystallographic operation-type label for the linear part."
+        },
+        "type": {
             "x-optimade-type": "integer",
             "x-optimade-unit": "inapplicable",
             "type": [
                 "integer",
                 "null"
             ],
-            "description": "Index metadata whose interpretation is supplied by the parent property."
+            "description": "Legacy numeric point-group operation-type code."
         },
-        "subgroup_type": {
-            "x-optimade-type": "string",
-            "x-optimade-unit": "inapplicable",
-            "type": [
-                "string",
-                "null"
-            ],
-            "description": "International Tables subgroup-type label when applicable."
-        },
-        "k_subtype": {
-            "x-optimade-type": "string",
-            "x-optimade-unit": "inapplicable",
-            "type": [
-                "string",
-                "null"
-            ],
-            "description": "Klassengleiche subtype when applicable."
-        },
-        "compatible_systems": {
+        "axis": {
             "x-optimade-type": "list",
             "x-optimade-unit": "inapplicable",
+            "x-optimade-dimensions": {
+                "names": [
+                    "dim_lattice"
+                ],
+                "sizes": [
+                    3
+                ]
+            },
             "type": [
                 "array",
                 "null"
             ],
-            "description": "Crystal metric systems compatible with the transform.",
+            "description": "Integer-vector axis or invariant-direction descriptor for the operation.",
             "items": {
-                "x-optimade-type": "string",
+                "x-optimade-type": "integer",
                 "x-optimade-unit": "inapplicable",
                 "type": [
-                    "string"
+                    "integer"
                 ],
-                "description": "One compatible crystal-system label."
+                "description": "One integer component of the axis vector."
             }
         },
-        "operation_kind": {
-            "x-optimade-type": "string",
+        "sense": {
+            "x-optimade-type": "integer",
             "x-optimade-unit": "inapplicable",
             "type": [
-                "string",
+                "integer",
                 "null"
             ],
-            "description": "Generator classification of the transform or representative."
+            "description": "Rotation sense/sign convention returned by the generator."
         },
-        "wyckoff_splitting": {
-            "x-optimade-type": "dictionary",
+        "screw_glide": {
+            "x-optimade-type": "list",
             "x-optimade-unit": "inapplicable",
+            "x-optimade-dimensions": {
+                "names": [
+                    "dim_lattice"
+                ],
+                "sizes": [
+                    3
+                ]
+            },
             "type": [
-                "object",
+                "array",
                 "null"
             ],
-            "description": "Wyckoff-position splitting metadata induced by the transform.",
-            "properties": {}
+            "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
+            "items": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                "title": "fraction",
+                "x-optimade-type": "string",
+                "x-optimade-definition": {
+                    "label": "fraction_core",
+                    "kind": "property",
+                    "version": "0.1.0",
+                    "format": "1.3",
+                    "name": "fraction"
+                },
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "A fraction represented as a string.",
+                "examples": [
+                    "2/3",
+                    "5/42",
+                    "10",
+                    "0"
+                ],
+                "x-optimade-unit": "inapplicable"
+            }
         },
-        "criteria": {
-            "x-optimade-type": "dictionary",
+        "origin_shift": {
+            "x-optimade-type": "list",
             "x-optimade-unit": "inapplicable",
+            "x-optimade-dimensions": {
+                "names": [
+                    "dim_lattice"
+                ],
+                "sizes": [
+                    3
+                ]
+            },
             "type": [
-                "object",
+                "array",
                 "null"
             ],
-            "description": "Backward-lift constraint metadata induced by the transform.",
-            "properties": {}
+            "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
+            "items": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                "title": "fraction",
+                "x-optimade-type": "string",
+                "x-optimade-definition": {
+                    "label": "fraction_core",
+                    "kind": "property",
+                    "version": "0.1.0",
+                    "format": "1.3",
+                    "name": "fraction"
+                },
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "A fraction represented as a string.",
+                "examples": [
+                    "2/3",
+                    "5/42",
+                    "10",
+                    "0"
+                ],
+                "x-optimade-unit": "inapplicable"
+            }
+        },
+        "is_proper": {
+            "x-optimade-type": "boolean",
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "boolean",
+                "null"
+            ],
+            "description": "Whether the linear operation is proper."
         }
     },
     "examples": [
@@ -274,28 +395,48 @@
             "affine_transformation": {
                 "matrix": [
                     [
-                        "1",
+                        "-1",
                         "0",
                         "0"
                     ],
                     [
                         "0",
-                        "1",
+                        "-1",
                         "0"
                     ],
                     [
                         "0",
                         "0",
-                        "2"
+                        "1"
                     ]
                 ],
                 "vector": [
                     "0",
                     "0",
                     "0"
-                ]
+                ],
+                "xyz": "-x,-y,z",
+                "det": 1,
+                "is_orthogonal": true
             },
-            "index": 2
+            "rot_type": "2",
+            "sense": 0,
+            "axis": [
+                0,
+                0,
+                1
+            ],
+            "screw_glide": [
+                "0",
+                "0",
+                "0"
+            ],
+            "origin_shift": [
+                "0",
+                "0",
+                "0"
+            ]
         }
     ]
 }
+```

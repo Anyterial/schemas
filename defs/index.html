@@ -179,7 +179,7 @@ The plain string value is stored in the corresponding unsuffixed property; this 
 <li>
 <p><strong><a href="v0.1/properties/pointgroups/symops">Symmetry operations</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/symops"><code>https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/symops</code></a></p>
 <p>Full list of symmetry-operation descriptors for a point group.
-Each list member is a <code>symop</code> object as defined by <code>/properties/symmetry/symop</code>.
+Each list member is a <code>op</code> object as defined by <code>/properties/symmetry/op</code>.
 For point-group operations, generated data currently uses <code>matrix</code> and <code>type</code>.</p>
 </li>
 </ul>
@@ -191,7 +191,7 @@ For point-group operations, generated data currently uses <code>matrix</code> an
 <p><strong><a href="v0.1/properties/spacegroups/affine_images">Affine images</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_images"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_images</code></a></p>
 <p>Same-space-group affine images for a standard setting.
 The list combines Euclidean normalizer operations and isomorphic subgroup transforms to enumerate alternative affine images of the same space group used by runtime search code.
-Matrix/vector transform fields follow <code>/properties/symmetry/affine_transformation</code>.</p>
+Matrix/vector transform fields follow <code>/properties/symmetry/basis_transform</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/affine_normalizer">Affine normalizer</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer</code></a></p>
@@ -209,7 +209,7 @@ The representatives are listed modulo the space group itself, so each listed ope
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/affine_normalizer_cosets">Affine normalizer cosets</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_cosets"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_cosets</code></a></p>
 <p>Runtime list of bounded affine normalizer coset representatives modulo the space group.
-Each item is one finite listed representative and follows <code>/properties/symmetry/affine_transformation</code>.
+Each item is one finite listed representative and follows <code>/properties/symmetry/basis_transform</code>.
 The list is a bounded representative table, not a complete infinite affine normalizer.</p>
 </li>
 <li>
@@ -249,7 +249,7 @@ Values are lists of transform records carrying a basis transform and a dictionar
 <p><strong><a href="v0.1/properties/spacegroups/baernighausen">Bärnighausen subgroup transforms</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/baernighausen"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/baernighausen</code></a></p>
 <p>Bärnighausen subgroup transform table for one parent setting or space-group type.
 Entries describe generated embeddings of subgroup settings into the containing parent setting.
-Transform records use <code>matrix</code> and <code>vector</code> according to <code>/properties/symmetry/affine_transformation</code>.</p>
+Transform records follow <code>/properties/symmetry/basis_transform</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/bravais_type">Bravais Type</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type</code></a></p>
@@ -536,35 +536,12 @@ This property contains the signed-permutation subset of affine normalizer repres
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/orthogonal_affine_normalizer_cosets">Orthogonal affine normalizer cosets</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/orthogonal_affine_normalizer_cosets"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/orthogonal_affine_normalizer_cosets</code></a></p>
 <p>Runtime list of orthogonal signed-permutation affine normalizer coset representatives modulo the space group.
-Each item is one finite listed representative and follows <code>/properties/symmetry/affine_transformation</code>.
+Each item is one finite listed representative and follows <code>/properties/symmetry/basis_transform</code>.
 The list is a bounded representative table, not a complete infinite affine normalizer.</p>
-</li>
-<li>
-<p><strong><a href="v0.1/properties/spacegroups/pmat">Basis transformation matrix</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/pmat"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/pmat</code></a></p>
-<p>Matrix part of a crystallographic basis or setting transformation.
-This emitted space-group property uses the common <code>/properties/symmetry/pmat</code> definition for its nested value shape and dimensional metadata.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/point_group">Point-Group Hermann-Mauguin Symbol</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/point_group"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/point_group</code></a></p>
 <p>The Hermann-Mauguin point-group symbol associated with the space group.</p>
-</li>
-<li>
-<p><strong><a href="v0.1/properties/spacegroups/pvec">Basis transformation origin shift</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/pvec"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/pvec</code></a></p>
-<p>Translation or origin-shift vector of a crystallographic basis or setting transformation.
-This emitted space-group property uses the common <code>/properties/symmetry/pvec</code> definition for its nested value shape and dimensional metadata.</p>
-</li>
-<li>
-<p><strong><a href="v0.1/properties/spacegroups/rmat">Symmetry operation linear matrix</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/rmat"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/rmat</code></a></p>
-<p>Linear matrix part of a same-setting affine operation.
-This emitted space-group property uses the common <code>/properties/symmetry/rmat</code> definition for its nested value shape and dimensional metadata.</p>
-</li>
-<li>
-<p><strong><a href="v0.1/properties/spacegroups/rmat_det">Symmetry operation rotation determinant</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/rmat_det"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/rmat_det</code></a></p>
-<p>Determinant of the <code>rmat</code> linear matrix part of a same-setting operation.</p>
-</li>
-<li>
-<p><strong><a href="v0.1/properties/spacegroups/rmat_is_orthogonal">Symmetry operation rotation is orthogonal</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/rmat_is_orthogonal"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/rmat_is_orthogonal</code></a></p>
-<p>Boolean flag indicating whether <code>rmat</code> is orthogonal in the conventional coordinate basis.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/same_space_group_affine_images_std">Same space group affine images std</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/same_space_group_affine_images_std"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/same_space_group_affine_images_std</code></a></p>
@@ -625,13 +602,13 @@ The companion <code>index_hall_entry_to_spacegroups</code> property maps normali
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/symops">Symmetry operations</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops</code></a></p>
 <p>Full list of symmetry-operation descriptors for a space-group setting.
-Each list member is a <code>symop</code> object as defined by <code>/properties/symmetry/symop</code>.
+Each list member is a <code>op</code> object as defined by <code>/properties/symmetry/op</code>.
 For space-group operations, generated data currently uses <code>rot_type</code>, <code>axis</code>, <code>sense</code>, <code>screw_glide</code>, and <code>origin_shift</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/symops_generators">Symmetry operation generators</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators</code></a></p>
 <p>Minimal generator subset of the full symmetry-operation group for a space-group setting.
-Each list member is a <code>symop</code> object as defined by <code>/properties/symmetry/symop</code>.
+Each list member is a <code>op</code> object as defined by <code>/properties/symmetry/op</code>.
 For space-group operations, generated data currently uses <code>rot_type</code>, <code>axis</code>, <code>sense</code>, <code>screw_glide</code>, and <code>origin_shift</code>.</p>
 </li>
 <li>
@@ -641,7 +618,7 @@ For space-group operations, generated data currently uses <code>rot_type</code>,
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/symops_representative">Representative symmetry operations</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative</code></a></p>
 <p>Representative symmetry-operation descriptors modulo centering translations.
-Each list member is a <code>symop</code> object as defined by <code>/properties/symmetry/symop</code>.
+Each list member is a <code>op</code> object as defined by <code>/properties/symmetry/op</code>.
 For space-group operations, generated data currently uses <code>rot_type</code>, <code>axis</code>, <code>sense</code>, <code>screw_glide</code>, and <code>origin_shift</code>.</p>
 </li>
 <li>
@@ -667,11 +644,6 @@ The semantic meaning of <code>target</code> is parent-specific and should not be
 <p>Display Hall symbol corresponding to <code>to_hall</code>.</p>
 </li>
 <li>
-<p><strong><a href="v0.1/properties/spacegroups/tvec">Symmetry operation translation vector</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/tvec"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/tvec</code></a></p>
-<p>Translation vector of a same-setting affine operation.
-This emitted space-group property uses the common <code>/properties/symmetry/tvec</code> definition for its nested value shape and dimensional metadata.</p>
-</li>
-<li>
 <p><strong><a href="v0.1/properties/spacegroups/wyckoff">Wyckoff positions</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff</code></a></p>
 <p>Wyckoff-position table for a specific space-group setting.
 Each key is a Wyckoff letter and each value describes one Wyckoff position.
@@ -693,20 +665,16 @@ Each value is an ordered list of subgroup Wyckoff-position assignments or coordi
 <p><strong>symmetry</strong></p>
 <ul>
 <li>
-<p><strong><a href="v0.1/properties/symmetry/affine_operation">Affine operation</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_operation"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_operation</code></a></p>
-<p>One affine operation in a fixed crystallographic setting.
-The operation may be represented by an exact matrix/vector pair, by an <code>x,y,z</code> expression, or by both depending on the parent table.</p>
-</li>
-<li>
 <p><strong><a href="v0.1/properties/symmetry/affine_transformation">Affine transformation</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation</code></a></p>
 <p>One exact affine transformation acting on fractional crystallographic coordinates.
-The transformation core is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.
-Parent properties define the coordinate convention and semantic role of the transformation, for example whether it is a setting transform, a subgroup embedding, a same-space-group image, or a normalizer representative.</p>
+The transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.
+Parent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/symmetry/basis_transform">Basis transformation</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform</code></a></p>
-<p>One crystallographic basis or setting transformation represented by an exact matrix and an exact origin shift.
-Parent tables use this object for Bärnighausen transforms, isomorphic subgroup transforms, Hall-to-standard transforms, and related setting maps.</p>
+<p>One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.
+The affine map itself is stored in the embedded <code>affine_transformation</code> field.
+Parent tables use this object for Hall-to-standard transforms, Bärnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/symmetry/centering_translation">Centering translation</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/centering_translation"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/centering_translation</code></a></p>
@@ -714,39 +682,10 @@ Parent tables use this object for Bärnighausen transforms, isomorphic subgroup 
 The translation is represented in fractional coordinates using exact fraction strings.</p>
 </li>
 <li>
-<p><strong><a href="v0.1/properties/symmetry/normalizer_representative">Normalizer representative</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/normalizer_representative"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/normalizer_representative</code></a></p>
-<p>One listed representative of a Euclidean or affine normalizer operation or coset.
-In affine-normalizer tables the representative is taken modulo the space group, so it should be read as one representative of an equivalence class rather than as the only operation in that class.
-Bounded affine-normalizer tables enumerate only the finite candidate set documented by the generator.</p>
-</li>
-<li>
-<p><strong><a href="v0.1/properties/symmetry/pmat">Basis transformation matrix</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/pmat"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/pmat</code></a></p>
-<p>Matrix part of a crystallographic basis or setting transformation.
-The matrix is represented exactly as three rows with three entries per row.
-Entries are strings so that exact rational or algebraic values can be preserved without floating-point rounding.</p>
-</li>
-<li>
-<p><strong><a href="v0.1/properties/symmetry/pvec">Basis transformation origin shift</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/pvec"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/pvec</code></a></p>
-<p>Translation or origin-shift part of a crystallographic basis or setting transformation.
-The vector is represented in fractional coordinates using exact fraction strings.</p>
-</li>
-<li>
-<p><strong><a href="v0.1/properties/symmetry/rmat">Symmetry operation linear matrix</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/rmat"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/rmat</code></a></p>
-<p>Linear matrix part of a same-setting affine operation acting on fractional coordinates.
-The matrix is represented exactly as three rows with three entries per row.
-Entries are strings in transformation tables because affine-normalizer candidates may be generated and serialized through exact arithmetic.</p>
-</li>
-<li>
-<p><strong><a href="v0.1/properties/symmetry/symop">Symmetry operation</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/symop"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/symop</code></a></p>
-<p>A single crystallographic symmetry-operation descriptor.
-Space-group operation lists currently store the operation type, axis, sense, and screw/glide decomposition.
-Point-group operation lists currently store the full integer operation matrix under the legacy key <code>matrix</code> together with an integer operation-type code under <code>type</code>.
-Future generated data may also use the semantic <code>rmat</code> key for the linear matrix part.</p>
-</li>
-<li>
-<p><strong><a href="v0.1/properties/symmetry/tvec">Symmetry operation translation vector</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/tvec"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/tvec</code></a></p>
-<p>Translation part of a same-setting affine operation acting on fractional coordinates.
-The vector is represented in fractional coordinates using exact fraction strings.</p>
+<p><strong><a href="v0.1/properties/symmetry/op">Operation</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op</code></a></p>
+<p>A classified crystallographic operation acting within one coordinate setting.
+The affine map itself is stored in the embedded <code>affine_transformation</code> field.
+The remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/symmetry/wyckoff_position">Wyckoff position</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/wyckoff_position"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/wyckoff_position</code></a></p>

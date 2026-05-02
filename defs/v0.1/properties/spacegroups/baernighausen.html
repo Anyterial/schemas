@@ -97,17 +97,17 @@ overflow-wrap: break-word;
 <p><strong>Property name:</strong> Bärnighausen subgroup transforms<br>
 <strong>Description:</strong> Bärnighausen subgroup transform table for one parent setting or space-group type.
 Entries describe generated embeddings of subgroup settings into the containing parent setting.
-Transform records use <code>matrix</code> and <code>vector</code> according to <code>/properties/symmetry/affine_transformation</code>.<br>
+Transform records follow <code>/properties/symmetry/basis_transform</code>.<br>
 <strong>Type:</strong> dictionary  </p>
 <p><strong>Requirements/Conventions</strong>:</p>
 <ul>
 <li>Dynamic keys identify target subgroup settings or target subgroup space-group types according to the containing dataset.</li>
 <li>Values are lists of transform records.</li>
-<li>Each transform record SHOULD follow <code>/properties/symmetry/affine_transformation</code> for its matrix and vector fields.</li>
+<li>Each transform record SHOULD follow <code>/properties/symmetry/basis_transform</code>.</li>
 </ul>
 <p><strong>Examples:</strong></p>
 <ul>
-<li><code>{"p_1": [{"index": 2, "matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "vector": ["0", "0", "0"]}]}</code></li>
+<li><code>{"p_1": [{"index": 2, "affine_transformation": {"matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "vector": ["0", "0", "0"]}}]}</code></li>
 </ul>
 <p><strong>Formats:</strong> [<a href="baernighausen.json">JSON</a>] [<a href="baernighausen.md">MD</a>]</p>
 <p><strong>JSON definition:</strong></p>
@@ -115,7 +115,7 @@ Transform records use <code>matrix</code> and <code>vector</code> according to <
 <span class="w">    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/baernighausen&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B\u00e4rnighausen subgroup transforms&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;$comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Anyterial transform collection property using the common affine-transformation definition for transform items.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;$comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Anyterial transform collection property using the common basis-transform definition for transform items.&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dictionary&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;property&quot;</span><span class="p">,</span>
@@ -129,35 +129,37 @@ Transform records use <code>matrix</code> and <code>vector</code> according to <
 <span class="w">        </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="s2">&quot;null&quot;</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B\u00e4rnighausen subgroup transform table for one parent setting or space-group type.\nEntries describe generated embeddings of subgroup settings into the containing parent setting.\nTransform records use `matrix` and `vector` according to `/properties/symmetry/affine_transformation`.\n\n**Requirements/Conventions**:\n\n- Dynamic keys identify target subgroup settings or target subgroup space-group types according to the containing dataset.\n- Values are lists of transform records.\n- Each transform record SHOULD follow `/properties/symmetry/affine_transformation` for its matrix and vector fields.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B\u00e4rnighausen subgroup transform table for one parent setting or space-group type.\nEntries describe generated embeddings of subgroup settings into the containing parent setting.\nTransform records follow `/properties/symmetry/basis_transform`.\n\n**Requirements/Conventions**:\n\n- Dynamic keys identify target subgroup settings or target subgroup space-group types according to the containing dataset.\n- Values are lists of transform records.\n- Each transform record SHOULD follow `/properties/symmetry/basis_transform`.&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
 <span class="w">    </span><span class="nt">&quot;examples&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;p_1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                </span><span class="p">{</span>
 <span class="w">                    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">                    </span><span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                        </span><span class="p">[</span>
-<span class="w">                            </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;affine_transformation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;matrix&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                            </span><span class="p">[</span>
+<span class="w">                                </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span>
+<span class="w">                            </span><span class="p">],</span>
+<span class="w">                            </span><span class="p">[</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span>
+<span class="w">                            </span><span class="p">],</span>
+<span class="w">                            </span><span class="p">[</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;2&quot;</span>
+<span class="w">                            </span><span class="p">]</span>
+<span class="w">                        </span><span class="p">],</span>
+<span class="w">                        </span><span class="nt">&quot;vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                            </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s2">&quot;0&quot;</span>
-<span class="w">                        </span><span class="p">],</span>
-<span class="w">                        </span><span class="p">[</span>
-<span class="w">                            </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                            </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
-<span class="w">                            </span><span class="s2">&quot;0&quot;</span>
-<span class="w">                        </span><span class="p">],</span>
-<span class="w">                        </span><span class="p">[</span>
-<span class="w">                            </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                            </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                            </span><span class="s2">&quot;2&quot;</span>
 <span class="w">                        </span><span class="p">]</span>
-<span class="w">                    </span><span class="p">],</span>
-<span class="w">                    </span><span class="nt">&quot;vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                        </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="s2">&quot;0&quot;</span>
-<span class="w">                    </span><span class="p">]</span>
+<span class="w">                    </span><span class="p">}</span>
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">]</span>
 <span class="w">        </span><span class="p">}</span>

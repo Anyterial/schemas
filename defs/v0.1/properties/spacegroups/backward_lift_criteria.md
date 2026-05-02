@@ -18,7 +18,7 @@ Values are lists of transform records carrying a basis transform and a dictionar
 
 **Examples:**
 
-- `{"2": [{"index": 2, "matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "vector": ["0", "0", "0"], "criteria": {"a": [{"roles": [["a", 0]], "coeffs": [[["1", "0", "0"]]], "target": ["0", "0", "0"]}]}}]}`
+- `{"2": [{"index": 2, "affine_transformation": {"matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "vector": ["0", "0", "0"]}, "criteria": {"a": [{"roles": [["a", 0]], "coeffs": [[["1", "0", "0"]]], "target": ["0", "0", "0"]}]}}]}`
 
 **Formats:** [[JSON](backward_lift_criteria.json)] [[MD](backward_lift_criteria.md)]
 
@@ -50,28 +50,30 @@ Values are lists of transform records carrying a basis transform and a dictionar
             "2": [
                 {
                     "index": 2,
-                    "matrix": [
-                        [
-                            "1",
+                    "affine_transformation": {
+                        "matrix": [
+                            [
+                                "1",
+                                "0",
+                                "0"
+                            ],
+                            [
+                                "0",
+                                "1",
+                                "0"
+                            ],
+                            [
+                                "0",
+                                "0",
+                                "2"
+                            ]
+                        ],
+                        "vector": [
+                            "0",
                             "0",
                             "0"
-                        ],
-                        [
-                            "0",
-                            "1",
-                            "0"
-                        ],
-                        [
-                            "0",
-                            "0",
-                            "2"
                         ]
-                    ],
-                    "vector": [
-                        "0",
-                        "0",
-                        "0"
-                    ],
+                    },
                     "criteria": {
                         "a": [
                             {

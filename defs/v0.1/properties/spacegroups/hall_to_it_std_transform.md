@@ -37,17 +37,14 @@ If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-sta
       Transform index.
       For this table the value is `1` because the transform maps between settings of the same space group.
 
-    - **matrix**: REQUIRED; Exact 3x3 matrix.
-      Matrix part of the basis transform.
-      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`.
-
-    - **vector**: REQUIRED; List of 3 Fractions (String).
-      Origin-shift vector of the basis transform.
-      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`.
+    - **affine\_transformation**: REQUIRED; Dictionary.
+      Exact affine map for this setting transform.
+      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.
+      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`, where `matrix` and `vector` are the fields inside `affine_transformation`.
 
 **Examples:**
 
-- `{"hall_entry": "p_1", "it_number": 1, "to_hall": "p_1", "to_hall_symbol": "p 1", "index": 1, "matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "1"]], "vector": ["0", "0", "0"]}`
+- `{"hall_entry": "p_1", "it_number": 1, "to_hall": "p_1", "to_hall_symbol": "p 1", "index": 1, "affine_transformation": {"matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "1"]], "vector": ["0", "0", "0"]}}`
 
 **Formats:** [[JSON](hall_to_it_std_transform.json)] [[MD](hall_to_it_std_transform.md)]
 
@@ -72,7 +69,7 @@ If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-sta
         "object",
         "null"
     ],
-    "description": "Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.\nThis transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.\nThe transform is represented by `matrix` and `vector`, following the same affine-transformation convention as the other generated transformation tables.\n\nIf `x_to_ref_hall` is a fractional coordinate column vector in the target IT-standard Hall setting, and `x_from_hall` is the corresponding fractional coordinate column vector in the source Hall setting keyed by the containing map, then the stored transform satisfies:\n`x_from_hall = matrix * x_to_ref_hall + vector`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary describing one exact transform from the containing Hall setting to the IT-standard Hall setting of the same `it_number`.\n- The `index` value is always `1`, because this is a same-space-group setting transform rather than a proper subgroup transform.\n- Matrix and vector entries MUST be exact strings, using integer strings or fraction strings as appropriate.\n- It MUST be a dictionary with the following keys:\n\n    - **hall\\_entry**: REQUIRED; String.\n      Source Hall-entry key for the setting transformed by this object.\n\n    - **it\\_number**: REQUIRED; Integer.\n      International Tables space-group number shared by the source and target Hall settings.\n\n    - **to\\_hall**: REQUIRED; String.\n      Target Hall-entry key for the IT-standard Hall setting of the same space-group type.\n\n    - **to\\_hall\\_symbol**: REQUIRED; String.\n      Display Hall symbol corresponding to `to_hall`, using spaces rather than the normalized Hall-entry key syntax.\n\n    - **index**: REQUIRED; Integer.\n      Transform index.\n      For this table the value is `1` because the transform maps between settings of the same space group.\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the basis transform.\n      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Origin-shift vector of the basis transform.\n      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`.",
+    "description": "Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.\nThis transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.\nThe transform is represented by `matrix` and `vector`, following the same affine-transformation convention as the other generated transformation tables.\n\nIf `x_to_ref_hall` is a fractional coordinate column vector in the target IT-standard Hall setting, and `x_from_hall` is the corresponding fractional coordinate column vector in the source Hall setting keyed by the containing map, then the stored transform satisfies:\n`x_from_hall = matrix * x_to_ref_hall + vector`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary describing one exact transform from the containing Hall setting to the IT-standard Hall setting of the same `it_number`.\n- The `index` value is always `1`, because this is a same-space-group setting transform rather than a proper subgroup transform.\n- Matrix and vector entries MUST be exact strings, using integer strings or fraction strings as appropriate.\n- It MUST be a dictionary with the following keys:\n\n    - **hall\\_entry**: REQUIRED; String.\n      Source Hall-entry key for the setting transformed by this object.\n\n    - **it\\_number**: REQUIRED; Integer.\n      International Tables space-group number shared by the source and target Hall settings.\n\n    - **to\\_hall**: REQUIRED; String.\n      Target Hall-entry key for the IT-standard Hall setting of the same space-group type.\n\n    - **to\\_hall\\_symbol**: REQUIRED; String.\n      Display Hall symbol corresponding to `to_hall`, using spaces rather than the normalized Hall-entry key syntax.\n\n    - **index**: REQUIRED; Integer.\n      Transform index.\n      For this table the value is `1` because the transform maps between settings of the same space group.\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for this setting transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`, where `matrix` and `vector` are the fields inside `affine_transformation`.",
     "properties": {
         "hall_entry": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
@@ -192,105 +189,182 @@ If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-sta
                 4
             ]
         },
-        "matrix": {
-            "x-optimade-type": "list",
-            "x-optimade-unit": "inapplicable",
-            "x-optimade-dimensions": {
-                "names": [
-                    "dim_lattice",
-                    "dim_lattice"
-                ],
-                "sizes": [
-                    3,
-                    3
-                ]
+        "affine_transformation": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+            "title": "Affine transformation",
+            "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
+            "x-optimade-type": "dictionary",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "affine_transformation",
+                "label": "affine_transformation_symmetry"
             },
+            "x-optimade-unit": "inapplicable",
             "type": [
-                "array",
+                "object",
                 "null"
             ],
-            "description": "Exact 3 by 3 matrix part of the affine transformation.",
-            "items": {
-                "x-optimade-type": "list",
-                "x-optimade-unit": "inapplicable",
-                "x-optimade-dimensions": {
-                    "names": [
-                        "dim_lattice"
-                    ],
-                    "sizes": [
-                        3
-                    ]
-                },
-                "type": [
-                    "array"
-                ],
-                "description": "One row of the exact 3 by 3 matrix.",
-                "items": {
-                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                    "title": "fraction",
-                    "x-optimade-type": "string",
-                    "x-optimade-definition": {
-                        "label": "fraction_core",
-                        "kind": "property",
-                        "version": "0.1.0",
-                        "format": "1.3",
-                        "name": "fraction"
+            "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+            "properties": {
+                "matrix": {
+                    "x-optimade-type": "list",
+                    "x-optimade-unit": "inapplicable",
+                    "x-optimade-dimensions": {
+                        "names": [
+                            "dim_lattice",
+                            "dim_lattice"
+                        ],
+                        "sizes": [
+                            3,
+                            3
+                        ]
                     },
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Exact 3 by 3 matrix part of the affine transformation.",
+                    "items": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "x-optimade-dimensions": {
+                            "names": [
+                                "dim_lattice"
+                            ],
+                            "sizes": [
+                                3
+                            ]
+                        },
+                        "type": [
+                            "array"
+                        ],
+                        "description": "One row of the exact 3 by 3 matrix.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                            "title": "fraction",
+                            "x-optimade-type": "string",
+                            "x-optimade-definition": {
+                                "label": "fraction_core",
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "fraction"
+                            },
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "A fraction represented as a string.",
+                            "examples": [
+                                "2/3",
+                                "5/42",
+                                "10",
+                                "0"
+                            ],
+                            "x-optimade-unit": "inapplicable"
+                        }
+                    }
+                },
+                "vector": {
+                    "x-optimade-type": "list",
+                    "x-optimade-unit": "inapplicable",
+                    "x-optimade-dimensions": {
+                        "names": [
+                            "dim_lattice"
+                        ],
+                        "sizes": [
+                            3
+                        ]
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Exact fractional-coordinate vector part of the affine transformation.",
+                    "items": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                        "title": "fraction",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "label": "fraction_core",
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "fraction"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "A fraction represented as a string.",
+                        "examples": [
+                            "2/3",
+                            "5/42",
+                            "10",
+                            "0"
+                        ],
+                        "x-optimade-unit": "inapplicable"
+                    }
+                },
+                "xyz": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
                     "type": [
                         "string",
                         "null"
                     ],
-                    "description": "A fraction represented as a string.",
-                    "examples": [
-                        "2/3",
-                        "5/42",
-                        "10",
+                    "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                },
+                "det": {
+                    "x-optimade-type": "integer",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Determinant of the matrix part when emitted by the generator."
+                },
+                "is_orthogonal": {
+                    "x-optimade-type": "boolean",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
+                    "description": "Whether the matrix part is orthogonal."
+                }
+            },
+            "examples": [
+                {
+                    "matrix": [
+                        [
+                            "-1",
+                            "0",
+                            "0"
+                        ],
+                        [
+                            "0",
+                            "-1",
+                            "0"
+                        ],
+                        [
+                            "0",
+                            "0",
+                            "1"
+                        ]
+                    ],
+                    "vector": [
+                        "0",
+                        "0",
                         "0"
                     ],
-                    "x-optimade-unit": "inapplicable"
+                    "xyz": "-x,-y,z",
+                    "det": 1,
+                    "is_orthogonal": true
                 }
-            }
-        },
-        "vector": {
-            "x-optimade-type": "list",
-            "x-optimade-unit": "inapplicable",
-            "x-optimade-dimensions": {
-                "names": [
-                    "dim_lattice"
-                ],
-                "sizes": [
-                    3
-                ]
-            },
-            "type": [
-                "array",
-                "null"
-            ],
-            "description": "Exact fractional-coordinate vector part of the affine transformation.",
-            "items": {
-                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                "title": "fraction",
-                "x-optimade-type": "string",
-                "x-optimade-definition": {
-                    "label": "fraction_core",
-                    "kind": "property",
-                    "version": "0.1.0",
-                    "format": "1.3",
-                    "name": "fraction"
-                },
-                "type": [
-                    "string",
-                    "null"
-                ],
-                "description": "A fraction represented as a string.",
-                "examples": [
-                    "2/3",
-                    "5/42",
-                    "10",
-                    "0"
-                ],
-                "x-optimade-unit": "inapplicable"
-            }
+            ]
         }
     },
     "examples": [
@@ -300,28 +374,30 @@ If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-sta
             "to_hall": "p_1",
             "to_hall_symbol": "p 1",
             "index": 1,
-            "matrix": [
-                [
-                    "1",
+            "affine_transformation": {
+                "matrix": [
+                    [
+                        "1",
+                        "0",
+                        "0"
+                    ],
+                    [
+                        "0",
+                        "1",
+                        "0"
+                    ],
+                    [
+                        "0",
+                        "0",
+                        "1"
+                    ]
+                ],
+                "vector": [
+                    "0",
                     "0",
                     "0"
-                ],
-                [
-                    "0",
-                    "1",
-                    "0"
-                ],
-                [
-                    "0",
-                    "0",
-                    "1"
                 ]
-            ],
-            "vector": [
-                "0",
-                "0",
-                "0"
-            ]
+            }
         }
     ]
 }
