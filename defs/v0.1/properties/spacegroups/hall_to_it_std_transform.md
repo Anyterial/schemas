@@ -8,11 +8,11 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Property name:** Hall to IT standard transform  
 **Description:** Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.
 This transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.
-The transform is represented by `pmat` and `pvec` using the same basis-transform convention as the other generated transformation tables.  
+The transform is represented by `matrix` and `vector`, following the same affine-transformation convention as the other generated transformation tables.  
 **Type:** dictionary  
 
 If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-standard Hall setting, and `x_from_hall` is the corresponding fractional coordinate column vector in the source Hall setting keyed by the containing map, then the stored transform satisfies:
-`x_from_hall = pmat * x_to_ref_hall + pvec`.
+`x_from_hall = matrix * x_to_ref_hall + vector`.
 
 **Requirements/Conventions**:
 
@@ -37,17 +37,17 @@ If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-sta
       Transform index.
       For this table the value is `1` because the transform maps between settings of the same space group.
 
-    - **pmat**: REQUIRED; Exact 3x3 matrix.
+    - **matrix**: REQUIRED; Exact 3x3 matrix.
       Matrix part of the basis transform.
-      The transform convention is `x_from_hall = pmat * x_to_ref_hall + pvec`.
+      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`.
 
-    - **pvec**: REQUIRED; List of 3 Fractions (String).
+    - **vector**: REQUIRED; List of 3 Fractions (String).
       Origin-shift vector of the basis transform.
-      The transform convention is `x_from_hall = pmat * x_to_ref_hall + pvec`.
+      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`.
 
 **Examples:**
 
-- `{"hall_entry": "p_1", "it_number": 1, "to_hall": "p_1", "to_hall_symbol": "p 1", "index": 1, "pmat": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "1"]], "pvec": ["0", "0", "0"]}`
+- `{"hall_entry": "p_1", "it_number": 1, "to_hall": "p_1", "to_hall_symbol": "p 1", "index": 1, "matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "1"]], "vector": ["0", "0", "0"]}`
 
 **Formats:** [[JSON](hall_to_it_std_transform.json)] [[MD](hall_to_it_std_transform.md)]
 
@@ -72,7 +72,7 @@ If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-sta
         "object",
         "null"
     ],
-    "description": "Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.\nThis transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.\nThe transform is represented by `pmat` and `pvec` using the same basis-transform convention as the other generated transformation tables.\n\nIf `x_to_ref_hall` is a fractional coordinate column vector in the target IT-standard Hall setting, and `x_from_hall` is the corresponding fractional coordinate column vector in the source Hall setting keyed by the containing map, then the stored transform satisfies:\n`x_from_hall = pmat * x_to_ref_hall + pvec`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary describing one exact transform from the containing Hall setting to the IT-standard Hall setting of the same `it_number`.\n- The `index` value is always `1`, because this is a same-space-group setting transform rather than a proper subgroup transform.\n- Matrix and vector entries MUST be exact strings, using integer strings or fraction strings as appropriate.\n- It MUST be a dictionary with the following keys:\n\n    - **hall\\_entry**: REQUIRED; String.\n      Source Hall-entry key for the setting transformed by this object.\n\n    - **it\\_number**: REQUIRED; Integer.\n      International Tables space-group number shared by the source and target Hall settings.\n\n    - **to\\_hall**: REQUIRED; String.\n      Target Hall-entry key for the IT-standard Hall setting of the same space-group type.\n\n    - **to\\_hall\\_symbol**: REQUIRED; String.\n      Display Hall symbol corresponding to `to_hall`, using spaces rather than the normalized Hall-entry key syntax.\n\n    - **index**: REQUIRED; Integer.\n      Transform index.\n      For this table the value is `1` because the transform maps between settings of the same space group.\n\n    - **pmat**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the basis transform.\n      The transform convention is `x_from_hall = pmat * x_to_ref_hall + pvec`.\n\n    - **pvec**: REQUIRED; List of 3 Fractions (String).\n      Origin-shift vector of the basis transform.\n      The transform convention is `x_from_hall = pmat * x_to_ref_hall + pvec`.",
+    "description": "Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.\nThis transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.\nThe transform is represented by `matrix` and `vector`, following the same affine-transformation convention as the other generated transformation tables.\n\nIf `x_to_ref_hall` is a fractional coordinate column vector in the target IT-standard Hall setting, and `x_from_hall` is the corresponding fractional coordinate column vector in the source Hall setting keyed by the containing map, then the stored transform satisfies:\n`x_from_hall = matrix * x_to_ref_hall + vector`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary describing one exact transform from the containing Hall setting to the IT-standard Hall setting of the same `it_number`.\n- The `index` value is always `1`, because this is a same-space-group setting transform rather than a proper subgroup transform.\n- Matrix and vector entries MUST be exact strings, using integer strings or fraction strings as appropriate.\n- It MUST be a dictionary with the following keys:\n\n    - **hall\\_entry**: REQUIRED; String.\n      Source Hall-entry key for the setting transformed by this object.\n\n    - **it\\_number**: REQUIRED; Integer.\n      International Tables space-group number shared by the source and target Hall settings.\n\n    - **to\\_hall**: REQUIRED; String.\n      Target Hall-entry key for the IT-standard Hall setting of the same space-group type.\n\n    - **to\\_hall\\_symbol**: REQUIRED; String.\n      Display Hall symbol corresponding to `to_hall`, using spaces rather than the normalized Hall-entry key syntax.\n\n    - **index**: REQUIRED; Integer.\n      Transform index.\n      For this table the value is `1` because the transform maps between settings of the same space group.\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the basis transform.\n      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Origin-shift vector of the basis transform.\n      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`.",
     "properties": {
         "hall_entry": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
@@ -192,24 +192,9 @@ If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-sta
                 4
             ]
         },
-        "pmat": {
-            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/pmat",
-            "title": "Basis transformation matrix",
-            "$comment": "Anyterial space-group property definition inheriting the common semantic `pmat` definition.",
-            "x-optimade-definition": {
-                "kind": "property",
-                "version": "0.1.0",
-                "format": "1.3",
-                "name": "pmat",
-                "label": "pmat_spacegroups"
-            },
-            "description": "Matrix part of a crystallographic basis or setting transformation.\nThis emitted space-group property uses the common `/properties/symmetry/pmat` definition for its nested value shape and dimensional metadata.",
+        "matrix": {
             "x-optimade-type": "list",
             "x-optimade-unit": "inapplicable",
-            "type": [
-                "array",
-                "null"
-            ],
             "x-optimade-dimensions": {
                 "names": [
                     "dim_lattice",
@@ -220,6 +205,11 @@ If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-sta
                     3
                 ]
             },
+            "type": [
+                "array",
+                "null"
+            ],
+            "description": "Exact 3 by 3 matrix part of the affine transformation.",
             "items": {
                 "x-optimade-type": "list",
                 "x-optimade-unit": "inapplicable",
@@ -234,71 +224,36 @@ If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-sta
                 "type": [
                     "array"
                 ],
-                "description": "One row of the 3 by 3 basis-transformation matrix.",
+                "description": "One row of the exact 3 by 3 matrix.",
                 "items": {
+                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                    "title": "fraction",
                     "x-optimade-type": "string",
-                    "x-optimade-unit": "inapplicable",
+                    "x-optimade-definition": {
+                        "label": "fraction_core",
+                        "kind": "property",
+                        "version": "0.1.0",
+                        "format": "1.3",
+                        "name": "fraction"
+                    },
                     "type": [
-                        "string"
+                        "string",
+                        "null"
                     ],
-                    "description": "One exact matrix entry."
+                    "description": "A fraction represented as a string.",
+                    "examples": [
+                        "2/3",
+                        "5/42",
+                        "10",
+                        "0"
+                    ],
+                    "x-optimade-unit": "inapplicable"
                 }
-            },
-            "examples": [
-                [
-                    [
-                        "1",
-                        "0",
-                        "0"
-                    ],
-                    [
-                        "0",
-                        "1",
-                        "0"
-                    ],
-                    [
-                        "0",
-                        "0",
-                        "1"
-                    ]
-                ],
-                [
-                    [
-                        "1",
-                        "0",
-                        "0"
-                    ],
-                    [
-                        "0",
-                        "1",
-                        "0"
-                    ],
-                    [
-                        "0",
-                        "0",
-                        "2"
-                    ]
-                ]
-            ]
+            }
         },
-        "pvec": {
-            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/pvec",
-            "title": "Basis transformation origin shift",
-            "$comment": "Anyterial space-group property definition inheriting the common semantic `pvec` definition.",
-            "x-optimade-definition": {
-                "kind": "property",
-                "version": "0.1.0",
-                "format": "1.3",
-                "name": "pvec",
-                "label": "pvec_spacegroups"
-            },
-            "description": "Translation or origin-shift vector of a crystallographic basis or setting transformation.\nThis emitted space-group property uses the common `/properties/symmetry/pvec` definition for its nested value shape and dimensional metadata.",
+        "vector": {
             "x-optimade-type": "list",
             "x-optimade-unit": "inapplicable",
-            "type": [
-                "array",
-                "null"
-            ],
             "x-optimade-dimensions": {
                 "names": [
                     "dim_lattice"
@@ -307,6 +262,11 @@ If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-sta
                     3
                 ]
             },
+            "type": [
+                "array",
+                "null"
+            ],
+            "description": "Exact fractional-coordinate vector part of the affine transformation.",
             "items": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
                 "title": "fraction",
@@ -330,19 +290,7 @@ If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-sta
                     "0"
                 ],
                 "x-optimade-unit": "inapplicable"
-            },
-            "examples": [
-                [
-                    "0",
-                    "0",
-                    "0"
-                ],
-                [
-                    "1/4",
-                    "1/4",
-                    "0"
-                ]
-            ]
+            }
         }
     },
     "examples": [
@@ -352,7 +300,7 @@ If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-sta
             "to_hall": "p_1",
             "to_hall_symbol": "p 1",
             "index": 1,
-            "pmat": [
+            "matrix": [
                 [
                     "1",
                     "0",
@@ -369,7 +317,7 @@ If `x_to_ref_hall` is a fractional coordinate column vector in the target IT-sta
                     "1"
                 ]
             ],
-            "pvec": [
+            "vector": [
                 "0",
                 "0",
                 "0"

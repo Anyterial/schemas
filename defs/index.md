@@ -81,7 +81,7 @@
                 
                 Same-space-group affine images for a standard setting.
                 The list combines Euclidean normalizer operations and isomorphic subgroup transforms to enumerate alternative affine images of the same space group used by runtime search code.
-                Matrix/vector transform fields use `pmat` and `pvec` according to `/properties/symmetry/basis_transform`.
+                Matrix/vector transform fields follow `/properties/symmetry/affine_transformation`.
 
             * **[Affine normalizer](v0.1/properties/spacegroups/affine_normalizer.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer.md)
                 
@@ -99,7 +99,7 @@
             * **[Affine normalizer cosets](v0.1/properties/spacegroups/affine_normalizer_cosets.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_cosets`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer_cosets.md)
                 
                 Runtime list of bounded affine normalizer coset representatives modulo the space group.
-                Each item is one finite listed representative and follows `/properties/symmetry/normalizer_representative`.
+                Each item is one finite listed representative and follows `/properties/symmetry/affine_transformation`.
                 The list is a bounded representative table, not a complete infinite affine normalizer.
 
             * **[Asu](v0.1/properties/spacegroups/asu.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu.md)
@@ -139,7 +139,7 @@
                 
                 Bärnighausen subgroup transform table for one parent setting or space-group type.
                 Entries describe generated embeddings of subgroup settings into the containing parent setting.
-                Transform records use `pmat` and `pvec` as defined by `/properties/symmetry/basis_transform`.
+                Transform records use `matrix` and `vector` according to `/properties/symmetry/affine_transformation`.
 
             * **[Bravais Type](v0.1/properties/spacegroups/bravais_type.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type.md)
                 
@@ -212,7 +212,7 @@
                 
                 Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.
                 This transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.
-                The transform is represented by `pmat` and `pvec` using the same basis-transform convention as the other generated transformation tables.
+                The transform is represented by `matrix` and `vector`, following the same affine-transformation convention as the other generated transformation tables.
 
             * **[Harker planes](v0.1/properties/spacegroups/harker_planes.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/harker_planes`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/harker_planes.md)
                 
@@ -426,7 +426,7 @@
             * **[Orthogonal affine normalizer cosets](v0.1/properties/spacegroups/orthogonal_affine_normalizer_cosets.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/orthogonal_affine_normalizer_cosets`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/orthogonal_affine_normalizer_cosets.md)
                 
                 Runtime list of orthogonal signed-permutation affine normalizer coset representatives modulo the space group.
-                Each item is one finite listed representative and follows `/properties/symmetry/normalizer_representative`.
+                Each item is one finite listed representative and follows `/properties/symmetry/affine_transformation`.
                 The list is a bounded representative table, not a complete infinite affine normalizer.
 
             * **[Basis transformation matrix](v0.1/properties/spacegroups/pmat.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/pmat`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/pmat.md)
@@ -582,6 +582,12 @@
                 
                 One affine operation in a fixed crystallographic setting.
                 The operation may be represented by an exact matrix/vector pair, by an `x,y,z` expression, or by both depending on the parent table.
+
+            * **[Affine transformation](v0.1/properties/symmetry/affine_transformation.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation`](https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation.md)
+                
+                One exact affine transformation acting on fractional crystallographic coordinates.
+                The transformation core is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.
+                Parent properties define the coordinate convention and semantic role of the transformation, for example whether it is a setting transform, a subgroup embedding, a same-space-group image, or a normalizer representative.
 
             * **[Basis transformation](v0.1/properties/symmetry/basis_transform.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform`](https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform.md)
                 

@@ -8,14 +8,14 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Property name:** Affine images  
 **Description:** Same-space-group affine images for a standard setting.
 The list combines Euclidean normalizer operations and isomorphic subgroup transforms to enumerate alternative affine images of the same space group used by runtime search code.
-Matrix/vector transform fields use `pmat` and `pvec` according to `/properties/symmetry/basis_transform`.  
+Matrix/vector transform fields follow `/properties/symmetry/affine_transformation`.  
 **Type:** list  
 
 
 
 **Examples:**
 
-- `[{"pmat": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "1"]], "pvec": ["0", "0", "0"]}]`
+- `[{"matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "1"]], "vector": ["0", "0", "0"]}]`
 
 **Formats:** [[JSON](affine_images.json)] [[MD](affine_images.md)]
 
@@ -40,44 +40,29 @@ Matrix/vector transform fields use `pmat` and `pvec` according to `/properties/s
         "array",
         "null"
     ],
-    "description": "Same-space-group affine images for a standard setting.\nThe list combines Euclidean normalizer operations and isomorphic subgroup transforms to enumerate alternative affine images of the same space group used by runtime search code.\nMatrix/vector transform fields use `pmat` and `pvec` according to `/properties/symmetry/basis_transform`.",
+    "description": "Same-space-group affine images for a standard setting.\nThe list combines Euclidean normalizer operations and isomorphic subgroup transforms to enumerate alternative affine images of the same space group used by runtime search code.\nMatrix/vector transform fields follow `/properties/symmetry/affine_transformation`.",
     "items": {
-        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
-        "title": "Basis transformation",
-        "$comment": "Reusable Anyterial definition for one crystallographic change-of-basis or setting transform.",
+        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+        "title": "Affine transformation",
+        "$comment": "Reusable Anyterial definition for one exact crystallographic affine transformation record.",
         "x-optimade-type": "dictionary",
         "x-optimade-definition": {
             "kind": "property",
             "version": "0.1.0",
             "format": "1.3",
-            "name": "basis_transform",
-            "label": "basis_transform_symmetry"
+            "name": "affine_transformation",
+            "label": "affine_transformation_symmetry"
         },
         "x-optimade-unit": "inapplicable",
         "type": [
             "object",
             "null"
         ],
-        "description": "One crystallographic basis or setting transformation represented by an exact matrix and an exact origin shift.\nParent tables use this object for B\u00e4rnighausen transforms, isomorphic subgroup transforms, Hall-to-standard transforms, and related setting maps.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **pmat**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the basis or setting transformation.\n\n    - **pvec**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the basis or setting transformation.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index or cell-index metadata when the parent table defines such an index.\n\n    - **target**: OPTIONAL; String or integer.\n      Target setting, Hall entry, IT number, or other target identifier as defined by the parent table.\n\n    - **wyckoff\\_splitting**: OPTIONAL; Dictionary.\n      Wyckoff-position splitting metadata associated with the transform when available.",
+        "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation core is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is a setting transform, a subgroup embedding, a same-space-group image, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transformation is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the operation or representative.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or other index metadata whose interpretation is defined by the parent property.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transformation describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transformation describes a klassengleiche subgroup relation.\n\n    - **wyckoff\\_splitting**: OPTIONAL; Dictionary.\n      Wyckoff-position splitting metadata induced by the transformation when available.\n\n    - **criteria**: OPTIONAL; Dictionary.\n      Backward-lift constraint metadata induced by the transformation when available.",
         "properties": {
-            "pmat": {
-                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/pmat",
-                "title": "Basis transformation matrix",
-                "$comment": "Reusable Anyterial definition for the matrix part of a crystallographic basis or setting transformation.",
+            "matrix": {
                 "x-optimade-type": "list",
-                "x-optimade-definition": {
-                    "kind": "property",
-                    "version": "0.1.0",
-                    "format": "1.3",
-                    "name": "pmat",
-                    "label": "pmat_symmetry"
-                },
                 "x-optimade-unit": "inapplicable",
-                "type": [
-                    "array",
-                    "null"
-                ],
-                "description": "Matrix part of a crystallographic basis or setting transformation.\nThe matrix is represented exactly as three rows with three entries per row.\nEntries are strings so that exact rational or algebraic values can be preserved without floating-point rounding.\n\n**Requirements/Conventions**:\n\n- It MUST be a 3 by 3 matrix represented as a list of three row lists.\n- Each row MUST contain three exact matrix entries represented as strings.\n- The parent transform definition specifies the coordinate convention and whether the matrix maps from a source setting to a target setting or conversely.",
                 "x-optimade-dimensions": {
                     "names": [
                         "dim_lattice",
@@ -88,6 +73,11 @@ Matrix/vector transform fields use `pmat` and `pvec` according to `/properties/s
                         3
                     ]
                 },
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Exact 3 by 3 matrix part of the affine transformation.",
                 "items": {
                     "x-optimade-type": "list",
                     "x-optimade-unit": "inapplicable",
@@ -102,71 +92,36 @@ Matrix/vector transform fields use `pmat` and `pvec` according to `/properties/s
                     "type": [
                         "array"
                     ],
-                    "description": "One row of the 3 by 3 basis-transformation matrix.",
+                    "description": "One row of the exact 3 by 3 matrix.",
                     "items": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                        "title": "fraction",
                         "x-optimade-type": "string",
-                        "x-optimade-unit": "inapplicable",
+                        "x-optimade-definition": {
+                            "label": "fraction_core",
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "fraction"
+                        },
                         "type": [
-                            "string"
+                            "string",
+                            "null"
                         ],
-                        "description": "One exact matrix entry."
+                        "description": "A fraction represented as a string.",
+                        "examples": [
+                            "2/3",
+                            "5/42",
+                            "10",
+                            "0"
+                        ],
+                        "x-optimade-unit": "inapplicable"
                     }
-                },
-                "examples": [
-                    [
-                        [
-                            "1",
-                            "0",
-                            "0"
-                        ],
-                        [
-                            "0",
-                            "1",
-                            "0"
-                        ],
-                        [
-                            "0",
-                            "0",
-                            "1"
-                        ]
-                    ],
-                    [
-                        [
-                            "1",
-                            "0",
-                            "0"
-                        ],
-                        [
-                            "0",
-                            "1",
-                            "0"
-                        ],
-                        [
-                            "0",
-                            "0",
-                            "2"
-                        ]
-                    ]
-                ]
+                }
             },
-            "pvec": {
-                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/pvec",
-                "title": "Basis transformation origin shift",
-                "$comment": "Reusable Anyterial definition for the translation/origin-shift part of a crystallographic basis or setting transformation.",
+            "vector": {
                 "x-optimade-type": "list",
-                "x-optimade-definition": {
-                    "kind": "property",
-                    "version": "0.1.0",
-                    "format": "1.3",
-                    "name": "pvec",
-                    "label": "pvec_symmetry"
-                },
                 "x-optimade-unit": "inapplicable",
-                "type": [
-                    "array",
-                    "null"
-                ],
-                "description": "Translation or origin-shift part of a crystallographic basis or setting transformation.\nThe vector is represented in fractional coordinates using exact fraction strings.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of three exact fractional-coordinate components.\n- Each component MUST be represented as a fraction string.\n- The parent transform definition specifies the source and target setting convention for the transformation.",
                 "x-optimade-dimensions": {
                     "names": [
                         "dim_lattice"
@@ -175,6 +130,11 @@ Matrix/vector transform fields use `pmat` and `pvec` according to `/properties/s
                         3
                     ]
                 },
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Exact fractional-coordinate vector part of the affine transformation.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
                     "title": "fraction",
@@ -198,19 +158,60 @@ Matrix/vector transform fields use `pmat` and `pvec` according to `/properties/s
                         "0"
                     ],
                     "x-optimade-unit": "inapplicable"
-                },
-                "examples": [
-                    [
-                        "0",
-                        "0",
-                        "0"
+                }
+            },
+            "xyz": {
+                "x-optimade-type": "string",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+            },
+            "det": {
+                "x-optimade-type": "integer",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "integer",
+                    "null"
+                ],
+                "description": "Determinant of the matrix part when emitted by the generator."
+            },
+            "is_orthogonal": {
+                "x-optimade-type": "boolean",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "boolean",
+                    "null"
+                ],
+                "description": "Whether the matrix part is orthogonal."
+            },
+            "compatible_systems": {
+                "x-optimade-type": "list",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Crystal metric systems compatible with the transformation.",
+                "items": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string"
                     ],
-                    [
-                        "1/4",
-                        "1/4",
-                        "0"
-                    ]
-                ]
+                    "description": "One compatible crystal-system label."
+                }
+            },
+            "operation_kind": {
+                "x-optimade-type": "string",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Generator classification of the operation or representative."
             },
             "index": {
                 "x-optimade-type": "integer",
@@ -219,16 +220,25 @@ Matrix/vector transform fields use `pmat` and `pvec` according to `/properties/s
                     "integer",
                     "null"
                 ],
-                "description": "Optional subgroup or cell index associated with the transform."
+                "description": "Index metadata whose interpretation is supplied by the parent property."
             },
-            "target": {
+            "subgroup_type": {
                 "x-optimade-type": "string",
                 "x-optimade-unit": "inapplicable",
                 "type": [
                     "string",
                     "null"
                 ],
-                "description": "Optional target identifier whose interpretation is supplied by the parent table."
+                "description": "International Tables subgroup-type label when applicable."
+            },
+            "k_subtype": {
+                "x-optimade-type": "string",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Klassengleiche subtype when applicable."
             },
             "wyckoff_splitting": {
                 "x-optimade-type": "dictionary",
@@ -237,42 +247,54 @@ Matrix/vector transform fields use `pmat` and `pvec` according to `/properties/s
                     "object",
                     "null"
                 ],
-                "description": "Optional Wyckoff-position splitting metadata associated with the transform.",
+                "description": "Wyckoff-position splitting metadata induced by the transformation.",
+                "properties": {}
+            },
+            "criteria": {
+                "x-optimade-type": "dictionary",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "Backward-lift constraint metadata induced by the transformation.",
                 "properties": {}
             }
         },
         "examples": [
             {
-                "index": 2,
-                "pmat": [
+                "matrix": [
                     [
-                        "1",
+                        "-1",
                         "0",
                         "0"
                     ],
                     [
                         "0",
-                        "1",
+                        "-1",
                         "0"
                     ],
                     [
                         "0",
                         "0",
-                        "2"
+                        "1"
                     ]
                 ],
-                "pvec": [
+                "vector": [
                     "0",
                     "0",
                     "0"
-                ]
+                ],
+                "xyz": "-x,-y,z",
+                "det": 1,
+                "is_orthogonal": true
             }
         ]
     },
     "examples": [
         [
             {
-                "pmat": [
+                "matrix": [
                     [
                         "1",
                         "0",
@@ -289,7 +311,7 @@ Matrix/vector transform fields use `pmat` and `pvec` according to `/properties/s
                         "1"
                     ]
                 ],
-                "pvec": [
+                "vector": [
                     "0",
                     "0",
                     "0"

@@ -16,14 +16,14 @@
         "object",
         "null"
     ],
-    "description": "Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen B\u00e4rnighausen transform.\nThe map is keyed by subgroup IT number.\nValues are lists of transform records carrying a basis transform and a dictionary of Wyckoff-letter criteria.\n\n**Requirements/Conventions**:\n\n- Dynamic keys MUST be subgroup IT numbers represented as strings.\n- Transform records SHOULD include `index`, `pmat`, `pvec`, and `criteria`.",
+    "description": "Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen B\u00e4rnighausen transform.\nThe map is keyed by subgroup IT number.\nValues are lists of transform records carrying a basis transform and a dictionary of Wyckoff-letter criteria.\n\n**Requirements/Conventions**:\n\n- Dynamic keys MUST be subgroup IT numbers represented as strings.\n- Transform records SHOULD include `index`, `matrix`, `vector`, and `criteria`.",
     "properties": {},
     "examples": [
         {
             "2": [
                 {
                     "index": 2,
-                    "pmat": [
+                    "matrix": [
                         [
                             "1",
                             "0",
@@ -40,7 +40,7 @@
                             "2"
                         ]
                     ],
-                    "pvec": [
+                    "vector": [
                         "0",
                         "0",
                         "0"

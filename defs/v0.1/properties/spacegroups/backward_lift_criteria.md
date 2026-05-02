@@ -14,11 +14,11 @@ Values are lists of transform records carrying a basis transform and a dictionar
 **Requirements/Conventions**:
 
 - Dynamic keys MUST be subgroup IT numbers represented as strings.
-- Transform records SHOULD include `index`, `pmat`, `pvec`, and `criteria`.
+- Transform records SHOULD include `index`, `matrix`, `vector`, and `criteria`.
 
 **Examples:**
 
-- `{"2": [{"index": 2, "pmat": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "pvec": ["0", "0", "0"], "criteria": {"a": [{"roles": [["a", 0]], "coeffs": [[["1", "0", "0"]]], "target": ["0", "0", "0"]}]}}]}`
+- `{"2": [{"index": 2, "matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "vector": ["0", "0", "0"], "criteria": {"a": [{"roles": [["a", 0]], "coeffs": [[["1", "0", "0"]]], "target": ["0", "0", "0"]}]}}]}`
 
 **Formats:** [[JSON](backward_lift_criteria.json)] [[MD](backward_lift_criteria.md)]
 
@@ -43,14 +43,14 @@ Values are lists of transform records carrying a basis transform and a dictionar
         "object",
         "null"
     ],
-    "description": "Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen B\u00e4rnighausen transform.\nThe map is keyed by subgroup IT number.\nValues are lists of transform records carrying a basis transform and a dictionary of Wyckoff-letter criteria.\n\n**Requirements/Conventions**:\n\n- Dynamic keys MUST be subgroup IT numbers represented as strings.\n- Transform records SHOULD include `index`, `pmat`, `pvec`, and `criteria`.",
+    "description": "Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen B\u00e4rnighausen transform.\nThe map is keyed by subgroup IT number.\nValues are lists of transform records carrying a basis transform and a dictionary of Wyckoff-letter criteria.\n\n**Requirements/Conventions**:\n\n- Dynamic keys MUST be subgroup IT numbers represented as strings.\n- Transform records SHOULD include `index`, `matrix`, `vector`, and `criteria`.",
     "properties": {},
     "examples": [
         {
             "2": [
                 {
                     "index": 2,
-                    "pmat": [
+                    "matrix": [
                         [
                             "1",
                             "0",
@@ -67,7 +67,7 @@ Values are lists of transform records carrying a basis transform and a dictionar
                             "2"
                         ]
                     ],
-                    "pvec": [
+                    "vector": [
                         "0",
                         "0",
                         "0"
