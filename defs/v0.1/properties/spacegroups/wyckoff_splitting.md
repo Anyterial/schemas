@@ -7,19 +7,19 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 
 **Property name:** Wyckoff splitting  
 **Description:** Wyckoff-position splitting data associated with a subgroup or same-space-group transform.
-The map is keyed by parent Wyckoff letter.
-Each value is an ordered list of subgroup Wyckoff-position assignments or coordinate expressions as emitted by the generator.  
-**Type:** dictionary  
+Each list item gives the split of one parent Wyckoff position.
+The parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.  
+**Type:** list  
 
 **Requirements/Conventions**:
 
-- Dynamic keys MUST be parent Wyckoff letters.
-- Values MUST be lists.
-- Each listed item is currently a compact generator record whose exact shape is defined by the parent transform table.
+- It MUST be a list of dictionaries.
+- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.
+- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.
 
 **Examples:**
 
-- `{"c": [["e", "x", "y", "z"], ["e", "-x", "y", "-z"]]}`
+- `[{"parent": "c", "splits": [["e", "x", "y", "z"], ["e", "-x", "y", "-z"]]}]`
 
 **Formats:** [[JSON](wyckoff_splitting.json)] [[MD](wyckoff_splitting.md)]
 
@@ -30,8 +30,8 @@ Each value is an ordered list of subgroup Wyckoff-position assignments or coordi
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_splitting",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Wyckoff splitting",
-    "$comment": "Anyterial property definition for Wyckoff-position splitting data attached to subgroup transforms.",
-    "x-optimade-type": "dictionary",
+    "$comment": "Anyterial property definition for Wyckoff-position splitting data attached to transforms.",
+    "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
         "version": "0.1.0",
@@ -41,28 +41,131 @@ Each value is an ordered list of subgroup Wyckoff-position assignments or coordi
     },
     "x-optimade-unit": "inapplicable",
     "type": [
-        "object",
+        "array",
         "null"
     ],
-    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\nThe map is keyed by parent Wyckoff letter.\nEach value is an ordered list of subgroup Wyckoff-position assignments or coordinate expressions as emitted by the generator.\n\n**Requirements/Conventions**:\n\n- Dynamic keys MUST be parent Wyckoff letters.\n- Values MUST be lists.\n- Each listed item is currently a compact generator record whose exact shape is defined by the parent transform table.",
-    "properties": {},
-    "examples": [
-        {
-            "c": [
-                [
-                    "e",
-                    "x",
-                    "y",
-                    "z"
+    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
+    "items": {
+        "x-optimade-type": "dictionary",
+        "x-optimade-unit": "inapplicable",
+        "type": [
+            "object"
+        ],
+        "description": "Splitting data for one parent Wyckoff position.",
+        "required": [
+            "parent",
+            "splits"
+        ],
+        "properties": {
+            "parent": {
+                "x-optimade-type": "string",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "string"
                 ],
-                [
-                    "e",
-                    "-x",
-                    "y",
-                    "-z"
-                ]
-            ]
+                "description": "Parent Wyckoff letter."
+            },
+            "splits": {
+                "x-optimade-type": "list",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "array"
+                ],
+                "description": "Ordered split records for this parent Wyckoff letter.",
+                "items": {
+                    "x-optimade-type": "dictionary",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "object"
+                    ],
+                    "description": "One Wyckoff split record.",
+                    "required": [
+                        "letter",
+                        "xyz",
+                        "affine"
+                    ],
+                    "properties": {
+                        "letter": {
+                            "x-optimade-type": "string",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "string"
+                            ],
+                            "description": "Subgroup Wyckoff letter assigned by this split branch."
+                        },
+                        "xyz": {
+                            "x-optimade-type": "string",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "string"
+                            ],
+                            "description": "Coordinate expression for the split branch."
+                        },
+                        "affine": {
+                            "x-optimade-type": "list",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "array"
+                            ],
+                            "description": "Exact affine representation for the split branch.",
+                            "items": {
+                                "x-optimade-type": "list",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "array"
+                                ],
+                                "description": "One affine row.",
+                                "items": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                    "title": "fraction",
+                                    "x-optimade-type": "string",
+                                    "x-optimade-definition": {
+                                        "label": "fraction_core",
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "fraction"
+                                    },
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "A fraction represented as a string.",
+                                    "examples": [
+                                        "2/3",
+                                        "5/42",
+                                        "10",
+                                        "0"
+                                    ],
+                                    "x-optimade-unit": "inapplicable"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
+    },
+    "examples": [
+        [
+            {
+                "parent": "c",
+                "splits": [
+                    [
+                        "e",
+                        "x",
+                        "y",
+                        "z"
+                    ],
+                    [
+                        "e",
+                        "-x",
+                        "y",
+                        "-z"
+                    ]
+                ]
+            }
+        ]
     ]
 }
 ```

@@ -1,0 +1,4426 @@
+# Transformations per IT number (property)
+
+This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
+
+**ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number.md)**  
+**Definition name:** `transformations_per_it_number`
+
+**Property name:** Transformations per IT number  
+**Description:** Standard-setting transformation data grouped by International Tables space-group number.
+Each list item contains the IT number as ordinary data together with all standard-setting transformation sections generated for that space-group type.
+This representation avoids using IT numbers as JSON dictionary keys in the OPTIMADE-described payload.  
+**Type:** list  
+
+**Requirements/Conventions**:
+
+- It MUST be a list of dictionaries.
+- Each dictionary MUST contain `it_number`.
+- Each dictionary SHOULD contain the generated standard-setting transformation sections for that IT number.
+
+**Examples:**
+
+- `[{"it_number": 1, "baernighausen": []}]`
+
+**Formats:** [[JSON](transformations_per_it_number.json)] [[MD](transformations_per_it_number.md)]
+
+**JSON definition:**
+
+``` json
+{
+    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number",
+    "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
+    "title": "Transformations per IT number",
+    "$comment": "Anyterial property definition for IT-number grouped transformation records.",
+    "x-optimade-type": "list",
+    "x-optimade-definition": {
+        "kind": "property",
+        "version": "0.1.0",
+        "format": "1.3",
+        "name": "transformations_per_it_number",
+        "label": "transformations_per_it_number_spacegroups"
+    },
+    "x-optimade-unit": "inapplicable",
+    "type": [
+        "array",
+        "null"
+    ],
+    "description": "Standard-setting transformation data grouped by International Tables space-group number.\nEach list item contains the IT number as ordinary data together with all standard-setting transformation sections generated for that space-group type.\nThis representation avoids using IT numbers as JSON dictionary keys in the OPTIMADE-described payload.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `it_number`.\n- Each dictionary SHOULD contain the generated standard-setting transformation sections for that IT number.",
+    "items": {
+        "x-optimade-type": "dictionary",
+        "x-optimade-unit": "inapplicable",
+        "type": [
+            "object"
+        ],
+        "description": "Transformation record for one International Tables number.",
+        "required": [
+            "it_number"
+        ],
+        "properties": {
+            "it_number": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
+                "title": "International Tables Space-Group Number",
+                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                "x-optimade-type": "integer",
+                "x-compatibility": [
+                    "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
+                ],
+                "x-optimade-definition": {
+                    "kind": "property",
+                    "version": "0.1.0",
+                    "format": "1.3",
+                    "name": "it_number",
+                    "label": "it_number_spacegroups"
+                },
+                "type": [
+                    "integer",
+                    "null"
+                ],
+                "description": "The International Tables space-group number.\n\nThis integer identifies the space-group type numbered 1 through 230 in International Tables for Crystallography. Multiple Hall settings can share the same `it_number`.",
+                "x-optimade-unit": "inapplicable",
+                "examples": [
+                    1,
+                    5
+                ]
+            },
+            "baernighausen": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/baernighausen",
+                "title": "B\u00e4rnighausen subgroup transforms",
+                "$comment": "Anyterial transform collection property using the common basis-transform definition for transform items.",
+                "x-optimade-type": "list",
+                "x-optimade-definition": {
+                    "kind": "property",
+                    "version": "0.1.0",
+                    "format": "1.3",
+                    "name": "baernighausen",
+                    "label": "baernighausen_spacegroups"
+                },
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "B\u00e4rnighausen subgroup transform table for one parent setting or space-group type.\nEntries describe generated embeddings of subgroup settings into the containing parent setting.\nEach list item groups transform records for one target subgroup, with the target stored as ordinary data rather than as a JSON dictionary key.\nTransform records follow `/properties/symmetry/basis_transform`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain either `target_hall_entry` or `target_it_number`, depending on whether the containing dataset is Hall-setting keyed or IT-number keyed.\n- Each dictionary MUST contain `transforms`, a list of basis-transform records.",
+                "items": {
+                    "x-optimade-type": "dictionary",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "object"
+                    ],
+                    "description": "B\u00e4rnighausen transform group for one target subgroup.",
+                    "required": [
+                        "transforms"
+                    ],
+                    "properties": {
+                        "target_hall_entry": {
+                            "x-optimade-type": "string",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Target Hall entry when the containing dataset is Hall-setting keyed."
+                        },
+                        "target_it_number": {
+                            "x-optimade-type": "integer",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "integer",
+                                "null"
+                            ],
+                            "description": "Target International Tables number when the containing dataset is IT-number keyed."
+                        },
+                        "transforms": {
+                            "x-optimade-type": "list",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "array"
+                            ],
+                            "description": "Basis transforms for this target subgroup.",
+                            "items": {
+                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
+                                "title": "Basis transformation",
+                                "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
+                                "x-optimade-type": "dictionary",
+                                "x-optimade-definition": {
+                                    "kind": "property",
+                                    "version": "0.1.0",
+                                    "format": "1.3",
+                                    "name": "basis_transform",
+                                    "label": "basis_transform_symmetry"
+                                },
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "object",
+                                    "null"
+                                ],
+                                "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                                "properties": {
+                                    "affine_transformation": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+                                        "title": "Affine transformation",
+                                        "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
+                                        "x-optimade-type": "dictionary",
+                                        "x-optimade-definition": {
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "affine_transformation",
+                                            "label": "affine_transformation_symmetry"
+                                        },
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "object",
+                                            "null"
+                                        ],
+                                        "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                        "properties": {
+                                            "matrix": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "x-optimade-dimensions": {
+                                                    "names": [
+                                                        "dim_lattice",
+                                                        "dim_lattice"
+                                                    ],
+                                                    "sizes": [
+                                                        3,
+                                                        3
+                                                    ]
+                                                },
+                                                "type": [
+                                                    "array",
+                                                    "null"
+                                                ],
+                                                "description": "Exact 3 by 3 matrix part of the affine transformation.",
+                                                "items": {
+                                                    "x-optimade-type": "list",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "x-optimade-dimensions": {
+                                                        "names": [
+                                                            "dim_lattice"
+                                                        ],
+                                                        "sizes": [
+                                                            3
+                                                        ]
+                                                    },
+                                                    "type": [
+                                                        "array"
+                                                    ],
+                                                    "description": "One row of the exact 3 by 3 matrix.",
+                                                    "items": {
+                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                        "title": "fraction",
+                                                        "x-optimade-type": "string",
+                                                        "x-optimade-definition": {
+                                                            "label": "fraction_core",
+                                                            "kind": "property",
+                                                            "version": "0.1.0",
+                                                            "format": "1.3",
+                                                            "name": "fraction"
+                                                        },
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "A fraction represented as a string.",
+                                                        "examples": [
+                                                            "2/3",
+                                                            "5/42",
+                                                            "10",
+                                                            "0"
+                                                        ],
+                                                        "x-optimade-unit": "inapplicable"
+                                                    }
+                                                }
+                                            },
+                                            "vector": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "x-optimade-dimensions": {
+                                                    "names": [
+                                                        "dim_lattice"
+                                                    ],
+                                                    "sizes": [
+                                                        3
+                                                    ]
+                                                },
+                                                "type": [
+                                                    "array",
+                                                    "null"
+                                                ],
+                                                "description": "Exact fractional-coordinate vector part of the affine transformation.",
+                                                "items": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                }
+                                            },
+                                            "xyz": {
+                                                "x-optimade-type": "string",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                            },
+                                            "det": {
+                                                "x-optimade-type": "integer",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "integer",
+                                                    "null"
+                                                ],
+                                                "description": "Determinant of the matrix part when emitted by the generator."
+                                            },
+                                            "is_orthogonal": {
+                                                "x-optimade-type": "boolean",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "boolean",
+                                                    "null"
+                                                ],
+                                                "description": "Whether the matrix part is orthogonal."
+                                            }
+                                        },
+                                        "examples": [
+                                            {
+                                                "matrix": [
+                                                    [
+                                                        "-1",
+                                                        "0",
+                                                        "0"
+                                                    ],
+                                                    [
+                                                        "0",
+                                                        "-1",
+                                                        "0"
+                                                    ],
+                                                    [
+                                                        "0",
+                                                        "0",
+                                                        "1"
+                                                    ]
+                                                ],
+                                                "vector": [
+                                                    "0",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                "xyz": "-x,-y,z",
+                                                "det": 1,
+                                                "is_orthogonal": true
+                                            }
+                                        ]
+                                    },
+                                    "index": {
+                                        "x-optimade-type": "integer",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "integer",
+                                            "null"
+                                        ],
+                                        "description": "Index metadata whose interpretation is supplied by the parent property."
+                                    },
+                                    "subgroup_type": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "International Tables subgroup-type label when applicable."
+                                    },
+                                    "k_subtype": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Klassengleiche subtype when applicable."
+                                    },
+                                    "compatible_systems": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Crystal metric systems compatible with the transform.",
+                                        "items": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string"
+                                            ],
+                                            "description": "One compatible crystal-system label."
+                                        }
+                                    },
+                                    "operation_kind": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Generator classification of the transform or representative."
+                                    },
+                                    "wyckoff_splitting": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                        "items": {
+                                            "x-optimade-type": "dictionary",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "object"
+                                            ],
+                                            "description": "Splitting data for one parent Wyckoff position.",
+                                            "required": [
+                                                "parent",
+                                                "splits"
+                                            ],
+                                            "properties": {
+                                                "parent": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string"
+                                                    ],
+                                                    "description": "Parent Wyckoff letter."
+                                                },
+                                                "splits": {
+                                                    "x-optimade-type": "list",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "array"
+                                                    ],
+                                                    "description": "Ordered split records for this parent Wyckoff letter.",
+                                                    "items": {
+                                                        "x-optimade-type": "dictionary",
+                                                        "x-optimade-unit": "inapplicable",
+                                                        "type": [
+                                                            "object"
+                                                        ],
+                                                        "description": "One Wyckoff split record.",
+                                                        "required": [
+                                                            "letter",
+                                                            "xyz",
+                                                            "affine"
+                                                        ],
+                                                        "properties": {
+                                                            "letter": {
+                                                                "x-optimade-type": "string",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "string"
+                                                                ],
+                                                                "description": "Subgroup Wyckoff letter assigned by this split branch."
+                                                            },
+                                                            "xyz": {
+                                                                "x-optimade-type": "string",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "string"
+                                                                ],
+                                                                "description": "Coordinate expression for the split branch."
+                                                            },
+                                                            "affine": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "Exact affine representation for the split branch.",
+                                                                "items": {
+                                                                    "x-optimade-type": "list",
+                                                                    "x-optimade-unit": "inapplicable",
+                                                                    "type": [
+                                                                        "array"
+                                                                    ],
+                                                                    "description": "One affine row.",
+                                                                    "items": {
+                                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                        "title": "fraction",
+                                                                        "x-optimade-type": "string",
+                                                                        "x-optimade-definition": {
+                                                                            "label": "fraction_core",
+                                                                            "kind": "property",
+                                                                            "version": "0.1.0",
+                                                                            "format": "1.3",
+                                                                            "name": "fraction"
+                                                                        },
+                                                                        "type": [
+                                                                            "string",
+                                                                            "null"
+                                                                        ],
+                                                                        "description": "A fraction represented as a string.",
+                                                                        "examples": [
+                                                                            "2/3",
+                                                                            "5/42",
+                                                                            "10",
+                                                                            "0"
+                                                                        ],
+                                                                        "x-optimade-unit": "inapplicable"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "criteria": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Backward-lift constraint metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                        "items": {
+                                            "x-optimade-type": "dictionary",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "object"
+                                            ],
+                                            "description": "Backward-lift constraints for one parent Wyckoff position.",
+                                            "required": [
+                                                "parent",
+                                                "constraints"
+                                            ],
+                                            "properties": {
+                                                "parent": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string"
+                                                    ],
+                                                    "description": "Parent Wyckoff letter."
+                                                },
+                                                "constraints": {
+                                                    "x-optimade-type": "list",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "array"
+                                                    ],
+                                                    "description": "Constraint records for this parent Wyckoff letter.",
+                                                    "items": {
+                                                        "x-optimade-type": "dictionary",
+                                                        "x-optimade-unit": "inapplicable",
+                                                        "type": [
+                                                            "object"
+                                                        ],
+                                                        "description": "One linear backward-lift constraint record.",
+                                                        "properties": {
+                                                            "roles": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "Wyckoff-position role references entering the constraint.",
+                                                                "items": {
+                                                                    "x-optimade-type": "dictionary",
+                                                                    "x-optimade-unit": "inapplicable",
+                                                                    "type": [
+                                                                        "object"
+                                                                    ],
+                                                                    "description": "One role reference.",
+                                                                    "required": [
+                                                                        "letter",
+                                                                        "index"
+                                                                    ],
+                                                                    "properties": {
+                                                                        "letter": {
+                                                                            "x-optimade-type": "string",
+                                                                            "x-optimade-unit": "inapplicable",
+                                                                            "type": [
+                                                                                "string"
+                                                                            ],
+                                                                            "description": "Wyckoff letter for the referenced role."
+                                                                        },
+                                                                        "index": {
+                                                                            "x-optimade-type": "integer",
+                                                                            "x-optimade-unit": "inapplicable",
+                                                                            "type": [
+                                                                                "integer"
+                                                                            ],
+                                                                            "description": "Zero-based occurrence index for the role."
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "coeffs": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "Exact coefficient vectors for the constraint.",
+                                                                "items": {
+                                                                    "x-optimade-type": "list",
+                                                                    "x-optimade-unit": "inapplicable",
+                                                                    "type": [
+                                                                        "array"
+                                                                    ],
+                                                                    "description": "Coefficients associated with one role.",
+                                                                    "items": {
+                                                                        "x-optimade-type": "list",
+                                                                        "x-optimade-unit": "inapplicable",
+                                                                        "type": [
+                                                                            "array"
+                                                                        ],
+                                                                        "description": "One exact coefficient vector.",
+                                                                        "items": {
+                                                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                            "title": "fraction",
+                                                                            "x-optimade-type": "string",
+                                                                            "x-optimade-definition": {
+                                                                                "label": "fraction_core",
+                                                                                "kind": "property",
+                                                                                "version": "0.1.0",
+                                                                                "format": "1.3",
+                                                                                "name": "fraction"
+                                                                            },
+                                                                            "type": [
+                                                                                "string",
+                                                                                "null"
+                                                                            ],
+                                                                            "description": "A fraction represented as a string.",
+                                                                            "examples": [
+                                                                                "2/3",
+                                                                                "5/42",
+                                                                                "10",
+                                                                                "0"
+                                                                            ],
+                                                                            "x-optimade-unit": "inapplicable"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "target": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "Exact target vector or scalar for the constraint.",
+                                                                "items": {
+                                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                    "title": "fraction",
+                                                                    "x-optimade-type": "string",
+                                                                    "x-optimade-definition": {
+                                                                        "label": "fraction_core",
+                                                                        "kind": "property",
+                                                                        "version": "0.1.0",
+                                                                        "format": "1.3",
+                                                                        "name": "fraction"
+                                                                    },
+                                                                    "type": [
+                                                                        "string",
+                                                                        "null"
+                                                                    ],
+                                                                    "description": "A fraction represented as a string.",
+                                                                    "examples": [
+                                                                        "2/3",
+                                                                        "5/42",
+                                                                        "10",
+                                                                        "0"
+                                                                    ],
+                                                                    "x-optimade-unit": "inapplicable"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "examples": [
+                                    {
+                                        "affine_transformation": {
+                                            "matrix": [
+                                                [
+                                                    "1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "1",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "2"
+                                                ]
+                                            ],
+                                            "vector": [
+                                                "0",
+                                                "0",
+                                                "0"
+                                            ]
+                                        },
+                                        "index": 2
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "examples": [
+                    [
+                        {
+                            "target_hall_entry": "p_1",
+                            "transforms": [
+                                {
+                                    "index": 2,
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "2"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                ]
+            },
+            "backward_lift_criteria": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/backward_lift_criteria",
+                "title": "Backward lift criteria",
+                "$comment": "Anyterial property definition for backward-lift criteria grouped by target subgroup IT number.",
+                "x-optimade-type": "list",
+                "x-optimade-definition": {
+                    "kind": "property",
+                    "version": "0.1.0",
+                    "format": "1.3",
+                    "name": "backward_lift_criteria",
+                    "label": "backward_lift_criteria_spacegroups"
+                },
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen B\u00e4rnighausen transform.\nEach list item groups transform records for one target subgroup IT number.\nThe target subgroup IT number is stored in `target_it_number` rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `target_it_number`, the subgroup IT number.\n- Each dictionary MUST contain `transforms`, a list of basis-transform records carrying backward-lift criteria.",
+                "items": {
+                    "x-optimade-type": "dictionary",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "object"
+                    ],
+                    "description": "Backward-lift criteria group for one target subgroup IT number.",
+                    "required": [
+                        "target_it_number",
+                        "transforms"
+                    ],
+                    "properties": {
+                        "target_it_number": {
+                            "x-optimade-type": "integer",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "integer"
+                            ],
+                            "description": "Target subgroup International Tables number."
+                        },
+                        "transforms": {
+                            "x-optimade-type": "list",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "array"
+                            ],
+                            "description": "Basis transforms and criteria for this target subgroup.",
+                            "items": {
+                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
+                                "title": "Basis transformation",
+                                "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
+                                "x-optimade-type": "dictionary",
+                                "x-optimade-definition": {
+                                    "kind": "property",
+                                    "version": "0.1.0",
+                                    "format": "1.3",
+                                    "name": "basis_transform",
+                                    "label": "basis_transform_symmetry"
+                                },
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "object",
+                                    "null"
+                                ],
+                                "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                                "properties": {
+                                    "affine_transformation": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+                                        "title": "Affine transformation",
+                                        "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
+                                        "x-optimade-type": "dictionary",
+                                        "x-optimade-definition": {
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "affine_transformation",
+                                            "label": "affine_transformation_symmetry"
+                                        },
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "object",
+                                            "null"
+                                        ],
+                                        "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                        "properties": {
+                                            "matrix": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "x-optimade-dimensions": {
+                                                    "names": [
+                                                        "dim_lattice",
+                                                        "dim_lattice"
+                                                    ],
+                                                    "sizes": [
+                                                        3,
+                                                        3
+                                                    ]
+                                                },
+                                                "type": [
+                                                    "array",
+                                                    "null"
+                                                ],
+                                                "description": "Exact 3 by 3 matrix part of the affine transformation.",
+                                                "items": {
+                                                    "x-optimade-type": "list",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "x-optimade-dimensions": {
+                                                        "names": [
+                                                            "dim_lattice"
+                                                        ],
+                                                        "sizes": [
+                                                            3
+                                                        ]
+                                                    },
+                                                    "type": [
+                                                        "array"
+                                                    ],
+                                                    "description": "One row of the exact 3 by 3 matrix.",
+                                                    "items": {
+                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                        "title": "fraction",
+                                                        "x-optimade-type": "string",
+                                                        "x-optimade-definition": {
+                                                            "label": "fraction_core",
+                                                            "kind": "property",
+                                                            "version": "0.1.0",
+                                                            "format": "1.3",
+                                                            "name": "fraction"
+                                                        },
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "A fraction represented as a string.",
+                                                        "examples": [
+                                                            "2/3",
+                                                            "5/42",
+                                                            "10",
+                                                            "0"
+                                                        ],
+                                                        "x-optimade-unit": "inapplicable"
+                                                    }
+                                                }
+                                            },
+                                            "vector": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "x-optimade-dimensions": {
+                                                    "names": [
+                                                        "dim_lattice"
+                                                    ],
+                                                    "sizes": [
+                                                        3
+                                                    ]
+                                                },
+                                                "type": [
+                                                    "array",
+                                                    "null"
+                                                ],
+                                                "description": "Exact fractional-coordinate vector part of the affine transformation.",
+                                                "items": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                }
+                                            },
+                                            "xyz": {
+                                                "x-optimade-type": "string",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                            },
+                                            "det": {
+                                                "x-optimade-type": "integer",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "integer",
+                                                    "null"
+                                                ],
+                                                "description": "Determinant of the matrix part when emitted by the generator."
+                                            },
+                                            "is_orthogonal": {
+                                                "x-optimade-type": "boolean",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "boolean",
+                                                    "null"
+                                                ],
+                                                "description": "Whether the matrix part is orthogonal."
+                                            }
+                                        },
+                                        "examples": [
+                                            {
+                                                "matrix": [
+                                                    [
+                                                        "-1",
+                                                        "0",
+                                                        "0"
+                                                    ],
+                                                    [
+                                                        "0",
+                                                        "-1",
+                                                        "0"
+                                                    ],
+                                                    [
+                                                        "0",
+                                                        "0",
+                                                        "1"
+                                                    ]
+                                                ],
+                                                "vector": [
+                                                    "0",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                "xyz": "-x,-y,z",
+                                                "det": 1,
+                                                "is_orthogonal": true
+                                            }
+                                        ]
+                                    },
+                                    "index": {
+                                        "x-optimade-type": "integer",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "integer",
+                                            "null"
+                                        ],
+                                        "description": "Index metadata whose interpretation is supplied by the parent property."
+                                    },
+                                    "subgroup_type": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "International Tables subgroup-type label when applicable."
+                                    },
+                                    "k_subtype": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Klassengleiche subtype when applicable."
+                                    },
+                                    "compatible_systems": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Crystal metric systems compatible with the transform.",
+                                        "items": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string"
+                                            ],
+                                            "description": "One compatible crystal-system label."
+                                        }
+                                    },
+                                    "operation_kind": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Generator classification of the transform or representative."
+                                    },
+                                    "wyckoff_splitting": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                        "items": {
+                                            "x-optimade-type": "dictionary",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "object"
+                                            ],
+                                            "description": "Splitting data for one parent Wyckoff position.",
+                                            "required": [
+                                                "parent",
+                                                "splits"
+                                            ],
+                                            "properties": {
+                                                "parent": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string"
+                                                    ],
+                                                    "description": "Parent Wyckoff letter."
+                                                },
+                                                "splits": {
+                                                    "x-optimade-type": "list",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "array"
+                                                    ],
+                                                    "description": "Ordered split records for this parent Wyckoff letter.",
+                                                    "items": {
+                                                        "x-optimade-type": "dictionary",
+                                                        "x-optimade-unit": "inapplicable",
+                                                        "type": [
+                                                            "object"
+                                                        ],
+                                                        "description": "One Wyckoff split record.",
+                                                        "required": [
+                                                            "letter",
+                                                            "xyz",
+                                                            "affine"
+                                                        ],
+                                                        "properties": {
+                                                            "letter": {
+                                                                "x-optimade-type": "string",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "string"
+                                                                ],
+                                                                "description": "Subgroup Wyckoff letter assigned by this split branch."
+                                                            },
+                                                            "xyz": {
+                                                                "x-optimade-type": "string",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "string"
+                                                                ],
+                                                                "description": "Coordinate expression for the split branch."
+                                                            },
+                                                            "affine": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "Exact affine representation for the split branch.",
+                                                                "items": {
+                                                                    "x-optimade-type": "list",
+                                                                    "x-optimade-unit": "inapplicable",
+                                                                    "type": [
+                                                                        "array"
+                                                                    ],
+                                                                    "description": "One affine row.",
+                                                                    "items": {
+                                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                        "title": "fraction",
+                                                                        "x-optimade-type": "string",
+                                                                        "x-optimade-definition": {
+                                                                            "label": "fraction_core",
+                                                                            "kind": "property",
+                                                                            "version": "0.1.0",
+                                                                            "format": "1.3",
+                                                                            "name": "fraction"
+                                                                        },
+                                                                        "type": [
+                                                                            "string",
+                                                                            "null"
+                                                                        ],
+                                                                        "description": "A fraction represented as a string.",
+                                                                        "examples": [
+                                                                            "2/3",
+                                                                            "5/42",
+                                                                            "10",
+                                                                            "0"
+                                                                        ],
+                                                                        "x-optimade-unit": "inapplicable"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "criteria": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Backward-lift constraint metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                        "items": {
+                                            "x-optimade-type": "dictionary",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "object"
+                                            ],
+                                            "description": "Backward-lift constraints for one parent Wyckoff position.",
+                                            "required": [
+                                                "parent",
+                                                "constraints"
+                                            ],
+                                            "properties": {
+                                                "parent": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string"
+                                                    ],
+                                                    "description": "Parent Wyckoff letter."
+                                                },
+                                                "constraints": {
+                                                    "x-optimade-type": "list",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "array"
+                                                    ],
+                                                    "description": "Constraint records for this parent Wyckoff letter.",
+                                                    "items": {
+                                                        "x-optimade-type": "dictionary",
+                                                        "x-optimade-unit": "inapplicable",
+                                                        "type": [
+                                                            "object"
+                                                        ],
+                                                        "description": "One linear backward-lift constraint record.",
+                                                        "properties": {
+                                                            "roles": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "Wyckoff-position role references entering the constraint.",
+                                                                "items": {
+                                                                    "x-optimade-type": "dictionary",
+                                                                    "x-optimade-unit": "inapplicable",
+                                                                    "type": [
+                                                                        "object"
+                                                                    ],
+                                                                    "description": "One role reference.",
+                                                                    "required": [
+                                                                        "letter",
+                                                                        "index"
+                                                                    ],
+                                                                    "properties": {
+                                                                        "letter": {
+                                                                            "x-optimade-type": "string",
+                                                                            "x-optimade-unit": "inapplicable",
+                                                                            "type": [
+                                                                                "string"
+                                                                            ],
+                                                                            "description": "Wyckoff letter for the referenced role."
+                                                                        },
+                                                                        "index": {
+                                                                            "x-optimade-type": "integer",
+                                                                            "x-optimade-unit": "inapplicable",
+                                                                            "type": [
+                                                                                "integer"
+                                                                            ],
+                                                                            "description": "Zero-based occurrence index for the role."
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "coeffs": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "Exact coefficient vectors for the constraint.",
+                                                                "items": {
+                                                                    "x-optimade-type": "list",
+                                                                    "x-optimade-unit": "inapplicable",
+                                                                    "type": [
+                                                                        "array"
+                                                                    ],
+                                                                    "description": "Coefficients associated with one role.",
+                                                                    "items": {
+                                                                        "x-optimade-type": "list",
+                                                                        "x-optimade-unit": "inapplicable",
+                                                                        "type": [
+                                                                            "array"
+                                                                        ],
+                                                                        "description": "One exact coefficient vector.",
+                                                                        "items": {
+                                                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                            "title": "fraction",
+                                                                            "x-optimade-type": "string",
+                                                                            "x-optimade-definition": {
+                                                                                "label": "fraction_core",
+                                                                                "kind": "property",
+                                                                                "version": "0.1.0",
+                                                                                "format": "1.3",
+                                                                                "name": "fraction"
+                                                                            },
+                                                                            "type": [
+                                                                                "string",
+                                                                                "null"
+                                                                            ],
+                                                                            "description": "A fraction represented as a string.",
+                                                                            "examples": [
+                                                                                "2/3",
+                                                                                "5/42",
+                                                                                "10",
+                                                                                "0"
+                                                                            ],
+                                                                            "x-optimade-unit": "inapplicable"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "target": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "Exact target vector or scalar for the constraint.",
+                                                                "items": {
+                                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                    "title": "fraction",
+                                                                    "x-optimade-type": "string",
+                                                                    "x-optimade-definition": {
+                                                                        "label": "fraction_core",
+                                                                        "kind": "property",
+                                                                        "version": "0.1.0",
+                                                                        "format": "1.3",
+                                                                        "name": "fraction"
+                                                                    },
+                                                                    "type": [
+                                                                        "string",
+                                                                        "null"
+                                                                    ],
+                                                                    "description": "A fraction represented as a string.",
+                                                                    "examples": [
+                                                                        "2/3",
+                                                                        "5/42",
+                                                                        "10",
+                                                                        "0"
+                                                                    ],
+                                                                    "x-optimade-unit": "inapplicable"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "examples": [
+                                    {
+                                        "affine_transformation": {
+                                            "matrix": [
+                                                [
+                                                    "1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "1",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "2"
+                                                ]
+                                            ],
+                                            "vector": [
+                                                "0",
+                                                "0",
+                                                "0"
+                                            ]
+                                        },
+                                        "index": 2
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "examples": [
+                    [
+                        {
+                            "target_it_number": 2,
+                            "transforms": [
+                                {
+                                    "index": 2,
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "2"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ]
+                                    },
+                                    "criteria": [
+                                        {
+                                            "parent": "a",
+                                            "constraints": [
+                                                {
+                                                    "roles": [
+                                                        [
+                                                            "a",
+                                                            0
+                                                        ]
+                                                    ],
+                                                    "coeffs": [
+                                                        [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    ],
+                                                    "target": [
+                                                        "0",
+                                                        "0",
+                                                        "0"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                ]
+            },
+            "isomorphic_subgroups": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/isomorphic_subgroups",
+                "title": "Isomorphic subgroup transforms",
+                "$comment": "Anyterial keyed table of bounded-index isomorphic subgroup transforms.",
+                "x-optimade-type": "dictionary",
+                "x-optimade-definition": {
+                    "kind": "property",
+                    "version": "0.1.0",
+                    "format": "1.3",
+                    "name": "isomorphic_subgroups",
+                    "label": "isomorphic_subgroups_spacegroups"
+                },
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "Isomorphic subgroup transforms of bounded index for one parent setting or space-group type.\nAn isomorphic subgroup has the same space-group type as the parent but is embedded with a finite index, usually corresponding to an enlarged unit cell or a sublattice choice.\nThese transforms are useful for algorithms that need to enumerate same-type subgroup embeddings, compare structures under supercell changes, or construct bounded same-space-group refinement paths.\n\nThe transform records use the basis-transform convention represented by `matrix` and `vector`.\nThe `index` field is the subgroup index and equals the determinant factor of the basis transformation.\nThe generator currently searches indices up to its configured maximum index and deduplicates equivalent transforms under normalizer equivalence.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary containing an `items` list.\n- Each item in `items` MUST describe one exact isomorphic subgroup transform.\n- Matrix and vector entries MUST be exact strings, using integer strings or fraction strings as appropriate.",
+                "properties": {
+                    "items": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Isomorphic subgroup transform records for one parent key.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
+                            "title": "Basis transformation",
+                            "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "basis_transform",
+                                "label": "basis_transform_symmetry"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                            "properties": {
+                                "affine_transformation": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+                                    "title": "Affine transformation",
+                                    "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
+                                    "x-optimade-type": "dictionary",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "affine_transformation",
+                                        "label": "affine_transformation_symmetry"
+                                    },
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                    "properties": {
+                                        "matrix": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice",
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3,
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact 3 by 3 matrix part of the affine transformation.",
+                                            "items": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "x-optimade-dimensions": {
+                                                    "names": [
+                                                        "dim_lattice"
+                                                    ],
+                                                    "sizes": [
+                                                        3
+                                                    ]
+                                                },
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "One row of the exact 3 by 3 matrix.",
+                                                "items": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                }
+                                            }
+                                        },
+                                        "vector": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact fractional-coordinate vector part of the affine transformation.",
+                                            "items": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                "title": "fraction",
+                                                "x-optimade-type": "string",
+                                                "x-optimade-definition": {
+                                                    "label": "fraction_core",
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "fraction"
+                                                },
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "A fraction represented as a string.",
+                                                "examples": [
+                                                    "2/3",
+                                                    "5/42",
+                                                    "10",
+                                                    "0"
+                                                ],
+                                                "x-optimade-unit": "inapplicable"
+                                            }
+                                        },
+                                        "xyz": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                        },
+                                        "det": {
+                                            "x-optimade-type": "integer",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ],
+                                            "description": "Determinant of the matrix part when emitted by the generator."
+                                        },
+                                        "is_orthogonal": {
+                                            "x-optimade-type": "boolean",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "description": "Whether the matrix part is orthogonal."
+                                        }
+                                    },
+                                    "examples": [
+                                        {
+                                            "matrix": [
+                                                [
+                                                    "-1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "-1",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "1"
+                                                ]
+                                            ],
+                                            "vector": [
+                                                "0",
+                                                "0",
+                                                "0"
+                                            ],
+                                            "xyz": "-x,-y,z",
+                                            "det": 1,
+                                            "is_orthogonal": true
+                                        }
+                                    ]
+                                },
+                                "index": {
+                                    "x-optimade-type": "integer",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "Index metadata whose interpretation is supplied by the parent property."
+                                },
+                                "subgroup_type": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "International Tables subgroup-type label when applicable."
+                                },
+                                "k_subtype": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Klassengleiche subtype when applicable."
+                                },
+                                "compatible_systems": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Crystal metric systems compatible with the transform.",
+                                    "items": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "One compatible crystal-system label."
+                                    }
+                                },
+                                "operation_kind": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Generator classification of the transform or representative."
+                                },
+                                "wyckoff_splitting": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "items": {
+                                        "x-optimade-type": "dictionary",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "description": "Splitting data for one parent Wyckoff position.",
+                                        "required": [
+                                            "parent",
+                                            "splits"
+                                        ],
+                                        "properties": {
+                                            "parent": {
+                                                "x-optimade-type": "string",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "string"
+                                                ],
+                                                "description": "Parent Wyckoff letter."
+                                            },
+                                            "splits": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "Ordered split records for this parent Wyckoff letter.",
+                                                "items": {
+                                                    "x-optimade-type": "dictionary",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "object"
+                                                    ],
+                                                    "description": "One Wyckoff split record.",
+                                                    "required": [
+                                                        "letter",
+                                                        "xyz",
+                                                        "affine"
+                                                    ],
+                                                    "properties": {
+                                                        "letter": {
+                                                            "x-optimade-type": "string",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "string"
+                                                            ],
+                                                            "description": "Subgroup Wyckoff letter assigned by this split branch."
+                                                        },
+                                                        "xyz": {
+                                                            "x-optimade-type": "string",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "string"
+                                                            ],
+                                                            "description": "Coordinate expression for the split branch."
+                                                        },
+                                                        "affine": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Exact affine representation for the split branch.",
+                                                            "items": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "One affine row.",
+                                                                "items": {
+                                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                    "title": "fraction",
+                                                                    "x-optimade-type": "string",
+                                                                    "x-optimade-definition": {
+                                                                        "label": "fraction_core",
+                                                                        "kind": "property",
+                                                                        "version": "0.1.0",
+                                                                        "format": "1.3",
+                                                                        "name": "fraction"
+                                                                    },
+                                                                    "type": [
+                                                                        "string",
+                                                                        "null"
+                                                                    ],
+                                                                    "description": "A fraction represented as a string.",
+                                                                    "examples": [
+                                                                        "2/3",
+                                                                        "5/42",
+                                                                        "10",
+                                                                        "0"
+                                                                    ],
+                                                                    "x-optimade-unit": "inapplicable"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "criteria": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Backward-lift constraint metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "items": {
+                                        "x-optimade-type": "dictionary",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "description": "Backward-lift constraints for one parent Wyckoff position.",
+                                        "required": [
+                                            "parent",
+                                            "constraints"
+                                        ],
+                                        "properties": {
+                                            "parent": {
+                                                "x-optimade-type": "string",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "string"
+                                                ],
+                                                "description": "Parent Wyckoff letter."
+                                            },
+                                            "constraints": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "Constraint records for this parent Wyckoff letter.",
+                                                "items": {
+                                                    "x-optimade-type": "dictionary",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "object"
+                                                    ],
+                                                    "description": "One linear backward-lift constraint record.",
+                                                    "properties": {
+                                                        "roles": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Wyckoff-position role references entering the constraint.",
+                                                            "items": {
+                                                                "x-optimade-type": "dictionary",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "object"
+                                                                ],
+                                                                "description": "One role reference.",
+                                                                "required": [
+                                                                    "letter",
+                                                                    "index"
+                                                                ],
+                                                                "properties": {
+                                                                    "letter": {
+                                                                        "x-optimade-type": "string",
+                                                                        "x-optimade-unit": "inapplicable",
+                                                                        "type": [
+                                                                            "string"
+                                                                        ],
+                                                                        "description": "Wyckoff letter for the referenced role."
+                                                                    },
+                                                                    "index": {
+                                                                        "x-optimade-type": "integer",
+                                                                        "x-optimade-unit": "inapplicable",
+                                                                        "type": [
+                                                                            "integer"
+                                                                        ],
+                                                                        "description": "Zero-based occurrence index for the role."
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "coeffs": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Exact coefficient vectors for the constraint.",
+                                                            "items": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "Coefficients associated with one role.",
+                                                                "items": {
+                                                                    "x-optimade-type": "list",
+                                                                    "x-optimade-unit": "inapplicable",
+                                                                    "type": [
+                                                                        "array"
+                                                                    ],
+                                                                    "description": "One exact coefficient vector.",
+                                                                    "items": {
+                                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                        "title": "fraction",
+                                                                        "x-optimade-type": "string",
+                                                                        "x-optimade-definition": {
+                                                                            "label": "fraction_core",
+                                                                            "kind": "property",
+                                                                            "version": "0.1.0",
+                                                                            "format": "1.3",
+                                                                            "name": "fraction"
+                                                                        },
+                                                                        "type": [
+                                                                            "string",
+                                                                            "null"
+                                                                        ],
+                                                                        "description": "A fraction represented as a string.",
+                                                                        "examples": [
+                                                                            "2/3",
+                                                                            "5/42",
+                                                                            "10",
+                                                                            "0"
+                                                                        ],
+                                                                        "x-optimade-unit": "inapplicable"
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "target": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Exact target vector or scalar for the constraint.",
+                                                            "items": {
+                                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                "title": "fraction",
+                                                                "x-optimade-type": "string",
+                                                                "x-optimade-definition": {
+                                                                    "label": "fraction_core",
+                                                                    "kind": "property",
+                                                                    "version": "0.1.0",
+                                                                    "format": "1.3",
+                                                                    "name": "fraction"
+                                                                },
+                                                                "type": [
+                                                                    "string",
+                                                                    "null"
+                                                                ],
+                                                                "description": "A fraction represented as a string.",
+                                                                "examples": [
+                                                                    "2/3",
+                                                                    "5/42",
+                                                                    "10",
+                                                                    "0"
+                                                                ],
+                                                                "x-optimade-unit": "inapplicable"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "2"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ]
+                                    },
+                                    "index": 2
+                                }
+                            ]
+                        }
+                    }
+                },
+                "examples": [
+                    {
+                        "items": [
+                            {
+                                "index": 2,
+                                "wyckoff_splitting": {
+                                    "a": [
+                                        [
+                                            "a",
+                                            "x,y,z",
+                                            [
+                                                [
+                                                    "1",
+                                                    "0",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "1/2",
+                                                    "1/2"
+                                                ]
+                                            ]
+                                        ],
+                                        [
+                                            "a",
+                                            "x,y,z",
+                                            [
+                                                [
+                                                    "1",
+                                                    "0",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "1/2",
+                                                    "0"
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                },
+                                "affine_transformation": {
+                                    "matrix": [
+                                        [
+                                            "1",
+                                            "0",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "1",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "0",
+                                            "2"
+                                        ]
+                                    ],
+                                    "vector": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "same_space_group_affine_images_std": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/same_space_group_affine_images_std",
+                "title": "Same space group affine images std",
+                "$comment": "IT-number keyed same-space-group affine-image records for standard settings.",
+                "x-optimade-type": "dictionary",
+                "x-optimade-definition": {
+                    "kind": "property",
+                    "version": "0.1.0",
+                    "format": "1.3",
+                    "name": "same_space_group_affine_images_std",
+                    "label": "same_space_group_affine_images_std_spacegroups"
+                },
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "Same-space-group affine-image record for one International Tables standard setting.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **it\\_number**: REQUIRED; Integer.\n      International Tables space-group number for the standard setting.\n\n    - **hall**: REQUIRED; String.\n      Hall-entry key of the reference setting used for the standard setting.\n\n    - **affine\\_images**: REQUIRED; List of dictionaries.\n      Same-space-group affine images represented by exact `matrix` and `vector` transforms.",
+                "properties": {
+                    "it_number": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
+                        "title": "International Tables Space-Group Number",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "integer",
+                        "x-compatibility": [
+                            "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "it_number",
+                            "label": "it_number_spacegroups"
+                        },
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The International Tables space-group number.\n\nThis integer identifies the space-group type numbered 1 through 230 in International Tables for Crystallography. Multiple Hall settings can share the same `it_number`.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            1,
+                            5
+                        ]
+                    },
+                    "hall": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
+                        "title": "Hall entry",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hall_entry",
+                            "label": "hall_entry_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Normalized Hall-table entry key used internally by the generated datasets.\n\nThe value is derived from the Hall symbol by using lowercase letters and underscores in place of spaces. It is stable for lookup within these data files, while the display Hall symbol is provided separately by `hall` and its formatted variants.\n\n**Requirements/Conventions**:\n\n- This field identifies a concrete Hall setting, not only an IT space-group type.\n- The same value is normally used as the key of the containing `spacegroups` map.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "p_1",
+                            "-p_1"
+                        ]
+                    },
+                    "affine_images": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Same-space-group affine image transforms.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
+                            "title": "Basis transformation",
+                            "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "basis_transform",
+                                "label": "basis_transform_symmetry"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                            "properties": {
+                                "affine_transformation": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+                                    "title": "Affine transformation",
+                                    "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
+                                    "x-optimade-type": "dictionary",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "affine_transformation",
+                                        "label": "affine_transformation_symmetry"
+                                    },
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                    "properties": {
+                                        "matrix": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice",
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3,
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact 3 by 3 matrix part of the affine transformation.",
+                                            "items": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "x-optimade-dimensions": {
+                                                    "names": [
+                                                        "dim_lattice"
+                                                    ],
+                                                    "sizes": [
+                                                        3
+                                                    ]
+                                                },
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "One row of the exact 3 by 3 matrix.",
+                                                "items": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                }
+                                            }
+                                        },
+                                        "vector": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact fractional-coordinate vector part of the affine transformation.",
+                                            "items": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                "title": "fraction",
+                                                "x-optimade-type": "string",
+                                                "x-optimade-definition": {
+                                                    "label": "fraction_core",
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "fraction"
+                                                },
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "A fraction represented as a string.",
+                                                "examples": [
+                                                    "2/3",
+                                                    "5/42",
+                                                    "10",
+                                                    "0"
+                                                ],
+                                                "x-optimade-unit": "inapplicable"
+                                            }
+                                        },
+                                        "xyz": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                        },
+                                        "det": {
+                                            "x-optimade-type": "integer",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ],
+                                            "description": "Determinant of the matrix part when emitted by the generator."
+                                        },
+                                        "is_orthogonal": {
+                                            "x-optimade-type": "boolean",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "description": "Whether the matrix part is orthogonal."
+                                        }
+                                    },
+                                    "examples": [
+                                        {
+                                            "matrix": [
+                                                [
+                                                    "-1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "-1",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "1"
+                                                ]
+                                            ],
+                                            "vector": [
+                                                "0",
+                                                "0",
+                                                "0"
+                                            ],
+                                            "xyz": "-x,-y,z",
+                                            "det": 1,
+                                            "is_orthogonal": true
+                                        }
+                                    ]
+                                },
+                                "index": {
+                                    "x-optimade-type": "integer",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "Index metadata whose interpretation is supplied by the parent property."
+                                },
+                                "subgroup_type": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "International Tables subgroup-type label when applicable."
+                                },
+                                "k_subtype": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Klassengleiche subtype when applicable."
+                                },
+                                "compatible_systems": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Crystal metric systems compatible with the transform.",
+                                    "items": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "One compatible crystal-system label."
+                                    }
+                                },
+                                "operation_kind": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Generator classification of the transform or representative."
+                                },
+                                "wyckoff_splitting": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "items": {
+                                        "x-optimade-type": "dictionary",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "description": "Splitting data for one parent Wyckoff position.",
+                                        "required": [
+                                            "parent",
+                                            "splits"
+                                        ],
+                                        "properties": {
+                                            "parent": {
+                                                "x-optimade-type": "string",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "string"
+                                                ],
+                                                "description": "Parent Wyckoff letter."
+                                            },
+                                            "splits": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "Ordered split records for this parent Wyckoff letter.",
+                                                "items": {
+                                                    "x-optimade-type": "dictionary",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "object"
+                                                    ],
+                                                    "description": "One Wyckoff split record.",
+                                                    "required": [
+                                                        "letter",
+                                                        "xyz",
+                                                        "affine"
+                                                    ],
+                                                    "properties": {
+                                                        "letter": {
+                                                            "x-optimade-type": "string",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "string"
+                                                            ],
+                                                            "description": "Subgroup Wyckoff letter assigned by this split branch."
+                                                        },
+                                                        "xyz": {
+                                                            "x-optimade-type": "string",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "string"
+                                                            ],
+                                                            "description": "Coordinate expression for the split branch."
+                                                        },
+                                                        "affine": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Exact affine representation for the split branch.",
+                                                            "items": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "One affine row.",
+                                                                "items": {
+                                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                    "title": "fraction",
+                                                                    "x-optimade-type": "string",
+                                                                    "x-optimade-definition": {
+                                                                        "label": "fraction_core",
+                                                                        "kind": "property",
+                                                                        "version": "0.1.0",
+                                                                        "format": "1.3",
+                                                                        "name": "fraction"
+                                                                    },
+                                                                    "type": [
+                                                                        "string",
+                                                                        "null"
+                                                                    ],
+                                                                    "description": "A fraction represented as a string.",
+                                                                    "examples": [
+                                                                        "2/3",
+                                                                        "5/42",
+                                                                        "10",
+                                                                        "0"
+                                                                    ],
+                                                                    "x-optimade-unit": "inapplicable"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "criteria": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Backward-lift constraint metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "items": {
+                                        "x-optimade-type": "dictionary",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "description": "Backward-lift constraints for one parent Wyckoff position.",
+                                        "required": [
+                                            "parent",
+                                            "constraints"
+                                        ],
+                                        "properties": {
+                                            "parent": {
+                                                "x-optimade-type": "string",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "string"
+                                                ],
+                                                "description": "Parent Wyckoff letter."
+                                            },
+                                            "constraints": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "Constraint records for this parent Wyckoff letter.",
+                                                "items": {
+                                                    "x-optimade-type": "dictionary",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "object"
+                                                    ],
+                                                    "description": "One linear backward-lift constraint record.",
+                                                    "properties": {
+                                                        "roles": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Wyckoff-position role references entering the constraint.",
+                                                            "items": {
+                                                                "x-optimade-type": "dictionary",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "object"
+                                                                ],
+                                                                "description": "One role reference.",
+                                                                "required": [
+                                                                    "letter",
+                                                                    "index"
+                                                                ],
+                                                                "properties": {
+                                                                    "letter": {
+                                                                        "x-optimade-type": "string",
+                                                                        "x-optimade-unit": "inapplicable",
+                                                                        "type": [
+                                                                            "string"
+                                                                        ],
+                                                                        "description": "Wyckoff letter for the referenced role."
+                                                                    },
+                                                                    "index": {
+                                                                        "x-optimade-type": "integer",
+                                                                        "x-optimade-unit": "inapplicable",
+                                                                        "type": [
+                                                                            "integer"
+                                                                        ],
+                                                                        "description": "Zero-based occurrence index for the role."
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "coeffs": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Exact coefficient vectors for the constraint.",
+                                                            "items": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "Coefficients associated with one role.",
+                                                                "items": {
+                                                                    "x-optimade-type": "list",
+                                                                    "x-optimade-unit": "inapplicable",
+                                                                    "type": [
+                                                                        "array"
+                                                                    ],
+                                                                    "description": "One exact coefficient vector.",
+                                                                    "items": {
+                                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                        "title": "fraction",
+                                                                        "x-optimade-type": "string",
+                                                                        "x-optimade-definition": {
+                                                                            "label": "fraction_core",
+                                                                            "kind": "property",
+                                                                            "version": "0.1.0",
+                                                                            "format": "1.3",
+                                                                            "name": "fraction"
+                                                                        },
+                                                                        "type": [
+                                                                            "string",
+                                                                            "null"
+                                                                        ],
+                                                                        "description": "A fraction represented as a string.",
+                                                                        "examples": [
+                                                                            "2/3",
+                                                                            "5/42",
+                                                                            "10",
+                                                                            "0"
+                                                                        ],
+                                                                        "x-optimade-unit": "inapplicable"
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "target": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Exact target vector or scalar for the constraint.",
+                                                            "items": {
+                                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                "title": "fraction",
+                                                                "x-optimade-type": "string",
+                                                                "x-optimade-definition": {
+                                                                    "label": "fraction_core",
+                                                                    "kind": "property",
+                                                                    "version": "0.1.0",
+                                                                    "format": "1.3",
+                                                                    "name": "fraction"
+                                                                },
+                                                                "type": [
+                                                                    "string",
+                                                                    "null"
+                                                                ],
+                                                                "description": "A fraction represented as a string.",
+                                                                "examples": [
+                                                                    "2/3",
+                                                                    "5/42",
+                                                                    "10",
+                                                                    "0"
+                                                                ],
+                                                                "x-optimade-unit": "inapplicable"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "2"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ]
+                                    },
+                                    "index": 2
+                                }
+                            ]
+                        }
+                    }
+                },
+                "examples": [
+                    {
+                        "it_number": 1,
+                        "hall": "p_1",
+                        "affine_images": [
+                            {
+                                "affine_transformation": {
+                                    "matrix": [
+                                        [
+                                            "1",
+                                            "0",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "1",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "0",
+                                            "1"
+                                        ]
+                                    ],
+                                    "vector": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "continuous_normalizer": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/continuous_normalizer",
+                "title": "Continuous normalizer",
+                "$comment": "Anyterial continuous-normalizer property definition.",
+                "x-optimade-type": "dictionary",
+                "x-optimade-definition": {
+                    "kind": "property",
+                    "version": "0.1.0",
+                    "format": "1.3",
+                    "name": "continuous_normalizer",
+                    "label": "continuous_normalizer_spacegroups"
+                },
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "Parameterized continuous normalizer subspace for a setting. It describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
+                "properties": {
+                    "dimension": {
+                        "x-optimade-type": "integer",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Dimension of the continuous parameter subspace."
+                    },
+                    "basis_vectors": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Basis vectors spanning the continuous normalizer parameter space.",
+                        "items": {
+                            "x-optimade-type": "list",
+                            "x-optimade-unit": "inapplicable",
+                            "x-optimade-dimensions": {
+                                "names": [
+                                    "dim_lattice"
+                                ],
+                                "sizes": [
+                                    3
+                                ]
+                            },
+                            "type": [
+                                "array"
+                            ],
+                            "description": "One basis vector in fractional coordinates.",
+                            "items": {
+                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                "title": "fraction",
+                                "x-optimade-type": "string",
+                                "x-optimade-definition": {
+                                    "label": "fraction_core",
+                                    "kind": "property",
+                                    "version": "0.1.0",
+                                    "format": "1.3",
+                                    "name": "fraction"
+                                },
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "A fraction represented as a string.",
+                                "examples": [
+                                    "2/3",
+                                    "5/42",
+                                    "10",
+                                    "0"
+                                ],
+                                "x-optimade-unit": "inapplicable"
+                            }
+                        }
+                    },
+                    "coordinate_system": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Coordinate system used for the parameter vectors."
+                    },
+                    "representation": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Textual description of the parameterized representation."
+                    }
+                },
+                "examples": [
+                    {
+                        "dimension": 3,
+                        "coordinate_system": "fractional",
+                        "basis_vectors": [
+                            [
+                                "1",
+                                "0",
+                                "0"
+                            ],
+                            [
+                                "0",
+                                "1",
+                                "0"
+                            ],
+                            [
+                                "0",
+                                "0",
+                                "1"
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "orthogonal_affine_normalizer": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/orthogonal_affine_normalizer",
+                "title": "Orthogonal affine normalizer",
+                "$comment": "Anyterial signed-permutation affine normalizer coset representatives for one space-group setting.",
+                "x-optimade-type": "dictionary",
+                "x-optimade-definition": {
+                    "kind": "property",
+                    "version": "0.1.0",
+                    "format": "1.3",
+                    "name": "orthogonal_affine_normalizer",
+                    "label": "orthogonal_affine_normalizer_spacegroups"
+                },
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains the signed-permutation subset of affine normalizer representatives.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `signed_permutation_matrices`, meaning 3 by 3 integer matrices with exactly one nonzero entry in each row and column and each nonzero entry equal to `-1` or `1`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds satisfied by the signed-permutation candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed orthogonal affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
+                "properties": {
+                    "normalizer_kind": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Kind label for this normalizer contribution."
+                    },
+                    "representation": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Representation label for the listed normalizer data."
+                    },
+                    "candidate_set": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Name of the finite linear candidate set used for generation."
+                    },
+                    "n_symops": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
+                        "title": "N Symops",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "integer",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "n_symops",
+                            "label": "n_symops_spacegroups"
+                        },
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            1,
+                            2
+                        ]
+                    },
+                    "n_linear_parts": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_linear_parts",
+                        "title": "N Linear Parts",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "integer",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "n_linear_parts",
+                            "label": "n_linear_parts_spacegroups"
+                        },
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            2,
+                            4
+                        ]
+                    },
+                    "n_raw_candidates": {
+                        "x-optimade-type": "integer",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of affine candidates found before deduplication modulo the space group."
+                    },
+                    "n_unique_candidates": {
+                        "x-optimade-type": "integer",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of unique affine candidates before quotienting by the space group."
+                    },
+                    "n_coset_representatives": {
+                        "x-optimade-type": "integer",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of non-trivial coset representatives before metric-compatibility filtering."
+                    },
+                    "bounds": {
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "description": "Simple numerical bounds satisfied by the signed-permutation candidate matrices.",
+                        "properties": {
+                            "det_abs": {
+                                "x-optimade-type": "integer",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "integer",
+                                    "null"
+                                ],
+                                "description": "Absolute determinant of every signed-permutation candidate matrix."
+                            },
+                            "max_abs_linear_entry": {
+                                "x-optimade-type": "integer",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "integer",
+                                    "null"
+                                ],
+                                "description": "Maximum absolute entry value in the signed-permutation candidate matrices."
+                            }
+                        }
+                    },
+                    "symops": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Listed orthogonal affine normalizer coset representatives.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
+                            "title": "Basis transformation",
+                            "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "basis_transform",
+                                "label": "basis_transform_symmetry"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                            "properties": {
+                                "affine_transformation": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+                                    "title": "Affine transformation",
+                                    "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
+                                    "x-optimade-type": "dictionary",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "affine_transformation",
+                                        "label": "affine_transformation_symmetry"
+                                    },
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                    "properties": {
+                                        "matrix": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice",
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3,
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact 3 by 3 matrix part of the affine transformation.",
+                                            "items": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "x-optimade-dimensions": {
+                                                    "names": [
+                                                        "dim_lattice"
+                                                    ],
+                                                    "sizes": [
+                                                        3
+                                                    ]
+                                                },
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "One row of the exact 3 by 3 matrix.",
+                                                "items": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                }
+                                            }
+                                        },
+                                        "vector": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact fractional-coordinate vector part of the affine transformation.",
+                                            "items": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                "title": "fraction",
+                                                "x-optimade-type": "string",
+                                                "x-optimade-definition": {
+                                                    "label": "fraction_core",
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "fraction"
+                                                },
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "A fraction represented as a string.",
+                                                "examples": [
+                                                    "2/3",
+                                                    "5/42",
+                                                    "10",
+                                                    "0"
+                                                ],
+                                                "x-optimade-unit": "inapplicable"
+                                            }
+                                        },
+                                        "xyz": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                        },
+                                        "det": {
+                                            "x-optimade-type": "integer",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ],
+                                            "description": "Determinant of the matrix part when emitted by the generator."
+                                        },
+                                        "is_orthogonal": {
+                                            "x-optimade-type": "boolean",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "description": "Whether the matrix part is orthogonal."
+                                        }
+                                    },
+                                    "examples": [
+                                        {
+                                            "matrix": [
+                                                [
+                                                    "-1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "-1",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "1"
+                                                ]
+                                            ],
+                                            "vector": [
+                                                "0",
+                                                "0",
+                                                "0"
+                                            ],
+                                            "xyz": "-x,-y,z",
+                                            "det": 1,
+                                            "is_orthogonal": true
+                                        }
+                                    ]
+                                },
+                                "index": {
+                                    "x-optimade-type": "integer",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "Index metadata whose interpretation is supplied by the parent property."
+                                },
+                                "subgroup_type": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "International Tables subgroup-type label when applicable."
+                                },
+                                "k_subtype": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Klassengleiche subtype when applicable."
+                                },
+                                "compatible_systems": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Crystal metric systems compatible with the transform.",
+                                    "items": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "One compatible crystal-system label."
+                                    }
+                                },
+                                "operation_kind": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Generator classification of the transform or representative."
+                                },
+                                "wyckoff_splitting": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "items": {
+                                        "x-optimade-type": "dictionary",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "description": "Splitting data for one parent Wyckoff position.",
+                                        "required": [
+                                            "parent",
+                                            "splits"
+                                        ],
+                                        "properties": {
+                                            "parent": {
+                                                "x-optimade-type": "string",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "string"
+                                                ],
+                                                "description": "Parent Wyckoff letter."
+                                            },
+                                            "splits": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "Ordered split records for this parent Wyckoff letter.",
+                                                "items": {
+                                                    "x-optimade-type": "dictionary",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "object"
+                                                    ],
+                                                    "description": "One Wyckoff split record.",
+                                                    "required": [
+                                                        "letter",
+                                                        "xyz",
+                                                        "affine"
+                                                    ],
+                                                    "properties": {
+                                                        "letter": {
+                                                            "x-optimade-type": "string",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "string"
+                                                            ],
+                                                            "description": "Subgroup Wyckoff letter assigned by this split branch."
+                                                        },
+                                                        "xyz": {
+                                                            "x-optimade-type": "string",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "string"
+                                                            ],
+                                                            "description": "Coordinate expression for the split branch."
+                                                        },
+                                                        "affine": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Exact affine representation for the split branch.",
+                                                            "items": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "One affine row.",
+                                                                "items": {
+                                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                    "title": "fraction",
+                                                                    "x-optimade-type": "string",
+                                                                    "x-optimade-definition": {
+                                                                        "label": "fraction_core",
+                                                                        "kind": "property",
+                                                                        "version": "0.1.0",
+                                                                        "format": "1.3",
+                                                                        "name": "fraction"
+                                                                    },
+                                                                    "type": [
+                                                                        "string",
+                                                                        "null"
+                                                                    ],
+                                                                    "description": "A fraction represented as a string.",
+                                                                    "examples": [
+                                                                        "2/3",
+                                                                        "5/42",
+                                                                        "10",
+                                                                        "0"
+                                                                    ],
+                                                                    "x-optimade-unit": "inapplicable"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "criteria": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Backward-lift constraint metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "items": {
+                                        "x-optimade-type": "dictionary",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "description": "Backward-lift constraints for one parent Wyckoff position.",
+                                        "required": [
+                                            "parent",
+                                            "constraints"
+                                        ],
+                                        "properties": {
+                                            "parent": {
+                                                "x-optimade-type": "string",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "string"
+                                                ],
+                                                "description": "Parent Wyckoff letter."
+                                            },
+                                            "constraints": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "Constraint records for this parent Wyckoff letter.",
+                                                "items": {
+                                                    "x-optimade-type": "dictionary",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "object"
+                                                    ],
+                                                    "description": "One linear backward-lift constraint record.",
+                                                    "properties": {
+                                                        "roles": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Wyckoff-position role references entering the constraint.",
+                                                            "items": {
+                                                                "x-optimade-type": "dictionary",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "object"
+                                                                ],
+                                                                "description": "One role reference.",
+                                                                "required": [
+                                                                    "letter",
+                                                                    "index"
+                                                                ],
+                                                                "properties": {
+                                                                    "letter": {
+                                                                        "x-optimade-type": "string",
+                                                                        "x-optimade-unit": "inapplicable",
+                                                                        "type": [
+                                                                            "string"
+                                                                        ],
+                                                                        "description": "Wyckoff letter for the referenced role."
+                                                                    },
+                                                                    "index": {
+                                                                        "x-optimade-type": "integer",
+                                                                        "x-optimade-unit": "inapplicable",
+                                                                        "type": [
+                                                                            "integer"
+                                                                        ],
+                                                                        "description": "Zero-based occurrence index for the role."
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "coeffs": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Exact coefficient vectors for the constraint.",
+                                                            "items": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "Coefficients associated with one role.",
+                                                                "items": {
+                                                                    "x-optimade-type": "list",
+                                                                    "x-optimade-unit": "inapplicable",
+                                                                    "type": [
+                                                                        "array"
+                                                                    ],
+                                                                    "description": "One exact coefficient vector.",
+                                                                    "items": {
+                                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                        "title": "fraction",
+                                                                        "x-optimade-type": "string",
+                                                                        "x-optimade-definition": {
+                                                                            "label": "fraction_core",
+                                                                            "kind": "property",
+                                                                            "version": "0.1.0",
+                                                                            "format": "1.3",
+                                                                            "name": "fraction"
+                                                                        },
+                                                                        "type": [
+                                                                            "string",
+                                                                            "null"
+                                                                        ],
+                                                                        "description": "A fraction represented as a string.",
+                                                                        "examples": [
+                                                                            "2/3",
+                                                                            "5/42",
+                                                                            "10",
+                                                                            "0"
+                                                                        ],
+                                                                        "x-optimade-unit": "inapplicable"
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "target": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Exact target vector or scalar for the constraint.",
+                                                            "items": {
+                                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                "title": "fraction",
+                                                                "x-optimade-type": "string",
+                                                                "x-optimade-definition": {
+                                                                    "label": "fraction_core",
+                                                                    "kind": "property",
+                                                                    "version": "0.1.0",
+                                                                    "format": "1.3",
+                                                                    "name": "fraction"
+                                                                },
+                                                                "type": [
+                                                                    "string",
+                                                                    "null"
+                                                                ],
+                                                                "description": "A fraction represented as a string.",
+                                                                "examples": [
+                                                                    "2/3",
+                                                                    "5/42",
+                                                                    "10",
+                                                                    "0"
+                                                                ],
+                                                                "x-optimade-unit": "inapplicable"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "2"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ]
+                                    },
+                                    "index": 2
+                                }
+                            ]
+                        }
+                    }
+                },
+                "examples": [
+                    {
+                        "normalizer_kind": "orthogonal_affine",
+                        "representation": "orthogonal_coset_representatives",
+                        "candidate_set": "signed_permutation_matrices",
+                        "n_symops": 47,
+                        "n_linear_parts": 47,
+                        "n_raw_candidates": 48,
+                        "n_unique_candidates": 48,
+                        "n_coset_representatives": 47,
+                        "bounds": {
+                            "det_abs": 1,
+                            "max_abs_linear_entry": 1
+                        },
+                        "symops": [
+                            {
+                                "affine_transformation": {
+                                    "xyz": "-x,-y,-z",
+                                    "matrix": [
+                                        [
+                                            "-1",
+                                            "0",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "-1",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "0",
+                                            "-1"
+                                        ]
+                                    ],
+                                    "vector": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "det": -1,
+                                    "is_orthogonal": true
+                                },
+                                "compatible_systems": [
+                                    "triclinic",
+                                    "monoclinic",
+                                    "orthorhombic",
+                                    "tetragonal",
+                                    "trigonal",
+                                    "hexagonal",
+                                    "cubic"
+                                ],
+                                "operation_kind": "orthogonal_affine"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "affine_normalizer": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/affine_normalizer",
+                "title": "Affine normalizer",
+                "$comment": "Anyterial bounded affine normalizer coset representatives for one space-group setting.",
+                "x-optimade-type": "dictionary",
+                "x-optimade-definition": {
+                    "kind": "property",
+                    "version": "0.1.0",
+                    "format": "1.3",
+                    "name": "affine_normalizer",
+                    "label": "affine_normalizer_spacegroups"
+                },
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "Affine normalizer coset representatives for one crystallographic space-group setting.\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
+                "properties": {
+                    "normalizer_kind": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Kind label for this normalizer contribution."
+                    },
+                    "representation": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Representation label for the listed normalizer data."
+                    },
+                    "candidate_set": {
+                        "x-optimade-type": "string",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Name of the finite linear candidate set used for generation."
+                    },
+                    "n_symops": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
+                        "title": "N Symops",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "integer",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "n_symops",
+                            "label": "n_symops_spacegroups"
+                        },
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            1,
+                            2
+                        ]
+                    },
+                    "n_linear_parts": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_linear_parts",
+                        "title": "N Linear Parts",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "integer",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "n_linear_parts",
+                            "label": "n_linear_parts_spacegroups"
+                        },
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            2,
+                            4
+                        ]
+                    },
+                    "n_raw_candidates": {
+                        "x-optimade-type": "integer",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of affine candidates found before deduplication modulo the space group."
+                    },
+                    "n_unique_candidates": {
+                        "x-optimade-type": "integer",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of unique affine candidates before quotienting by the space group."
+                    },
+                    "n_coset_representatives": {
+                        "x-optimade-type": "integer",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of non-trivial coset representatives before metric-compatibility filtering."
+                    },
+                    "bounds": {
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "description": "Simple numerical bounds defining the bounded unimodular integer candidate matrices.",
+                        "properties": {
+                            "det_abs": {
+                                "x-optimade-type": "integer",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "integer",
+                                    "null"
+                                ],
+                                "description": "Required absolute determinant of every candidate matrix."
+                            },
+                            "max_abs_linear_entry": {
+                                "x-optimade-type": "integer",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "integer",
+                                    "null"
+                                ],
+                                "description": "Maximum absolute entry value allowed in candidate matrices."
+                            }
+                        }
+                    },
+                    "symops": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Listed affine normalizer coset representatives.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
+                            "title": "Basis transformation",
+                            "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "basis_transform",
+                                "label": "basis_transform_symmetry"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                            "properties": {
+                                "affine_transformation": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+                                    "title": "Affine transformation",
+                                    "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
+                                    "x-optimade-type": "dictionary",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "affine_transformation",
+                                        "label": "affine_transformation_symmetry"
+                                    },
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                    "properties": {
+                                        "matrix": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice",
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3,
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact 3 by 3 matrix part of the affine transformation.",
+                                            "items": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "x-optimade-dimensions": {
+                                                    "names": [
+                                                        "dim_lattice"
+                                                    ],
+                                                    "sizes": [
+                                                        3
+                                                    ]
+                                                },
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "One row of the exact 3 by 3 matrix.",
+                                                "items": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                }
+                                            }
+                                        },
+                                        "vector": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact fractional-coordinate vector part of the affine transformation.",
+                                            "items": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                "title": "fraction",
+                                                "x-optimade-type": "string",
+                                                "x-optimade-definition": {
+                                                    "label": "fraction_core",
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "fraction"
+                                                },
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "A fraction represented as a string.",
+                                                "examples": [
+                                                    "2/3",
+                                                    "5/42",
+                                                    "10",
+                                                    "0"
+                                                ],
+                                                "x-optimade-unit": "inapplicable"
+                                            }
+                                        },
+                                        "xyz": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                        },
+                                        "det": {
+                                            "x-optimade-type": "integer",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ],
+                                            "description": "Determinant of the matrix part when emitted by the generator."
+                                        },
+                                        "is_orthogonal": {
+                                            "x-optimade-type": "boolean",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "description": "Whether the matrix part is orthogonal."
+                                        }
+                                    },
+                                    "examples": [
+                                        {
+                                            "matrix": [
+                                                [
+                                                    "-1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "-1",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "1"
+                                                ]
+                                            ],
+                                            "vector": [
+                                                "0",
+                                                "0",
+                                                "0"
+                                            ],
+                                            "xyz": "-x,-y,z",
+                                            "det": 1,
+                                            "is_orthogonal": true
+                                        }
+                                    ]
+                                },
+                                "index": {
+                                    "x-optimade-type": "integer",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "Index metadata whose interpretation is supplied by the parent property."
+                                },
+                                "subgroup_type": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "International Tables subgroup-type label when applicable."
+                                },
+                                "k_subtype": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Klassengleiche subtype when applicable."
+                                },
+                                "compatible_systems": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Crystal metric systems compatible with the transform.",
+                                    "items": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "One compatible crystal-system label."
+                                    }
+                                },
+                                "operation_kind": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Generator classification of the transform or representative."
+                                },
+                                "wyckoff_splitting": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "items": {
+                                        "x-optimade-type": "dictionary",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "description": "Splitting data for one parent Wyckoff position.",
+                                        "required": [
+                                            "parent",
+                                            "splits"
+                                        ],
+                                        "properties": {
+                                            "parent": {
+                                                "x-optimade-type": "string",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "string"
+                                                ],
+                                                "description": "Parent Wyckoff letter."
+                                            },
+                                            "splits": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "Ordered split records for this parent Wyckoff letter.",
+                                                "items": {
+                                                    "x-optimade-type": "dictionary",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "object"
+                                                    ],
+                                                    "description": "One Wyckoff split record.",
+                                                    "required": [
+                                                        "letter",
+                                                        "xyz",
+                                                        "affine"
+                                                    ],
+                                                    "properties": {
+                                                        "letter": {
+                                                            "x-optimade-type": "string",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "string"
+                                                            ],
+                                                            "description": "Subgroup Wyckoff letter assigned by this split branch."
+                                                        },
+                                                        "xyz": {
+                                                            "x-optimade-type": "string",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "string"
+                                                            ],
+                                                            "description": "Coordinate expression for the split branch."
+                                                        },
+                                                        "affine": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Exact affine representation for the split branch.",
+                                                            "items": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "One affine row.",
+                                                                "items": {
+                                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                    "title": "fraction",
+                                                                    "x-optimade-type": "string",
+                                                                    "x-optimade-definition": {
+                                                                        "label": "fraction_core",
+                                                                        "kind": "property",
+                                                                        "version": "0.1.0",
+                                                                        "format": "1.3",
+                                                                        "name": "fraction"
+                                                                    },
+                                                                    "type": [
+                                                                        "string",
+                                                                        "null"
+                                                                    ],
+                                                                    "description": "A fraction represented as a string.",
+                                                                    "examples": [
+                                                                        "2/3",
+                                                                        "5/42",
+                                                                        "10",
+                                                                        "0"
+                                                                    ],
+                                                                    "x-optimade-unit": "inapplicable"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "criteria": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Backward-lift constraint metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "items": {
+                                        "x-optimade-type": "dictionary",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "object"
+                                        ],
+                                        "description": "Backward-lift constraints for one parent Wyckoff position.",
+                                        "required": [
+                                            "parent",
+                                            "constraints"
+                                        ],
+                                        "properties": {
+                                            "parent": {
+                                                "x-optimade-type": "string",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "string"
+                                                ],
+                                                "description": "Parent Wyckoff letter."
+                                            },
+                                            "constraints": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "Constraint records for this parent Wyckoff letter.",
+                                                "items": {
+                                                    "x-optimade-type": "dictionary",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "object"
+                                                    ],
+                                                    "description": "One linear backward-lift constraint record.",
+                                                    "properties": {
+                                                        "roles": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Wyckoff-position role references entering the constraint.",
+                                                            "items": {
+                                                                "x-optimade-type": "dictionary",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "object"
+                                                                ],
+                                                                "description": "One role reference.",
+                                                                "required": [
+                                                                    "letter",
+                                                                    "index"
+                                                                ],
+                                                                "properties": {
+                                                                    "letter": {
+                                                                        "x-optimade-type": "string",
+                                                                        "x-optimade-unit": "inapplicable",
+                                                                        "type": [
+                                                                            "string"
+                                                                        ],
+                                                                        "description": "Wyckoff letter for the referenced role."
+                                                                    },
+                                                                    "index": {
+                                                                        "x-optimade-type": "integer",
+                                                                        "x-optimade-unit": "inapplicable",
+                                                                        "type": [
+                                                                            "integer"
+                                                                        ],
+                                                                        "description": "Zero-based occurrence index for the role."
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "coeffs": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Exact coefficient vectors for the constraint.",
+                                                            "items": {
+                                                                "x-optimade-type": "list",
+                                                                "x-optimade-unit": "inapplicable",
+                                                                "type": [
+                                                                    "array"
+                                                                ],
+                                                                "description": "Coefficients associated with one role.",
+                                                                "items": {
+                                                                    "x-optimade-type": "list",
+                                                                    "x-optimade-unit": "inapplicable",
+                                                                    "type": [
+                                                                        "array"
+                                                                    ],
+                                                                    "description": "One exact coefficient vector.",
+                                                                    "items": {
+                                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                        "title": "fraction",
+                                                                        "x-optimade-type": "string",
+                                                                        "x-optimade-definition": {
+                                                                            "label": "fraction_core",
+                                                                            "kind": "property",
+                                                                            "version": "0.1.0",
+                                                                            "format": "1.3",
+                                                                            "name": "fraction"
+                                                                        },
+                                                                        "type": [
+                                                                            "string",
+                                                                            "null"
+                                                                        ],
+                                                                        "description": "A fraction represented as a string.",
+                                                                        "examples": [
+                                                                            "2/3",
+                                                                            "5/42",
+                                                                            "10",
+                                                                            "0"
+                                                                        ],
+                                                                        "x-optimade-unit": "inapplicable"
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "target": {
+                                                            "x-optimade-type": "list",
+                                                            "x-optimade-unit": "inapplicable",
+                                                            "type": [
+                                                                "array"
+                                                            ],
+                                                            "description": "Exact target vector or scalar for the constraint.",
+                                                            "items": {
+                                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                                "title": "fraction",
+                                                                "x-optimade-type": "string",
+                                                                "x-optimade-definition": {
+                                                                    "label": "fraction_core",
+                                                                    "kind": "property",
+                                                                    "version": "0.1.0",
+                                                                    "format": "1.3",
+                                                                    "name": "fraction"
+                                                                },
+                                                                "type": [
+                                                                    "string",
+                                                                    "null"
+                                                                ],
+                                                                "description": "A fraction represented as a string.",
+                                                                "examples": [
+                                                                    "2/3",
+                                                                    "5/42",
+                                                                    "10",
+                                                                    "0"
+                                                                ],
+                                                                "x-optimade-unit": "inapplicable"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "2"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ]
+                                    },
+                                    "index": 2
+                                }
+                            ]
+                        }
+                    }
+                },
+                "examples": [
+                    {
+                        "normalizer_kind": "affine",
+                        "representation": "bounded_coset_representatives",
+                        "candidate_set": "bounded_unimodular_integer_matrices",
+                        "n_symops": 63,
+                        "n_linear_parts": 63,
+                        "n_raw_candidates": 6960,
+                        "n_unique_candidates": 6960,
+                        "n_coset_representatives": 6959,
+                        "bounds": {
+                            "det_abs": 1,
+                            "max_abs_linear_entry": 1
+                        },
+                        "symops": [
+                            {
+                                "affine_transformation": {
+                                    "xyz": "-x,-y,-z",
+                                    "matrix": [
+                                        [
+                                            "-1",
+                                            "0",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "-1",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "0",
+                                            "-1"
+                                        ]
+                                    ],
+                                    "vector": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "det": -1,
+                                    "is_orthogonal": true
+                                },
+                                "compatible_systems": [
+                                    "triclinic",
+                                    "monoclinic",
+                                    "orthorhombic",
+                                    "tetragonal",
+                                    "trigonal",
+                                    "hexagonal",
+                                    "cubic"
+                                ],
+                                "operation_kind": "affine"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "examples": [
+        [
+            {
+                "it_number": 1,
+                "baernighausen": []
+            }
+        ]
+    ]
+}
+```

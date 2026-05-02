@@ -132,13 +132,14 @@
             * **[Backward lift criteria](v0.1/properties/spacegroups/backward_lift_criteria.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/backward_lift_criteria`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/backward_lift_criteria.md)
                 
                 Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen Bärnighausen transform.
-                The map is keyed by subgroup IT number.
-                Values are lists of transform records carrying a basis transform and a dictionary of Wyckoff-letter criteria.
+                Each list item groups transform records for one target subgroup IT number.
+                The target subgroup IT number is stored in `target_it_number` rather than as a JSON dictionary key.
 
             * **[Bärnighausen subgroup transforms](v0.1/properties/spacegroups/baernighausen.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/baernighausen`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/baernighausen.md)
                 
                 Bärnighausen subgroup transform table for one parent setting or space-group type.
                 Entries describe generated embeddings of subgroup settings into the containing parent setting.
+                Each list item groups transform records for one target subgroup, with the target stored as ordinary data rather than as a JSON dictionary key.
                 Transform records follow `/properties/symmetry/basis_transform`.
 
             * **[Bravais Type](v0.1/properties/spacegroups/bravais_type.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type.md)
@@ -202,11 +203,6 @@
                 
                 Display-oriented renderings of the Hall symbol in `hall`.
                 The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.
-
-            * **[Hall-symbol to affine normalizer coset data index](v0.1/properties/spacegroups/hall_symbol_to_affine_normalizer_coset_data.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_symbol_to_affine_normalizer_coset_data`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_symbol_to_affine_normalizer_coset_data.md)
-                
-                Index from normalized Hall entries to row positions in the top-level `affine_normalizer_coset_data` table.
-                It allows consumers to look up affine normalizer coset data by Hall entry while keeping `affine_normalizer_coset_data` as a compact ordered list.
 
             * **[Hall to IT standard transform](v0.1/properties/spacegroups/hall_to_it_std_transform.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_to_it_std_transform`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_to_it_std_transform.md)
                 
@@ -311,23 +307,6 @@
                 
                 Subgroup or transform index. For subgroup transforms it is the crystallographic subgroup index `[G:H]`, equal to the determinant factor of the basis transformation when applicable.
 
-            * **[Index Hall entry to space-group symbols](v0.1/properties/spacegroups/index_hall_entry_to_spacegroup_symbols.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroup_symbols`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroup_symbols.md)
-                
-                Index from normalized Hall entries to row positions in the top-level `spacegroup_symbols` table.
-
-            * **[Hall-entry to spacegroups index](v0.1/properties/spacegroups/index_hall_entry_to_spacegroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroups`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_hall_entry_to_spacegroups.md)
-                
-                Index from normalized Hall entries to row positions in the top-level `spacegroups` table.
-                It allows consumers to look up a space-group setting by Hall entry while keeping `spacegroups` as a compact ordered list.
-
-            * **[IT number to spglib default spacegroups index](v0.1/properties/spacegroups/index_it_number_to_spglib_default_spacegroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_spglib_default_spacegroups`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_spglib_default_spacegroups.md)
-                
-                IT-number keyed lookup from the default spglib Hall setting to the corresponding row index in the top-level `spacegroups` list.
-
-            * **[IT number to std spacegroups index](v0.1/properties/spacegroups/index_it_number_to_std_spacegroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_std_spacegroups`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/index_it_number_to_std_spacegroups.md)
-                
-                IT-number keyed lookup from the International Tables standard setting to the corresponding row index in the top-level `spacegroups` list.
-
             * **[Is Centric](v0.1/properties/spacegroups/is_centric.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_centric`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_centric.md)
                 
                 Boolean flag indicating whether the cctbx space group is centric.
@@ -379,7 +358,8 @@
             * **[Maximal subgroup relations](v0.1/properties/spacegroups/maximal_subgroup_relations.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/maximal_subgroup_relations`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/maximal_subgroup_relations.md)
                 
                 Maximal non-isomorphic subgroup relations for International Tables space-group types.
-                The dictionary is keyed by supergroup IT number and each value is a list of subgroup-relation records.
+                Each list item describes all known maximal non-isomorphic subgroup relations for one supergroup IT number.
+                The supergroup IT number is stored in `supergroup_it_number` rather than as a JSON dictionary key.
 
             * **[N Centering Translations](v0.1/properties/spacegroups/n_centering_translations.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_centering_translations`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_centering_translations.md)
                 
@@ -471,7 +451,7 @@
                 
                 Ordered table of crystallographic space-group setting records.
                 Each item describes one concrete Hall/International Tables setting of a space group, including symbols, classifications, symmetry operations, asymmetric-unit information, Wyckoff positions, and related auxiliary data.
-                The companion `index_hall_entry_to_spacegroups` property maps normalized Hall entries to indices in this list.
+                The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps normalized Hall entries to indices in this list; it is not an OPTIMADE property.
 
             * **[Spglib Hall](v0.1/properties/spacegroups/spglib_hall.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall.md)
                 
@@ -533,11 +513,24 @@
                 
                 Display Hall symbol corresponding to `to_hall`.
 
+            * **[Transformations per Hall entry](v0.1/properties/spacegroups/transformations_per_hall.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hall`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hall.md)
+                
+                Transformation data grouped by Hall entry.
+                Each list item contains the Hall entry as ordinary data together with all transformation sections generated for that setting.
+                This representation avoids using Hall entries as JSON dictionary keys in the OPTIMADE-described payload.
+
+            * **[Transformations per IT number](v0.1/properties/spacegroups/transformations_per_it_number.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number.md)
+                
+                Standard-setting transformation data grouped by International Tables space-group number.
+                Each list item contains the IT number as ordinary data together with all standard-setting transformation sections generated for that space-group type.
+                This representation avoids using IT numbers as JSON dictionary keys in the OPTIMADE-described payload.
+
             * **[Wyckoff positions](v0.1/properties/spacegroups/wyckoff.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff.md)
                 
                 Wyckoff-position table for a specific space-group setting.
-                Each key is a Wyckoff letter and each value describes one Wyckoff position.
-                Values follow `/properties/symmetry/wyckoff_position`.
+                Each list item describes one Wyckoff position and includes the Wyckoff letter as ordinary data.
+                This list representation avoids using JSON dictionary keys as crystallographic data.
+                Items follow `/properties/symmetry/wyckoff_position`.
 
             * **[Wyckoff Sets](v0.1/properties/spacegroups/wyckoff_sets.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_sets`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_sets.md)
                 
@@ -546,8 +539,8 @@
             * **[Wyckoff splitting](v0.1/properties/spacegroups/wyckoff_splitting.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_splitting`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_splitting.md)
                 
                 Wyckoff-position splitting data associated with a subgroup or same-space-group transform.
-                The map is keyed by parent Wyckoff letter.
-                Each value is an ordered list of subgroup Wyckoff-position assignments or coordinate expressions as emitted by the generator.
+                Each list item gives the split of one parent Wyckoff position.
+                The parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.
 
         * **symmetry**
             * **[Affine transformation](v0.1/properties/symmetry/affine_transformation.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation`](https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation.md)

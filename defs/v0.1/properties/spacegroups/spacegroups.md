@@ -8,7 +8,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Property name:** Space groups  
 **Description:** Ordered table of crystallographic space-group setting records.
 Each item describes one concrete Hall/International Tables setting of a space group, including symbols, classifications, symmetry operations, asymmetric-unit information, Wyckoff positions, and related auxiliary data.
-The companion `index_hall_entry_to_spacegroups` property maps normalized Hall entries to indices in this list.  
+The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps normalized Hall entries to indices in this list; it is not an OPTIMADE property.  
 **Type:** list  
 
 **Requirements/Conventions**:
@@ -44,7 +44,7 @@ The companion `index_hall_entry_to_spacegroups` property maps normalized Hall en
         "array",
         "null"
     ],
-    "description": "Ordered table of crystallographic space-group setting records.\nEach item describes one concrete Hall/International Tables setting of a space group, including symbols, classifications, symmetry operations, asymmetric-unit information, Wyckoff positions, and related auxiliary data.\nThe companion `index_hall_entry_to_spacegroups` property maps normalized Hall entries to indices in this list.\n\n**Requirements/Conventions**:\n\n- Items MUST be ordered in the same setting order as `spacegroup_symbols.json.gz`, with additional cctbx-only Hall settings kept in their IT-number block.\n- A single IT number can occur in several items.\n- The `setting_it_nc` property gives the corresponding International Tables `n:c` setting code when applicable.",
+    "description": "Ordered table of crystallographic space-group setting records.\nEach item describes one concrete Hall/International Tables setting of a space group, including symbols, classifications, symmetry operations, asymmetric-unit information, Wyckoff positions, and related auxiliary data.\nThe companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps normalized Hall entries to indices in this list; it is not an OPTIMADE property.\n\n**Requirements/Conventions**:\n\n- Items MUST be ordered in the same setting order as `spacegroup_symbols.json.gz`, with additional cctbx-only Hall settings kept in their IT-number block.\n- A single IT number can occur in several items.\n- The `setting_it_nc` property gives the corresponding International Tables `n:c` setting code when applicable.",
     "items": {
         "x-optimade-type": "dictionary",
         "x-optimade-unit": "inapplicable",

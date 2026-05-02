@@ -14,6 +14,9 @@ The record gives the multiplicity, oriented site-symmetry symbol, representative
 
 - It MUST be a dictionary with the following keys:
 
+    - **letter**: REQUIRED; String.
+      Wyckoff letter for this position in the setting.
+
     - **multiplicity**: REQUIRED; Integer.
       Multiplicity of the Wyckoff position in the conventional cell.
 
@@ -40,7 +43,7 @@ The record gives the multiplicity, oriented site-symmetry symbol, representative
 
 **Examples:**
 
-- `{"multiplicity": 2, "sitesym": "1", "hasfreedom": [true, true, true], "first_orbit": "x,y,z", "orbit_xyz": ["x", "y", "z", "-x", "y", "-z"], "orbit_mod_centering_xyz": ["x", "y", "z", "-x", "y", "-z"]}`
+- `{"letter": "e", "multiplicity": 2, "sitesym": "1", "hasfreedom": [true, true, true], "first_orbit": "x,y,z", "orbit_xyz": ["x", "y", "z", "-x", "y", "-z"], "orbit_mod_centering_xyz": ["x", "y", "z", "-x", "y", "-z"]}`
 
 **Formats:** [[JSON](wyckoff_position.json)] [[MD](wyckoff_position.md)]
 
@@ -65,8 +68,17 @@ The record gives the multiplicity, oriented site-symmetry symbol, representative
         "object",
         "null"
     ],
-    "description": "One Wyckoff position in a space-group setting.\nThe record gives the multiplicity, oriented site-symmetry symbol, representative coordinate, full orbit, and orbit factorized modulo centering translations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **multiplicity**: REQUIRED; Integer.\n      Multiplicity of the Wyckoff position in the conventional cell.\n\n    - **sitesym**: REQUIRED; String.\n      Oriented site-symmetry symbol.\n\n    - **hasfreedom**: REQUIRED; List of booleans.\n      Flags indicating whether each fractional coordinate has a free parameter.\n\n    - **first\\_orbit**: REQUIRED; String.\n      First representative coordinate expression used by the generator.\n\n    - **orbit\\_affine**: REQUIRED; List.\n      Full orbit in affine matrix/vector representation.\n\n    - **orbit\\_xyz**: REQUIRED; List of strings.\n      Full orbit in `x,y,z` coordinate notation.\n\n    - **orbit\\_mod\\_centering\\_affine**: REQUIRED; List.\n      Orbit representatives modulo centering translations in affine representation.\n\n    - **orbit\\_mod\\_centering\\_xyz**: REQUIRED; List of strings.\n      Orbit representatives modulo centering translations in `x,y,z` notation.",
+    "description": "One Wyckoff position in a space-group setting.\nThe record gives the multiplicity, oriented site-symmetry symbol, representative coordinate, full orbit, and orbit factorized modulo centering translations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **letter**: REQUIRED; String.\n      Wyckoff letter for this position in the setting.\n\n    - **multiplicity**: REQUIRED; Integer.\n      Multiplicity of the Wyckoff position in the conventional cell.\n\n    - **sitesym**: REQUIRED; String.\n      Oriented site-symmetry symbol.\n\n    - **hasfreedom**: REQUIRED; List of booleans.\n      Flags indicating whether each fractional coordinate has a free parameter.\n\n    - **first\\_orbit**: REQUIRED; String.\n      First representative coordinate expression used by the generator.\n\n    - **orbit\\_affine**: REQUIRED; List.\n      Full orbit in affine matrix/vector representation.\n\n    - **orbit\\_xyz**: REQUIRED; List of strings.\n      Full orbit in `x,y,z` coordinate notation.\n\n    - **orbit\\_mod\\_centering\\_affine**: REQUIRED; List.\n      Orbit representatives modulo centering translations in affine representation.\n\n    - **orbit\\_mod\\_centering\\_xyz**: REQUIRED; List of strings.\n      Orbit representatives modulo centering translations in `x,y,z` notation.",
     "properties": {
+        "letter": {
+            "x-optimade-type": "string",
+            "x-optimade-unit": "inapplicable",
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Wyckoff letter for this position in the setting."
+        },
         "multiplicity": {
             "x-optimade-type": "integer",
             "x-optimade-unit": "inapplicable",
@@ -263,6 +275,7 @@ The record gives the multiplicity, oriented site-symmetry symbol, representative
     },
     "examples": [
         {
+            "letter": "e",
             "multiplicity": 2,
             "sitesym": "1",
             "hasfreedom": [

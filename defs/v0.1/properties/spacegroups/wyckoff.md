@@ -7,20 +7,21 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 
 **Property name:** Wyckoff positions  
 **Description:** Wyckoff-position table for a specific space-group setting.
-Each key is a Wyckoff letter and each value describes one Wyckoff position.
-Values follow `/properties/symmetry/wyckoff_position`.  
-**Type:** dictionary  
+Each list item describes one Wyckoff position and includes the Wyckoff letter as ordinary data.
+This list representation avoids using JSON dictionary keys as crystallographic data.
+Items follow `/properties/symmetry/wyckoff_position`.  
+**Type:** list  
 
 **Requirements/Conventions**:
 
-- Dynamic keys MUST be Wyckoff letters for the setting.
-- Each value MUST be a dictionary describing the corresponding Wyckoff position.
+- It MUST be a list of dictionaries.
+- Each item MUST include `letter`, identifying the Wyckoff letter for that position in the setting.
 - `orbit_affine` and `orbit_xyz` contain the full orbit.
 - `orbit_mod_centering_affine` and `orbit_mod_centering_xyz` contain one representative modulo centering translations.
 
 **Examples:**
 
-- `{"e": {"multiplicity": 2, "sitesym": "1", "hasfreedom": [true, true, true], "first_orbit": "x,y,z", "orbit_xyz": ["x", "y", "z", "-x", "y", "-z"], "orbit_mod_centering_xyz": ["x", "y", "z", "-x", "y", "-z"]}}`
+- `[{"letter": "e", "multiplicity": 2, "sitesym": "1", "hasfreedom": [true, true, true], "first_orbit": "x,y,z", "orbit_xyz": ["x", "y", "z", "-x", "y", "-z"], "orbit_mod_centering_xyz": ["x", "y", "z", "-x", "y", "-z"]}]`
 
 **Formats:** [[JSON](wyckoff.json)] [[MD](wyckoff.md)]
 
@@ -31,8 +32,8 @@ Values follow `/properties/symmetry/wyckoff_position`.
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Wyckoff positions",
-    "$comment": "Anyterial Wyckoff-position map property using the common wyckoff-position record definition.",
-    "x-optimade-type": "dictionary",
+    "$comment": "Anyterial Wyckoff-position list property using the common wyckoff-position record definition.",
+    "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
         "version": "0.1.0",
@@ -42,14 +43,235 @@ Values follow `/properties/symmetry/wyckoff_position`.
     },
     "x-optimade-unit": "inapplicable",
     "type": [
-        "object",
+        "array",
         "null"
     ],
-    "description": "Wyckoff-position table for a specific space-group setting.\nEach key is a Wyckoff letter and each value describes one Wyckoff position.\nValues follow `/properties/symmetry/wyckoff_position`.\n\n**Requirements/Conventions**:\n\n- Dynamic keys MUST be Wyckoff letters for the setting.\n- Each value MUST be a dictionary describing the corresponding Wyckoff position.\n- `orbit_affine` and `orbit_xyz` contain the full orbit.\n- `orbit_mod_centering_affine` and `orbit_mod_centering_xyz` contain one representative modulo centering translations.",
-    "properties": {},
-    "examples": [
-        {
-            "e": {
+    "description": "Wyckoff-position table for a specific space-group setting.\nEach list item describes one Wyckoff position and includes the Wyckoff letter as ordinary data.\nThis list representation avoids using JSON dictionary keys as crystallographic data.\nItems follow `/properties/symmetry/wyckoff_position`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each item MUST include `letter`, identifying the Wyckoff letter for that position in the setting.\n- `orbit_affine` and `orbit_xyz` contain the full orbit.\n- `orbit_mod_centering_affine` and `orbit_mod_centering_xyz` contain one representative modulo centering translations.",
+    "items": {
+        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/wyckoff_position",
+        "title": "Wyckoff position",
+        "$comment": "Reusable Anyterial definition for one Wyckoff-position record in a space-group setting.",
+        "x-optimade-type": "dictionary",
+        "x-optimade-definition": {
+            "kind": "property",
+            "version": "0.1.0",
+            "format": "1.3",
+            "name": "wyckoff_position",
+            "label": "wyckoff_position_symmetry"
+        },
+        "x-optimade-unit": "inapplicable",
+        "type": [
+            "object",
+            "null"
+        ],
+        "description": "One Wyckoff position in a space-group setting.\nThe record gives the multiplicity, oriented site-symmetry symbol, representative coordinate, full orbit, and orbit factorized modulo centering translations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **letter**: REQUIRED; String.\n      Wyckoff letter for this position in the setting.\n\n    - **multiplicity**: REQUIRED; Integer.\n      Multiplicity of the Wyckoff position in the conventional cell.\n\n    - **sitesym**: REQUIRED; String.\n      Oriented site-symmetry symbol.\n\n    - **hasfreedom**: REQUIRED; List of booleans.\n      Flags indicating whether each fractional coordinate has a free parameter.\n\n    - **first\\_orbit**: REQUIRED; String.\n      First representative coordinate expression used by the generator.\n\n    - **orbit\\_affine**: REQUIRED; List.\n      Full orbit in affine matrix/vector representation.\n\n    - **orbit\\_xyz**: REQUIRED; List of strings.\n      Full orbit in `x,y,z` coordinate notation.\n\n    - **orbit\\_mod\\_centering\\_affine**: REQUIRED; List.\n      Orbit representatives modulo centering translations in affine representation.\n\n    - **orbit\\_mod\\_centering\\_xyz**: REQUIRED; List of strings.\n      Orbit representatives modulo centering translations in `x,y,z` notation.",
+        "properties": {
+            "letter": {
+                "x-optimade-type": "string",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Wyckoff letter for this position in the setting."
+            },
+            "multiplicity": {
+                "x-optimade-type": "integer",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "integer",
+                    "null"
+                ],
+                "description": "Multiplicity of the Wyckoff position in the conventional cell."
+            },
+            "sitesym": {
+                "x-optimade-type": "string",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Oriented site-symmetry symbol."
+            },
+            "hasfreedom": {
+                "x-optimade-type": "list",
+                "x-optimade-unit": "inapplicable",
+                "x-optimade-dimensions": {
+                    "names": [
+                        "dim_lattice"
+                    ],
+                    "sizes": [
+                        3
+                    ]
+                },
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Three flags indicating whether each fractional coordinate contains a free parameter.",
+                "items": {
+                    "x-optimade-type": "boolean",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "boolean"
+                    ],
+                    "description": "Whether the corresponding coordinate is free."
+                }
+            },
+            "first_orbit_ita": {
+                "x-optimade-type": "string",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Representative coordinate expression following the ITA source convention, when distinct from `first_orbit`."
+            },
+            "first_orbit": {
+                "x-optimade-type": "string",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Representative coordinate expression for the Wyckoff position."
+            },
+            "orbit_affine": {
+                "x-optimade-type": "list",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Full orbit represented as affine matrix/vector data.",
+                "items": {
+                    "x-optimade-type": "list",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "array"
+                    ],
+                    "description": "One generator-emitted affine orbit operation represented as nested exact lists.",
+                    "items": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array"
+                        ],
+                        "description": "One row or component list of the affine orbit representation.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                            "title": "fraction",
+                            "x-optimade-type": "string",
+                            "x-optimade-definition": {
+                                "label": "fraction_core",
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "fraction"
+                            },
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "A fraction represented as a string.",
+                            "examples": [
+                                "2/3",
+                                "5/42",
+                                "10",
+                                "0"
+                            ],
+                            "x-optimade-unit": "inapplicable"
+                        }
+                    }
+                }
+            },
+            "orbit_xyz": {
+                "x-optimade-type": "list",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Full orbit represented as `x,y,z` coordinate expressions.",
+                "items": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string"
+                    ],
+                    "description": "One coordinate expression."
+                }
+            },
+            "orbit_mod_centering_affine": {
+                "x-optimade-type": "list",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Orbit representatives modulo centering translations in affine matrix/vector representation.",
+                "items": {
+                    "x-optimade-type": "list",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "array"
+                    ],
+                    "description": "One generator-emitted affine orbit operation represented as nested exact lists.",
+                    "items": {
+                        "x-optimade-type": "list",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array"
+                        ],
+                        "description": "One row or component list of the affine orbit representation.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                            "title": "fraction",
+                            "x-optimade-type": "string",
+                            "x-optimade-definition": {
+                                "label": "fraction_core",
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "fraction"
+                            },
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "A fraction represented as a string.",
+                            "examples": [
+                                "2/3",
+                                "5/42",
+                                "10",
+                                "0"
+                            ],
+                            "x-optimade-unit": "inapplicable"
+                        }
+                    }
+                }
+            },
+            "orbit_mod_centering_xyz": {
+                "x-optimade-type": "list",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Orbit representatives modulo centering translations as `x,y,z` coordinate expressions.",
+                "items": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string"
+                    ],
+                    "description": "One coordinate expression."
+                }
+            }
+        },
+        "examples": [
+            {
+                "letter": "e",
                 "multiplicity": 2,
                 "sitesym": "1",
                 "hasfreedom": [
@@ -75,7 +297,38 @@ Values follow `/properties/symmetry/wyckoff_position`.
                     "-z"
                 ]
             }
-        }
+        ]
+    },
+    "examples": [
+        [
+            {
+                "letter": "e",
+                "multiplicity": 2,
+                "sitesym": "1",
+                "hasfreedom": [
+                    true,
+                    true,
+                    true
+                ],
+                "first_orbit": "x,y,z",
+                "orbit_xyz": [
+                    "x",
+                    "y",
+                    "z",
+                    "-x",
+                    "y",
+                    "-z"
+                ],
+                "orbit_mod_centering_xyz": [
+                    "x",
+                    "y",
+                    "z",
+                    "-x",
+                    "y",
+                    "-z"
+                ]
+            }
+        ]
     ]
 }
 ```
