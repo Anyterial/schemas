@@ -102,9 +102,14 @@
                 Each item is one finite listed representative and follows `/properties/symmetry/basis_transform`.
                 The list is a bounded representative table, not a complete infinite affine normalizer.
 
-            * **[Asu](v0.1/properties/spacegroups/asu.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu.md)
+            * **[Asymmetric unit](v0.1/properties/spacegroups/asu.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu.md)
                 
-                Structured asymmetric-unit description for the space-group setting.
+                Direct-space asymmetric unit for the space-group setting, represented as a bounded non-recursive set of half-space cuts and boundary ownership rules.
+                The representation is equivalent to the recursive cctbx direct-space ASU cut expression documented by Grosse-Kunstleve et al., Acta Cryst. A67, 269 (2011), but stores the volume, face, edge, and vertex rules in separate fixed-depth tables.
+                A point is inside the ASU volume only if all `volume_cuts` pass.
+                Each volume cut tests an oriented plane from `planes`: a positive plane value includes the point, a negative value excludes it, and an exactly zero value uses `when_zero`.
+                Boundary rules are disjunctive normal form rule tables: the outer `dnf` list is OR, each inner list is AND, and each term tests one oriented plane and uses its own `on_zero` action.
+                Face rules may descend to edge rules on equality, edge rules may descend to vertex rules on equality, and vertex rules terminate with include or exclude actions.
 
             * **[Asymmetric-unit cut](v0.1/properties/spacegroups/asu_cut.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_cut`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_cut.md)
                 
