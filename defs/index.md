@@ -341,12 +341,6 @@
                 
                 International Tables number of the enantiomorphic partner space group, when one exists. The value is null for space groups without a distinct enantiomorphic partner.
 
-            * **[Items](v0.1/properties/spacegroups/items.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/items`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/items.md)
-                
-                Generic ordered data-list container used by several generated JSON-LD datasets.
-                The item schema is defined by the containing dataset or parent property.
-                This property is intentionally generic because `items` is used for symbol rows, transform rows, and normalizer rows in different contexts.
-
             * **[Klassengleiche subgroup subtype](v0.1/properties/spacegroups/k_subtype.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/k_subtype`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/k_subtype.md)
                 
                 Subtype of a klassengleiche (`k`) subgroup relation. Values distinguish loss of centering translations from enlarged-unit-cell subgroups; the value is null for non-`k` relations.

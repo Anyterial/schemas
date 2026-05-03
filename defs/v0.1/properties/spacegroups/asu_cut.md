@@ -191,7 +191,127 @@ Cut objects may recursively refer to other cut objects through `condition`, `lhs
                 "null"
             ],
             "description": "Left-hand operand for a logical cut expression.",
-            "properties": {}
+            "properties": {
+                "kind": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Kind of cut expression."
+                },
+                "ascii": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Plain-text rendering of the cut expression."
+                },
+                "xyz": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Coordinate expression for the cut in `x,y,z` notation."
+                },
+                "inclusive": {
+                    "x-optimade-type": "boolean",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
+                    "description": "Whether the cut boundary is included."
+                },
+                "base_symbol": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Base symbolic inequality or coordinate label used for the cut."
+                },
+                "normal": {
+                    "x-optimade-type": "list",
+                    "x-optimade-unit": "inapplicable",
+                    "x-optimade-dimensions": {
+                        "names": [
+                            "dim_lattice"
+                        ],
+                        "sizes": [
+                            3
+                        ]
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Normal vector of a half-space cut.",
+                    "items": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                        "title": "fraction",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "label": "fraction_core",
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "fraction"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "A fraction represented as a string.",
+                        "examples": [
+                            "2/3",
+                            "5/42",
+                            "10",
+                            "0"
+                        ],
+                        "x-optimade-unit": "inapplicable"
+                    }
+                },
+                "const": {
+                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                    "title": "fraction",
+                    "x-optimade-type": "string",
+                    "x-optimade-definition": {
+                        "label": "fraction_core",
+                        "kind": "property",
+                        "version": "0.1.0",
+                        "format": "1.3",
+                        "name": "fraction"
+                    },
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "A fraction represented as a string.",
+                    "examples": [
+                        "2/3",
+                        "5/42",
+                        "10",
+                        "0"
+                    ],
+                    "x-optimade-unit": "inapplicable"
+                },
+                "op": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Logical operator used when the expression combines two subexpressions."
+                }
+            }
         },
         "rhs": {
             "x-optimade-type": "dictionary",
@@ -201,7 +321,127 @@ Cut objects may recursively refer to other cut objects through `condition`, `lhs
                 "null"
             ],
             "description": "Right-hand operand for a logical cut expression.",
-            "properties": {}
+            "properties": {
+                "kind": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Kind of cut expression."
+                },
+                "ascii": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Plain-text rendering of the cut expression."
+                },
+                "xyz": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Coordinate expression for the cut in `x,y,z` notation."
+                },
+                "inclusive": {
+                    "x-optimade-type": "boolean",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
+                    "description": "Whether the cut boundary is included."
+                },
+                "base_symbol": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Base symbolic inequality or coordinate label used for the cut."
+                },
+                "normal": {
+                    "x-optimade-type": "list",
+                    "x-optimade-unit": "inapplicable",
+                    "x-optimade-dimensions": {
+                        "names": [
+                            "dim_lattice"
+                        ],
+                        "sizes": [
+                            3
+                        ]
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Normal vector of a half-space cut.",
+                    "items": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                        "title": "fraction",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "label": "fraction_core",
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "fraction"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "A fraction represented as a string.",
+                        "examples": [
+                            "2/3",
+                            "5/42",
+                            "10",
+                            "0"
+                        ],
+                        "x-optimade-unit": "inapplicable"
+                    }
+                },
+                "const": {
+                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                    "title": "fraction",
+                    "x-optimade-type": "string",
+                    "x-optimade-definition": {
+                        "label": "fraction_core",
+                        "kind": "property",
+                        "version": "0.1.0",
+                        "format": "1.3",
+                        "name": "fraction"
+                    },
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "A fraction represented as a string.",
+                    "examples": [
+                        "2/3",
+                        "5/42",
+                        "10",
+                        "0"
+                    ],
+                    "x-optimade-unit": "inapplicable"
+                },
+                "op": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Logical operator used when the expression combines two subexpressions."
+                }
+            }
         },
         "condition": {
             "x-optimade-type": "dictionary",
@@ -211,7 +451,127 @@ Cut objects may recursively refer to other cut objects through `condition`, `lhs
                 "null"
             ],
             "description": "Optional conditional cut expression that refines when this cut applies.",
-            "properties": {}
+            "properties": {
+                "kind": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Kind of cut expression."
+                },
+                "ascii": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Plain-text rendering of the cut expression."
+                },
+                "xyz": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Coordinate expression for the cut in `x,y,z` notation."
+                },
+                "inclusive": {
+                    "x-optimade-type": "boolean",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
+                    "description": "Whether the cut boundary is included."
+                },
+                "base_symbol": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Base symbolic inequality or coordinate label used for the cut."
+                },
+                "normal": {
+                    "x-optimade-type": "list",
+                    "x-optimade-unit": "inapplicable",
+                    "x-optimade-dimensions": {
+                        "names": [
+                            "dim_lattice"
+                        ],
+                        "sizes": [
+                            3
+                        ]
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Normal vector of a half-space cut.",
+                    "items": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                        "title": "fraction",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "label": "fraction_core",
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "fraction"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "A fraction represented as a string.",
+                        "examples": [
+                            "2/3",
+                            "5/42",
+                            "10",
+                            "0"
+                        ],
+                        "x-optimade-unit": "inapplicable"
+                    }
+                },
+                "const": {
+                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                    "title": "fraction",
+                    "x-optimade-type": "string",
+                    "x-optimade-definition": {
+                        "label": "fraction_core",
+                        "kind": "property",
+                        "version": "0.1.0",
+                        "format": "1.3",
+                        "name": "fraction"
+                    },
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "A fraction represented as a string.",
+                    "examples": [
+                        "2/3",
+                        "5/42",
+                        "10",
+                        "0"
+                    ],
+                    "x-optimade-unit": "inapplicable"
+                },
+                "op": {
+                    "x-optimade-type": "string",
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Logical operator used when the expression combines two subexpressions."
+                }
+            }
         }
     },
     "examples": [

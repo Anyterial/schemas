@@ -751,17 +751,6 @@ These transforms are useful for algorithms that need to enumerate same-type subg
     - **Query:** Support for queries on this property is OPTIONAL.
     - **Response:** MAY be included by default in the response.
 
-* **[Items](../properties/spacegroups/items.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/items`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/items.md)  
-  Generic ordered data-list container used by several generated JSON-LD datasets.
-The item schema is defined by the containing dataset or parent property.
-This property is intentionally generic because `items` is used for symbol rows, transform rows, and normalizer rows in different contexts.
-
-    **Requirements/Conventions:**  
-
-    - **Support:** OPTIONAL support in implementations, i.e., MAY be `null`.
-    - **Query:** Support for queries on this property is OPTIONAL.
-    - **Response:** MAY be included by default in the response.
-
 * **[Klassengleiche subgroup subtype (k_subtype)](../properties/spacegroups/k_subtype.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/k_subtype`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/k_subtype.md)  
   Subtype of a klassengleiche (`k`) subgroup relation. Values distinguish loss of centering translations from enlarged-unit-cell subgroups; the value is null for non-`k` relations.
 
@@ -5294,7 +5283,127 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                                     "null"
                                 ],
                                 "description": "Left-hand operand for a logical cut expression.",
-                                "properties": {}
+                                "properties": {
+                                    "kind": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Kind of cut expression."
+                                    },
+                                    "ascii": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Plain-text rendering of the cut expression."
+                                    },
+                                    "xyz": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                    },
+                                    "inclusive": {
+                                        "x-optimade-type": "boolean",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ],
+                                        "description": "Whether the cut boundary is included."
+                                    },
+                                    "base_symbol": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Base symbolic inequality or coordinate label used for the cut."
+                                    },
+                                    "normal": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "x-optimade-dimensions": {
+                                            "names": [
+                                                "dim_lattice"
+                                            ],
+                                            "sizes": [
+                                                3
+                                            ]
+                                        },
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Normal vector of a half-space cut.",
+                                        "items": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                            "title": "fraction",
+                                            "x-optimade-type": "string",
+                                            "x-optimade-definition": {
+                                                "label": "fraction_core",
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "fraction"
+                                            },
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "A fraction represented as a string.",
+                                            "examples": [
+                                                "2/3",
+                                                "5/42",
+                                                "10",
+                                                "0"
+                                            ],
+                                            "x-optimade-unit": "inapplicable"
+                                        }
+                                    },
+                                    "const": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A fraction represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    },
+                                    "op": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Logical operator used when the expression combines two subexpressions."
+                                    }
+                                }
                             },
                             "rhs": {
                                 "x-optimade-type": "dictionary",
@@ -5304,7 +5413,127 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                                     "null"
                                 ],
                                 "description": "Right-hand operand for a logical cut expression.",
-                                "properties": {}
+                                "properties": {
+                                    "kind": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Kind of cut expression."
+                                    },
+                                    "ascii": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Plain-text rendering of the cut expression."
+                                    },
+                                    "xyz": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                    },
+                                    "inclusive": {
+                                        "x-optimade-type": "boolean",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ],
+                                        "description": "Whether the cut boundary is included."
+                                    },
+                                    "base_symbol": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Base symbolic inequality or coordinate label used for the cut."
+                                    },
+                                    "normal": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "x-optimade-dimensions": {
+                                            "names": [
+                                                "dim_lattice"
+                                            ],
+                                            "sizes": [
+                                                3
+                                            ]
+                                        },
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Normal vector of a half-space cut.",
+                                        "items": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                            "title": "fraction",
+                                            "x-optimade-type": "string",
+                                            "x-optimade-definition": {
+                                                "label": "fraction_core",
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "fraction"
+                                            },
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "A fraction represented as a string.",
+                                            "examples": [
+                                                "2/3",
+                                                "5/42",
+                                                "10",
+                                                "0"
+                                            ],
+                                            "x-optimade-unit": "inapplicable"
+                                        }
+                                    },
+                                    "const": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A fraction represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    },
+                                    "op": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Logical operator used when the expression combines two subexpressions."
+                                    }
+                                }
                             },
                             "condition": {
                                 "x-optimade-type": "dictionary",
@@ -5314,7 +5543,127 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                                     "null"
                                 ],
                                 "description": "Optional conditional cut expression that refines when this cut applies.",
-                                "properties": {}
+                                "properties": {
+                                    "kind": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Kind of cut expression."
+                                    },
+                                    "ascii": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Plain-text rendering of the cut expression."
+                                    },
+                                    "xyz": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                    },
+                                    "inclusive": {
+                                        "x-optimade-type": "boolean",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ],
+                                        "description": "Whether the cut boundary is included."
+                                    },
+                                    "base_symbol": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Base symbolic inequality or coordinate label used for the cut."
+                                    },
+                                    "normal": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "x-optimade-dimensions": {
+                                            "names": [
+                                                "dim_lattice"
+                                            ],
+                                            "sizes": [
+                                                3
+                                            ]
+                                        },
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Normal vector of a half-space cut.",
+                                        "items": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                            "title": "fraction",
+                                            "x-optimade-type": "string",
+                                            "x-optimade-definition": {
+                                                "label": "fraction_core",
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "fraction"
+                                            },
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "A fraction represented as a string.",
+                                            "examples": [
+                                                "2/3",
+                                                "5/42",
+                                                "10",
+                                                "0"
+                                            ],
+                                            "x-optimade-unit": "inapplicable"
+                                        }
+                                    },
+                                    "const": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A fraction represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    },
+                                    "op": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Logical operator used when the expression combines two subexpressions."
+                                    }
+                                }
                             }
                         },
                         "examples": [
@@ -5488,7 +5837,127 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                                     "null"
                                 ],
                                 "description": "Left-hand operand for a logical cut expression.",
-                                "properties": {}
+                                "properties": {
+                                    "kind": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Kind of cut expression."
+                                    },
+                                    "ascii": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Plain-text rendering of the cut expression."
+                                    },
+                                    "xyz": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                    },
+                                    "inclusive": {
+                                        "x-optimade-type": "boolean",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ],
+                                        "description": "Whether the cut boundary is included."
+                                    },
+                                    "base_symbol": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Base symbolic inequality or coordinate label used for the cut."
+                                    },
+                                    "normal": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "x-optimade-dimensions": {
+                                            "names": [
+                                                "dim_lattice"
+                                            ],
+                                            "sizes": [
+                                                3
+                                            ]
+                                        },
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Normal vector of a half-space cut.",
+                                        "items": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                            "title": "fraction",
+                                            "x-optimade-type": "string",
+                                            "x-optimade-definition": {
+                                                "label": "fraction_core",
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "fraction"
+                                            },
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "A fraction represented as a string.",
+                                            "examples": [
+                                                "2/3",
+                                                "5/42",
+                                                "10",
+                                                "0"
+                                            ],
+                                            "x-optimade-unit": "inapplicable"
+                                        }
+                                    },
+                                    "const": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A fraction represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    },
+                                    "op": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Logical operator used when the expression combines two subexpressions."
+                                    }
+                                }
                             },
                             "rhs": {
                                 "x-optimade-type": "dictionary",
@@ -5498,7 +5967,127 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                                     "null"
                                 ],
                                 "description": "Right-hand operand for a logical cut expression.",
-                                "properties": {}
+                                "properties": {
+                                    "kind": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Kind of cut expression."
+                                    },
+                                    "ascii": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Plain-text rendering of the cut expression."
+                                    },
+                                    "xyz": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                    },
+                                    "inclusive": {
+                                        "x-optimade-type": "boolean",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ],
+                                        "description": "Whether the cut boundary is included."
+                                    },
+                                    "base_symbol": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Base symbolic inequality or coordinate label used for the cut."
+                                    },
+                                    "normal": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "x-optimade-dimensions": {
+                                            "names": [
+                                                "dim_lattice"
+                                            ],
+                                            "sizes": [
+                                                3
+                                            ]
+                                        },
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Normal vector of a half-space cut.",
+                                        "items": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                            "title": "fraction",
+                                            "x-optimade-type": "string",
+                                            "x-optimade-definition": {
+                                                "label": "fraction_core",
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "fraction"
+                                            },
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "A fraction represented as a string.",
+                                            "examples": [
+                                                "2/3",
+                                                "5/42",
+                                                "10",
+                                                "0"
+                                            ],
+                                            "x-optimade-unit": "inapplicable"
+                                        }
+                                    },
+                                    "const": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A fraction represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    },
+                                    "op": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Logical operator used when the expression combines two subexpressions."
+                                    }
+                                }
                             },
                             "condition": {
                                 "x-optimade-type": "dictionary",
@@ -5508,7 +6097,127 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                                     "null"
                                 ],
                                 "description": "Optional conditional cut expression that refines when this cut applies.",
-                                "properties": {}
+                                "properties": {
+                                    "kind": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Kind of cut expression."
+                                    },
+                                    "ascii": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Plain-text rendering of the cut expression."
+                                    },
+                                    "xyz": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                    },
+                                    "inclusive": {
+                                        "x-optimade-type": "boolean",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ],
+                                        "description": "Whether the cut boundary is included."
+                                    },
+                                    "base_symbol": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Base symbolic inequality or coordinate label used for the cut."
+                                    },
+                                    "normal": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "x-optimade-dimensions": {
+                                            "names": [
+                                                "dim_lattice"
+                                            ],
+                                            "sizes": [
+                                                3
+                                            ]
+                                        },
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Normal vector of a half-space cut.",
+                                        "items": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                            "title": "fraction",
+                                            "x-optimade-type": "string",
+                                            "x-optimade-definition": {
+                                                "label": "fraction_core",
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "fraction"
+                                            },
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "A fraction represented as a string.",
+                                            "examples": [
+                                                "2/3",
+                                                "5/42",
+                                                "10",
+                                                "0"
+                                            ],
+                                            "x-optimade-unit": "inapplicable"
+                                        }
+                                    },
+                                    "const": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A fraction represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    },
+                                    "op": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "Logical operator used when the expression combines two subexpressions."
+                                    }
+                                }
                             }
                         },
                         "examples": [
@@ -18622,50 +19331,6 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                 76
             ]
         },
-        "items": {
-            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/items",
-            "x-optimade-requirements": {
-                "support": "may",
-                "sortable": false,
-                "query-support": "none",
-                "response-level": "may"
-            },
-            "title": "Items",
-            "$comment": "Generic Anyterial ordered data-list container used by several generated datasets.",
-            "x-optimade-type": "list",
-            "x-optimade-definition": {
-                "kind": "property",
-                "version": "0.1.0",
-                "format": "1.3",
-                "name": "items",
-                "label": "items_spacegroups"
-            },
-            "x-optimade-unit": "inapplicable",
-            "type": [
-                "array",
-                "null"
-            ],
-            "description": "Generic ordered data-list container used by several generated JSON-LD datasets.\nThe item schema is defined by the containing dataset or parent property.\nThis property is intentionally generic because `items` is used for symbol rows, transform rows, and normalizer rows in different contexts.",
-            "items": {
-                "x-optimade-type": "dictionary",
-                "x-optimade-unit": "inapplicable",
-                "type": [
-                    "object",
-                    "null"
-                ],
-                "description": "One parent-defined item object.",
-                "properties": {}
-            },
-            "examples": [
-                [
-                    {
-                        "setting_it_nc": "1",
-                        "hall": "P 1",
-                        "it_number": 1
-                    }
-                ]
-            ]
-        },
         "k_subtype": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/k_subtype",
             "x-optimade-requirements": {
@@ -20730,7 +21395,253 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                     "null"
                 ],
                 "description": "One space-group symbol row.",
-                "properties": {}
+                "properties": {
+                    "setting_it_nc": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc",
+                        "title": "International Tables setting code n:c",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "setting_it_nc",
+                            "label": "setting_it_nc_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "International Tables setting identifier in `n:c` notation.\n\nThe part before the colon is the International Tables space-group number. The part after the colon is the coordinate-system or origin-choice qualifier used to distinguish settings that share the same IT number.\n\n**Requirements/Conventions**:\n\n- Triclinic, hexagonal, and many unique settings use only the IT number, for example `1`.\n- Monoclinic settings use qualifiers such as `b1`, `-b1`, `c2`, or `a3`.\n- Orthorhombic settings use qualifiers such as `abc`, `cab`, `1abc`, or `2bca` when needed.\n- Tetragonal and cubic origin choices use qualifiers such as `1` and `2`; trigonal axis choices use qualifiers such as `h` and `r`.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "1",
+                            "2"
+                        ]
+                    },
+                    "hall_entry": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
+                        "title": "Hall entry",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hall_entry",
+                            "label": "hall_entry_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Normalized Hall-table entry key used internally by the generated datasets.\n\nThe value is derived from the Hall symbol by using lowercase letters and underscores in place of spaces. It is stable for lookup within these data files, while the display Hall symbol is provided separately by `hall` and its formatted variants.\n\n**Requirements/Conventions**:\n\n- This field identifies a concrete Hall setting, not only an IT space-group type.\n- The same value is normally used as the key of the containing `spacegroups` map.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "p_1",
+                            "-p_1"
+                        ]
+                    },
+                    "hall": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall",
+                        "title": "Hall Symbol",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hall"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hall",
+                            "label": "hall_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The Hall symbol for a crystallographic space-group setting.\n\nHall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously. In the Anyterial symmetry data, this property is the plain ASCII Hall symbol corresponding to the Hall-keyed record.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P 1",
+                            "C 2y"
+                        ]
+                    },
+                    "it_number": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
+                        "title": "International Tables Space-Group Number",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "integer",
+                        "x-compatibility": [
+                            "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "it_number",
+                            "label": "it_number_spacegroups"
+                        },
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The International Tables space-group number.\n\nThis integer identifies the space-group type numbered 1 through 230 in International Tables for Crystallography. Multiple Hall settings can share the same `it_number`.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            1,
+                            5
+                        ]
+                    },
+                    "hm_short": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short",
+                        "title": "Short Hermann-Mauguin Symbol",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_short",
+                            "label": "hm_short_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The setting-specific short Hermann-Mauguin symbol for the space-group setting.\n\nThis field gives the concise Hermann-Mauguin notation used for the concrete Hall setting represented by the containing record. It is compatible with OPTIMADE's `space_group_symbol_hermann_mauguin` when used as the conventional short Hermann-Mauguin symbol.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P 1",
+                            "C 2"
+                        ]
+                    },
+                    "hm_full": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full",
+                        "title": "Full Hermann-Mauguin Symbol",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_H-M_full.html"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_full",
+                            "label": "hm_full_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The setting-specific full Hermann-Mauguin symbol for the space-group setting.\n\nThe full symbol expands the short Hermann-Mauguin notation to include the symmetry entries for all relevant crystallographic directions in the setting represented by the containing Hall record.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P 1",
+                            "C 1 2 1"
+                        ]
+                    },
+                    "hm_extended": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended",
+                        "title": "Extended Hermann-Mauguin Symbol",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin_extended"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_extended",
+                            "label": "hm_extended_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The setting-specific extended Hermann-Mauguin symbol for the space-group setting.\n\nExtended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol. Multi-line values preserve line breaks and spacing used to align the extended symbol components.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P 1",
+                            "C 1 2 1\n  21"
+                        ]
+                    },
+                    "hm_extended_old": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_old",
+                        "title": "Hermann-Mauguin Extended Old",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_extended_old",
+                            "label": "hm_extended_old_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The older extended Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- The extended symbol MAY contain multiple lines; line breaks and spacing encode the alignment used in International Tables extended symbols.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "A b m 2\n c c 21",
+                            "C 2 m b\n 21 a a"
+                        ]
+                    },
+                    "hm_short_old": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_old",
+                        "title": "Hermann-Mauguin Short Old",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_short_old",
+                            "label": "hm_short_old_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The older short Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- The extended symbol MAY contain multiple lines; line breaks and spacing encode the alignment used in International Tables extended symbols.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "A b m 2",
+                            "C 2 m b"
+                        ]
+                    },
+                    "hm_full_old": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_old",
+                        "title": "Hermann-Mauguin Full Old",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_full_old",
+                            "label": "hm_full_old_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The older full Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- The extended symbol MAY contain multiple lines; line breaks and spacing encode the alignment used in International Tables extended symbols.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "A b m 2",
+                            "C 2 m b"
+                        ]
+                    }
+                }
             },
             "examples": [
                 [
@@ -20777,7 +21688,5428 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                     "null"
                 ],
                 "description": "One space-group setting record.",
-                "properties": {}
+                "properties": {
+                    "setting_it_nc": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc",
+                        "title": "International Tables setting code n:c",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "setting_it_nc",
+                            "label": "setting_it_nc_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "International Tables setting identifier in `n:c` notation.\n\nThe part before the colon is the International Tables space-group number. The part after the colon is the coordinate-system or origin-choice qualifier used to distinguish settings that share the same IT number.\n\n**Requirements/Conventions**:\n\n- Triclinic, hexagonal, and many unique settings use only the IT number, for example `1`.\n- Monoclinic settings use qualifiers such as `b1`, `-b1`, `c2`, or `a3`.\n- Orthorhombic settings use qualifiers such as `abc`, `cab`, `1abc`, or `2bca` when needed.\n- Tetragonal and cubic origin choices use qualifiers such as `1` and `2`; trigonal axis choices use qualifiers such as `h` and `r`.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "1",
+                            "2"
+                        ]
+                    },
+                    "it_coordinate_system_code": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_coordinate_system_code",
+                        "title": "International Tables Coordinate-System Code",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.IT_coordinate_system_code.html"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "it_coordinate_system_code",
+                            "label": "it_coordinate_system_code_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The International Tables coordinate-system code for the setting.\n\nThe code distinguishes setting choices such as monoclinic unique-axis and cell choices, orthorhombic axis settings, tetragonal/cubic origin choices, and trigonal hexagonal or rhombohedral axes.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "b1",
+                            "2"
+                        ]
+                    },
+                    "setting_plaintext": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_plaintext",
+                        "title": "Setting Plaintext",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "setting_plaintext",
+                            "label": "setting_plaintext_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Human-readable description of the International Tables coordinate-system setting.\n\nThis field expands `setting_it_nc` into a short phrase such as a monoclinic unique-axis and cell-choice description, an orthorhombic axis permutation, or an origin-choice description.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "unique axis b",
+                            "unique axis c"
+                        ]
+                    },
+                    "it_number": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
+                        "title": "International Tables Space-Group Number",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "integer",
+                        "x-compatibility": [
+                            "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "it_number",
+                            "label": "it_number_spacegroups"
+                        },
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "The International Tables space-group number.\n\nThis integer identifies the space-group type numbered 1 through 230 in International Tables for Crystallography. Multiple Hall settings can share the same `it_number`.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            1,
+                            5
+                        ]
+                    },
+                    "it_number_enantiomorphic": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number_enantiomorphic",
+                        "title": "It Number Enantiomorphic",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "integer",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "it_number_enantiomorphic",
+                            "label": "it_number_enantiomorphic_spacegroups"
+                        },
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "International Tables number of the enantiomorphic partner space group, when one exists. The value is null for space groups without a distinct enantiomorphic partner.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            78,
+                            76
+                        ]
+                    },
+                    "bravais_type": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type",
+                        "title": "Bravais Type",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.Bravais_type.html"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "bravais_type",
+                            "label": "bravais_type_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The Bravais type of the translational lattice.\n\nThe symbol consists of a lower-case crystal-system letter followed by an upper-case centring symbol, using setting-independent `mS` and `oS` for monoclinic and orthorhombic side-centred lattices.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "aP",
+                            "mS"
+                        ]
+                    },
+                    "centring_type": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centring_type",
+                        "title": "Centring Type",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.centring_type.html"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "centring_type",
+                            "label": "centring_type_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The lattice centring symbol for the crystallographic setting.\n\nThis setting-dependent symbol identifies primitive, face-centred, body-centred, rhombohedral, or hexagonal centring as represented in the setting record.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P",
+                            "C"
+                        ]
+                    },
+                    "hall_entry": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
+                        "title": "Hall entry",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hall_entry",
+                            "label": "hall_entry_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Normalized Hall-table entry key used internally by the generated datasets.\n\nThe value is derived from the Hall symbol by using lowercase letters and underscores in place of spaces. It is stable for lookup within these data files, while the display Hall symbol is provided separately by `hall` and its formatted variants.\n\n**Requirements/Conventions**:\n\n- This field identifies a concrete Hall setting, not only an IT space-group type.\n- The same value is normally used as the key of the containing `spacegroups` map.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "p_1",
+                            "-p_1"
+                        ]
+                    },
+                    "hall": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall",
+                        "title": "Hall Symbol",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hall"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hall",
+                            "label": "hall_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The Hall symbol for a crystallographic space-group setting.\n\nHall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously. In the Anyterial symmetry data, this property is the plain ASCII Hall symbol corresponding to the Hall-keyed record.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P 1",
+                            "C 2y"
+                        ]
+                    },
+                    "spglib_hall_numbers": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall_numbers",
+                        "title": "Spglib Hall Numbers",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "spglib_hall_numbers",
+                            "label": "spglib_hall_numbers_spacegroups"
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "spglib Hall numbers corresponding to the generated setting.",
+                        "x-optimade-unit": "inapplicable",
+                        "items": {
+                            "x-optimade-type": "integer",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "integer"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                1
+                            ],
+                            [
+                                2
+                            ]
+                        ]
+                    },
+                    "spglib_hall": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall",
+                        "title": "Spglib Hall",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "spglib_hall",
+                            "label": "spglib_hall_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Hall setting selected by spglib for the space-group type or setting, represented as a normalized Hall key.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P 1",
+                            "-P 1"
+                        ]
+                    },
+                    "hm_extended": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended",
+                        "title": "Extended Hermann-Mauguin Symbol",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin_extended"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_extended",
+                            "label": "hm_extended_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The setting-specific extended Hermann-Mauguin symbol for the space-group setting.\n\nExtended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol. Multi-line values preserve line breaks and spacing used to align the extended symbol components.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P 1",
+                            "C 1 2 1\n  21"
+                        ]
+                    },
+                    "hm_extended_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_markup",
+                        "title": "Extended Hermann-Mauguin symbol markups",
+                        "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_extended_markup",
+                            "label": "hm_extended_markup_spacegroups"
+                        },
+                        "description": "Display-oriented renderings of the extended Hermann-Mauguin symbol in `hm_extended`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "properties": {
+                            "html": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "HTML rendering of the sibling string."
+                            },
+                            "latex": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "LaTeX rendering of the sibling string."
+                            },
+                            "unicode": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Unicode rendering of the sibling string."
+                            }
+                        },
+                        "examples": [
+                            {
+                                "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                "latex": "\\mathit{P}\\,2_{1}/c",
+                                "unicode": "P2\u2081/c"
+                            }
+                        ]
+                    },
+                    "hm_full": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full",
+                        "title": "Full Hermann-Mauguin Symbol",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_H-M_full.html"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_full",
+                            "label": "hm_full_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The setting-specific full Hermann-Mauguin symbol for the space-group setting.\n\nThe full symbol expands the short Hermann-Mauguin notation to include the symmetry entries for all relevant crystallographic directions in the setting represented by the containing Hall record.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P 1",
+                            "C 1 2 1"
+                        ]
+                    },
+                    "hm_full_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_markup",
+                        "title": "Full Hermann-Mauguin symbol markups",
+                        "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_full_markup",
+                            "label": "hm_full_markup_spacegroups"
+                        },
+                        "description": "Display-oriented renderings of the setting-specific full Hermann-Mauguin symbol in `hm_full`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "properties": {
+                            "html": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "HTML rendering of the sibling string."
+                            },
+                            "latex": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "LaTeX rendering of the sibling string."
+                            },
+                            "unicode": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Unicode rendering of the sibling string."
+                            }
+                        },
+                        "examples": [
+                            {
+                                "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                "latex": "\\mathit{P}\\,2_{1}/c",
+                                "unicode": "P2\u2081/c"
+                            }
+                        ]
+                    },
+                    "hm_full_std": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_std",
+                        "title": "Hermann-Mauguin Full Std",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_full_std",
+                            "label": "hm_full_std_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The International Tables standard full Hermann-Mauguin symbol for the space-group type.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- The extended symbol MAY contain multiple lines; line breaks and spacing encode the alignment used in International Tables extended symbols.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P 1",
+                            "P -1"
+                        ]
+                    },
+                    "hm_full_std_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_std_markup",
+                        "title": "Standard full Hermann-Mauguin symbol markups",
+                        "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_full_std_markup",
+                            "label": "hm_full_std_markup_spacegroups"
+                        },
+                        "description": "Display-oriented renderings of the ITA-standard full Hermann-Mauguin symbol in `hm_full_std`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "properties": {
+                            "html": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "HTML rendering of the sibling string."
+                            },
+                            "latex": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "LaTeX rendering of the sibling string."
+                            },
+                            "unicode": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Unicode rendering of the sibling string."
+                            }
+                        },
+                        "examples": [
+                            {
+                                "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                "latex": "\\mathit{P}\\,2_{1}/c",
+                                "unicode": "P2\u2081/c"
+                            }
+                        ]
+                    },
+                    "hm_short": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short",
+                        "title": "Short Hermann-Mauguin Symbol",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_short",
+                            "label": "hm_short_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The setting-specific short Hermann-Mauguin symbol for the space-group setting.\n\nThis field gives the concise Hermann-Mauguin notation used for the concrete Hall setting represented by the containing record. It is compatible with OPTIMADE's `space_group_symbol_hermann_mauguin` when used as the conventional short Hermann-Mauguin symbol.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P 1",
+                            "C 2"
+                        ]
+                    },
+                    "hm_short_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_markup",
+                        "title": "Short Hermann-Mauguin symbol markups",
+                        "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_short_markup",
+                            "label": "hm_short_markup_spacegroups"
+                        },
+                        "description": "Display-oriented renderings of the setting-specific short Hermann-Mauguin symbol in `hm_short`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "properties": {
+                            "html": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "HTML rendering of the sibling string."
+                            },
+                            "latex": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "LaTeX rendering of the sibling string."
+                            },
+                            "unicode": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Unicode rendering of the sibling string."
+                            }
+                        },
+                        "examples": [
+                            {
+                                "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                "latex": "\\mathit{P}\\,2_{1}/c",
+                                "unicode": "P2\u2081/c"
+                            }
+                        ]
+                    },
+                    "hm_short_std": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std",
+                        "title": "Hermann-Mauguin Short Std",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_short_std",
+                            "label": "hm_short_std_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The International Tables standard short Hermann-Mauguin symbol for the space-group type.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- The extended symbol MAY contain multiple lines; line breaks and spacing encode the alignment used in International Tables extended symbols.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P 1",
+                            "P -1"
+                        ]
+                    },
+                    "hm_short_std_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std_markup",
+                        "title": "Standard short Hermann-Mauguin symbol markups",
+                        "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_short_std_markup",
+                            "label": "hm_short_std_markup_spacegroups"
+                        },
+                        "description": "Display-oriented renderings of the ITA-standard short Hermann-Mauguin symbol in `hm_short_std`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "properties": {
+                            "html": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "HTML rendering of the sibling string."
+                            },
+                            "latex": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "LaTeX rendering of the sibling string."
+                            },
+                            "unicode": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Unicode rendering of the sibling string."
+                            }
+                        },
+                        "examples": [
+                            {
+                                "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                "latex": "\\mathit{P}\\,2_{1}/c",
+                                "unicode": "P2\u2081/c"
+                            }
+                        ]
+                    },
+                    "hall_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_markup",
+                        "title": "Hall symbol markups",
+                        "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hall_markup",
+                            "label": "hall_markup_spacegroups"
+                        },
+                        "description": "Display-oriented renderings of the Hall symbol in `hall`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "properties": {
+                            "html": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "HTML rendering of the sibling string."
+                            },
+                            "latex": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "LaTeX rendering of the sibling string."
+                            },
+                            "unicode": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Unicode rendering of the sibling string."
+                            }
+                        },
+                        "examples": [
+                            {
+                                "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                "latex": "\\mathit{P}\\,2_{1}/c",
+                                "unicode": "P2\u2081/c"
+                            }
+                        ]
+                    },
+                    "schoenflies": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies",
+                        "title": "Schoenflies Symbol",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_Schoenflies.html"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "schoenflies",
+                            "label": "schoenflies_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The Schoenflies symbol for the space-group type.\n\nThe ASCII form follows the CIF convention for `_space_group.name_Schoenflies`, using a period to separate the Schoenflies point-group symbol from the superscript index.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "C1.1",
+                            "C2.3"
+                        ]
+                    },
+                    "schoenflies_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies_markup",
+                        "title": "Schoenflies symbol markups",
+                        "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "schoenflies_markup",
+                            "label": "schoenflies_markup_spacegroups"
+                        },
+                        "description": "Display-oriented renderings of the Schoenflies symbol in `schoenflies`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "properties": {
+                            "html": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "HTML rendering of the sibling string."
+                            },
+                            "latex": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "LaTeX rendering of the sibling string."
+                            },
+                            "unicode": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Unicode rendering of the sibling string."
+                            }
+                        },
+                        "examples": [
+                            {
+                                "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                "latex": "\\mathit{P}\\,2_{1}/c",
+                                "unicode": "P2\u2081/c"
+                            }
+                        ]
+                    },
+                    "setting": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting",
+                        "title": "Setting",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "setting",
+                            "label": "setting_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Setting suffix or setting annotation extracted from the cctbx universal Hermann-Mauguin symbol.\n\nThis value is a compact textual description of the coordinate setting portion of the cctbx symbol, for example an origin choice or axis-setting annotation. It is primarily an auxiliary generator field and SHOULD NOT be used as a substitute for the International Tables `setting_it_nc` identifier.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "(c,a,b)",
+                            "(b,c,a)"
+                        ]
+                    },
+                    "hm_cctbx_universal": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal",
+                        "title": "Hermann-Mauguin Cctbx Universal",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_cctbx_universal",
+                            "label": "hm_cctbx_universal_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Universal Hermann-Mauguin symbol returned by cctbx for this setting.\n\nThis field records the cctbx-internal universal symbol used during generation. It is useful for diagnostics and for tracing generator behavior, but it is not the International Tables preferred symbol. Prefer `hm_short`, `hm_full`, and `hm_extended` for table-facing symbol data.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P 1",
+                            "P -1"
+                        ]
+                    },
+                    "point_group": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/point_group",
+                        "title": "Point-Group Hermann-Mauguin Symbol",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.point_group_H-M.html"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "point_group",
+                            "label": "point_group_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The Hermann-Mauguin point-group symbol associated with the space group.\n\nThis field identifies the crystallographic point group obtained from the space group by removing translational components.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "1",
+                            "2"
+                        ]
+                    },
+                    "laue_class": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/laue_class",
+                        "title": "Laue Class",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.Laue_class.html"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "laue_class",
+                            "label": "laue_class_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The Laue class associated with the space group or point group.\n\nThe Laue class groups point groups that become equivalent when inversion symmetry is included.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "-1",
+                            "2/m"
+                        ]
+                    },
+                    "crystal_system": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/crystal_system",
+                        "title": "Crystal System",
+                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
+                        "x-optimade-type": "string",
+                        "x-compatibility": [
+                            "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.crystal_system.html"
+                        ],
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "crystal_system",
+                            "label": "crystal_system_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The crystal system of the space group or point group.\n\nValues use the conventional crystallographic system names such as triclinic, monoclinic, orthorhombic, tetragonal, trigonal, hexagonal, and cubic.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "triclinic",
+                            "monoclinic"
+                        ]
+                    },
+                    "n_centering_translations": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_centering_translations",
+                        "title": "N Centering Translations",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "integer",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "n_centering_translations",
+                            "label": "n_centering_translations_spacegroups"
+                        },
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of centering translations in the conventional cell of the space-group setting.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            1,
+                            2
+                        ]
+                    },
+                    "n_pointgroup_symops": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_pointgroup_symops",
+                        "title": "N Pointgroup Symops",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "integer",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "n_pointgroup_symops",
+                            "label": "n_pointgroup_symops_spacegroups"
+                        },
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of point-group symmetry operations represented by the space group, excluding centering translations.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            1,
+                            2
+                        ]
+                    },
+                    "n_symops": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
+                        "title": "N Symops",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "integer",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "n_symops",
+                            "label": "n_symops_spacegroups"
+                        },
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            1,
+                            2
+                        ]
+                    },
+                    "is_centric": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_centric",
+                        "title": "Is Centric",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "boolean",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "is_centric",
+                            "label": "is_centric_spacegroups"
+                        },
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Boolean flag indicating whether the cctbx space group is centric.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            false,
+                            true
+                        ]
+                    },
+                    "is_chiral": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_chiral",
+                        "title": "Is Chiral",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "boolean",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "is_chiral",
+                            "label": "is_chiral_spacegroups"
+                        },
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Boolean flag indicating whether the space group is chiral.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            true,
+                            false
+                        ]
+                    },
+                    "is_enantiomorphic": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_enantiomorphic",
+                        "title": "Is Enantiomorphic",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "boolean",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "is_enantiomorphic",
+                            "label": "is_enantiomorphic_spacegroups"
+                        },
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Boolean flag indicating whether the space-group type belongs to an enantiomorphic pair.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            false,
+                            true
+                        ]
+                    },
+                    "is_reference_setting": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_reference_setting",
+                        "title": "Is Reference Setting",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "boolean",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "is_reference_setting",
+                            "label": "is_reference_setting_spacegroups"
+                        },
+                        "type": [
+                            "boolean",
+                            "null"
+                        ],
+                        "description": "Boolean flag indicating whether this Hall setting is the selected reference setting for its International Tables space-group number.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            true,
+                            false
+                        ]
+                    },
+                    "asu": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu",
+                        "title": "Asu",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "asu",
+                            "label": "asu_spacegroups"
+                        },
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "description": "Structured asymmetric-unit description for the space-group setting.\n\nThe asymmetric unit is represented as a list of half-space cuts and logical cut expressions in fractional coordinates. Together these cuts define a representative region of the unit cell from which the full space group can generate all equivalent positions.\n\n**Requirements/Conventions**:\n\n- `cuts` contains the complete serialized cut tree.\n- `shape_only_cuts` contains only the geometric shape restrictions, omitting some conditional refinements.\n- The formatted `asu_*` fields provide compact textual renderings of the same information.",
+                        "x-optimade-unit": "inapplicable",
+                        "properties": {
+                            "cuts": {
+                                "x-optimade-type": "list",
+                                "type": [
+                                    "array",
+                                    "null"
+                                ],
+                                "description": "Complete serialized asymmetric-unit cut tree.",
+                                "items": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_cut",
+                                    "title": "Asymmetric-unit cut",
+                                    "$comment": "Reusable Anyterial source definition for one serialized asymmetric-unit cut expression.",
+                                    "x-optimade-type": "dictionary",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "asu_cut",
+                                        "label": "asu_cut_spacegroups"
+                                    },
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "description": "One serialized asymmetric-unit half-space cut or logical cut expression.\nCut objects may recursively refer to other cut objects through `condition`, `lhs`, and `rhs`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **kind**: REQUIRED; String.\n      Kind of cut expression, for example a half-space cut or a logical expression.\n\n    - **ascii**: OPTIONAL; String.\n      Compact plain-text rendering of the cut expression.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the cut in fractional `x,y,z` notation.\n\n    - **inclusive**: OPTIONAL; Boolean.\n      Whether the cut boundary is included.\n\n    - **normal**: OPTIONAL; List of 3 Fractions (String).\n      Normal vector of a half-space cut.\n\n    - **const**: OPTIONAL; Fraction (String).\n      Right-hand-side constant of a half-space cut.\n\n    - **condition**, **lhs**, **rhs**: OPTIONAL; Dictionary.\n      Recursive cut-expression objects.",
+                                    "properties": {
+                                        "kind": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Kind of cut expression."
+                                        },
+                                        "ascii": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Plain-text rendering of the cut expression."
+                                        },
+                                        "xyz": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                        },
+                                        "inclusive": {
+                                            "x-optimade-type": "boolean",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "description": "Whether the cut boundary is included."
+                                        },
+                                        "base_symbol": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Base symbolic inequality or coordinate label used for the cut."
+                                        },
+                                        "normal": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Normal vector of a half-space cut.",
+                                            "items": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                "title": "fraction",
+                                                "x-optimade-type": "string",
+                                                "x-optimade-definition": {
+                                                    "label": "fraction_core",
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "fraction"
+                                                },
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "A fraction represented as a string.",
+                                                "examples": [
+                                                    "2/3",
+                                                    "5/42",
+                                                    "10",
+                                                    "0"
+                                                ],
+                                                "x-optimade-unit": "inapplicable"
+                                            }
+                                        },
+                                        "const": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                            "title": "fraction",
+                                            "x-optimade-type": "string",
+                                            "x-optimade-definition": {
+                                                "label": "fraction_core",
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "fraction"
+                                            },
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "A fraction represented as a string.",
+                                            "examples": [
+                                                "2/3",
+                                                "5/42",
+                                                "10",
+                                                "0"
+                                            ],
+                                            "x-optimade-unit": "inapplicable"
+                                        },
+                                        "op": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Logical operator used when the expression combines two subexpressions."
+                                        },
+                                        "lhs": {
+                                            "x-optimade-type": "dictionary",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "object",
+                                                "null"
+                                            ],
+                                            "description": "Left-hand operand for a logical cut expression.",
+                                            "properties": {
+                                                "kind": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Kind of cut expression."
+                                                },
+                                                "ascii": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Plain-text rendering of the cut expression."
+                                                },
+                                                "xyz": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                                },
+                                                "inclusive": {
+                                                    "x-optimade-type": "boolean",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "boolean",
+                                                        "null"
+                                                    ],
+                                                    "description": "Whether the cut boundary is included."
+                                                },
+                                                "base_symbol": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Base symbolic inequality or coordinate label used for the cut."
+                                                },
+                                                "normal": {
+                                                    "x-optimade-type": "list",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "x-optimade-dimensions": {
+                                                        "names": [
+                                                            "dim_lattice"
+                                                        ],
+                                                        "sizes": [
+                                                            3
+                                                        ]
+                                                    },
+                                                    "type": [
+                                                        "array",
+                                                        "null"
+                                                    ],
+                                                    "description": "Normal vector of a half-space cut.",
+                                                    "items": {
+                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                        "title": "fraction",
+                                                        "x-optimade-type": "string",
+                                                        "x-optimade-definition": {
+                                                            "label": "fraction_core",
+                                                            "kind": "property",
+                                                            "version": "0.1.0",
+                                                            "format": "1.3",
+                                                            "name": "fraction"
+                                                        },
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "A fraction represented as a string.",
+                                                        "examples": [
+                                                            "2/3",
+                                                            "5/42",
+                                                            "10",
+                                                            "0"
+                                                        ],
+                                                        "x-optimade-unit": "inapplicable"
+                                                    }
+                                                },
+                                                "const": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                },
+                                                "op": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Logical operator used when the expression combines two subexpressions."
+                                                }
+                                            }
+                                        },
+                                        "rhs": {
+                                            "x-optimade-type": "dictionary",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "object",
+                                                "null"
+                                            ],
+                                            "description": "Right-hand operand for a logical cut expression.",
+                                            "properties": {
+                                                "kind": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Kind of cut expression."
+                                                },
+                                                "ascii": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Plain-text rendering of the cut expression."
+                                                },
+                                                "xyz": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                                },
+                                                "inclusive": {
+                                                    "x-optimade-type": "boolean",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "boolean",
+                                                        "null"
+                                                    ],
+                                                    "description": "Whether the cut boundary is included."
+                                                },
+                                                "base_symbol": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Base symbolic inequality or coordinate label used for the cut."
+                                                },
+                                                "normal": {
+                                                    "x-optimade-type": "list",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "x-optimade-dimensions": {
+                                                        "names": [
+                                                            "dim_lattice"
+                                                        ],
+                                                        "sizes": [
+                                                            3
+                                                        ]
+                                                    },
+                                                    "type": [
+                                                        "array",
+                                                        "null"
+                                                    ],
+                                                    "description": "Normal vector of a half-space cut.",
+                                                    "items": {
+                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                        "title": "fraction",
+                                                        "x-optimade-type": "string",
+                                                        "x-optimade-definition": {
+                                                            "label": "fraction_core",
+                                                            "kind": "property",
+                                                            "version": "0.1.0",
+                                                            "format": "1.3",
+                                                            "name": "fraction"
+                                                        },
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "A fraction represented as a string.",
+                                                        "examples": [
+                                                            "2/3",
+                                                            "5/42",
+                                                            "10",
+                                                            "0"
+                                                        ],
+                                                        "x-optimade-unit": "inapplicable"
+                                                    }
+                                                },
+                                                "const": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                },
+                                                "op": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Logical operator used when the expression combines two subexpressions."
+                                                }
+                                            }
+                                        },
+                                        "condition": {
+                                            "x-optimade-type": "dictionary",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "object",
+                                                "null"
+                                            ],
+                                            "description": "Optional conditional cut expression that refines when this cut applies.",
+                                            "properties": {
+                                                "kind": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Kind of cut expression."
+                                                },
+                                                "ascii": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Plain-text rendering of the cut expression."
+                                                },
+                                                "xyz": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                                },
+                                                "inclusive": {
+                                                    "x-optimade-type": "boolean",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "boolean",
+                                                        "null"
+                                                    ],
+                                                    "description": "Whether the cut boundary is included."
+                                                },
+                                                "base_symbol": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Base symbolic inequality or coordinate label used for the cut."
+                                                },
+                                                "normal": {
+                                                    "x-optimade-type": "list",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "x-optimade-dimensions": {
+                                                        "names": [
+                                                            "dim_lattice"
+                                                        ],
+                                                        "sizes": [
+                                                            3
+                                                        ]
+                                                    },
+                                                    "type": [
+                                                        "array",
+                                                        "null"
+                                                    ],
+                                                    "description": "Normal vector of a half-space cut.",
+                                                    "items": {
+                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                        "title": "fraction",
+                                                        "x-optimade-type": "string",
+                                                        "x-optimade-definition": {
+                                                            "label": "fraction_core",
+                                                            "kind": "property",
+                                                            "version": "0.1.0",
+                                                            "format": "1.3",
+                                                            "name": "fraction"
+                                                        },
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "A fraction represented as a string.",
+                                                        "examples": [
+                                                            "2/3",
+                                                            "5/42",
+                                                            "10",
+                                                            "0"
+                                                        ],
+                                                        "x-optimade-unit": "inapplicable"
+                                                    }
+                                                },
+                                                "const": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                },
+                                                "op": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Logical operator used when the expression combines two subexpressions."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "examples": [
+                                        {
+                                            "kind": "cut",
+                                            "ascii": "x0",
+                                            "xyz": "x>=0",
+                                            "inclusive": true,
+                                            "base_symbol": "x0",
+                                            "normal": [
+                                                "1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            "const": "0"
+                                        }
+                                    ]
+                                },
+                                "x-optimade-unit": "inapplicable"
+                            },
+                            "shape_only_cuts": {
+                                "x-optimade-type": "list",
+                                "type": [
+                                    "array",
+                                    "null"
+                                ],
+                                "description": "Geometric cut tree with conditional refinements omitted.",
+                                "items": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_cut",
+                                    "title": "Asymmetric-unit cut",
+                                    "$comment": "Reusable Anyterial source definition for one serialized asymmetric-unit cut expression.",
+                                    "x-optimade-type": "dictionary",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "asu_cut",
+                                        "label": "asu_cut_spacegroups"
+                                    },
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "description": "One serialized asymmetric-unit half-space cut or logical cut expression.\nCut objects may recursively refer to other cut objects through `condition`, `lhs`, and `rhs`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **kind**: REQUIRED; String.\n      Kind of cut expression, for example a half-space cut or a logical expression.\n\n    - **ascii**: OPTIONAL; String.\n      Compact plain-text rendering of the cut expression.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the cut in fractional `x,y,z` notation.\n\n    - **inclusive**: OPTIONAL; Boolean.\n      Whether the cut boundary is included.\n\n    - **normal**: OPTIONAL; List of 3 Fractions (String).\n      Normal vector of a half-space cut.\n\n    - **const**: OPTIONAL; Fraction (String).\n      Right-hand-side constant of a half-space cut.\n\n    - **condition**, **lhs**, **rhs**: OPTIONAL; Dictionary.\n      Recursive cut-expression objects.",
+                                    "properties": {
+                                        "kind": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Kind of cut expression."
+                                        },
+                                        "ascii": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Plain-text rendering of the cut expression."
+                                        },
+                                        "xyz": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                        },
+                                        "inclusive": {
+                                            "x-optimade-type": "boolean",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "description": "Whether the cut boundary is included."
+                                        },
+                                        "base_symbol": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Base symbolic inequality or coordinate label used for the cut."
+                                        },
+                                        "normal": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Normal vector of a half-space cut.",
+                                            "items": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                "title": "fraction",
+                                                "x-optimade-type": "string",
+                                                "x-optimade-definition": {
+                                                    "label": "fraction_core",
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "fraction"
+                                                },
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "A fraction represented as a string.",
+                                                "examples": [
+                                                    "2/3",
+                                                    "5/42",
+                                                    "10",
+                                                    "0"
+                                                ],
+                                                "x-optimade-unit": "inapplicable"
+                                            }
+                                        },
+                                        "const": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                            "title": "fraction",
+                                            "x-optimade-type": "string",
+                                            "x-optimade-definition": {
+                                                "label": "fraction_core",
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "fraction"
+                                            },
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "A fraction represented as a string.",
+                                            "examples": [
+                                                "2/3",
+                                                "5/42",
+                                                "10",
+                                                "0"
+                                            ],
+                                            "x-optimade-unit": "inapplicable"
+                                        },
+                                        "op": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Logical operator used when the expression combines two subexpressions."
+                                        },
+                                        "lhs": {
+                                            "x-optimade-type": "dictionary",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "object",
+                                                "null"
+                                            ],
+                                            "description": "Left-hand operand for a logical cut expression.",
+                                            "properties": {
+                                                "kind": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Kind of cut expression."
+                                                },
+                                                "ascii": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Plain-text rendering of the cut expression."
+                                                },
+                                                "xyz": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                                },
+                                                "inclusive": {
+                                                    "x-optimade-type": "boolean",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "boolean",
+                                                        "null"
+                                                    ],
+                                                    "description": "Whether the cut boundary is included."
+                                                },
+                                                "base_symbol": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Base symbolic inequality or coordinate label used for the cut."
+                                                },
+                                                "normal": {
+                                                    "x-optimade-type": "list",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "x-optimade-dimensions": {
+                                                        "names": [
+                                                            "dim_lattice"
+                                                        ],
+                                                        "sizes": [
+                                                            3
+                                                        ]
+                                                    },
+                                                    "type": [
+                                                        "array",
+                                                        "null"
+                                                    ],
+                                                    "description": "Normal vector of a half-space cut.",
+                                                    "items": {
+                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                        "title": "fraction",
+                                                        "x-optimade-type": "string",
+                                                        "x-optimade-definition": {
+                                                            "label": "fraction_core",
+                                                            "kind": "property",
+                                                            "version": "0.1.0",
+                                                            "format": "1.3",
+                                                            "name": "fraction"
+                                                        },
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "A fraction represented as a string.",
+                                                        "examples": [
+                                                            "2/3",
+                                                            "5/42",
+                                                            "10",
+                                                            "0"
+                                                        ],
+                                                        "x-optimade-unit": "inapplicable"
+                                                    }
+                                                },
+                                                "const": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                },
+                                                "op": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Logical operator used when the expression combines two subexpressions."
+                                                }
+                                            }
+                                        },
+                                        "rhs": {
+                                            "x-optimade-type": "dictionary",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "object",
+                                                "null"
+                                            ],
+                                            "description": "Right-hand operand for a logical cut expression.",
+                                            "properties": {
+                                                "kind": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Kind of cut expression."
+                                                },
+                                                "ascii": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Plain-text rendering of the cut expression."
+                                                },
+                                                "xyz": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                                },
+                                                "inclusive": {
+                                                    "x-optimade-type": "boolean",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "boolean",
+                                                        "null"
+                                                    ],
+                                                    "description": "Whether the cut boundary is included."
+                                                },
+                                                "base_symbol": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Base symbolic inequality or coordinate label used for the cut."
+                                                },
+                                                "normal": {
+                                                    "x-optimade-type": "list",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "x-optimade-dimensions": {
+                                                        "names": [
+                                                            "dim_lattice"
+                                                        ],
+                                                        "sizes": [
+                                                            3
+                                                        ]
+                                                    },
+                                                    "type": [
+                                                        "array",
+                                                        "null"
+                                                    ],
+                                                    "description": "Normal vector of a half-space cut.",
+                                                    "items": {
+                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                        "title": "fraction",
+                                                        "x-optimade-type": "string",
+                                                        "x-optimade-definition": {
+                                                            "label": "fraction_core",
+                                                            "kind": "property",
+                                                            "version": "0.1.0",
+                                                            "format": "1.3",
+                                                            "name": "fraction"
+                                                        },
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "A fraction represented as a string.",
+                                                        "examples": [
+                                                            "2/3",
+                                                            "5/42",
+                                                            "10",
+                                                            "0"
+                                                        ],
+                                                        "x-optimade-unit": "inapplicable"
+                                                    }
+                                                },
+                                                "const": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                },
+                                                "op": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Logical operator used when the expression combines two subexpressions."
+                                                }
+                                            }
+                                        },
+                                        "condition": {
+                                            "x-optimade-type": "dictionary",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "object",
+                                                "null"
+                                            ],
+                                            "description": "Optional conditional cut expression that refines when this cut applies.",
+                                            "properties": {
+                                                "kind": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Kind of cut expression."
+                                                },
+                                                "ascii": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Plain-text rendering of the cut expression."
+                                                },
+                                                "xyz": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Coordinate expression for the cut in `x,y,z` notation."
+                                                },
+                                                "inclusive": {
+                                                    "x-optimade-type": "boolean",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "boolean",
+                                                        "null"
+                                                    ],
+                                                    "description": "Whether the cut boundary is included."
+                                                },
+                                                "base_symbol": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Base symbolic inequality or coordinate label used for the cut."
+                                                },
+                                                "normal": {
+                                                    "x-optimade-type": "list",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "x-optimade-dimensions": {
+                                                        "names": [
+                                                            "dim_lattice"
+                                                        ],
+                                                        "sizes": [
+                                                            3
+                                                        ]
+                                                    },
+                                                    "type": [
+                                                        "array",
+                                                        "null"
+                                                    ],
+                                                    "description": "Normal vector of a half-space cut.",
+                                                    "items": {
+                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                        "title": "fraction",
+                                                        "x-optimade-type": "string",
+                                                        "x-optimade-definition": {
+                                                            "label": "fraction_core",
+                                                            "kind": "property",
+                                                            "version": "0.1.0",
+                                                            "format": "1.3",
+                                                            "name": "fraction"
+                                                        },
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "A fraction represented as a string.",
+                                                        "examples": [
+                                                            "2/3",
+                                                            "5/42",
+                                                            "10",
+                                                            "0"
+                                                        ],
+                                                        "x-optimade-unit": "inapplicable"
+                                                    }
+                                                },
+                                                "const": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                },
+                                                "op": {
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-unit": "inapplicable",
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "Logical operator used when the expression combines two subexpressions."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "examples": [
+                                        {
+                                            "kind": "cut",
+                                            "ascii": "x0",
+                                            "xyz": "x>=0",
+                                            "inclusive": true,
+                                            "base_symbol": "x0",
+                                            "normal": [
+                                                "1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            "const": "0"
+                                        }
+                                    ]
+                                },
+                                "x-optimade-unit": "inapplicable"
+                            }
+                        },
+                        "examples": [
+                            {
+                                "cuts": [
+                                    {
+                                        "kind": "cut",
+                                        "ascii": "x0",
+                                        "xyz": "x>=0",
+                                        "inclusive": true,
+                                        "base_symbol": "x0",
+                                        "normal": [
+                                            "1",
+                                            "0"
+                                        ],
+                                        "const": "0"
+                                    },
+                                    {
+                                        "kind": "cut",
+                                        "ascii": "+x1",
+                                        "xyz": "x<1",
+                                        "inclusive": false,
+                                        "base_symbol": "x1",
+                                        "normal": [
+                                            "-1",
+                                            "0"
+                                        ],
+                                        "const": "1"
+                                    }
+                                ],
+                                "shape_only_cuts": [
+                                    {
+                                        "kind": "cut",
+                                        "ascii": "x0",
+                                        "xyz": "x>=0",
+                                        "inclusive": true,
+                                        "base_symbol": "x0",
+                                        "normal": [
+                                            "1",
+                                            "0"
+                                        ],
+                                        "const": "0"
+                                    },
+                                    {
+                                        "kind": "cut",
+                                        "ascii": "x1",
+                                        "xyz": "x<=1",
+                                        "inclusive": true,
+                                        "base_symbol": "x1",
+                                        "normal": [
+                                            "-1",
+                                            "0"
+                                        ],
+                                        "const": "1"
+                                    }
+                                ]
+                            },
+                            {
+                                "cuts": [
+                                    {
+                                        "kind": "cut",
+                                        "ascii": "x0(y0(z2) & y2(z2))",
+                                        "xyz": "x>=0 [y>=0 [z<=1/2] & y<=1/2 [z<=1/2]]",
+                                        "inclusive": true,
+                                        "base_symbol": "x0",
+                                        "normal": [
+                                            "1",
+                                            "0"
+                                        ],
+                                        "const": "0",
+                                        "condition": {
+                                            "kind": "expr",
+                                            "ascii": "y0(z2) & y2(z2)",
+                                            "xyz": "y>=0 [z<=1/2] & y<=1/2 [z<=1/2]",
+                                            "op": "&",
+                                            "lhs": {
+                                                "kind": "cut",
+                                                "ascii": "y0(z2)",
+                                                "xyz": "y>=0 [z<=1/2]",
+                                                "inclusive": true,
+                                                "base_symbol": "y0",
+                                                "normal": [
+                                                    "0",
+                                                    "1"
+                                                ],
+                                                "const": "0",
+                                                "condition": {
+                                                    "kind": "cut",
+                                                    "ascii": "z2"
+                                                }
+                                            },
+                                            "rhs": {
+                                                "kind": "cut",
+                                                "ascii": "y2(z2)",
+                                                "xyz": "y<=1/2 [z<=1/2]",
+                                                "inclusive": true,
+                                                "base_symbol": "y2",
+                                                "normal": [
+                                                    "0",
+                                                    "-1"
+                                                ],
+                                                "const": "1/2",
+                                                "condition": {
+                                                    "kind": "cut",
+                                                    "ascii": "z2"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "kind": "cut",
+                                        "ascii": "x2(y0(z2) & y2(z2))",
+                                        "xyz": "x<=1/2 [y>=0 [z<=1/2] & y<=1/2 [z<=1/2]]",
+                                        "inclusive": true,
+                                        "base_symbol": "x2",
+                                        "normal": [
+                                            "-1",
+                                            "0"
+                                        ],
+                                        "const": "1/2",
+                                        "condition": {
+                                            "kind": "expr",
+                                            "ascii": "y0(z2) & y2(z2)",
+                                            "xyz": "y>=0 [z<=1/2] & y<=1/2 [z<=1/2]",
+                                            "op": "&",
+                                            "lhs": {
+                                                "kind": "cut",
+                                                "ascii": "y0(z2)",
+                                                "xyz": "y>=0 [z<=1/2]",
+                                                "inclusive": true,
+                                                "base_symbol": "y0",
+                                                "normal": [
+                                                    "0",
+                                                    "1"
+                                                ],
+                                                "const": "0",
+                                                "condition": {
+                                                    "kind": "cut",
+                                                    "ascii": "z2"
+                                                }
+                                            },
+                                            "rhs": {
+                                                "kind": "cut",
+                                                "ascii": "y2(z2)",
+                                                "xyz": "y<=1/2 [z<=1/2]",
+                                                "inclusive": true,
+                                                "base_symbol": "y2",
+                                                "normal": [
+                                                    "0",
+                                                    "-1"
+                                                ],
+                                                "const": "1/2",
+                                                "condition": {
+                                                    "kind": "cut",
+                                                    "ascii": "z2"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ],
+                                "shape_only_cuts": [
+                                    {
+                                        "kind": "cut",
+                                        "ascii": "x0",
+                                        "xyz": "x>=0",
+                                        "inclusive": true,
+                                        "base_symbol": "x0",
+                                        "normal": [
+                                            "1",
+                                            "0"
+                                        ],
+                                        "const": "0"
+                                    },
+                                    {
+                                        "kind": "cut",
+                                        "ascii": "x2",
+                                        "xyz": "x<=1/2",
+                                        "inclusive": true,
+                                        "base_symbol": "x2",
+                                        "normal": [
+                                            "-1",
+                                            "0"
+                                        ],
+                                        "const": "1/2"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "asu_str": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_str",
+                        "title": "Asymmetric unit string",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "asu_str",
+                            "label": "asu_str_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Plain string rendering of the asymmetric-unit restrictions for the space-group setting.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "x>=0; x<1; y>=0; y<1; z>=0; z<1",
+                            "x>=0 [y>=0 [z<=1/2] & y<=1/2 [z<=1/2]]; x<=1/2 [y>=0 [z<=1/2] & y<=1/2 [z<=1/2]]; y>=0; y<1; z>=0; z<1"
+                        ]
+                    },
+                    "asu_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_markup",
+                        "title": "Asymmetric unit markups",
+                        "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "asu_markup",
+                            "label": "asu_markup_spacegroups"
+                        },
+                        "description": "Display-oriented renderings of the plain-string asymmetric-unit restrictions in `asu_str`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "properties": {
+                            "html": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "HTML rendering of the sibling string."
+                            },
+                            "latex": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "LaTeX rendering of the sibling string."
+                            },
+                            "unicode": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Unicode rendering of the sibling string."
+                            }
+                        },
+                        "examples": [
+                            {
+                                "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                "latex": "\\mathit{P}\\,2_{1}/c",
+                                "unicode": "P2\u2081/c"
+                            }
+                        ]
+                    },
+                    "asu_shape_only_str": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_shape_only_str",
+                        "title": "Shape-only asymmetric unit string",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "asu_shape_only_str",
+                            "label": "asu_shape_only_str_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Plain string rendering of the geometric shape part of the asymmetric-unit restrictions, without conditional refinements.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "x>=0; x<=1; y>=0; y<=1; z>=0; z<=1",
+                            "x>=0; x<=1/2; y>=0; y<=1; z>=0; z<=1"
+                        ]
+                    },
+                    "asu_shape_only_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_shape_only_markup",
+                        "title": "Shape-only asymmetric unit markups",
+                        "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "asu_shape_only_markup",
+                            "label": "asu_shape_only_markup_spacegroups"
+                        },
+                        "description": "Display-oriented renderings of the plain-string shape-only asymmetric-unit restrictions in `asu_shape_only_str`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "properties": {
+                            "html": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "HTML rendering of the sibling string."
+                            },
+                            "latex": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "LaTeX rendering of the sibling string."
+                            },
+                            "unicode": {
+                                "x-optimade-type": "string",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Unicode rendering of the sibling string."
+                            }
+                        },
+                        "examples": [
+                            {
+                                "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                "latex": "\\mathit{P}\\,2_{1}/c",
+                                "unicode": "P2\u2081/c"
+                            }
+                        ]
+                    },
+                    "symops": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops",
+                        "title": "Symmetry operations",
+                        "$comment": "Anyterial property definition using the common reusable op object definition.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "symops",
+                            "label": "symops_spacegroups"
+                        },
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Full list of symmetry-operation descriptors for a space-group setting.\nEach list member is a `op` object as defined by `/properties/symmetry/op`.\nFor space-group operations, generated data currently uses `rot_type`, `axis`, `sense`, `screw_glide`, and `origin_shift`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/properties/symmetry/op`.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
+                            "title": "Operation",
+                            "$comment": "Reusable Anyterial definition for one classified crystallographic operation descriptor.",
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "op",
+                                "label": "op_symmetry"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "A classified crystallographic operation acting within one coordinate setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **type**: OPTIONAL; Integer.\n      Legacy numeric operation-type code used by point-group operation descriptors.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                            "properties": {
+                                "affine_transformation": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+                                    "title": "Affine transformation",
+                                    "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
+                                    "x-optimade-type": "dictionary",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "affine_transformation",
+                                        "label": "affine_transformation_symmetry"
+                                    },
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                    "properties": {
+                                        "matrix": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice",
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3,
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact 3 by 3 matrix part of the affine transformation.",
+                                            "items": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "x-optimade-dimensions": {
+                                                    "names": [
+                                                        "dim_lattice"
+                                                    ],
+                                                    "sizes": [
+                                                        3
+                                                    ]
+                                                },
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "One row of the exact 3 by 3 matrix.",
+                                                "items": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                }
+                                            }
+                                        },
+                                        "vector": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact fractional-coordinate vector part of the affine transformation.",
+                                            "items": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                "title": "fraction",
+                                                "x-optimade-type": "string",
+                                                "x-optimade-definition": {
+                                                    "label": "fraction_core",
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "fraction"
+                                                },
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "A fraction represented as a string.",
+                                                "examples": [
+                                                    "2/3",
+                                                    "5/42",
+                                                    "10",
+                                                    "0"
+                                                ],
+                                                "x-optimade-unit": "inapplicable"
+                                            }
+                                        },
+                                        "xyz": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                        },
+                                        "det": {
+                                            "x-optimade-type": "integer",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ],
+                                            "description": "Determinant of the matrix part when emitted by the generator."
+                                        },
+                                        "is_orthogonal": {
+                                            "x-optimade-type": "boolean",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "description": "Whether the matrix part is orthogonal."
+                                        }
+                                    },
+                                    "examples": [
+                                        {
+                                            "matrix": [
+                                                [
+                                                    "-1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "-1",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "1"
+                                                ]
+                                            ],
+                                            "vector": [
+                                                "0",
+                                                "0",
+                                                "0"
+                                            ],
+                                            "xyz": "-x,-y,z",
+                                            "det": 1,
+                                            "is_orthogonal": true
+                                        }
+                                    ]
+                                },
+                                "rot_type": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Symbolic crystallographic operation-type label for the linear part."
+                                },
+                                "type": {
+                                    "x-optimade-type": "integer",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "Legacy numeric point-group operation-type code."
+                                },
+                                "axis": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Integer-vector axis or invariant-direction descriptor for the operation.",
+                                    "items": {
+                                        "x-optimade-type": "integer",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "integer"
+                                        ],
+                                        "description": "One integer component of the axis vector."
+                                    }
+                                },
+                                "sense": {
+                                    "x-optimade-type": "integer",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "Rotation sense/sign convention returned by the generator."
+                                },
+                                "screw_glide": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
+                                    "items": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A fraction represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    }
+                                },
+                                "origin_shift": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
+                                    "items": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A fraction represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    }
+                                },
+                                "is_proper": {
+                                    "x-optimade-type": "boolean",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "boolean",
+                                        "null"
+                                    ],
+                                    "description": "Whether the linear operation is proper."
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "-1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "-1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "1"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ],
+                                        "xyz": "-x,-y,z",
+                                        "det": 1,
+                                        "is_orthogonal": true
+                                    },
+                                    "rot_type": "2",
+                                    "sense": 0,
+                                    "axis": [
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "screw_glide": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "origin_shift": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ]
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "1"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ],
+                                        "xyz": "x,y,z"
+                                    },
+                                    "rot_type": "1",
+                                    "sense": 0,
+                                    "axis": [
+                                        0,
+                                        0,
+                                        0
+                                    ],
+                                    "screw_glide": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "origin_shift": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    "symops_xyz": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_xyz",
+                        "title": "Symmetry operations in x,y,z notation",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "symops_xyz",
+                            "label": "symops_xyz_spacegroups"
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Full list of symmetry operations for the space-group setting written in fractional `x,y,z` coordinate notation. Each expression acts on fractional coordinates in the setting represented by the containing Hall entry.",
+                        "x-optimade-unit": "inapplicable",
+                        "items": {
+                            "x-optimade-type": "string",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "string"
+                            ],
+                            "description": "One symmetry operation in x,y,z notation."
+                        },
+                        "examples": [
+                            [
+                                "x,y,z"
+                            ],
+                            [
+                                "-x,-y,-z",
+                                "x,y,z"
+                            ]
+                        ],
+                        "x-compatibility": [
+                            "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symmetry_operations_xyz"
+                        ]
+                    },
+                    "centering_translations": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations",
+                        "title": "Centering translations",
+                        "$comment": "Anyterial property definition using the common reusable centering-translation definition.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "centering_translations",
+                            "label": "centering_translations_spacegroups"
+                        },
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Centering translations of the conventional cell.\nEach list member is one exact fractional-coordinate centering translation as defined by `/properties/symmetry/centering_translation`.\nThe zero translation `(0,0,0)` is listed first.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/centering_translation",
+                            "title": "Centering translation",
+                            "$comment": "Reusable Anyterial definition for one conventional-cell centering translation.",
+                            "x-optimade-type": "list",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "centering_translation",
+                                "label": "centering_translation_symmetry"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "One centering translation of a conventional crystallographic cell.\nThe translation is represented in fractional coordinates using exact fraction strings.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of three exact fractional-coordinate components.\n- The zero translation is included in centering-translation lists and is normally listed first.",
+                            "x-optimade-dimensions": {
+                                "names": [
+                                    "dim_lattice"
+                                ],
+                                "sizes": [
+                                    3
+                                ]
+                            },
+                            "items": {
+                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                "title": "fraction",
+                                "x-optimade-type": "string",
+                                "x-optimade-definition": {
+                                    "label": "fraction_core",
+                                    "kind": "property",
+                                    "version": "0.1.0",
+                                    "format": "1.3",
+                                    "name": "fraction"
+                                },
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "A fraction represented as a string.",
+                                "examples": [
+                                    "2/3",
+                                    "5/42",
+                                    "10",
+                                    "0"
+                                ],
+                                "x-optimade-unit": "inapplicable"
+                            },
+                            "examples": [
+                                [
+                                    "0",
+                                    "0",
+                                    "0"
+                                ],
+                                [
+                                    "1/2",
+                                    "1/2",
+                                    "0"
+                                ]
+                            ]
+                        },
+                        "examples": [
+                            [
+                                [
+                                    "0",
+                                    "0",
+                                    "0"
+                                ]
+                            ],
+                            [
+                                [
+                                    "0",
+                                    "0",
+                                    "0"
+                                ],
+                                [
+                                    "1/2",
+                                    "1/2",
+                                    "0"
+                                ]
+                            ]
+                        ]
+                    },
+                    "centering_translations_xyz": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations_xyz",
+                        "title": "Centering translations as xyz strings",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "centering_translations_xyz",
+                            "label": "centering_translations_xyz_spacegroups"
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Centering translations of the conventional cell, represented as `x,y,z`-style coordinate shifts. The zero translation is listed first.",
+                        "x-optimade-unit": "inapplicable",
+                        "items": {
+                            "x-optimade-type": "string",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "string"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "0,0,0"
+                            ],
+                            [
+                                "0,0,0",
+                                "1/2,1/2,0"
+                            ]
+                        ]
+                    },
+                    "symops_representative": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative",
+                        "title": "Representative symmetry operations",
+                        "$comment": "Anyterial property definition using the common reusable op object definition.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "symops_representative",
+                            "label": "symops_representative_spacegroups"
+                        },
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Representative symmetry-operation descriptors modulo centering translations.\nEach list member is a `op` object as defined by `/properties/symmetry/op`.\nFor space-group operations, generated data currently uses `rot_type`, `axis`, `sense`, `screw_glide`, and `origin_shift`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/properties/symmetry/op`.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
+                            "title": "Operation",
+                            "$comment": "Reusable Anyterial definition for one classified crystallographic operation descriptor.",
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "op",
+                                "label": "op_symmetry"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "A classified crystallographic operation acting within one coordinate setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **type**: OPTIONAL; Integer.\n      Legacy numeric operation-type code used by point-group operation descriptors.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                            "properties": {
+                                "affine_transformation": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+                                    "title": "Affine transformation",
+                                    "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
+                                    "x-optimade-type": "dictionary",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "affine_transformation",
+                                        "label": "affine_transformation_symmetry"
+                                    },
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                    "properties": {
+                                        "matrix": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice",
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3,
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact 3 by 3 matrix part of the affine transformation.",
+                                            "items": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "x-optimade-dimensions": {
+                                                    "names": [
+                                                        "dim_lattice"
+                                                    ],
+                                                    "sizes": [
+                                                        3
+                                                    ]
+                                                },
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "One row of the exact 3 by 3 matrix.",
+                                                "items": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                }
+                                            }
+                                        },
+                                        "vector": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact fractional-coordinate vector part of the affine transformation.",
+                                            "items": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                "title": "fraction",
+                                                "x-optimade-type": "string",
+                                                "x-optimade-definition": {
+                                                    "label": "fraction_core",
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "fraction"
+                                                },
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "A fraction represented as a string.",
+                                                "examples": [
+                                                    "2/3",
+                                                    "5/42",
+                                                    "10",
+                                                    "0"
+                                                ],
+                                                "x-optimade-unit": "inapplicable"
+                                            }
+                                        },
+                                        "xyz": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                        },
+                                        "det": {
+                                            "x-optimade-type": "integer",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ],
+                                            "description": "Determinant of the matrix part when emitted by the generator."
+                                        },
+                                        "is_orthogonal": {
+                                            "x-optimade-type": "boolean",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "description": "Whether the matrix part is orthogonal."
+                                        }
+                                    },
+                                    "examples": [
+                                        {
+                                            "matrix": [
+                                                [
+                                                    "-1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "-1",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "1"
+                                                ]
+                                            ],
+                                            "vector": [
+                                                "0",
+                                                "0",
+                                                "0"
+                                            ],
+                                            "xyz": "-x,-y,z",
+                                            "det": 1,
+                                            "is_orthogonal": true
+                                        }
+                                    ]
+                                },
+                                "rot_type": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Symbolic crystallographic operation-type label for the linear part."
+                                },
+                                "type": {
+                                    "x-optimade-type": "integer",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "Legacy numeric point-group operation-type code."
+                                },
+                                "axis": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Integer-vector axis or invariant-direction descriptor for the operation.",
+                                    "items": {
+                                        "x-optimade-type": "integer",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "integer"
+                                        ],
+                                        "description": "One integer component of the axis vector."
+                                    }
+                                },
+                                "sense": {
+                                    "x-optimade-type": "integer",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "Rotation sense/sign convention returned by the generator."
+                                },
+                                "screw_glide": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
+                                    "items": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A fraction represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    }
+                                },
+                                "origin_shift": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
+                                    "items": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A fraction represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    }
+                                },
+                                "is_proper": {
+                                    "x-optimade-type": "boolean",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "boolean",
+                                        "null"
+                                    ],
+                                    "description": "Whether the linear operation is proper."
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "-1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "-1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "1"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ],
+                                        "xyz": "-x,-y,z",
+                                        "det": 1,
+                                        "is_orthogonal": true
+                                    },
+                                    "rot_type": "2",
+                                    "sense": 0,
+                                    "axis": [
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "screw_glide": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "origin_shift": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ]
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "1"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ],
+                                        "xyz": "x,y,z"
+                                    },
+                                    "rot_type": "1",
+                                    "sense": 0,
+                                    "axis": [
+                                        0,
+                                        0,
+                                        0
+                                    ],
+                                    "screw_glide": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "origin_shift": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    "symops_representative_xyz": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative_xyz",
+                        "title": "Symops Representative Xyz",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "symops_representative_xyz",
+                            "label": "symops_representative_xyz_spacegroups"
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Representative symmetry operations modulo centering translations in fractional `x,y,z` notation, ordered consistently with `symops_representative`.",
+                        "x-optimade-unit": "inapplicable",
+                        "items": {
+                            "x-optimade-type": "string",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "string"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "x,y,z"
+                            ],
+                            [
+                                "-x,y,-z",
+                                "x,y,z"
+                            ]
+                        ]
+                    },
+                    "symops_generators": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators",
+                        "title": "Symmetry operation generators",
+                        "$comment": "Anyterial property definition using the common reusable op object definition.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "symops_generators",
+                            "label": "symops_generators_spacegroups"
+                        },
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Minimal generator subset of the full symmetry-operation group for a space-group setting.\nEach list member is a `op` object as defined by `/properties/symmetry/op`.\nFor space-group operations, generated data currently uses `rot_type`, `axis`, `sense`, `screw_glide`, and `origin_shift`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/properties/symmetry/op`.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
+                            "title": "Operation",
+                            "$comment": "Reusable Anyterial definition for one classified crystallographic operation descriptor.",
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "op",
+                                "label": "op_symmetry"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "A classified crystallographic operation acting within one coordinate setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **type**: OPTIONAL; Integer.\n      Legacy numeric operation-type code used by point-group operation descriptors.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                            "properties": {
+                                "affine_transformation": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+                                    "title": "Affine transformation",
+                                    "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
+                                    "x-optimade-type": "dictionary",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "affine_transformation",
+                                        "label": "affine_transformation_symmetry"
+                                    },
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                    "properties": {
+                                        "matrix": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice",
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3,
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact 3 by 3 matrix part of the affine transformation.",
+                                            "items": {
+                                                "x-optimade-type": "list",
+                                                "x-optimade-unit": "inapplicable",
+                                                "x-optimade-dimensions": {
+                                                    "names": [
+                                                        "dim_lattice"
+                                                    ],
+                                                    "sizes": [
+                                                        3
+                                                    ]
+                                                },
+                                                "type": [
+                                                    "array"
+                                                ],
+                                                "description": "One row of the exact 3 by 3 matrix.",
+                                                "items": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                    "title": "fraction",
+                                                    "x-optimade-type": "string",
+                                                    "x-optimade-definition": {
+                                                        "label": "fraction_core",
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "fraction"
+                                                    },
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "A fraction represented as a string.",
+                                                    "examples": [
+                                                        "2/3",
+                                                        "5/42",
+                                                        "10",
+                                                        "0"
+                                                    ],
+                                                    "x-optimade-unit": "inapplicable"
+                                                }
+                                            }
+                                        },
+                                        "vector": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ],
+                                            "description": "Exact fractional-coordinate vector part of the affine transformation.",
+                                            "items": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                "title": "fraction",
+                                                "x-optimade-type": "string",
+                                                "x-optimade-definition": {
+                                                    "label": "fraction_core",
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "fraction"
+                                                },
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "A fraction represented as a string.",
+                                                "examples": [
+                                                    "2/3",
+                                                    "5/42",
+                                                    "10",
+                                                    "0"
+                                                ],
+                                                "x-optimade-unit": "inapplicable"
+                                            }
+                                        },
+                                        "xyz": {
+                                            "x-optimade-type": "string",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                        },
+                                        "det": {
+                                            "x-optimade-type": "integer",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ],
+                                            "description": "Determinant of the matrix part when emitted by the generator."
+                                        },
+                                        "is_orthogonal": {
+                                            "x-optimade-type": "boolean",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "boolean",
+                                                "null"
+                                            ],
+                                            "description": "Whether the matrix part is orthogonal."
+                                        }
+                                    },
+                                    "examples": [
+                                        {
+                                            "matrix": [
+                                                [
+                                                    "-1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "-1",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "1"
+                                                ]
+                                            ],
+                                            "vector": [
+                                                "0",
+                                                "0",
+                                                "0"
+                                            ],
+                                            "xyz": "-x,-y,z",
+                                            "det": 1,
+                                            "is_orthogonal": true
+                                        }
+                                    ]
+                                },
+                                "rot_type": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Symbolic crystallographic operation-type label for the linear part."
+                                },
+                                "type": {
+                                    "x-optimade-type": "integer",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "Legacy numeric point-group operation-type code."
+                                },
+                                "axis": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Integer-vector axis or invariant-direction descriptor for the operation.",
+                                    "items": {
+                                        "x-optimade-type": "integer",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "integer"
+                                        ],
+                                        "description": "One integer component of the axis vector."
+                                    }
+                                },
+                                "sense": {
+                                    "x-optimade-type": "integer",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "Rotation sense/sign convention returned by the generator."
+                                },
+                                "screw_glide": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
+                                    "items": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A fraction represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    }
+                                },
+                                "origin_shift": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
+                                    "items": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A fraction represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    }
+                                },
+                                "is_proper": {
+                                    "x-optimade-type": "boolean",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "boolean",
+                                        "null"
+                                    ],
+                                    "description": "Whether the linear operation is proper."
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "-1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "-1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "1"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ],
+                                        "xyz": "-x,-y,z",
+                                        "det": 1,
+                                        "is_orthogonal": true
+                                    },
+                                    "rot_type": "2",
+                                    "sense": 0,
+                                    "axis": [
+                                        0,
+                                        0,
+                                        1
+                                    ],
+                                    "screw_glide": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "origin_shift": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ]
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "1"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ],
+                                        "xyz": "x,y,z"
+                                    },
+                                    "rot_type": "1",
+                                    "sense": 0,
+                                    "axis": [
+                                        0,
+                                        0,
+                                        0
+                                    ],
+                                    "screw_glide": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "origin_shift": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    "symops_generators_xyz": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators_xyz",
+                        "title": "Symops Generators Xyz",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "symops_generators_xyz",
+                            "label": "symops_generators_xyz_spacegroups"
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Minimal generator subset of the full symmetry-operation group in fractional `x,y,z` notation, ordered consistently with `symops_generators`.",
+                        "x-optimade-unit": "inapplicable",
+                        "items": {
+                            "x-optimade-type": "string",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "string"
+                            ]
+                        },
+                        "examples": [
+                            [
+                                "-x,-y,-z"
+                            ],
+                            [
+                                "-x,y,-z"
+                            ]
+                        ]
+                    },
+                    "harker_planes": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/harker_planes",
+                        "title": "Harker planes",
+                        "$comment": "Anyterial property definition for Harker planes or special-position conditions.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "harker_planes",
+                            "label": "harker_planes_spacegroups"
+                        },
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Harker planes of the space group in fractional Patterson coordinates, as generated by cctbx.\nEach entry describes one plane or special-position condition with an expression and optional exact normal, point, and constant data.",
+                        "items": {
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "One Harker plane or special-position condition.",
+                            "properties": {
+                                "algebraic": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Algebraic expression for the condition when emitted by cctbx."
+                                },
+                                "xyz": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Plane equation in `x,y,z` notation when available."
+                                },
+                                "normal": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Integer normal vector of the plane.",
+                                    "items": {
+                                        "x-optimade-type": "integer",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "integer"
+                                        ],
+                                        "description": "One integer component of the normal vector."
+                                    }
+                                },
+                                "point": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Point on the plane.",
+                                    "items": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A fraction represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    }
+                                },
+                                "const": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                    "title": "fraction",
+                                    "x-optimade-type": "string",
+                                    "x-optimade-definition": {
+                                        "label": "fraction_core",
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "fraction"
+                                    },
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "A fraction represented as a string.",
+                                    "examples": [
+                                        "2/3",
+                                        "5/42",
+                                        "10",
+                                        "0"
+                                    ],
+                                    "x-optimade-unit": "inapplicable"
+                                }
+                            }
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "algebraic": "2*x,0,2*z",
+                                    "normal": [
+                                        0,
+                                        1,
+                                        0
+                                    ],
+                                    "point": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    "structure_seminvariants": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/structure_seminvariants",
+                        "title": "Structure Seminvariants",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "structure_seminvariants",
+                            "label": "structure_seminvariants_spacegroups"
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Structure seminvariant vectors and moduli for the space-group setting. These characterize phase restrictions and FFT grid constraints associated with the symmetry.",
+                        "x-optimade-unit": "inapplicable",
+                        "items": {
+                            "x-optimade-type": "dictionary",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "One structure-seminvariant condition vector.",
+                            "properties": {
+                                "vector": {
+                                    "x-optimade-type": "list",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Integer vector defining the seminvariant congruence.",
+                                    "items": {
+                                        "x-optimade-type": "integer",
+                                        "type": [
+                                            "integer",
+                                            "null"
+                                        ],
+                                        "description": "One vector component.",
+                                        "x-optimade-unit": "inapplicable"
+                                    },
+                                    "x-optimade-unit": "inapplicable"
+                                },
+                                "modulus": {
+                                    "x-optimade-type": "integer",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "Modulus for the seminvariant congruence.",
+                                    "x-optimade-unit": "inapplicable"
+                                }
+                            },
+                            "x-optimade-unit": "inapplicable"
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "vector": [
+                                        1,
+                                        0
+                                    ],
+                                    "modulus": 0
+                                },
+                                {
+                                    "vector": [
+                                        0,
+                                        1
+                                    ],
+                                    "modulus": 0
+                                },
+                                {
+                                    "vector": [
+                                        0,
+                                        0
+                                    ],
+                                    "modulus": 0
+                                }
+                            ],
+                            [
+                                {
+                                    "vector": [
+                                        1,
+                                        0
+                                    ],
+                                    "modulus": 2
+                                },
+                                {
+                                    "vector": [
+                                        0,
+                                        1
+                                    ],
+                                    "modulus": 2
+                                },
+                                {
+                                    "vector": [
+                                        0,
+                                        0
+                                    ],
+                                    "modulus": 2
+                                }
+                            ]
+                        ]
+                    },
+                    "cctbx_fft_grid_factors": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/cctbx_fft_grid_factors",
+                        "title": "Cctbx Fft Grid Factors",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "dictionary",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "cctbx_fft_grid_factors",
+                            "label": "cctbx_fft_grid_factors_spacegroups"
+                        },
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "description": "FFT grid-factor recommendations derived from cctbx for the space group, its structure seminvariants, and its Euclidean normalizer.",
+                        "x-optimade-unit": "inapplicable",
+                        "properties": {
+                            "space_group": {
+                                "x-optimade-type": "list",
+                                "type": [
+                                    "array",
+                                    "null"
+                                ],
+                                "description": "FFT grid factors arising from the space-group translations.",
+                                "items": {
+                                    "x-optimade-type": "integer",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "One grid factor.",
+                                    "x-optimade-unit": "inapplicable"
+                                },
+                                "x-optimade-unit": "inapplicable"
+                            },
+                            "seminvariant": {
+                                "x-optimade-type": "list",
+                                "type": [
+                                    "array",
+                                    "null"
+                                ],
+                                "description": "FFT grid factors arising from structure seminvariants.",
+                                "items": {
+                                    "x-optimade-type": "integer",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "One grid factor.",
+                                    "x-optimade-unit": "inapplicable"
+                                },
+                                "x-optimade-unit": "inapplicable"
+                            },
+                            "euclidean": {
+                                "x-optimade-type": "list",
+                                "type": [
+                                    "array",
+                                    "null"
+                                ],
+                                "description": "FFT grid factors arising from Euclidean-normalizer considerations.",
+                                "items": {
+                                    "x-optimade-type": "integer",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "One grid factor.",
+                                    "x-optimade-unit": "inapplicable"
+                                },
+                                "x-optimade-unit": "inapplicable"
+                            }
+                        },
+                        "examples": [
+                            {
+                                "space_group": [
+                                    1,
+                                    1
+                                ],
+                                "seminvariant": [
+                                    1,
+                                    1
+                                ],
+                                "euclidean": [
+                                    1,
+                                    1
+                                ]
+                            },
+                            {
+                                "space_group": [
+                                    1,
+                                    1
+                                ],
+                                "seminvariant": [
+                                    2,
+                                    2
+                                ],
+                                "euclidean": [
+                                    2,
+                                    2
+                                ]
+                            }
+                        ]
+                    },
+                    "wyckoff": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff",
+                        "title": "Wyckoff positions",
+                        "$comment": "Anyterial Wyckoff-position list property using the common wyckoff-position record definition.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "wyckoff",
+                            "label": "wyckoff_spacegroups"
+                        },
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Wyckoff-position table for a specific space-group setting.\nEach list item describes one Wyckoff position and includes the Wyckoff letter as ordinary data.\nThis list representation avoids using JSON dictionary keys as crystallographic data.\nItems follow `/properties/symmetry/wyckoff_position`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each item MUST include `letter`, identifying the Wyckoff letter for that position in the setting.\n- `orbit_affine` and `orbit_xyz` contain the full orbit.\n- `orbit_mod_centering_affine` and `orbit_mod_centering_xyz` contain one representative modulo centering translations.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/wyckoff_position",
+                            "title": "Wyckoff position",
+                            "$comment": "Reusable Anyterial definition for one Wyckoff-position record in a space-group setting.",
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "wyckoff_position",
+                                "label": "wyckoff_position_symmetry"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "One Wyckoff position in a space-group setting.\nThe record gives the multiplicity, oriented site-symmetry symbol, representative coordinate, full orbit, and orbit factorized modulo centering translations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **letter**: REQUIRED; String.\n      Wyckoff letter for this position in the setting.\n\n    - **multiplicity**: REQUIRED; Integer.\n      Multiplicity of the Wyckoff position in the conventional cell.\n\n    - **sitesym**: REQUIRED; String.\n      Oriented site-symmetry symbol.\n\n    - **hasfreedom**: REQUIRED; List of booleans.\n      Flags indicating whether each fractional coordinate has a free parameter.\n\n    - **first\\_orbit**: REQUIRED; String.\n      First representative coordinate expression used by the generator.\n\n    - **orbit\\_affine**: REQUIRED; List.\n      Full orbit in affine matrix/vector representation.\n\n    - **orbit\\_xyz**: REQUIRED; List of strings.\n      Full orbit in `x,y,z` coordinate notation.\n\n    - **orbit\\_mod\\_centering\\_affine**: REQUIRED; List.\n      Orbit representatives modulo centering translations in affine representation.\n\n    - **orbit\\_mod\\_centering\\_xyz**: REQUIRED; List of strings.\n      Orbit representatives modulo centering translations in `x,y,z` notation.",
+                            "properties": {
+                                "letter": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Wyckoff letter for this position in the setting."
+                                },
+                                "multiplicity": {
+                                    "x-optimade-type": "integer",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "Multiplicity of the Wyckoff position in the conventional cell."
+                                },
+                                "sitesym": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Oriented site-symmetry symbol."
+                                },
+                                "hasfreedom": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Three flags indicating whether each fractional coordinate contains a free parameter.",
+                                    "items": {
+                                        "x-optimade-type": "boolean",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "boolean"
+                                        ],
+                                        "description": "Whether the corresponding coordinate is free."
+                                    }
+                                },
+                                "first_orbit_ita": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Representative coordinate expression following the ITA source convention, when distinct from `first_orbit`."
+                                },
+                                "first_orbit": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Representative coordinate expression for the Wyckoff position."
+                                },
+                                "orbit_affine": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Full orbit represented as affine matrix/vector data.",
+                                    "items": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "array"
+                                        ],
+                                        "description": "One generator-emitted affine orbit operation represented as nested exact lists.",
+                                        "items": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "array"
+                                            ],
+                                            "description": "One row or component list of the affine orbit representation.",
+                                            "items": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                "title": "fraction",
+                                                "x-optimade-type": "string",
+                                                "x-optimade-definition": {
+                                                    "label": "fraction_core",
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "fraction"
+                                                },
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "A fraction represented as a string.",
+                                                "examples": [
+                                                    "2/3",
+                                                    "5/42",
+                                                    "10",
+                                                    "0"
+                                                ],
+                                                "x-optimade-unit": "inapplicable"
+                                            }
+                                        }
+                                    }
+                                },
+                                "orbit_xyz": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Full orbit represented as `x,y,z` coordinate expressions.",
+                                    "items": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "One coordinate expression."
+                                    }
+                                },
+                                "orbit_mod_centering_affine": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Orbit representatives modulo centering translations in affine matrix/vector representation.",
+                                    "items": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "array"
+                                        ],
+                                        "description": "One generator-emitted affine orbit operation represented as nested exact lists.",
+                                        "items": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "type": [
+                                                "array"
+                                            ],
+                                            "description": "One row or component list of the affine orbit representation.",
+                                            "items": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                "title": "fraction",
+                                                "x-optimade-type": "string",
+                                                "x-optimade-definition": {
+                                                    "label": "fraction_core",
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "fraction"
+                                                },
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "A fraction represented as a string.",
+                                                "examples": [
+                                                    "2/3",
+                                                    "5/42",
+                                                    "10",
+                                                    "0"
+                                                ],
+                                                "x-optimade-unit": "inapplicable"
+                                            }
+                                        }
+                                    }
+                                },
+                                "orbit_mod_centering_xyz": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Orbit representatives modulo centering translations as `x,y,z` coordinate expressions.",
+                                    "items": {
+                                        "x-optimade-type": "string",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "string"
+                                        ],
+                                        "description": "One coordinate expression."
+                                    }
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "letter": "e",
+                                    "multiplicity": 2,
+                                    "sitesym": "1",
+                                    "hasfreedom": [
+                                        true,
+                                        true,
+                                        true
+                                    ],
+                                    "first_orbit": "x,y,z",
+                                    "orbit_xyz": [
+                                        "x",
+                                        "y",
+                                        "z",
+                                        "-x",
+                                        "y",
+                                        "-z"
+                                    ],
+                                    "orbit_mod_centering_xyz": [
+                                        "x",
+                                        "y",
+                                        "z",
+                                        "-x",
+                                        "y",
+                                        "-z"
+                                    ]
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "letter": "e",
+                                    "multiplicity": 2,
+                                    "sitesym": "1",
+                                    "hasfreedom": [
+                                        true,
+                                        true,
+                                        true
+                                    ],
+                                    "first_orbit": "x,y,z",
+                                    "orbit_xyz": [
+                                        "x",
+                                        "y",
+                                        "z",
+                                        "-x",
+                                        "y",
+                                        "-z"
+                                    ],
+                                    "orbit_mod_centering_xyz": [
+                                        "x",
+                                        "y",
+                                        "z",
+                                        "-x",
+                                        "y",
+                                        "-z"
+                                    ]
+                                }
+                            ]
+                        ]
+                    },
+                    "wyckoff_sets": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_sets",
+                        "title": "Wyckoff Sets",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "wyckoff_sets",
+                            "label": "wyckoff_sets_spacegroups"
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Sets of Wyckoff letters related by normalizer operations. Each inner list groups Wyckoff positions that can be interchanged by the relevant normalizer action.",
+                        "x-optimade-unit": "inapplicable",
+                        "items": {
+                            "x-optimade-type": "list",
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "One Wyckoff-set combination.",
+                            "items": {
+                                "x-optimade-type": "string",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "Wyckoff letter.",
+                                "x-optimade-unit": "inapplicable"
+                            },
+                            "x-optimade-unit": "inapplicable"
+                        },
+                        "examples": [
+                            [
+                                [
+                                    "a"
+                                ]
+                            ],
+                            [
+                                [
+                                    "i"
+                                ],
+                                [
+                                    "h"
+                                ],
+                                [
+                                    "g"
+                                ]
+                            ]
+                        ]
+                    },
+                    "hall_aliases": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_aliases",
+                        "title": "Hall Aliases",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hall_aliases",
+                            "label": "hall_aliases_spacegroups"
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Alternate ASCII Hall symbols or Hall-setting keys associated with the same generated setting.\n\nAliases capture duplicate or equivalent Hall-table forms that identify the same setting in the generated tables.\n\n**Requirements/Conventions**:\n\n- The preferred display symbol is stored in `hall`.\n- Alias values SHOULD NOT be assumed to be unique across all settings without also considering the setting key.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            [
+                                "A -2yac"
+                            ],
+                            [
+                                "C -2ybc"
+                            ]
+                        ],
+                        "items": {
+                            "x-optimade-type": "string",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "One alternate symbol string.",
+                            "x-optimade-unit": "inapplicable"
+                        }
+                    },
+                    "hall_aliases_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_aliases_markup",
+                        "title": "Hall alias markups",
+                        "$comment": "Anyterial symmetry property definition using the common string markup object for each list item.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hall_aliases_markup",
+                            "label": "hall_aliases_markup_spacegroups"
+                        },
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Display-oriented renderings corresponding element-by-element to the alternate Hall symbols in `hall_aliases`.\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
+                            "title": "String markups",
+                            "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "string_markups",
+                                "label": "string_markups_core"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+                            "properties": {
+                                "html": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "HTML rendering of the sibling string."
+                                },
+                                "latex": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "LaTeX rendering of the sibling string."
+                                },
+                                "unicode": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Unicode rendering of the sibling string."
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                    "latex": "\\mathit{P}\\,2_{1}/c",
+                                    "unicode": "P2\u2081/c"
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "html": "<i>P</i> 1",
+                                    "latex": "\\mathrm{P} 1",
+                                    "unicode": "P 1"
+                                }
+                            ]
+                        ]
+                    },
+                    "hm_extended_aliases": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_aliases",
+                        "title": "Hermann-Mauguin Extended Aliases",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_extended_aliases",
+                            "label": "hm_extended_aliases_spacegroups"
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Alternate ASCII forms of `hm_extended` that are accepted for the same generated setting. The preferred symbol is stored in `hm_extended`.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            [
+                                "A b m 2\n c c 21"
+                            ],
+                            [
+                                "B m a 2\n c c 21"
+                            ]
+                        ],
+                        "items": {
+                            "x-optimade-type": "string",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "One alternate symbol string.",
+                            "x-optimade-unit": "inapplicable"
+                        }
+                    },
+                    "hm_extended_aliases_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_aliases_markup",
+                        "title": "Extended Hermann-Mauguin alias markups",
+                        "$comment": "Anyterial symmetry property definition using the common string markup object for each list item.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_extended_aliases_markup",
+                            "label": "hm_extended_aliases_markup_spacegroups"
+                        },
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Display-oriented renderings corresponding element-by-element to the alternate extended Hermann-Mauguin symbols in `hm_extended_aliases`.\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
+                            "title": "String markups",
+                            "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "string_markups",
+                                "label": "string_markups_core"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+                            "properties": {
+                                "html": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "HTML rendering of the sibling string."
+                                },
+                                "latex": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "LaTeX rendering of the sibling string."
+                                },
+                                "unicode": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Unicode rendering of the sibling string."
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                    "latex": "\\mathit{P}\\,2_{1}/c",
+                                    "unicode": "P2\u2081/c"
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "html": "<i>P</i> 1",
+                                    "latex": "\\mathrm{P} 1",
+                                    "unicode": "P 1"
+                                }
+                            ]
+                        ]
+                    },
+                    "setting_it_nc_aliases": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc_aliases",
+                        "title": "International Tables setting-code aliases",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "setting_it_nc_aliases",
+                            "label": "setting_it_nc_aliases_spacegroups"
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Alternative International Tables `n:c` setting identifiers that refer to the same Hall setting or are otherwise treated as aliases of `setting_it_nc` by the generator. This field is used only when the source tables expose more than one conventional label for the same generated setting.",
+                        "x-optimade-unit": "inapplicable",
+                        "items": {
+                            "x-optimade-type": "string",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "One alternate symbol string.",
+                            "x-optimade-unit": "inapplicable"
+                        },
+                        "examples": [
+                            [
+                                "68:1ba-c"
+                            ],
+                            [
+                                "68:1-cba"
+                            ]
+                        ]
+                    },
+                    "hm_short_aliases": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_aliases",
+                        "title": "Hermann-Mauguin Short Aliases",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_short_aliases",
+                            "label": "hm_short_aliases_spacegroups"
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Alternate ASCII forms of `hm_short` that are accepted for the same generated setting. The preferred symbol is stored in `hm_short`.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            [
+                                "C c c a",
+                                "C c c b"
+                            ],
+                            [
+                                "A b a a",
+                                "A c a a"
+                            ]
+                        ],
+                        "items": {
+                            "x-optimade-type": "string",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "One alternate symbol string.",
+                            "x-optimade-unit": "inapplicable"
+                        }
+                    },
+                    "hm_short_aliases_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_aliases_markup",
+                        "title": "Short Hermann-Mauguin alias markups",
+                        "$comment": "Anyterial symmetry property definition using the common string markup object for each list item.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_short_aliases_markup",
+                            "label": "hm_short_aliases_markup_spacegroups"
+                        },
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Display-oriented renderings corresponding element-by-element to the alternate short Hermann-Mauguin symbols in `hm_short_aliases`.\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
+                            "title": "String markups",
+                            "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "string_markups",
+                                "label": "string_markups_core"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+                            "properties": {
+                                "html": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "HTML rendering of the sibling string."
+                                },
+                                "latex": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "LaTeX rendering of the sibling string."
+                                },
+                                "unicode": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Unicode rendering of the sibling string."
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                    "latex": "\\mathit{P}\\,2_{1}/c",
+                                    "unicode": "P2\u2081/c"
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "html": "<i>P</i> 1",
+                                    "latex": "\\mathrm{P} 1",
+                                    "unicode": "P 1"
+                                }
+                            ]
+                        ]
+                    },
+                    "hm_full_aliases": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_aliases",
+                        "title": "Hermann-Mauguin Full Aliases",
+                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_full_aliases",
+                            "label": "hm_full_aliases_spacegroups"
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Alternate ASCII forms of `hm_full` that are accepted for the same generated setting. The preferred symbol is stored in `hm_full`.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            [
+                                "F 23"
+                            ],
+                            [
+                                "I 23"
+                            ]
+                        ],
+                        "items": {
+                            "x-optimade-type": "string",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "One alternate symbol string.",
+                            "x-optimade-unit": "inapplicable"
+                        }
+                    },
+                    "hm_full_aliases_markup": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_aliases_markup",
+                        "title": "Full Hermann-Mauguin alias markups",
+                        "$comment": "Anyterial symmetry property definition using the common string markup object for each list item.",
+                        "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_full_aliases_markup",
+                            "label": "hm_full_aliases_markup_spacegroups"
+                        },
+                        "x-optimade-unit": "inapplicable",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "description": "Display-oriented renderings corresponding element-by-element to the alternate full Hermann-Mauguin symbols in `hm_full_aliases`.\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
+                        "items": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
+                            "title": "String markups",
+                            "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "string_markups",
+                                "label": "string_markups_core"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+                            "properties": {
+                                "html": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "HTML rendering of the sibling string."
+                                },
+                                "latex": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "LaTeX rendering of the sibling string."
+                                },
+                                "unicode": {
+                                    "x-optimade-type": "string",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Unicode rendering of the sibling string."
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "html": "<i>P</i> 2<sub>1</sub>/<i>c</i>",
+                                    "latex": "\\mathit{P}\\,2_{1}/c",
+                                    "unicode": "P2\u2081/c"
+                                }
+                            ]
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "html": "<i>P</i> 1",
+                                    "latex": "\\mathrm{P} 1",
+                                    "unicode": "P 1"
+                                }
+                            ]
+                        ]
+                    }
+                }
             },
             "examples": [
                 [
