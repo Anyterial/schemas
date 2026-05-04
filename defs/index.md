@@ -1,6 +1,18 @@
 # Index
 
 * **v0.1**
+    * **datasets**
+        * **[Point groups](v0.1/datasets/pointgroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/datasets/pointgroups`](https://schemas.anyterial.se/defs/v0.1/datasets/pointgroups.md)
+            
+            Ordered table of crystallographic point-group records.
+            Each item contains point-group classification, finite point-group operations, conjugacy classes, and real and complex character tables generated from cctbx and spgrep.
+
+        * **[Space groups](v0.1/datasets/spacegroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/datasets/spacegroups`](https://schemas.anyterial.se/defs/v0.1/datasets/spacegroups.md)
+            
+            Ordered table of crystallographic space-group setting records.
+            Each item describes one concrete Hall/International Tables setting of a space group, including symbols, classifications, symmetry operations, asymmetric-unit information, Wyckoff positions, and related auxiliary data.
+            The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps normalized Hall entries to indices in this list; it is not an OPTIMADE property.
+
     * **entrytypes**
         * **[Anyterial point group symmetry fields](v0.1/entrytypes/pointgroups.md)** (entrytype) - [`https://schemas.anyterial.se/defs/v0.1/entrytypes/pointgroups`](https://schemas.anyterial.se/defs/v0.1/entrytypes/pointgroups.md)
             
@@ -55,11 +67,6 @@
             * **[Order](v0.1/properties/pointgroups/order.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order.md)
                 
                 Order of the point group, i.e. the number of operations in the finite point group.
-
-            * **[Point groups](v0.1/properties/pointgroups/pointgroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/pointgroups`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/pointgroups.md)
-                
-                Ordered table of crystallographic point-group records.
-                Each item contains point-group classification, finite point-group operations, conjugacy classes, and real and complex character tables generated from cctbx and spgrep.
 
             * **[Schoenflies Symbol](v0.1/properties/pointgroups/schoenflies.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies.md)
                 
@@ -445,12 +452,6 @@
                 
                 Ordered table of conventional space-group symbol rows.
                 Each row describes one Hall setting where the International Tables symbol data is available, including the IT coordinate-system code, Hall symbol, IT number, and Hermann-Mauguin symbols.
-
-            * **[Space groups](v0.1/properties/spacegroups/spacegroups.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroups`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroups.md)
-                
-                Ordered table of crystallographic space-group setting records.
-                Each item describes one concrete Hall/International Tables setting of a space group, including symbols, classifications, symmetry operations, asymmetric-unit information, Wyckoff positions, and related auxiliary data.
-                The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps normalized Hall entries to indices in this list; it is not an OPTIMADE property.
 
             * **[Spglib Hall](v0.1/properties/spacegroups/spglib_hall.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall.md)
                 

@@ -96,6 +96,22 @@ overflow-wrap: break-word;
 <p><strong>v0.1</strong></p>
 <ul>
 <li>
+<p><strong>datasets</strong></p>
+<ul>
+<li>
+<p><strong><a href="v0.1/datasets/pointgroups">Point groups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/datasets/pointgroups"><code>https://schemas.anyterial.se/defs/v0.1/datasets/pointgroups</code></a></p>
+<p>Ordered table of crystallographic point-group records.
+Each item contains point-group classification, finite point-group operations, conjugacy classes, and real and complex character tables generated from cctbx and spgrep.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/datasets/spacegroups">Space groups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/datasets/spacegroups"><code>https://schemas.anyterial.se/defs/v0.1/datasets/spacegroups</code></a></p>
+<p>Ordered table of crystallographic space-group setting records.
+Each item describes one concrete Hall/International Tables setting of a space group, including symbols, classifications, symmetry operations, asymmetric-unit information, Wyckoff positions, and related auxiliary data.
+The companion top-level <code>indicies.index_hall_entry_to_spacegroups</code> lookup maps normalized Hall entries to indices in this list; it is not an OPTIMADE property.</p>
+</li>
+</ul>
+</li>
+<li>
 <p><strong>entrytypes</strong></p>
 <ul>
 <li>
@@ -161,11 +177,6 @@ The object is intended for display-oriented variants only; the corresponding uns
 <li>
 <p><strong><a href="v0.1/properties/pointgroups/order">Order</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order"><code>https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order</code></a></p>
 <p>Order of the point group, i.e. the number of operations in the finite point group.</p>
-</li>
-<li>
-<p><strong><a href="v0.1/properties/pointgroups/pointgroups">Point groups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/pointgroups"><code>https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/pointgroups</code></a></p>
-<p>Ordered table of crystallographic point-group records.
-Each item contains point-group classification, finite point-group operations, conjugacy classes, and real and complex character tables generated from cctbx and spgrep.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/pointgroups/schoenflies">Schoenflies Symbol</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies"><code>https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies</code></a></p>
@@ -555,12 +566,6 @@ The plain string value is stored in the corresponding unsuffixed property; this 
 <p><strong><a href="v0.1/properties/spacegroups/spacegroup_symbols">Space-group symbols</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroup_symbols"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroup_symbols</code></a></p>
 <p>Ordered table of conventional space-group symbol rows.
 Each row describes one Hall setting where the International Tables symbol data is available, including the IT coordinate-system code, Hall symbol, IT number, and Hermann-Mauguin symbols.</p>
-</li>
-<li>
-<p><strong><a href="v0.1/properties/spacegroups/spacegroups">Space groups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroups"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroups</code></a></p>
-<p>Ordered table of crystallographic space-group setting records.
-Each item describes one concrete Hall/International Tables setting of a space group, including symbols, classifications, symmetry operations, asymmetric-unit information, Wyckoff positions, and related auxiliary data.
-The companion top-level <code>indicies.index_hall_entry_to_spacegroups</code> lookup maps normalized Hall entries to indices in this list; it is not an OPTIMADE property.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/spglib_hall">Spglib Hall</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall</code></a></p>
