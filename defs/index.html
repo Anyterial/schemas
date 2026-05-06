@@ -642,10 +642,11 @@ The semantic meaning of <code>target</code> is parent-specific and should not be
 <p>Display Hall symbol corresponding to <code>to_hall</code>.</p>
 </li>
 <li>
-<p><strong><a href="v0.1/properties/spacegroups/transformations_per_hall">Transformations per Hall entry</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hall"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hall</code></a></p>
-<p>Transformation data grouped by Hall entry.
-Each list item contains the Hall entry as ordinary data together with all transformation sections generated for that setting.
-This representation avoids using Hall entries as JSON dictionary keys in the OPTIMADE-described payload.</p>
+<p><strong><a href="v0.1/properties/spacegroups/transformations_per_hm_entry">Transformations per H-M entry</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hm_entry"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hm_entry</code></a></p>
+<p>Transformation data grouped by H-M entry.
+Each list item contains the H-M entry as ordinary data together with all transformation sections generated for that setting.
+This representation avoids using H-M entries as JSON dictionary keys in the OPTIMADE-described payload.
+The accompanying <code>hall_entry</code> field identifies the Hall symbol used to compute the symmetry operations and normalizer data.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/transformations_per_it_number">Transformations per IT number</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number</code></a></p>

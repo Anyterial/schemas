@@ -527,11 +527,12 @@
                 
                 Display Hall symbol corresponding to `to_hall`.
 
-            * **[Transformations per Hall entry](v0.1/properties/spacegroups/transformations_per_hall.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hall`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hall.md)
+            * **[Transformations per H-M entry](v0.1/properties/spacegroups/transformations_per_hm_entry.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hm_entry`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hm_entry.md)
                 
-                Transformation data grouped by Hall entry.
-                Each list item contains the Hall entry as ordinary data together with all transformation sections generated for that setting.
-                This representation avoids using Hall entries as JSON dictionary keys in the OPTIMADE-described payload.
+                Transformation data grouped by H-M entry.
+                Each list item contains the H-M entry as ordinary data together with all transformation sections generated for that setting.
+                This representation avoids using H-M entries as JSON dictionary keys in the OPTIMADE-described payload.
+                The accompanying `hall_entry` field identifies the Hall symbol used to compute the symmetry operations and normalizer data.
 
             * **[Transformations per IT number](v0.1/properties/spacegroups/transformations_per_it_number.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number.md)
                 

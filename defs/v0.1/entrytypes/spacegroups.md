@@ -300,10 +300,11 @@ Transform records follow `/properties/symmetry/basis_transform`.
     - Each dictionary MUST contain `transforms`, a list of basis-transform records.
 
 
-* **[Transformations per Hall entry (transformations_per_hall)](../properties/spacegroups/transformations_per_hall.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hall`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hall.md)  
-  Transformation data grouped by Hall entry.
-Each list item contains the Hall entry as ordinary data together with all transformation sections generated for that setting.
-This representation avoids using Hall entries as JSON dictionary keys in the OPTIMADE-described payload.
+* **[Transformations per H-M entry (transformations_per_hm_entry)](../properties/spacegroups/transformations_per_hm_entry.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hm_entry`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hm_entry.md)  
+  Transformation data grouped by H-M entry.
+Each list item contains the H-M entry as ordinary data together with all transformation sections generated for that setting.
+This representation avoids using H-M entries as JSON dictionary keys in the OPTIMADE-described payload.
+The accompanying `hall_entry` field identifies the Hall symbol used to compute the symmetry operations and normalizer data.
 
     **Requirements/Conventions:**  
 
@@ -311,8 +312,8 @@ This representation avoids using Hall entries as JSON dictionary keys in the OPT
     - **Query:** Support for queries on this property is OPTIONAL.
     - **Response:** MAY be included by default in the response.
     - It MUST be a list of dictionaries.
-    - Each dictionary MUST contain `hall_entry`.
-    - Each dictionary SHOULD contain the generated transformation sections for that Hall setting.
+    - Each dictionary MUST contain `hm_entry`.
+    - Each dictionary SHOULD contain `hall_entry` and the generated transformation sections for that setting.
 
 
 * **[Transformations per IT number (transformations_per_it_number)](../properties/spacegroups/transformations_per_it_number.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number.md)  
@@ -521,6 +522,25 @@ These operations are useful for algorithms that need to compare or enumerate equ
     
     - This field identifies a concrete Hall setting, not only an IT space-group type.
     - The same value is normally used as the key of the containing `spacegroups` map.
+
+
+* **[Hermann-Mauguin Entry (hm_entry)](../properties/spacegroups/hm_entry.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry.md)  
+  The Hermann-Mauguin entry label for a conventional space-group setting from table A1.4.2.7 of the [International Tables for Crystallography (2006). Volume B, Reciprocal space. ISBN: 978-0-7923-6592-1, doi:10.1107/97809553602060000102](https://doi.org/10.1107/97809553602060000102).
+
+    **Requirements/Conventions:**  
+
+    - **Support:** OPTIONAL support in implementations, i.e., MAY be `null`.
+    - **Query:** Support for queries on this property is OPTIONAL.
+    - **Response:** MAY be included by default in the response.
+    The symbol is a full Hermann-Mauguin-style setting label, except that:
+    
+    * The older glide-plane letters are used, rather than the newer `e` notation introduced in the Fourth Edition of the International Tables for Crystallography (1995) for the space groups Aem2 (39), Aea2 (41), Cmce (64), Cmme (67) and Ccce (68).
+    * When necessary to disambiguate the 530 conventional settings, an origin-choice suffix (`:1`, `:2`) is used.
+    
+    **Requirements/Conventions**:
+    
+    - The value MUST be written as a plain string with spaces between Hermann-Mauguin symbol parts.
+    - The disambiguation suffix MUST be a colon `:`  and an integer appended to the string without whitespace, for example `:1` or `:2`.
 
 
 * **[Hall to IT standard transform (hall_to_it_std_transform)](../properties/spacegroups/hall_to_it_std_transform.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_to_it_std_transform`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_to_it_std_transform.md)  
@@ -7130,41 +7150,65 @@ The plain string value is stored in the corresponding unsuffixed property; this 
                 ]
             ]
         },
-        "transformations_per_hall": {
-            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hall",
+        "transformations_per_hm_entry": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hm_entry",
             "x-optimade-requirements": {
                 "support": "may",
                 "sortable": false,
                 "query-support": "none",
                 "response-level": "may"
             },
-            "title": "Transformations per Hall entry",
-            "$comment": "Anyterial property definition for Hall-entry grouped transformation records.",
+            "title": "Transformations per H-M entry",
+            "$comment": "Anyterial property definition for H-M-entry grouped transformation records.",
             "x-optimade-type": "list",
             "x-optimade-definition": {
                 "kind": "property",
                 "version": "0.1.0",
                 "format": "1.3",
-                "name": "transformations_per_hall",
-                "label": "transformations_per_hall_spacegroups"
+                "name": "transformations_per_hm_entry",
+                "label": "transformations_per_hm_entry_spacegroups"
             },
             "x-optimade-unit": "inapplicable",
             "type": [
                 "array",
                 "null"
             ],
-            "description": "Transformation data grouped by Hall entry.\nEach list item contains the Hall entry as ordinary data together with all transformation sections generated for that setting.\nThis representation avoids using Hall entries as JSON dictionary keys in the OPTIMADE-described payload.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `hall_entry`.\n- Each dictionary SHOULD contain the generated transformation sections for that Hall setting.",
+            "description": "Transformation data grouped by H-M entry.\nEach list item contains the H-M entry as ordinary data together with all transformation sections generated for that setting.\nThis representation avoids using H-M entries as JSON dictionary keys in the OPTIMADE-described payload.\nThe accompanying `hall_entry` field identifies the Hall symbol used to compute the symmetry operations and normalizer data.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `hm_entry`.\n- Each dictionary SHOULD contain `hall_entry` and the generated transformation sections for that setting.",
             "items": {
                 "x-optimade-type": "dictionary",
                 "x-optimade-unit": "inapplicable",
                 "type": [
                     "object"
                 ],
-                "description": "Transformation record for one Hall entry.",
+                "description": "Transformation record for one H-M entry.",
                 "required": [
-                    "hall_entry"
+                    "hm_entry"
                 ],
                 "properties": {
+                    "hm_entry": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry",
+                        "title": "Hermann-Mauguin Entry",
+                        "$comment": "Anyterial symmetry property definition based on International Tables for Crystallography Volume B table A1.4.2.7.",
+                        "x-optimade-type": "string",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "hm_entry",
+                            "label": "hm_entry_spacegroups"
+                        },
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The Hermann-Mauguin entry label for a conventional space-group setting from table A1.4.2.7 of the [International Tables for Crystallography (2006). Volume B, Reciprocal space. ISBN: 978-0-7923-6592-1, doi:10.1107/97809553602060000102](https://doi.org/10.1107/97809553602060000102).\n\nThe symbol is a full Hermann-Mauguin-style setting label, except that:\n\n* The older glide-plane letters are used, rather than the newer `e` notation introduced in the Fourth Edition of the International Tables for Crystallography (1995) for the space groups Aem2 (39), Aea2 (41), Cmce (64), Cmme (67) and Ccce (68).\n* When necessary to disambiguate the 530 conventional settings, an origin-choice suffix (`:1`, `:2`) is used.\n\n**Requirements/Conventions**:\n\n- The value MUST be written as a plain string with spaces between Hermann-Mauguin symbol parts.\n- The disambiguation suffix MUST be a colon `:`  and an integer appended to the string without whitespace, for example `:1` or `:2`.",
+                        "x-optimade-unit": "inapplicable",
+                        "examples": [
+                            "P 1",
+                            "C c c a:1",
+                            "C c c b:2"
+                        ]
+                    },
                     "hall_entry": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
                         "title": "Hall entry",
@@ -11109,6 +11153,7 @@ The plain string value is stored in the corresponding unsuffixed property; this 
             "examples": [
                 [
                     {
+                        "hm_entry": "P 1",
                         "hall_entry": "p_1",
                         "baernighausen": []
                     }
@@ -16811,6 +16856,36 @@ The plain string value is stored in the corresponding unsuffixed property; this 
             "examples": [
                 "p_1",
                 "-p_1"
+            ]
+        },
+        "hm_entry": {
+            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry",
+            "x-optimade-requirements": {
+                "support": "may",
+                "sortable": false,
+                "query-support": "none",
+                "response-level": "may"
+            },
+            "title": "Hermann-Mauguin Entry",
+            "$comment": "Anyterial symmetry property definition based on International Tables for Crystallography Volume B table A1.4.2.7.",
+            "x-optimade-type": "string",
+            "x-optimade-definition": {
+                "kind": "property",
+                "version": "0.1.0",
+                "format": "1.3",
+                "name": "hm_entry",
+                "label": "hm_entry_spacegroups"
+            },
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "The Hermann-Mauguin entry label for a conventional space-group setting from table A1.4.2.7 of the [International Tables for Crystallography (2006). Volume B, Reciprocal space. ISBN: 978-0-7923-6592-1, doi:10.1107/97809553602060000102](https://doi.org/10.1107/97809553602060000102).\n\nThe symbol is a full Hermann-Mauguin-style setting label, except that:\n\n* The older glide-plane letters are used, rather than the newer `e` notation introduced in the Fourth Edition of the International Tables for Crystallography (1995) for the space groups Aem2 (39), Aea2 (41), Cmce (64), Cmme (67) and Ccce (68).\n* When necessary to disambiguate the 530 conventional settings, an origin-choice suffix (`:1`, `:2`) is used.\n\n**Requirements/Conventions**:\n\n- The value MUST be written as a plain string with spaces between Hermann-Mauguin symbol parts.\n- The disambiguation suffix MUST be a colon `:`  and an integer appended to the string without whitespace, for example `:1` or `:2`.",
+            "x-optimade-unit": "inapplicable",
+            "examples": [
+                "P 1",
+                "C c c a:1",
+                "C c c b:2"
             ]
         },
         "hall_to_it_std_transform": {

@@ -5840,41 +5840,65 @@ overflow-wrap: break-word;
 <span class="w">                        </span><span class="p">]</span>
 <span class="w">                    </span><span class="p">]</span>
 <span class="w">                </span><span class="p">},</span>
-<span class="w">                </span><span class="nt">&quot;transformations_per_hall&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hall&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;transformations_per_hm_entry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_hm_entry&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nt">&quot;x-optimade-requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                        </span><span class="nt">&quot;support&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;may&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="nt">&quot;sortable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">                        </span><span class="nt">&quot;query-support&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="nt">&quot;response-level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;may&quot;</span>
 <span class="w">                    </span><span class="p">},</span>
-<span class="w">                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Transformations per Hall entry&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="nt">&quot;$comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Anyterial property definition for Hall-entry grouped transformation records.&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Transformations per H-M entry&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;$comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Anyterial property definition for H-M-entry grouped transformation records.&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                        </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;property&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.3&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;transformations_per_hall&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;transformations_per_hall_spacegroups&quot;</span>
+<span class="w">                        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;transformations_per_hm_entry&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;transformations_per_hm_entry_spacegroups&quot;</span>
 <span class="w">                    </span><span class="p">},</span>
 <span class="w">                    </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                        </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="s2">&quot;null&quot;</span>
 <span class="w">                    </span><span class="p">],</span>
-<span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Transformation data grouped by Hall entry.\nEach list item contains the Hall entry as ordinary data together with all transformation sections generated for that setting.\nThis representation avoids using Hall entries as JSON dictionary keys in the OPTIMADE-described payload.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `hall_entry`.\n- Each dictionary SHOULD contain the generated transformation sections for that Hall setting.&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Transformation data grouped by H-M entry.\nEach list item contains the H-M entry as ordinary data together with all transformation sections generated for that setting.\nThis representation avoids using H-M entries as JSON dictionary keys in the OPTIMADE-described payload.\nThe accompanying `hall_entry` field identifies the Hall symbol used to compute the symmetry operations and normalizer data.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `hm_entry`.\n- Each dictionary SHOULD contain `hall_entry` and the generated transformation sections for that setting.&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                        </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dictionary&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                            </span><span class="s2">&quot;object&quot;</span>
 <span class="w">                        </span><span class="p">],</span>
-<span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Transformation record for one Hall entry.&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Transformation record for one H-M entry.&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                            </span><span class="s2">&quot;hall_entry&quot;</span>
+<span class="w">                            </span><span class="s2">&quot;hm_entry&quot;</span>
 <span class="w">                        </span><span class="p">],</span>
 <span class="w">                        </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="nt">&quot;hm_entry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hermann-Mauguin Entry&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="nt">&quot;$comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Anyterial symmetry property definition based on International Tables for Crystallography Volume B table A1.4.2.7.&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                    </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;property&quot;</span><span class="p">,</span>
+<span class="w">                                    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+<span class="w">                                    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.3&quot;</span><span class="p">,</span>
+<span class="w">                                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hm_entry&quot;</span><span class="p">,</span>
+<span class="w">                                    </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hm_entry_spacegroups&quot;</span>
+<span class="w">                                </span><span class="p">},</span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                    </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">                                    </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                                </span><span class="p">],</span>
+<span class="w">                                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The Hermann-Mauguin entry label for a conventional space-group setting from table A1.4.2.7 of the [International Tables for Crystallography (2006). Volume B, Reciprocal space. ISBN: 978-0-7923-6592-1, doi:10.1107/97809553602060000102](https://doi.org/10.1107/97809553602060000102).\n\nThe symbol is a full Hermann-Mauguin-style setting label, except that:\n\n* The older glide-plane letters are used, rather than the newer `e` notation introduced in the Fourth Edition of the International Tables for Crystallography (1995) for the space groups Aem2 (39), Aea2 (41), Cmce (64), Cmme (67) and Ccce (68).\n* When necessary to disambiguate the 530 conventional settings, an origin-choice suffix (`:1`, `:2`) is used.\n\n**Requirements/Conventions**:\n\n- The value MUST be written as a plain string with spaces between Hermann-Mauguin symbol parts.\n- The disambiguation suffix MUST be a colon `:`  and an integer appended to the string without whitespace, for example `:1` or `:2`.&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="nt">&quot;examples&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                    </span><span class="s2">&quot;P 1&quot;</span><span class="p">,</span>
+<span class="w">                                    </span><span class="s2">&quot;C c c a:1&quot;</span><span class="p">,</span>
+<span class="w">                                    </span><span class="s2">&quot;C c c b:2&quot;</span>
+<span class="w">                                </span><span class="p">]</span>
+<span class="w">                            </span><span class="p">},</span>
 <span class="w">                            </span><span class="nt">&quot;hall_entry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry&quot;</span><span class="p">,</span>
 <span class="w">                                </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hall entry&quot;</span><span class="p">,</span>
@@ -9819,6 +9843,7 @@ overflow-wrap: break-word;
 <span class="w">                    </span><span class="nt">&quot;examples&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                        </span><span class="p">[</span>
 <span class="w">                            </span><span class="p">{</span>
+<span class="w">                                </span><span class="nt">&quot;hm_entry&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;P 1&quot;</span><span class="p">,</span>
 <span class="w">                                </span><span class="nt">&quot;hall_entry&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;p_1&quot;</span><span class="p">,</span>
 <span class="w">                                </span><span class="nt">&quot;baernighausen&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">                            </span><span class="p">}</span>
@@ -15521,6 +15546,36 @@ overflow-wrap: break-word;
 <span class="w">                    </span><span class="nt">&quot;examples&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                        </span><span class="s2">&quot;p_1&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="s2">&quot;-p_1&quot;</span>
+<span class="w">                    </span><span class="p">]</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;hm_entry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;x-optimade-requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;support&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;may&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;sortable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;query-support&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;response-level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;may&quot;</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hermann-Mauguin Entry&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;$comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Anyterial symmetry property definition based on International Tables for Crystallography Volume B table A1.4.2.7.&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;property&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.3&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hm_entry&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hm_entry_spacegroups&quot;</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                        </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                    </span><span class="p">],</span>
+<span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The Hermann-Mauguin entry label for a conventional space-group setting from table A1.4.2.7 of the [International Tables for Crystallography (2006). Volume B, Reciprocal space. ISBN: 978-0-7923-6592-1, doi:10.1107/97809553602060000102](https://doi.org/10.1107/97809553602060000102).\n\nThe symbol is a full Hermann-Mauguin-style setting label, except that:\n\n* The older glide-plane letters are used, rather than the newer `e` notation introduced in the Fourth Edition of the International Tables for Crystallography (1995) for the space groups Aem2 (39), Aea2 (41), Cmce (64), Cmme (67) and Ccce (68).\n* When necessary to disambiguate the 530 conventional settings, an origin-choice suffix (`:1`, `:2`) is used.\n\n**Requirements/Conventions**:\n\n- The value MUST be written as a plain string with spaces between Hermann-Mauguin symbol parts.\n- The disambiguation suffix MUST be a colon `:`  and an integer appended to the string without whitespace, for example `:1` or `:2`.&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;examples&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                        </span><span class="s2">&quot;P 1&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;C c c a:1&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="s2">&quot;C c c b:2&quot;</span>
 <span class="w">                    </span><span class="p">]</span>
 <span class="w">                </span><span class="p">},</span>
 <span class="w">                </span><span class="nt">&quot;hall_to_it_std_transform&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
