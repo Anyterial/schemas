@@ -239,6 +239,12 @@
                 
                 Alternative Hermann-Mauguin entry labels from International Tables for Crystallography Volume B table A1.4.2.7 that identify the same generated Hall-symbol row as `hm_entry`.
 
+            * **[Hermann-Mauguin entry markups](v0.1/properties/spacegroups/hm_entry_markup.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_markup`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_markup.md)
+                
+                Display-oriented renderings of the Hermann-Mauguin entry label in `hm_entry`.
+                The plain string value is stored in `hm_entry`; this object only provides alternate markup forms for display.
+                These renderings follow the same typographic conventions as `hm_full_markup`.
+
             * **[Extended Hermann-Mauguin Symbol](v0.1/properties/spacegroups/hm_extended.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended.md)
                 
                 The setting-specific extended Hermann-Mauguin symbol for the space-group setting.
