@@ -231,6 +231,14 @@
                 
                 Universal Hermann-Mauguin symbol returned by cctbx for this setting.
 
+            * **[Hermann-Mauguin Entry](v0.1/properties/spacegroups/hm_entry.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry.md)
+                
+                The Hermann-Mauguin entry label for a conventional space-group setting from table A1.4.2.7 of the [International Tables for Crystallography (2006). Volume B, Reciprocal space. ISBN: 978-0-7923-6592-1, doi:10.1107/97809553602060000102](https://doi.org/10.1107/97809553602060000102).
+
+            * **[Hermann-Mauguin Entry Aliases](v0.1/properties/spacegroups/hm_entry_aliases.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_aliases`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_aliases.md)
+                
+                Alternative Hermann-Mauguin entry labels from International Tables for Crystallography Volume B table A1.4.2.7 that identify the same generated Hall-symbol row as `hm_entry`.
+
             * **[Extended Hermann-Mauguin Symbol](v0.1/properties/spacegroups/hm_extended.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended.md)
                 
                 The setting-specific extended Hermann-Mauguin symbol for the space-group setting.
