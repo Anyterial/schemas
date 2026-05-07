@@ -499,6 +499,16 @@
                 
                 Minimal generator subset of the full symmetry-operation group in fractional `x,y,z` notation, ordered consistently with `symops_generators`.
 
+            * **[Symmetry operations modulo centering translations](v0.1/properties/spacegroups/symops_mod_centering.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering.md)
+                
+                Representative symmetry-operation descriptors modulo centering translations.
+                Each list member is a `op` object as defined by `/properties/symmetry/op`.
+                For space-group operations, generated data currently uses `rot_type`, `axis`, `sense`, `screw_glide`, and `origin_shift`.
+
+            * **[Symmetry operations modulo centering in x,y,z notation](v0.1/properties/spacegroups/symops_mod_centering_xyz.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering_xyz`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering_xyz.md)
+                
+                Symmetry operations modulo centering translations in fractional `x,y,z` notation, ordered consistently with `symops_mod_centering`.
+
             * **[Representative symmetry operations](v0.1/properties/spacegroups/symops_representative.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative.md)
                 
                 Representative symmetry-operation descriptors modulo centering translations.
@@ -533,6 +543,7 @@
                 Each list item contains the H-M entry as ordinary data together with all transformation sections generated for that setting.
                 This representation avoids using H-M entries as JSON dictionary keys in the OPTIMADE-described payload.
                 The accompanying `hall_entry` field identifies the Hall symbol used to compute the symmetry operations and normalizer data.
+                The `centering_translations` and `centering_translations_xyz` fields give the setting's centering translations directly in each record, so modulo-centering operation lists can be interpreted without joining against another dataset.
 
             * **[Transformations per IT number](v0.1/properties/spacegroups/transformations_per_it_number.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number.md)
                 

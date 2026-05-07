@@ -614,6 +614,16 @@ For space-group operations, generated data currently uses <code>rot_type</code>,
 <p>Minimal generator subset of the full symmetry-operation group in fractional <code>x,y,z</code> notation, ordered consistently with <code>symops_generators</code>.</p>
 </li>
 <li>
+<p><strong><a href="v0.1/properties/spacegroups/symops_mod_centering">Symmetry operations modulo centering translations</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering</code></a></p>
+<p>Representative symmetry-operation descriptors modulo centering translations.
+Each list member is a <code>op</code> object as defined by <code>/properties/symmetry/op</code>.
+For space-group operations, generated data currently uses <code>rot_type</code>, <code>axis</code>, <code>sense</code>, <code>screw_glide</code>, and <code>origin_shift</code>.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/spacegroups/symops_mod_centering_xyz">Symmetry operations modulo centering in x,y,z notation</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering_xyz"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering_xyz</code></a></p>
+<p>Symmetry operations modulo centering translations in fractional <code>x,y,z</code> notation, ordered consistently with <code>symops_mod_centering</code>.</p>
+</li>
+<li>
 <p><strong><a href="v0.1/properties/spacegroups/symops_representative">Representative symmetry operations</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative</code></a></p>
 <p>Representative symmetry-operation descriptors modulo centering translations.
 Each list member is a <code>op</code> object as defined by <code>/properties/symmetry/op</code>.
@@ -646,7 +656,8 @@ The semantic meaning of <code>target</code> is parent-specific and should not be
 <p>Transformation data grouped by H-M entry.
 Each list item contains the H-M entry as ordinary data together with all transformation sections generated for that setting.
 This representation avoids using H-M entries as JSON dictionary keys in the OPTIMADE-described payload.
-The accompanying <code>hall_entry</code> field identifies the Hall symbol used to compute the symmetry operations and normalizer data.</p>
+The accompanying <code>hall_entry</code> field identifies the Hall symbol used to compute the symmetry operations and normalizer data.
+The <code>centering_translations</code> and <code>centering_translations_xyz</code> fields give the setting's centering translations directly in each record, so modulo-centering operation lists can be interpreted without joining against another dataset.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/transformations_per_it_number">Transformations per IT number</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/transformations_per_it_number</code></a></p>
