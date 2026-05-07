@@ -13,11 +13,20 @@
             Each item describes one concrete Hall/International Tables setting of a space group, including symbols, classifications, symmetry operations, asymmetric-unit information, Wyckoff positions, and related auxiliary data.
             The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps normalized Hall entries to indices in this list; it is not an OPTIMADE property.
 
+        * **[Transformations](v0.1/datasets/transformations.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/datasets/transformations`](https://schemas.anyterial.se/defs/v0.1/datasets/transformations.md)
+            
+            Ordered table of crystallographic transformation records.
+            Each item describes transformations and normalizer information for one concrete International Tables H-M entry.
+            In `transformations_hm_entry.json.gz`, items are keyed for lookup by the companion top-level `indicies.index_hm_entry_to_transformations_per_hm_entry` object; that index is not an OPTIMADE property.
+
     * **entrytypes**
         * **[Anyterial point group symmetry fields](v0.1/entrytypes/pointgroups.md)** (entrytype) - [`https://schemas.anyterial.se/defs/v0.1/entrytypes/pointgroups`](https://schemas.anyterial.se/defs/v0.1/entrytypes/pointgroups.md)
             
 
         * **[Anyterial space group symmetry fields](v0.1/entrytypes/spacegroups.md)** (entrytype) - [`https://schemas.anyterial.se/defs/v0.1/entrytypes/spacegroups`](https://schemas.anyterial.se/defs/v0.1/entrytypes/spacegroups.md)
+            
+
+        * **[Anyterial transformation fields](v0.1/entrytypes/transformations.md)** (entrytype) - [`https://schemas.anyterial.se/defs/v0.1/entrytypes/transformations`](https://schemas.anyterial.se/defs/v0.1/entrytypes/transformations.md)
             
 
     * **properties**

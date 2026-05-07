@@ -109,6 +109,12 @@ Each item contains point-group classification, finite point-group operations, co
 Each item describes one concrete Hall/International Tables setting of a space group, including symbols, classifications, symmetry operations, asymmetric-unit information, Wyckoff positions, and related auxiliary data.
 The companion top-level <code>indicies.index_hall_entry_to_spacegroups</code> lookup maps normalized Hall entries to indices in this list; it is not an OPTIMADE property.</p>
 </li>
+<li>
+<p><strong><a href="v0.1/datasets/transformations">Transformations</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/datasets/transformations"><code>https://schemas.anyterial.se/defs/v0.1/datasets/transformations</code></a></p>
+<p>Ordered table of crystallographic transformation records.
+Each item describes transformations and normalizer information for one concrete International Tables H-M entry.
+In <code>transformations_hm_entry.json.gz</code>, items are keyed for lookup by the companion top-level <code>indicies.index_hm_entry_to_transformations_per_hm_entry</code> object; that index is not an OPTIMADE property.</p>
+</li>
 </ul>
 </li>
 <li>
@@ -119,6 +125,9 @@ The companion top-level <code>indicies.index_hall_entry_to_spacegroups</code> lo
 </li>
 <li>
 <p><strong><a href="v0.1/entrytypes/spacegroups">Anyterial space group symmetry fields</a></strong> (entrytype) - <a href="https://schemas.anyterial.se/defs/v0.1/entrytypes/spacegroups"><code>https://schemas.anyterial.se/defs/v0.1/entrytypes/spacegroups</code></a></p>
+</li>
+<li>
+<p><strong><a href="v0.1/entrytypes/transformations">Anyterial transformation fields</a></strong> (entrytype) - <a href="https://schemas.anyterial.se/defs/v0.1/entrytypes/transformations"><code>https://schemas.anyterial.se/defs/v0.1/entrytypes/transformations</code></a></p>
 </li>
 </ul>
 </li>
