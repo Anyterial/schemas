@@ -1,11 +1,11 @@
-# fraction (property)
+# Fraction (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/core/fraction`](https://schemas.anyterial.se/defs/v0.1/properties/core/fraction.md)**  
 **Definition name:** `fraction`
 
-**Property name:** fraction  
+**Property name:** Fraction  
 **Description:** A numerical representation formed as the quotient of two numbers represented as a string.  
 **Type:** string  
 
@@ -26,7 +26,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
     "$schema": "https://schemas.optimade.org/meta/v1.2/optimade/property_definition.json",
-    "title": "fraction",
+    "title": "Fraction",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "label": "fraction_core",

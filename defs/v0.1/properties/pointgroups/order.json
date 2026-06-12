@@ -1,7 +1,7 @@
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Order",
+    "title": "Order of the point group",
     "x-optimade-type": "integer",
     "x-optimade-definition": {
         "kind": "property",
@@ -14,7 +14,7 @@
         "integer",
         "null"
     ],
-    "description": "Order of the point group, i.e. the number of operations in the finite point group.",
+    "description": "Order of the point group, i.e. the number of operations in the finite point group.\n\nThis value MUST equal the length of the `symops` list of the point-group entry.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         1,

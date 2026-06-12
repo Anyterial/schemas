@@ -1,20 +1,26 @@
-# Conjugacy Classes (property)
+# Conjugacy classes (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/conjugacy_classes`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/conjugacy_classes.md)**  
 **Definition name:** `conjugacy_classes`
 
-**Property name:** Conjugacy Classes  
-**Description:** Conjugacy classes of a crystallographic point group. Each class lists its member operation indices, a representative operation, a conventional class label, and operation-type metadata used by the character tables.  
+**Property name:** Conjugacy classes  
+**Description:** Conjugacy classes of a crystallographic point group.  
 **Type:** list  
 
+Each class lists its member operation indices, a representative operation, a conventional class label, and operation-type metadata used by the character tables.
+Operation indices refer to positions in the `symops` list of the same point-group record, starting at 0.
 
+**Requirements/Conventions**:
+
+- It MUST be a list of dictionaries, one per conjugacy class, ordered consistently with the character tables.
+- **size** MUST equal the length of **members**.
+- **op\_type** is the signed integer rotation-type code of the representative operation: `1`, `2`, `3`, `4`, `6` for proper rotations, and the negated value for the corresponding rotoinversions, with `-2` denoting a mirror plane.
 
 **Examples:**
 
-- `[{"label": {"ascii": "E", "unicode": "E", "latex": "E"}, "size": 1, "members": [0], "representative": 0, "op_type": 1, "op_axis": [0, 0]}]`
-- `[{"label": {"ascii": "E", "unicode": "E", "latex": "E"}, "size": 1, "members": [0], "representative": 0, "op_type": 1, "op_axis": [0, 0]}, {"label": {"ascii": "i", "unicode": "i", "latex": "i"}, "size": 1, "members": [1], "representative": 1, "op_type": -1, "op_axis": [0, 0]}]`
+- `[{"label": {"ascii": "E", "unicode": "E", "latex": "E"}, "size": 1, "members": [0], "representative": 0, "op_type": 1, "op_axis": [0, 0, 0]}, {"label": {"ascii": "i", "unicode": "i", "latex": "i"}, "size": 1, "members": [1], "representative": 1, "op_type": -1, "op_axis": [0, 0, 0]}]`
 
 **Formats:** [[JSON](conjugacy_classes.json)] [[MD](conjugacy_classes.md)]
 
@@ -24,8 +30,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/conjugacy_classes",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Conjugacy Classes",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+    "title": "Conjugacy classes",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -38,7 +43,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "array",
         "null"
     ],
-    "description": "Conjugacy classes of a crystallographic point group. Each class lists its member operation indices, a representative operation, a conventional class label, and operation-type metadata used by the character tables.",
+    "description": "Conjugacy classes of a crystallographic point group.\n\nEach class lists its member operation indices, a representative operation, a conventional class label, and operation-type metadata used by the character tables.\nOperation indices refer to positions in the `symops` list of the same point-group record, starting at 0.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries, one per conjugacy class, ordered consistently with the character tables.\n- **size** MUST equal the length of **members**.\n- **op\\_type** is the signed integer rotation-type code of the representative operation: `1`, `2`, `3`, `4`, `6` for proper rotations, and the negated value for the corresponding rotoinversions, with `-2` denoting a mirror plane.",
     "x-optimade-unit": "inapplicable",
     "items": {
         "x-optimade-type": "dictionary",
@@ -92,7 +97,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
                     "integer",
                     "null"
                 ],
-                "description": "Number of point-group operations in the class.",
+                "description": "Number of point-group operations in the class. It MUST equal the length of `members`.",
                 "x-optimade-unit": "inapplicable"
             },
             "members": {
@@ -101,14 +106,14 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
                     "array",
                     "null"
                 ],
-                "description": "Indices of operations belonging to this class.",
+                "description": "Indices into the `symops` list of the operations belonging to this class.",
                 "items": {
                     "x-optimade-type": "integer",
                     "type": [
                         "integer",
                         "null"
                     ],
-                    "description": "Operation index.",
+                    "description": "Operation index into `symops`.",
                     "x-optimade-unit": "inapplicable"
                 },
                 "x-optimade-unit": "inapplicable"
@@ -119,7 +124,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
                     "integer",
                     "null"
                 ],
-                "description": "Index of a representative operation for the class.",
+                "description": "Index into `symops` of a representative operation for the class.",
                 "x-optimade-unit": "inapplicable"
             },
             "op_type": {
@@ -128,23 +133,43 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
                     "integer",
                     "null"
                 ],
-                "description": "Numeric operation type code of the representative.",
+                "description": "Signed integer rotation-type code of the representative operation; negative values denote rotoinversions, with `-2` denoting a mirror plane.",
+                "enum": [
+                    1,
+                    -1,
+                    2,
+                    -2,
+                    3,
+                    -3,
+                    4,
+                    -4,
+                    6,
+                    -6
+                ],
                 "x-optimade-unit": "inapplicable"
             },
             "op_axis": {
                 "x-optimade-type": "list",
+                "x-optimade-dimensions": {
+                    "names": [
+                        "dim_lattice"
+                    ],
+                    "sizes": [
+                        3
+                    ]
+                },
                 "type": [
                     "array",
                     "null"
                 ],
-                "description": "Three integer components.",
+                "description": "Integer-vector axis or invariant direction of the representative operation; `[0, 0, 0]` when no axis is applicable.",
                 "items": {
                     "x-optimade-type": "integer",
                     "type": [
                         "integer",
                         "null"
                     ],
-                    "description": "One integer component.",
+                    "description": "One integer component of the axis vector.",
                     "x-optimade-unit": "inapplicable"
                 },
                 "x-optimade-unit": "inapplicable"
@@ -168,24 +193,6 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
                 "op_type": 1,
                 "op_axis": [
                     0,
-                    0
-                ]
-            }
-        ],
-        [
-            {
-                "label": {
-                    "ascii": "E",
-                    "unicode": "E",
-                    "latex": "E"
-                },
-                "size": 1,
-                "members": [
-                    0
-                ],
-                "representative": 0,
-                "op_type": 1,
-                "op_axis": [
                     0,
                     0
                 ]
@@ -203,6 +210,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
                 "representative": 1,
                 "op_type": -1,
                 "op_axis": [
+                    0,
                     0,
                     0
                 ]

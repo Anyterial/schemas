@@ -1,11 +1,11 @@
-# Hermann-Mauguin Short Old (property)
+# Short Hermann-Mauguin symbol in old notation (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_old`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_old.md)**  
 **Definition name:** `hm_short_old`
 
-**Property name:** Hermann-Mauguin Short Old  
+**Property name:** Short Hermann-Mauguin symbol in old notation  
 **Description:** The older short Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.  
 **Type:** string  
 
@@ -31,7 +31,7 @@ The `*_std` fields describe the IT-standard setting for the space-group type and
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_old",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Hermann-Mauguin Short Old",
+    "title": "Short Hermann-Mauguin symbol in old notation",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",

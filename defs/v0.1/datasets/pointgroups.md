@@ -181,7 +181,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Character Table Complex",
+                "title": "Complex character table",
                 "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
@@ -195,7 +195,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "array",
                     "null"
                 ],
-                "description": "Complex irreducible character table of the crystallographic point group. Rows correspond to complex irreducible representations and columns follow the order of `conjugacy_classes`.",
+                "description": "Complex irreducible character table of the crystallographic point group.\n\nRows correspond to complex irreducible representations and columns follow the order of `conjugacy_classes`.\nCharacters are exact complex rational values stored as dictionaries with `re` and `im` fraction strings, so that they round-trip without floating-point loss.",
                 "x-optimade-unit": "inapplicable",
                 "items": {
                     "x-optimade-type": "dictionary",
@@ -434,7 +434,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Character Table Real",
+                "title": "Real character table",
                 "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
@@ -448,7 +448,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "array",
                     "null"
                 ],
-                "description": "Real irreducible character table of the crystallographic point group. Rows correspond to real irreducible representations and columns follow the order of `conjugacy_classes`.",
+                "description": "Real irreducible character table of the crystallographic point group.\n\nRows correspond to real irreducible representations and columns follow the order of `conjugacy_classes`.\nCharacters of the real table are exact integers and are therefore stored as plain integers, unlike the `re`/`im` fraction-string pairs of `character_table_complex`.",
                 "x-optimade-unit": "inapplicable",
                 "items": {
                     "x-optimade-type": "dictionary",
@@ -688,8 +688,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Conjugacy Classes",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                "title": "Conjugacy classes",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -702,7 +701,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "array",
                     "null"
                 ],
-                "description": "Conjugacy classes of a crystallographic point group. Each class lists its member operation indices, a representative operation, a conventional class label, and operation-type metadata used by the character tables.",
+                "description": "Conjugacy classes of a crystallographic point group.\n\nEach class lists its member operation indices, a representative operation, a conventional class label, and operation-type metadata used by the character tables.\nOperation indices refer to positions in the `symops` list of the same point-group record, starting at 0.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries, one per conjugacy class, ordered consistently with the character tables.\n- **size** MUST equal the length of **members**.\n- **op\\_type** is the signed integer rotation-type code of the representative operation: `1`, `2`, `3`, `4`, `6` for proper rotations, and the negated value for the corresponding rotoinversions, with `-2` denoting a mirror plane.",
                 "x-optimade-unit": "inapplicable",
                 "items": {
                     "x-optimade-type": "dictionary",
@@ -756,7 +755,7 @@ Each item contains point-group classification, finite point-group operations, co
                                 "integer",
                                 "null"
                             ],
-                            "description": "Number of point-group operations in the class.",
+                            "description": "Number of point-group operations in the class. It MUST equal the length of `members`.",
                             "x-optimade-unit": "inapplicable"
                         },
                         "members": {
@@ -765,14 +764,14 @@ Each item contains point-group classification, finite point-group operations, co
                                 "array",
                                 "null"
                             ],
-                            "description": "Indices of operations belonging to this class.",
+                            "description": "Indices into the `symops` list of the operations belonging to this class.",
                             "items": {
                                 "x-optimade-type": "integer",
                                 "type": [
                                     "integer",
                                     "null"
                                 ],
-                                "description": "Operation index.",
+                                "description": "Operation index into `symops`.",
                                 "x-optimade-unit": "inapplicable"
                             },
                             "x-optimade-unit": "inapplicable"
@@ -783,7 +782,7 @@ Each item contains point-group classification, finite point-group operations, co
                                 "integer",
                                 "null"
                             ],
-                            "description": "Index of a representative operation for the class.",
+                            "description": "Index into `symops` of a representative operation for the class.",
                             "x-optimade-unit": "inapplicable"
                         },
                         "op_type": {
@@ -792,23 +791,43 @@ Each item contains point-group classification, finite point-group operations, co
                                 "integer",
                                 "null"
                             ],
-                            "description": "Numeric operation type code of the representative.",
+                            "description": "Signed integer rotation-type code of the representative operation; negative values denote rotoinversions, with `-2` denoting a mirror plane.",
+                            "enum": [
+                                1,
+                                -1,
+                                2,
+                                -2,
+                                3,
+                                -3,
+                                4,
+                                -4,
+                                6,
+                                -6
+                            ],
                             "x-optimade-unit": "inapplicable"
                         },
                         "op_axis": {
                             "x-optimade-type": "list",
+                            "x-optimade-dimensions": {
+                                "names": [
+                                    "dim_lattice"
+                                ],
+                                "sizes": [
+                                    3
+                                ]
+                            },
                             "type": [
                                 "array",
                                 "null"
                             ],
-                            "description": "Three integer components.",
+                            "description": "Integer-vector axis or invariant direction of the representative operation; `[0, 0, 0]` when no axis is applicable.",
                             "items": {
                                 "x-optimade-type": "integer",
                                 "type": [
                                     "integer",
                                     "null"
                                 ],
-                                "description": "One integer component.",
+                                "description": "One integer component of the axis vector.",
                                 "x-optimade-unit": "inapplicable"
                             },
                             "x-optimade-unit": "inapplicable"
@@ -832,24 +851,6 @@ Each item contains point-group classification, finite point-group operations, co
                             "op_type": 1,
                             "op_axis": [
                                 0,
-                                0
-                            ]
-                        }
-                    ],
-                    [
-                        {
-                            "label": {
-                                "ascii": "E",
-                                "unicode": "E",
-                                "latex": "E"
-                            },
-                            "size": 1,
-                            "members": [
-                                0
-                            ],
-                            "representative": 0,
-                            "op_type": 1,
-                            "op_axis": [
                                 0,
                                 0
                             ]
@@ -868,6 +869,7 @@ Each item contains point-group classification, finite point-group operations, co
                             "op_type": -1,
                             "op_axis": [
                                 0,
+                                0,
                                 0
                             ]
                         }
@@ -882,7 +884,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Crystal System",
+                "title": "Crystal system",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.crystal_system.html"
@@ -898,8 +900,17 @@ Each item contains point-group classification, finite point-group operations, co
                     "string",
                     "null"
                 ],
-                "description": "The crystal system of the space group or point group.\n\nValues use the conventional crystallographic system names such as triclinic, monoclinic, orthorhombic, tetragonal, trigonal, hexagonal, and cubic.",
+                "description": "The crystal system of the space group or point group.\n\nValues use the conventional crystallographic system names.",
                 "x-optimade-unit": "inapplicable",
+                "enum": [
+                    "triclinic",
+                    "monoclinic",
+                    "orthorhombic",
+                    "tetragonal",
+                    "trigonal",
+                    "hexagonal",
+                    "cubic"
+                ],
                 "examples": [
                     "triclinic",
                     "monoclinic"
@@ -913,8 +924,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Hermann-Mauguin Symbol",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                "title": "Hermann-Mauguin symbol",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -927,11 +937,46 @@ Each item contains point-group classification, finite point-group operations, co
                     "string",
                     "null"
                 ],
-                "description": "Hermann-Mauguin point-group symbol used as the key and display symbol for a point-group record.",
+                "description": "Hermann-Mauguin point-group symbol used as the key and display symbol for a point-group record.\n\nThe value is one of the 32 crystallographic point-group symbols in Hermann-Mauguin notation, written in ASCII with `-` denoting rotoinversion.",
                 "x-optimade-unit": "inapplicable",
+                "enum": [
+                    "1",
+                    "-1",
+                    "2",
+                    "m",
+                    "2/m",
+                    "222",
+                    "mm2",
+                    "mmm",
+                    "4",
+                    "-4",
+                    "4/m",
+                    "422",
+                    "4mm",
+                    "-42m",
+                    "4/mmm",
+                    "3",
+                    "-3",
+                    "32",
+                    "3m",
+                    "-3m",
+                    "6",
+                    "-6",
+                    "6/m",
+                    "622",
+                    "6mm",
+                    "-62m",
+                    "6/mmm",
+                    "23",
+                    "m-3",
+                    "432",
+                    "-43m",
+                    "m-3m"
+                ],
                 "examples": [
                     "1",
-                    "-1"
+                    "-1",
+                    "m-3m"
                 ]
             },
             "is_centrosymmetric": {
@@ -942,7 +987,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Is Centrosymmetric",
+                "title": "is centrosymmetric",
                 "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "boolean",
                 "x-optimade-definition": {
@@ -971,7 +1016,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Laue Class",
+                "title": "Laue class",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.Laue_class.html"
@@ -1015,7 +1060,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "N Conjugacy Classes",
+                "title": "Number of conjugacy classes",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1028,7 +1073,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "integer",
                     "null"
                 ],
-                "description": "Number of conjugacy classes in the crystallographic point group.",
+                "description": "Number of conjugacy classes in the crystallographic point group.\n\nThis value MUST equal the length of the `conjugacy_classes` list of the point-group entry.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     1,
@@ -1043,7 +1088,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Order",
+                "title": "Order of the point group",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1056,7 +1101,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "integer",
                     "null"
                 ],
-                "description": "Order of the point group, i.e. the number of operations in the finite point group.",
+                "description": "Order of the point group, i.e. the number of operations in the finite point group.\n\nThis value MUST equal the length of the `symops` list of the point-group entry.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     1,
@@ -1071,11 +1116,8 @@ Each item contains point-group classification, finite point-group operations, co
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Schoenflies Symbol",
+                "title": "Schoenflies symbol",
                 "x-optimade-type": "string",
-                "x-compatibility": [
-                    "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_Schoenflies.html"
-                ],
                 "x-optimade-definition": {
                     "kind": "property",
                     "version": "0.1.0",
@@ -1087,243 +1129,46 @@ Each item contains point-group classification, finite point-group operations, co
                     "string",
                     "null"
                 ],
-                "description": "The Schoenflies symbol for the space-group type.\n\nThe ASCII form follows the CIF convention for `_space_group.name_Schoenflies`, using a period to separate the Schoenflies point-group symbol from the superscript index.",
+                "description": "The Schoenflies symbol for the crystallographic point group.\n\nThe value is one of the 32 crystallographic point-group symbols in Schoenflies notation, written in ASCII without subscript formatting.\nThe symbol `S6` is used for the point group also known as `C3i`.",
                 "x-optimade-unit": "inapplicable",
                 "enum": [
-                    "C1.1",
-                    "Ci.1",
-                    "C2.1",
-                    "C2.2",
-                    "C2.3",
-                    "Cs.1",
-                    "Cs.2",
-                    "Cs.3",
-                    "Cs.4",
-                    "C2h.1",
-                    "C2h.2",
-                    "C2h.3",
-                    "C2h.4",
-                    "C2h.5",
-                    "C2h.6",
-                    "D2.1",
-                    "D2.2",
-                    "D2.3",
-                    "D2.4",
-                    "D2.5",
-                    "D2.6",
-                    "D2.7",
-                    "D2.8",
-                    "D2.9",
-                    "C2v.1",
-                    "C2v.2",
-                    "C2v.3",
-                    "C2v.4",
-                    "C2v.5",
-                    "C2v.6",
-                    "C2v.7",
-                    "C2v.8",
-                    "C2v.9",
-                    "C2v.10",
-                    "C2v.11",
-                    "C2v.12",
-                    "C2v.13",
-                    "C2v.14",
-                    "C2v.15",
-                    "C2v.16",
-                    "C2v.17",
-                    "C2v.18",
-                    "C2v.19",
-                    "C2v.20",
-                    "C2v.21",
-                    "C2v.22",
-                    "D2h.1",
-                    "D2h.2",
-                    "D2h.3",
-                    "D2h.4",
-                    "D2h.5",
-                    "D2h.6",
-                    "D2h.7",
-                    "D2h.8",
-                    "D2h.9",
-                    "D2h.10",
-                    "D2h.11",
-                    "D2h.12",
-                    "D2h.13",
-                    "D2h.14",
-                    "D2h.15",
-                    "D2h.16",
-                    "D2h.17",
-                    "D2h.18",
-                    "D2h.19",
-                    "D2h.20",
-                    "D2h.21",
-                    "D2h.22",
-                    "D2h.23",
-                    "D2h.24",
-                    "D2h.25",
-                    "D2h.26",
-                    "D2h.27",
-                    "D2h.28",
-                    "C4.1",
-                    "C4.2",
-                    "C4.3",
-                    "C4.4",
-                    "C4.5",
-                    "C4.6",
-                    "S4.1",
-                    "S4.2",
-                    "C4h.1",
-                    "C4h.2",
-                    "C4h.3",
-                    "C4h.4",
-                    "C4h.5",
-                    "C4h.6",
-                    "D4.1",
-                    "D4.2",
-                    "D4.3",
-                    "D4.4",
-                    "D4.5",
-                    "D4.6",
-                    "D4.7",
-                    "D4.8",
-                    "D4.9",
-                    "D4.10",
-                    "C4v.1",
-                    "C4v.2",
-                    "C4v.3",
-                    "C4v.4",
-                    "C4v.5",
-                    "C4v.6",
-                    "C4v.7",
-                    "C4v.8",
-                    "C4v.9",
-                    "C4v.10",
-                    "C4v.11",
-                    "C4v.12",
-                    "D2d.1",
-                    "D2d.2",
-                    "D2d.3",
-                    "D2d.4",
-                    "D2d.5",
-                    "D2d.6",
-                    "D2d.7",
-                    "D2d.8",
-                    "D2d.9",
-                    "D2d.10",
-                    "D2d.11",
-                    "D2d.12",
-                    "D4h.1",
-                    "D4h.2",
-                    "D4h.3",
-                    "D4h.4",
-                    "D4h.5",
-                    "D4h.6",
-                    "D4h.7",
-                    "D4h.8",
-                    "D4h.9",
-                    "D4h.10",
-                    "D4h.11",
-                    "D4h.12",
-                    "D4h.13",
-                    "D4h.14",
-                    "D4h.15",
-                    "D4h.16",
-                    "D4h.17",
-                    "D4h.18",
-                    "D4h.19",
-                    "D4h.20",
-                    "C3.1",
-                    "C3.2",
-                    "C3.3",
-                    "C3.4",
-                    "C3i.1",
-                    "C3i.2",
-                    "D3.1",
-                    "D3.2",
-                    "D3.3",
-                    "D3.4",
-                    "D3.5",
-                    "D3.6",
-                    "D3.7",
-                    "C3v.1",
-                    "C3v.2",
-                    "C3v.3",
-                    "C3v.4",
-                    "C3v.5",
-                    "C3v.6",
-                    "D3d.1",
-                    "D3d.2",
-                    "D3d.3",
-                    "D3d.4",
-                    "D3d.5",
-                    "D3d.6",
-                    "C6.1",
-                    "C6.2",
-                    "C6.3",
-                    "C6.4",
-                    "C6.5",
-                    "C6.6",
-                    "C3h.1",
-                    "C6h.1",
-                    "C6h.2",
-                    "D6.1",
-                    "D6.2",
-                    "D6.3",
-                    "D6.4",
-                    "D6.5",
-                    "D6.6",
-                    "C6v.1",
-                    "C6v.2",
-                    "C6v.3",
-                    "C6v.4",
-                    "D3h.1",
-                    "D3h.2",
-                    "D3h.3",
-                    "D3h.4",
-                    "D6h.1",
-                    "D6h.2",
-                    "D6h.3",
-                    "D6h.4",
-                    "T.1",
-                    "T.2",
-                    "T.3",
-                    "T.4",
-                    "T.5",
-                    "Th.1",
-                    "Th.2",
-                    "Th.3",
-                    "Th.4",
-                    "Th.5",
-                    "Th.6",
-                    "Th.7",
-                    "O.1",
-                    "O.2",
-                    "O.3",
-                    "O.4",
-                    "O.5",
-                    "O.6",
-                    "O.7",
-                    "O.8",
-                    "Td.1",
-                    "Td.2",
-                    "Td.3",
-                    "Td.4",
-                    "Td.5",
-                    "Td.6",
-                    "Oh.1",
-                    "Oh.2",
-                    "Oh.3",
-                    "Oh.4",
-                    "Oh.5",
-                    "Oh.6",
-                    "Oh.7",
-                    "Oh.8",
-                    "Oh.9",
-                    "Oh.10"
+                    "C1",
+                    "Ci",
+                    "C2",
+                    "Cs",
+                    "C2h",
+                    "D2",
+                    "C2v",
+                    "D2h",
+                    "C4",
+                    "S4",
+                    "C4h",
+                    "D4",
+                    "C4v",
+                    "D2d",
+                    "D4h",
+                    "C3",
+                    "S6",
+                    "D3",
+                    "C3v",
+                    "D3d",
+                    "C6",
+                    "C3h",
+                    "C6h",
+                    "D6",
+                    "C6v",
+                    "D3h",
+                    "D6h",
+                    "T",
+                    "Th",
+                    "O",
+                    "Td",
+                    "Oh"
                 ],
                 "examples": [
-                    "C1.1",
-                    "C2.3"
+                    "C1",
+                    "C2v",
+                    "Oh"
                 ]
             },
             "symops": {
@@ -1348,7 +1193,7 @@ Each item contains point-group classification, finite point-group operations, co
                     "array",
                     "null"
                 ],
-                "description": "Full list of symmetry-operation descriptors for a point group.\nEach list member is a `op` object as defined by `/properties/symmetry/op`.\nFor point-group operations, generated data currently uses `matrix` and `type`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/properties/symmetry/op`.",
+                "description": "Full list of symmetry-operation descriptors for a point group.\nEach list member is an `op` object as defined by `/defs/v0.1/properties/symmetry/op`.\nPoint-group operations have a zero translation part, so the `screw_glide` and `origin_shift` classification fields are omitted.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/defs/v0.1/properties/symmetry/op`.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
                     "title": "Operation",
@@ -1365,7 +1210,7 @@ Each item contains point-group classification, finite point-group operations, co
                         "object",
                         "null"
                     ],
-                    "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                    "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n- Whether the operation is proper follows from the sign of the `det` field of `affine_transformation`; no separate properness flag is stored.",
                     "properties": {
                         "affine_transformation": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
@@ -1420,7 +1265,7 @@ Each item contains point-group classification, finite point-group operations, co
                                         "description": "One row of the exact 3 by 3 matrix.",
                                         "items": {
                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                            "title": "fraction",
+                                            "title": "Fraction",
                                             "x-optimade-type": "string",
                                             "x-optimade-definition": {
                                                 "label": "fraction_core",
@@ -1462,7 +1307,7 @@ Each item contains point-group classification, finite point-group operations, co
                                     "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                     "items": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                        "title": "Fraction",
                                         "x-optimade-type": "string",
                                         "x-optimade-definition": {
                                             "label": "fraction_core",
@@ -1568,7 +1413,19 @@ Each item contains point-group classification, finite point-group operations, co
                                 "string",
                                 "null"
                             ],
-                            "description": "Symbolic crystallographic operation-type label for the linear part."
+                            "description": "Symbolic crystallographic operation-type label for the linear part.",
+                            "enum": [
+                                "1",
+                                "-1",
+                                "2",
+                                "m",
+                                "3",
+                                "-3",
+                                "4",
+                                "-4",
+                                "6",
+                                "-6"
+                            ]
                         },
                         "axis": {
                             "x-optimade-type": "list",
@@ -1622,7 +1479,7 @@ Each item contains point-group classification, finite point-group operations, co
                             "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
                             "items": {
                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                "title": "fraction",
+                                "title": "Fraction",
                                 "x-optimade-type": "string",
                                 "x-optimade-definition": {
                                     "label": "fraction_core",
@@ -1663,7 +1520,7 @@ Each item contains point-group classification, finite point-group operations, co
                             "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
                             "items": {
                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                "title": "fraction",
+                                "title": "Fraction",
                                 "x-optimade-type": "string",
                                 "x-optimade-definition": {
                                     "label": "fraction_core",
@@ -1685,15 +1542,6 @@ Each item contains point-group classification, finite point-group operations, co
                                 ],
                                 "x-optimade-unit": "inapplicable"
                             }
-                        },
-                        "is_proper": {
-                            "x-optimade-type": "boolean",
-                            "x-optimade-unit": "inapplicable",
-                            "type": [
-                                "boolean",
-                                "null"
-                            ],
-                            "description": "Whether the linear operation is proper."
                         }
                     },
                     "examples": [
@@ -1771,7 +1619,9 @@ Each item contains point-group classification, finite point-group operations, co
                                     "0",
                                     "0"
                                 ],
-                                "xyz": "x,y,z"
+                                "xyz": "x,y,z",
+                                "det": 1,
+                                "is_orthogonal": true
                             },
                             "rot_type": "1",
                             "sense": 0,
@@ -1779,16 +1629,6 @@ Each item contains point-group classification, finite point-group operations, co
                                 0,
                                 0,
                                 0
-                            ],
-                            "screw_glide": [
-                                "0",
-                                "0",
-                                "0"
-                            ],
-                            "origin_shift": [
-                                "0",
-                                "0",
-                                "0"
                             ]
                         }
                     ]

@@ -107,7 +107,7 @@ The parent Wyckoff letter is stored in the <code>parent</code> field rather than
 </ul>
 <p><strong>Examples:</strong></p>
 <ul>
-<li><code>[{"parent": "c", "splits": [["e", "x", "y", "z"], ["e", "-x", "y", "-z"]]}]</code></li>
+<li><code>[{"parent": "c", "splits": [{"letter": "e", "xyz": "x,y,z", "affine": [["1", "0", "0", "0"], ["0", "1", "0", "0"], ["0", "0", "1", "0"]]}]}]</code></li>
 </ul>
 <p><strong>Formats:</strong> [<a href="wyckoff_splitting.json">JSON</a>] [<a href="wyckoff_splitting.md">MD</a>]</p>
 <p><strong>JSON definition:</strong></p>
@@ -188,20 +188,38 @@ The parent Wyckoff letter is stored in the <code>parent</code> field rather than
 <span class="w">                        </span><span class="nt">&quot;affine&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                            </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
 <span class="w">                            </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;x-optimade-dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                </span><span class="nt">&quot;names&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                    </span><span class="s2">&quot;dim_lattice&quot;</span><span class="p">,</span>
+<span class="w">                                    </span><span class="s2">&quot;dim_affine&quot;</span>
+<span class="w">                                </span><span class="p">],</span>
+<span class="w">                                </span><span class="nt">&quot;sizes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                    </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">                                    </span><span class="mi">4</span>
+<span class="w">                                </span><span class="p">]</span>
+<span class="w">                            </span><span class="p">},</span>
 <span class="w">                            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                                </span><span class="s2">&quot;array&quot;</span>
 <span class="w">                            </span><span class="p">],</span>
-<span class="w">                            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Exact affine representation for the split branch.&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.&quot;</span><span class="p">,</span>
 <span class="w">                            </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
 <span class="w">                                </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="nt">&quot;x-optimade-dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                    </span><span class="nt">&quot;names&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                        </span><span class="s2">&quot;dim_affine&quot;</span>
+<span class="w">                                    </span><span class="p">],</span>
+<span class="w">                                    </span><span class="nt">&quot;sizes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                        </span><span class="mi">4</span>
+<span class="w">                                    </span><span class="p">]</span>
+<span class="w">                                </span><span class="p">},</span>
 <span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                                    </span><span class="s2">&quot;array&quot;</span>
 <span class="w">                                </span><span class="p">],</span>
-<span class="w">                                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One affine row.&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One row of the augmented affine matrix.&quot;</span><span class="p">,</span>
 <span class="w">                                </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/core/fraction&quot;</span><span class="p">,</span>
-<span class="w">                                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction&quot;</span><span class="p">,</span>
+<span class="w">                                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fraction&quot;</span><span class="p">,</span>
 <span class="w">                                    </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 <span class="w">                                    </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                        </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction_core&quot;</span><span class="p">,</span>
@@ -235,18 +253,30 @@ The parent Wyckoff letter is stored in the <code>parent</code> field rather than
 <span class="w">            </span><span class="p">{</span>
 <span class="w">                </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;c&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="nt">&quot;splits&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                    </span><span class="p">[</span>
-<span class="w">                        </span><span class="s2">&quot;e&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="s2">&quot;z&quot;</span>
-<span class="w">                    </span><span class="p">],</span>
-<span class="w">                    </span><span class="p">[</span>
-<span class="w">                        </span><span class="s2">&quot;e&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="s2">&quot;-x&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="s2">&quot;-z&quot;</span>
-<span class="w">                    </span><span class="p">]</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;letter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;e&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;xyz&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x,y,z&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;affine&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                            </span><span class="p">[</span>
+<span class="w">                                </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span>
+<span class="w">                            </span><span class="p">],</span>
+<span class="w">                            </span><span class="p">[</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span>
+<span class="w">                            </span><span class="p">],</span>
+<span class="w">                            </span><span class="p">[</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="s2">&quot;0&quot;</span>
+<span class="w">                            </span><span class="p">]</span>
+<span class="w">                        </span><span class="p">]</span>
+<span class="w">                    </span><span class="p">}</span>
 <span class="w">                </span><span class="p">]</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">]</span>

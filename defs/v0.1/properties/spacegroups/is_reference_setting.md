@@ -1,11 +1,11 @@
-# Is Reference Setting (property)
+# is reference setting (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_reference_setting`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_reference_setting.md)**  
 **Definition name:** `is_reference_setting`
 
-**Property name:** Is Reference Setting  
+**Property name:** is reference setting  
 **Description:** Boolean flag indicating whether this Hall setting is the selected reference setting for its International Tables space-group number.  
 **Type:** boolean  
 
@@ -24,7 +24,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_reference_setting",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Is Reference Setting",
+    "title": "is reference setting",
     "x-optimade-type": "boolean",
     "x-optimade-definition": {
         "kind": "property",

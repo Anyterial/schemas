@@ -16,6 +16,12 @@ This object is generated from the finite Euclidean normalizer operations exposed
 It is not a bounded candidate search table.
 Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `bounds` do not belong to this property.
 
+This property is one of three related normalizer tables for a setting:
+this property holds the finite Euclidean normalizer operations obtained from cctbx,
+`orthogonal_affine_normalizer` holds the older bounded coset table restricted to signed-permutation linear parts,
+and `affine_normalizer` holds the bounded coset table generated from unimodular integer linear parts.
+Continuous origin-shift freedoms are described separately by `continuous_normalizer`.
+
 **Requirements/Conventions**:
 
 - It MUST be a dictionary with the following keys:
@@ -46,12 +52,9 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
       This keeps one operation for each linear part and translation class modulo centering, while `symops` keeps the complete operation list.
       Each item follows `/defs/v0.1/properties/symmetry/op`.
 
-    - **symops\_mod\_centering\_xyz**: REQUIRED; List of strings.
-      The `x,y,z` notation for the operations in `symops_mod_centering`, ordered element-by-element with that list.
-
 **Examples:**
 
-- `{"normalizer_kind": "euclidean", "n_centering_translations": 1, "n_pointgroup_symops": 1, "n_symops": 2, "n_linear_parts": 2, "symops": [{"affine_transformation": {"xyz": "-x,-y,-z", "matrix": [["-1", "0", "0"], ["0", "-1", "0"], ["0", "0", "-1"]], "vector": ["0", "0", "0"], "det": -1, "is_orthogonal": true}, "rot_type": "-1", "sense": 0, "axis": [0, 0, 0], "screw_glide": ["0", "0", "0"], "origin_shift": ["0", "0", "0"], "operation_kind": "euclidean"}], "symops_mod_centering": [{"affine_transformation": {"xyz": "-x,-y,-z", "matrix": [["-1", "0", "0"], ["0", "-1", "0"], ["0", "0", "-1"]], "vector": ["0", "0", "0"], "det": -1, "is_orthogonal": true}, "rot_type": "-1", "sense": 0, "axis": [0, 0, 0], "screw_glide": ["0", "0", "0"], "origin_shift": ["0", "0", "0"], "operation_kind": "euclidean"}], "symops_mod_centering_xyz": ["-x,-y,-z"]}`
+- `{"normalizer_kind": "euclidean", "n_centering_translations": 1, "n_pointgroup_symops": 1, "n_symops": 2, "n_linear_parts": 2, "symops": [{"affine_transformation": {"xyz": "-x,-y,-z", "matrix": [["-1", "0", "0"], ["0", "-1", "0"], ["0", "0", "-1"]], "vector": ["0", "0", "0"], "det": -1, "is_orthogonal": true}, "rot_type": "-1", "sense": 0, "axis": [0, 0, 0], "screw_glide": ["0", "0", "0"], "origin_shift": ["0", "0", "0"], "operation_kind": "euclidean"}], "symops_mod_centering": [{"affine_transformation": {"xyz": "-x,-y,-z", "matrix": [["-1", "0", "0"], ["0", "-1", "0"], ["0", "0", "-1"]], "vector": ["0", "0", "0"], "det": -1, "is_orthogonal": true}, "rot_type": "-1", "sense": 0, "axis": [0, 0, 0], "screw_glide": ["0", "0", "0"], "origin_shift": ["0", "0", "0"], "operation_kind": "euclidean"}]}`
 
 **Formats:** [[JSON](euclidean_normalizer.json)] [[MD](euclidean_normalizer.md)]
 
@@ -75,7 +78,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
         "object",
         "null"
     ],
-    "description": "Finite Euclidean normalizer operations for one crystallographic space-group setting.\n\nThe Euclidean normalizer consists of metric-preserving affine operations that normalize the space group in the chosen setting.\nThese operations are useful for algorithms that need to compare or enumerate equivalent descriptions of the same setting under rigid crystallographic changes of coordinates.\n\nThis object is generated from the finite Euclidean normalizer operations exposed by cctbx.\nIt is not a bounded candidate search table.\nTherefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `bounds` do not belong to this property.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n      For this property the value is `euclidean`.\n\n    - **n\\_centering\\_translations**: REQUIRED; Integer.\n      Number of centering translations represented in the underlying Euclidean normalizer operation construction.\n\n    - **n\\_pointgroup\\_symops**: REQUIRED; Integer.\n      Number of point-group symmetry operations represented before centering translations are combined with them.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of Euclidean normalizer operations listed in `symops`.\n      This value MUST equal the length of `symops`.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Finite Euclidean normalizer operations for the setting.\n      Each item follows `/defs/v0.1/properties/symmetry/op`.\n\n    - **symops\\_mod\\_centering**: REQUIRED; List of dictionaries.\n      Euclidean normalizer operations factorized modulo the centering translations of the setting.\n      This keeps one operation for each linear part and translation class modulo centering, while `symops` keeps the complete operation list.\n      Each item follows `/defs/v0.1/properties/symmetry/op`.\n\n    - **symops\\_mod\\_centering\\_xyz**: REQUIRED; List of strings.\n      The `x,y,z` notation for the operations in `symops_mod_centering`, ordered element-by-element with that list.",
+    "description": "Finite Euclidean normalizer operations for one crystallographic space-group setting.\n\nThe Euclidean normalizer consists of metric-preserving affine operations that normalize the space group in the chosen setting.\nThese operations are useful for algorithms that need to compare or enumerate equivalent descriptions of the same setting under rigid crystallographic changes of coordinates.\n\nThis object is generated from the finite Euclidean normalizer operations exposed by cctbx.\nIt is not a bounded candidate search table.\nTherefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `bounds` do not belong to this property.\n\nThis property is one of three related normalizer tables for a setting:\nthis property holds the finite Euclidean normalizer operations obtained from cctbx,\n`orthogonal_affine_normalizer` holds the older bounded coset table restricted to signed-permutation linear parts,\nand `affine_normalizer` holds the bounded coset table generated from unimodular integer linear parts.\nContinuous origin-shift freedoms are described separately by `continuous_normalizer`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n      For this property the value is `euclidean`.\n\n    - **n\\_centering\\_translations**: REQUIRED; Integer.\n      Number of centering translations represented in the underlying Euclidean normalizer operation construction.\n\n    - **n\\_pointgroup\\_symops**: REQUIRED; Integer.\n      Number of point-group symmetry operations represented before centering translations are combined with them.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of Euclidean normalizer operations listed in `symops`.\n      This value MUST equal the length of `symops`.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Finite Euclidean normalizer operations for the setting.\n      Each item follows `/defs/v0.1/properties/symmetry/op`.\n\n    - **symops\\_mod\\_centering**: REQUIRED; List of dictionaries.\n      Euclidean normalizer operations factorized modulo the centering translations of the setting.\n      This keeps one operation for each linear part and translation class modulo centering, while `symops` keeps the complete operation list.\n      Each item follows `/defs/v0.1/properties/symmetry/op`.",
     "properties": {
         "normalizer_kind": {
             "x-optimade-type": "string",
@@ -101,7 +104,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                 "integer",
                 "null"
             ],
-            "description": "Number of centering translations in the conventional cell of the space-group setting.",
+            "description": "Number of centering translations in the conventional cell of the space-group setting.\n\nWhen the entry contains a `centering_translations` list, this value MUST equal its length.",
             "x-optimade-unit": "inapplicable",
             "examples": [
                 1,
@@ -110,7 +113,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
         },
         "n_pointgroup_symops": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops",
-            "title": "number of pointgroup symops",
+            "title": "Number of pointgroup symops",
             "x-optimade-type": "integer",
             "x-optimade-definition": {
                 "kind": "property",
@@ -123,7 +126,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                 "integer",
                 "null"
             ],
-            "description": "Number of point-group symmetry operations.",
+            "description": "Number of point-group symmetry operations.\n\nFor a space-group entry this is the number of operations of the point group of the space group, and it MUST equal the length of the `symops_representative` list when present.",
             "x-optimade-unit": "inapplicable",
             "examples": [
                 1,
@@ -132,7 +135,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
         },
         "n_symops": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-            "title": "number of symops",
+            "title": "Number of symops",
             "x-optimade-type": "integer",
             "x-optimade-definition": {
                 "kind": "property",
@@ -145,7 +148,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                 "integer",
                 "null"
             ],
-            "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+            "description": "Number of symmetry operations in the finite operation list of the generated entry.\n\nWhen the entry contains a `symops` list, this value MUST equal its length.",
             "x-optimade-unit": "inapplicable",
             "examples": [
                 1,
@@ -154,7 +157,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
         },
         "n_linear_parts": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
-            "title": "N Linear Parts",
+            "title": "Number of linear parts",
             "x-optimade-type": "integer",
             "x-optimade-definition": {
                 "kind": "property",
@@ -167,7 +170,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                 "integer",
                 "null"
             ],
-            "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+            "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
             "x-optimade-unit": "inapplicable",
             "examples": [
                 2,
@@ -198,7 +201,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                     "object",
                     "null"
                 ],
-                "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n- Whether the operation is proper follows from the sign of the `det` field of `affine_transformation`; no separate properness flag is stored.",
                 "properties": {
                     "affine_transformation": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
@@ -253,7 +256,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                                     "description": "One row of the exact 3 by 3 matrix.",
                                     "items": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                        "title": "Fraction",
                                         "x-optimade-type": "string",
                                         "x-optimade-definition": {
                                             "label": "fraction_core",
@@ -295,7 +298,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                                 "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                 "items": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                    "title": "fraction",
+                                    "title": "Fraction",
                                     "x-optimade-type": "string",
                                     "x-optimade-definition": {
                                         "label": "fraction_core",
@@ -401,7 +404,19 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                             "string",
                             "null"
                         ],
-                        "description": "Symbolic crystallographic operation-type label for the linear part."
+                        "description": "Symbolic crystallographic operation-type label for the linear part.",
+                        "enum": [
+                            "1",
+                            "-1",
+                            "2",
+                            "m",
+                            "3",
+                            "-3",
+                            "4",
+                            "-4",
+                            "6",
+                            "-6"
+                        ]
                     },
                     "axis": {
                         "x-optimade-type": "list",
@@ -455,7 +470,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                         "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
                         "items": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                            "title": "fraction",
+                            "title": "Fraction",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "label": "fraction_core",
@@ -496,7 +511,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                         "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
                         "items": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                            "title": "fraction",
+                            "title": "Fraction",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "label": "fraction_core",
@@ -518,15 +533,6 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                             ],
                             "x-optimade-unit": "inapplicable"
                         }
-                    },
-                    "is_proper": {
-                        "x-optimade-type": "boolean",
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "boolean",
-                            "null"
-                        ],
-                        "description": "Whether the linear operation is proper."
                     }
                 },
                 "examples": [
@@ -612,7 +618,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                     "object",
                     "null"
                 ],
-                "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n- Whether the operation is proper follows from the sign of the `det` field of `affine_transformation`; no separate properness flag is stored.",
                 "properties": {
                     "affine_transformation": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
@@ -667,7 +673,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                                     "description": "One row of the exact 3 by 3 matrix.",
                                     "items": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                        "title": "Fraction",
                                         "x-optimade-type": "string",
                                         "x-optimade-definition": {
                                             "label": "fraction_core",
@@ -709,7 +715,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                                 "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                 "items": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                    "title": "fraction",
+                                    "title": "Fraction",
                                     "x-optimade-type": "string",
                                     "x-optimade-definition": {
                                         "label": "fraction_core",
@@ -815,7 +821,19 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                             "string",
                             "null"
                         ],
-                        "description": "Symbolic crystallographic operation-type label for the linear part."
+                        "description": "Symbolic crystallographic operation-type label for the linear part.",
+                        "enum": [
+                            "1",
+                            "-1",
+                            "2",
+                            "m",
+                            "3",
+                            "-3",
+                            "4",
+                            "-4",
+                            "6",
+                            "-6"
+                        ]
                     },
                     "axis": {
                         "x-optimade-type": "list",
@@ -869,7 +887,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                         "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
                         "items": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                            "title": "fraction",
+                            "title": "Fraction",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "label": "fraction_core",
@@ -910,7 +928,7 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                         "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
                         "items": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                            "title": "fraction",
+                            "title": "Fraction",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "label": "fraction_core",
@@ -932,15 +950,6 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                             ],
                             "x-optimade-unit": "inapplicable"
                         }
-                    },
-                    "is_proper": {
-                        "x-optimade-type": "boolean",
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "boolean",
-                            "null"
-                        ],
-                        "description": "Whether the linear operation is proper."
                     }
                 },
                 "examples": [
@@ -1038,429 +1047,6 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                             "0"
                         ]
                     }
-                ]
-            ]
-        },
-        "symops_mod_centering_xyz": {
-            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering_xyz",
-            "title": "Symmetry operations modulo centering in x,y,z notation",
-            "x-optimade-type": "list",
-            "x-optimade-definition": {
-                "kind": "property",
-                "version": "0.1.0",
-                "format": "1.3",
-                "name": "symops_mod_centering_xyz",
-                "label": "symops_mod_centering_xyz_spacegroups"
-            },
-            "type": [
-                "array",
-                "null"
-            ],
-            "description": "Symmetry operations modulo centering translations in fractional `x,y,z` notation, ordered consistently with `symops_mod_centering`.",
-            "x-optimade-unit": "inapplicable",
-            "items": {
-                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
-                "title": "Operation",
-                "x-optimade-type": "dictionary",
-                "x-optimade-definition": {
-                    "kind": "property",
-                    "version": "0.1.0",
-                    "format": "1.3",
-                    "name": "op",
-                    "label": "op_symmetry"
-                },
-                "x-optimade-unit": "inapplicable",
-                "type": [
-                    "object",
-                    "null"
-                ],
-                "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
-                "properties": {
-                    "affine_transformation": {
-                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
-                        "title": "Affine transformation",
-                        "x-optimade-type": "dictionary",
-                        "x-optimade-definition": {
-                            "kind": "property",
-                            "version": "0.1.0",
-                            "format": "1.3",
-                            "name": "affine_transformation",
-                            "label": "affine_transformation_symmetry"
-                        },
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "object",
-                            "null"
-                        ],
-                        "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
-                        "properties": {
-                            "matrix": {
-                                "x-optimade-type": "list",
-                                "x-optimade-unit": "inapplicable",
-                                "x-optimade-dimensions": {
-                                    "names": [
-                                        "dim_lattice",
-                                        "dim_lattice"
-                                    ],
-                                    "sizes": [
-                                        3,
-                                        3
-                                    ]
-                                },
-                                "type": [
-                                    "array",
-                                    "null"
-                                ],
-                                "description": "Exact 3 by 3 matrix part of the affine transformation.",
-                                "items": {
-                                    "x-optimade-type": "list",
-                                    "x-optimade-unit": "inapplicable",
-                                    "x-optimade-dimensions": {
-                                        "names": [
-                                            "dim_lattice"
-                                        ],
-                                        "sizes": [
-                                            3
-                                        ]
-                                    },
-                                    "type": [
-                                        "array"
-                                    ],
-                                    "description": "One row of the exact 3 by 3 matrix.",
-                                    "items": {
-                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
-                                        "x-optimade-type": "string",
-                                        "x-optimade-definition": {
-                                            "label": "fraction_core",
-                                            "kind": "property",
-                                            "version": "0.1.0",
-                                            "format": "1.3",
-                                            "name": "fraction"
-                                        },
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
-                                        "examples": [
-                                            "2/3",
-                                            "5/42",
-                                            "10",
-                                            "0"
-                                        ],
-                                        "x-optimade-unit": "inapplicable"
-                                    }
-                                }
-                            },
-                            "vector": {
-                                "x-optimade-type": "list",
-                                "x-optimade-unit": "inapplicable",
-                                "x-optimade-dimensions": {
-                                    "names": [
-                                        "dim_lattice"
-                                    ],
-                                    "sizes": [
-                                        3
-                                    ]
-                                },
-                                "type": [
-                                    "array",
-                                    "null"
-                                ],
-                                "description": "Exact fractional-coordinate vector part of the affine transformation.",
-                                "items": {
-                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                    "title": "fraction",
-                                    "x-optimade-type": "string",
-                                    "x-optimade-definition": {
-                                        "label": "fraction_core",
-                                        "kind": "property",
-                                        "version": "0.1.0",
-                                        "format": "1.3",
-                                        "name": "fraction"
-                                    },
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ],
-                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
-                                    "examples": [
-                                        "2/3",
-                                        "5/42",
-                                        "10",
-                                        "0"
-                                    ],
-                                    "x-optimade-unit": "inapplicable"
-                                }
-                            },
-                            "xyz": {
-                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
-                                "title": "Operation xyz",
-                                "x-optimade-type": "string",
-                                "x-compatibility": [
-                                    "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
-                                    "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
-                                ],
-                                "x-optimade-definition": {
-                                    "kind": "property",
-                                    "version": "0.1.0",
-                                    "format": "1.3",
-                                    "name": "op_xyz",
-                                    "label": "op_xyz_symmetry"
-                                },
-                                "x-optimade-unit": "inapplicable",
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
-                                "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
-                                "examples": [
-                                    "-x,-y,z",
-                                    "x,1/2-y,1/2+z"
-                                ]
-                            },
-                            "det": {
-                                "x-optimade-type": "integer",
-                                "x-optimade-unit": "inapplicable",
-                                "type": [
-                                    "integer",
-                                    "null"
-                                ],
-                                "description": "Determinant of the matrix part when emitted by the generator."
-                            },
-                            "is_orthogonal": {
-                                "x-optimade-type": "boolean",
-                                "x-optimade-unit": "inapplicable",
-                                "type": [
-                                    "boolean",
-                                    "null"
-                                ],
-                                "description": "Whether the matrix part is orthogonal."
-                            }
-                        },
-                        "examples": [
-                            {
-                                "matrix": [
-                                    [
-                                        "-1",
-                                        "0",
-                                        "0"
-                                    ],
-                                    [
-                                        "0",
-                                        "-1",
-                                        "0"
-                                    ],
-                                    [
-                                        "0",
-                                        "0",
-                                        "1"
-                                    ]
-                                ],
-                                "vector": [
-                                    "0",
-                                    "0",
-                                    "0"
-                                ],
-                                "xyz": "-x,-y,z",
-                                "det": 1,
-                                "is_orthogonal": true
-                            }
-                        ]
-                    },
-                    "rot_type": {
-                        "x-optimade-type": "string",
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "Symbolic crystallographic operation-type label for the linear part."
-                    },
-                    "axis": {
-                        "x-optimade-type": "list",
-                        "x-optimade-unit": "inapplicable",
-                        "x-optimade-dimensions": {
-                            "names": [
-                                "dim_lattice"
-                            ],
-                            "sizes": [
-                                3
-                            ]
-                        },
-                        "type": [
-                            "array",
-                            "null"
-                        ],
-                        "description": "Integer-vector axis or invariant-direction descriptor for the operation.",
-                        "items": {
-                            "x-optimade-type": "integer",
-                            "x-optimade-unit": "inapplicable",
-                            "type": [
-                                "integer"
-                            ],
-                            "description": "One integer component of the axis vector."
-                        }
-                    },
-                    "sense": {
-                        "x-optimade-type": "integer",
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
-                        "description": "Rotation sense/sign convention returned by the generator."
-                    },
-                    "screw_glide": {
-                        "x-optimade-type": "list",
-                        "x-optimade-unit": "inapplicable",
-                        "x-optimade-dimensions": {
-                            "names": [
-                                "dim_lattice"
-                            ],
-                            "sizes": [
-                                3
-                            ]
-                        },
-                        "type": [
-                            "array",
-                            "null"
-                        ],
-                        "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
-                        "items": {
-                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                            "title": "fraction",
-                            "x-optimade-type": "string",
-                            "x-optimade-definition": {
-                                "label": "fraction_core",
-                                "kind": "property",
-                                "version": "0.1.0",
-                                "format": "1.3",
-                                "name": "fraction"
-                            },
-                            "type": [
-                                "string",
-                                "null"
-                            ],
-                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
-                            "examples": [
-                                "2/3",
-                                "5/42",
-                                "10",
-                                "0"
-                            ],
-                            "x-optimade-unit": "inapplicable"
-                        }
-                    },
-                    "origin_shift": {
-                        "x-optimade-type": "list",
-                        "x-optimade-unit": "inapplicable",
-                        "x-optimade-dimensions": {
-                            "names": [
-                                "dim_lattice"
-                            ],
-                            "sizes": [
-                                3
-                            ]
-                        },
-                        "type": [
-                            "array",
-                            "null"
-                        ],
-                        "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
-                        "items": {
-                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                            "title": "fraction",
-                            "x-optimade-type": "string",
-                            "x-optimade-definition": {
-                                "label": "fraction_core",
-                                "kind": "property",
-                                "version": "0.1.0",
-                                "format": "1.3",
-                                "name": "fraction"
-                            },
-                            "type": [
-                                "string",
-                                "null"
-                            ],
-                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
-                            "examples": [
-                                "2/3",
-                                "5/42",
-                                "10",
-                                "0"
-                            ],
-                            "x-optimade-unit": "inapplicable"
-                        }
-                    },
-                    "is_proper": {
-                        "x-optimade-type": "boolean",
-                        "x-optimade-unit": "inapplicable",
-                        "type": [
-                            "boolean",
-                            "null"
-                        ],
-                        "description": "Whether the linear operation is proper."
-                    }
-                },
-                "examples": [
-                    {
-                        "affine_transformation": {
-                            "matrix": [
-                                [
-                                    "-1",
-                                    "0",
-                                    "0"
-                                ],
-                                [
-                                    "0",
-                                    "-1",
-                                    "0"
-                                ],
-                                [
-                                    "0",
-                                    "0",
-                                    "1"
-                                ]
-                            ],
-                            "vector": [
-                                "0",
-                                "0",
-                                "0"
-                            ],
-                            "xyz": "-x,-y,z",
-                            "det": 1,
-                            "is_orthogonal": true
-                        },
-                        "rot_type": "2",
-                        "sense": 0,
-                        "axis": [
-                            0,
-                            0,
-                            1
-                        ],
-                        "screw_glide": [
-                            "0",
-                            "0",
-                            "0"
-                        ],
-                        "origin_shift": [
-                            "0",
-                            "0",
-                            "0"
-                        ]
-                    }
-                ]
-            },
-            "examples": [
-                [
-                    "x,y,z"
-                ],
-                [
-                    "-x,y,-z",
-                    "x,y,z"
                 ]
             ]
         }
@@ -1569,9 +1155,6 @@ Therefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `
                     ],
                     "operation_kind": "euclidean"
                 }
-            ],
-            "symops_mod_centering_xyz": [
-                "-x,-y,-z"
             ]
         }
     ]

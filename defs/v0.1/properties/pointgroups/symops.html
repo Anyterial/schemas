@@ -96,17 +96,17 @@ overflow-wrap: break-word;
 <strong>Definition name:</strong> <code>symops</code></p>
 <p><strong>Property name:</strong> Symmetry operations<br>
 <strong>Description:</strong> Full list of symmetry-operation descriptors for a point group.
-Each list member is a <code>op</code> object as defined by <code>/properties/symmetry/op</code>.
-For point-group operations, generated data currently uses <code>matrix</code> and <code>type</code>.<br>
+Each list member is an <code>op</code> object as defined by <code>/defs/v0.1/properties/symmetry/op</code>.
+Point-group operations have a zero translation part, so the <code>screw_glide</code> and <code>origin_shift</code> classification fields are omitted.<br>
 <strong>Type:</strong> list  </p>
 <p><strong>Requirements/Conventions</strong>:</p>
 <ul>
 <li>It MUST be a list of dictionaries.</li>
-<li>Each dictionary MUST follow the schema inherited from <code>/properties/symmetry/op</code>.</li>
+<li>Each dictionary MUST follow the schema inherited from <code>/defs/v0.1/properties/symmetry/op</code>.</li>
 </ul>
 <p><strong>Examples:</strong></p>
 <ul>
-<li><code>[{"affine_transformation": {"matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "1"]], "vector": ["0", "0", "0"], "xyz": "x,y,z"}, "rot_type": "1", "sense": 0, "axis": [0, 0, 0], "screw_glide": ["0", "0", "0"], "origin_shift": ["0", "0", "0"]}]</code></li>
+<li><code>[{"affine_transformation": {"matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "1"]], "vector": ["0", "0", "0"], "xyz": "x,y,z", "det": 1, "is_orthogonal": true}, "rot_type": "1", "sense": 0, "axis": [0, 0, 0]}]</code></li>
 </ul>
 <p><strong>Formats:</strong> [<a href="symops.json">JSON</a>] [<a href="symops.md">MD</a>]</p>
 <p><strong>JSON definition:</strong></p>
@@ -127,7 +127,7 @@ For point-group operations, generated data currently uses <code>matrix</code> an
 <span class="w">        </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="s2">&quot;null&quot;</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Full list of symmetry-operation descriptors for a point group.\nEach list member is a `op` object as defined by `/properties/symmetry/op`.\nFor point-group operations, generated data currently uses `matrix` and `type`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/properties/symmetry/op`.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Full list of symmetry-operation descriptors for a point group.\nEach list member is an `op` object as defined by `/defs/v0.1/properties/symmetry/op`.\nPoint-group operations have a zero translation part, so the `screw_glide` and `origin_shift` classification fields are omitted.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/defs/v0.1/properties/symmetry/op`.&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Operation&quot;</span><span class="p">,</span>
@@ -144,7 +144,7 @@ For point-group operations, generated data currently uses <code>matrix</code> an
 <span class="w">            </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;null&quot;</span>
 <span class="w">        </span><span class="p">],</span>
-<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n- Whether the operation is proper follows from the sign of the `det` field of `affine_transformation`; no separate properness flag is stored.&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;affine_transformation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation&quot;</span><span class="p">,</span>
@@ -199,7 +199,7 @@ For point-group operations, generated data currently uses <code>matrix</code> an
 <span class="w">                            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One row of the exact 3 by 3 matrix.&quot;</span><span class="p">,</span>
 <span class="w">                            </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/core/fraction&quot;</span><span class="p">,</span>
-<span class="w">                                </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fraction&quot;</span><span class="p">,</span>
 <span class="w">                                </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 <span class="w">                                </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                    </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction_core&quot;</span><span class="p">,</span>
@@ -241,7 +241,7 @@ For point-group operations, generated data currently uses <code>matrix</code> an
 <span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Exact fractional-coordinate vector part of the affine transformation.&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                            </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/core/fraction&quot;</span><span class="p">,</span>
-<span class="w">                            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fraction&quot;</span><span class="p">,</span>
 <span class="w">                            </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 <span class="w">                            </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction_core&quot;</span><span class="p">,</span>
@@ -347,7 +347,19 @@ For point-group operations, generated data currently uses <code>matrix</code> an
 <span class="w">                    </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="s2">&quot;null&quot;</span>
 <span class="w">                </span><span class="p">],</span>
-<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Symbolic crystallographic operation-type label for the linear part.&quot;</span>
+<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Symbolic crystallographic operation-type label for the linear part.&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;-1&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;2&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;m&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;3&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;-3&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;4&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;-4&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;6&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s2">&quot;-6&quot;</span>
+<span class="w">                </span><span class="p">]</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;axis&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
@@ -401,7 +413,7 @@ For point-group operations, generated data currently uses <code>matrix</code> an
 <span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Screw-axis or glide-plane component represented exactly as a list of fraction strings.&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/core/fraction&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fraction&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                        </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction_core&quot;</span><span class="p">,</span>
@@ -442,7 +454,7 @@ For point-group operations, generated data currently uses <code>matrix</code> an
 <span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Origin-shift descriptor represented exactly as a list of fraction strings.&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/core/fraction&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fraction&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                        </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction_core&quot;</span><span class="p">,</span>
@@ -464,15 +476,6 @@ For point-group operations, generated data currently uses <code>matrix</code> an
 <span class="w">                    </span><span class="p">],</span>
 <span class="w">                    </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span>
 <span class="w">                </span><span class="p">}</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;is_proper&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                    </span><span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="s2">&quot;null&quot;</span>
-<span class="w">                </span><span class="p">],</span>
-<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the linear operation is proper.&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="nt">&quot;examples&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -550,7 +553,9 @@ For point-group operations, generated data currently uses <code>matrix</code> an
 <span class="w">                        </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="s2">&quot;0&quot;</span>
 <span class="w">                    </span><span class="p">],</span>
-<span class="w">                    </span><span class="nt">&quot;xyz&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x,y,z&quot;</span>
+<span class="w">                    </span><span class="nt">&quot;xyz&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x,y,z&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;det&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;is_orthogonal&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">                </span><span class="p">},</span>
 <span class="w">                </span><span class="nt">&quot;rot_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="nt">&quot;sense&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
@@ -558,16 +563,6 @@ For point-group operations, generated data currently uses <code>matrix</code> an
 <span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
 <span class="w">                    </span><span class="mi">0</span><span class="p">,</span>
 <span class="w">                    </span><span class="mi">0</span>
-<span class="w">                </span><span class="p">],</span>
-<span class="w">                </span><span class="nt">&quot;screw_glide&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                    </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="s2">&quot;0&quot;</span>
-<span class="w">                </span><span class="p">],</span>
-<span class="w">                </span><span class="nt">&quot;origin_shift&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                    </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="s2">&quot;0&quot;</span>
 <span class="w">                </span><span class="p">]</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">]</span>

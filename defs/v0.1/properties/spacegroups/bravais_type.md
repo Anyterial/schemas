@@ -1,15 +1,17 @@
-# Bravais Type (property)
+# Bravais type (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type.md)**  
 **Definition name:** `bravais_type`
 
-**Property name:** Bravais Type  
+**Property name:** Bravais type  
 **Description:** The Bravais type of the translational lattice.  
 **Type:** string  
 
-The symbol consists of a lower-case crystal-system letter followed by an upper-case centring symbol, using setting-independent `mS` and `oS` for monoclinic and orthorhombic side-centred lattices.
+The symbol consists of a lower-case crystal-system letter followed by an upper-case centring symbol.
+Side-centred settings (`A`, `B`, or `C` centring) are normalized to the setting-independent `S` symbol for monoclinic and orthorhombic lattices.
+Body-centred monoclinic settings keep the symbol `mI`, which describes the same lattice type as `mS` in a different conventional cell choice.
 
 **Examples:**
 
@@ -24,7 +26,7 @@ The symbol consists of a lower-case crystal-system letter followed by an upper-c
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Bravais Type",
+    "title": "Bravais type",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.Bravais_type.html"
@@ -40,8 +42,25 @@ The symbol consists of a lower-case crystal-system letter followed by an upper-c
         "string",
         "null"
     ],
-    "description": "The Bravais type of the translational lattice.\n\nThe symbol consists of a lower-case crystal-system letter followed by an upper-case centring symbol, using setting-independent `mS` and `oS` for monoclinic and orthorhombic side-centred lattices.",
+    "description": "The Bravais type of the translational lattice.\n\nThe symbol consists of a lower-case crystal-system letter followed by an upper-case centring symbol.\nSide-centred settings (`A`, `B`, or `C` centring) are normalized to the setting-independent `S` symbol for monoclinic and orthorhombic lattices.\nBody-centred monoclinic settings keep the symbol `mI`, which describes the same lattice type as `mS` in a different conventional cell choice.",
     "x-optimade-unit": "inapplicable",
+    "enum": [
+        "aP",
+        "mP",
+        "mS",
+        "mI",
+        "oP",
+        "oS",
+        "oF",
+        "oI",
+        "tP",
+        "tI",
+        "hP",
+        "hR",
+        "cP",
+        "cI",
+        "cF"
+    ],
     "examples": [
         "aP",
         "mS"

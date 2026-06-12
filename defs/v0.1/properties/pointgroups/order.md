@@ -1,15 +1,15 @@
-# Order (property)
+# Order of the point group (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order.md)**  
 **Definition name:** `order`
 
-**Property name:** Order  
+**Property name:** Order of the point group  
 **Description:** Order of the point group, i.e. the number of operations in the finite point group.  
 **Type:** integer  
 
-
+This value MUST equal the length of the `symops` list of the point-group entry.
 
 **Examples:**
 
@@ -24,7 +24,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Order",
+    "title": "Order of the point group",
     "x-optimade-type": "integer",
     "x-optimade-definition": {
         "kind": "property",
@@ -37,7 +37,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "integer",
         "null"
     ],
-    "description": "Order of the point group, i.e. the number of operations in the finite point group.",
+    "description": "Order of the point group, i.e. the number of operations in the finite point group.\n\nThis value MUST equal the length of the `symops` list of the point-group entry.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         1,

@@ -1,15 +1,15 @@
-# N Coset Representatives (property)
+# Number of coset representatives (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_coset_representatives`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_coset_representatives.md)**  
 **Definition name:** `n_coset_representatives`
 
-**Property name:** N Coset Representatives  
+**Property name:** Number of coset representatives  
 **Description:** Number of nontrivial coset representatives retained after deduplication modulo the space group.  
 **Type:** integer  
 
-
+This count is taken before metric-compatibility filtering, so it MAY exceed the length of the stored `symops` list of the containing record.
 
 **Examples:**
 
@@ -24,7 +24,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_coset_representatives",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "N Coset Representatives",
+    "title": "Number of coset representatives",
     "x-optimade-type": "integer",
     "x-optimade-definition": {
         "kind": "property",
@@ -37,7 +37,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "integer",
         "null"
     ],
-    "description": "Number of nontrivial coset representatives retained after deduplication modulo the space group.",
+    "description": "Number of nontrivial coset representatives retained after deduplication modulo the space group.\n\nThis count is taken before metric-compatibility filtering, so it MAY exceed the length of the stored `symops` list of the containing record.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         47,

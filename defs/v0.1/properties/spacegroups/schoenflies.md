@@ -1,11 +1,11 @@
-# Schoenflies Symbol (property)
+# Schoenflies symbol (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
-**ID: [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies.md)**  
+**ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies.md)**  
 **Definition name:** `schoenflies`
 
-**Property name:** Schoenflies Symbol  
+**Property name:** Schoenflies symbol  
 **Description:** The Schoenflies symbol for the space-group type.  
 **Type:** string  
 
@@ -22,9 +22,9 @@ The ASCII form follows the CIF convention for `_space_group.name_Schoenflies`, u
 
 ``` json
 {
-    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies",
+    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Schoenflies Symbol",
+    "title": "Schoenflies symbol",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_Schoenflies.html"
@@ -34,7 +34,7 @@ The ASCII form follows the CIF convention for `_space_group.name_Schoenflies`, u
         "version": "0.1.0",
         "format": "1.3",
         "name": "schoenflies",
-        "label": "schoenflies_pointgroups"
+        "label": "schoenflies_spacegroups"
     },
     "type": [
         "string",

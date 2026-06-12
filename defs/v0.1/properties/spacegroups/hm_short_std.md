@@ -1,11 +1,11 @@
-# Hermann-Mauguin Short Standard (property)
+# Standard short Hermann-Mauguin symbol (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std.md)**  
 **Definition name:** `hm_short_std`
 
-**Property name:** Hermann-Mauguin Short Standard  
+**Property name:** Standard short Hermann-Mauguin symbol  
 **Description:** The International Tables standard short Hermann-Mauguin symbol for the space-group type.  
 **Type:** string  
 
@@ -30,7 +30,7 @@ The `*_std` fields describe the IT-standard setting for the space-group type and
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Hermann-Mauguin Short Standard",
+    "title": "Standard short Hermann-Mauguin symbol",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",

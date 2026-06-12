@@ -143,7 +143,7 @@ The target subgroup IT number is stored in `target_it_number` rather than as a J
                                         "description": "One row of the exact 3 by 3 matrix.",
                                         "items": {
                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                            "title": "fraction",
+                                            "title": "Fraction",
                                             "x-optimade-type": "string",
                                             "x-optimade-definition": {
                                                 "label": "fraction_core",
@@ -185,7 +185,7 @@ The target subgroup IT number is stored in `target_it_number` rather than as a J
                                     "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                     "items": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                        "title": "Fraction",
                                         "x-optimade-type": "string",
                                         "x-optimade-definition": {
                                             "label": "fraction_core",
@@ -354,13 +354,22 @@ The target subgroup IT number is stored in `target_it_number` rather than as a J
                             ]
                         },
                         "wyckoff_splitting": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                            "title": "Wyckoff splitting",
                             "x-optimade-type": "list",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "wyckoff_splitting",
+                                "label": "wyckoff_splitting_transformations"
+                            },
                             "x-optimade-unit": "inapplicable",
                             "type": [
                                 "array",
                                 "null"
                             ],
-                            "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                            "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                             "items": {
                                 "x-optimade-type": "dictionary",
                                 "x-optimade-unit": "inapplicable",
@@ -420,20 +429,38 @@ The target subgroup IT number is stored in `target_it_number` rather than as a J
                                                 "affine": {
                                                     "x-optimade-type": "list",
                                                     "x-optimade-unit": "inapplicable",
+                                                    "x-optimade-dimensions": {
+                                                        "names": [
+                                                            "dim_lattice",
+                                                            "dim_affine"
+                                                        ],
+                                                        "sizes": [
+                                                            3,
+                                                            4
+                                                        ]
+                                                    },
                                                     "type": [
                                                         "array"
                                                     ],
-                                                    "description": "Exact affine representation for the split branch.",
+                                                    "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                     "items": {
                                                         "x-optimade-type": "list",
                                                         "x-optimade-unit": "inapplicable",
+                                                        "x-optimade-dimensions": {
+                                                            "names": [
+                                                                "dim_affine"
+                                                            ],
+                                                            "sizes": [
+                                                                4
+                                                            ]
+                                                        },
                                                         "type": [
                                                             "array"
                                                         ],
-                                                        "description": "One affine row.",
+                                                        "description": "One row of the augmented affine matrix.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -461,7 +488,40 @@ The target subgroup IT number is stored in `target_it_number` rather than as a J
                                         }
                                     }
                                 }
-                            }
+                            },
+                            "examples": [
+                                [
+                                    {
+                                        "parent": "c",
+                                        "splits": [
+                                            {
+                                                "letter": "e",
+                                                "xyz": "x,y,z",
+                                                "affine": [
+                                                    [
+                                                        "1",
+                                                        "0",
+                                                        "0",
+                                                        "0"
+                                                    ],
+                                                    [
+                                                        "0",
+                                                        "1",
+                                                        "0",
+                                                        "0"
+                                                    ],
+                                                    [
+                                                        "0",
+                                                        "0",
+                                                        "1",
+                                                        "0"
+                                                    ]
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            ]
                         },
                         "criteria": {
                             "x-optimade-type": "list",
@@ -561,13 +621,21 @@ The target subgroup IT number is stored in `target_it_number` rather than as a J
                                                         "items": {
                                                             "x-optimade-type": "list",
                                                             "x-optimade-unit": "inapplicable",
+                                                            "x-optimade-dimensions": {
+                                                                "names": [
+                                                                    "dim_lattice"
+                                                                ],
+                                                                "sizes": [
+                                                                    3
+                                                                ]
+                                                            },
                                                             "type": [
                                                                 "array"
                                                             ],
                                                             "description": "One exact coefficient vector.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -601,7 +669,7 @@ The target subgroup IT number is stored in `target_it_number` rather than as a J
                                                     "description": "Exact target vector or scalar for the constraint.",
                                                     "items": {
                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                        "title": "fraction",
+                                                        "title": "Fraction",
                                                         "x-optimade-type": "string",
                                                         "x-optimade-definition": {
                                                             "label": "fraction_core",

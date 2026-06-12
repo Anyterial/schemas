@@ -1,7 +1,7 @@
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_orthogonal_cosets",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "N Orthogonal Cosets",
+    "title": "Number of orthogonal cosets",
     "x-optimade-type": "integer",
     "x-optimade-definition": {
         "kind": "property",
@@ -14,7 +14,7 @@
         "integer",
         "null"
     ],
-    "description": "Number of orthogonal affine normalizer coset representatives stored for the setting.",
+    "description": "Number of orthogonal affine normalizer coset representatives stored for the setting.\n\nThis value MUST equal the length of the `orthogonal_affine_normalizer_cosets` list of the containing record.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         47,

@@ -31,7 +31,7 @@
 
     * **properties**
         * **core**
-            * **[fraction](v0.1/properties/core/fraction.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/core/fraction`](https://schemas.anyterial.se/defs/v0.1/properties/core/fraction.md)
+            * **[Fraction](v0.1/properties/core/fraction.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/core/fraction`](https://schemas.anyterial.se/defs/v0.1/properties/core/fraction.md)
                 
                 A numerical representation formed as the quotient of two numbers represented as a string.
 
@@ -40,49 +40,49 @@
                 Strings with alternate markup and/or encoding for display rendering.
 
         * **pointgroups**
-            * **[Character Table Complex](v0.1/properties/pointgroups/character_table_complex.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_complex`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_complex.md)
+            * **[Complex character table](v0.1/properties/pointgroups/character_table_complex.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_complex`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_complex.md)
                 
-                Complex irreducible character table of the crystallographic point group. Rows correspond to complex irreducible representations and columns follow the order of `conjugacy_classes`.
+                Complex irreducible character table of the crystallographic point group.
 
-            * **[Character Table Real](v0.1/properties/pointgroups/character_table_real.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_real`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_real.md)
+            * **[Real character table](v0.1/properties/pointgroups/character_table_real.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_real`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_real.md)
                 
-                Real irreducible character table of the crystallographic point group. Rows correspond to real irreducible representations and columns follow the order of `conjugacy_classes`.
+                Real irreducible character table of the crystallographic point group.
 
-            * **[Conjugacy Classes](v0.1/properties/pointgroups/conjugacy_classes.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/conjugacy_classes`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/conjugacy_classes.md)
+            * **[Conjugacy classes](v0.1/properties/pointgroups/conjugacy_classes.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/conjugacy_classes`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/conjugacy_classes.md)
                 
-                Conjugacy classes of a crystallographic point group. Each class lists its member operation indices, a representative operation, a conventional class label, and operation-type metadata used by the character tables.
+                Conjugacy classes of a crystallographic point group.
 
-            * **[Crystal System](v0.1/properties/pointgroups/crystal_system.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/crystal_system`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/crystal_system.md)
+            * **[Crystal system](v0.1/properties/pointgroups/crystal_system.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/crystal_system`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/crystal_system.md)
                 
                 The crystal system of the space group or point group.
 
-            * **[Hermann-Mauguin Symbol](v0.1/properties/pointgroups/hm_symbol.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/hm_symbol`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/hm_symbol.md)
+            * **[Hermann-Mauguin symbol](v0.1/properties/pointgroups/hm_symbol.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/hm_symbol`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/hm_symbol.md)
                 
                 Hermann-Mauguin point-group symbol used as the key and display symbol for a point-group record.
 
-            * **[Is Centrosymmetric](v0.1/properties/pointgroups/is_centrosymmetric.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/is_centrosymmetric`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/is_centrosymmetric.md)
+            * **[is centrosymmetric](v0.1/properties/pointgroups/is_centrosymmetric.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/is_centrosymmetric`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/is_centrosymmetric.md)
                 
                 Boolean flag indicating whether the point group contains inversion symmetry.
 
-            * **[Laue Class](v0.1/properties/pointgroups/laue_class.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/laue_class`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/laue_class.md)
+            * **[Laue class](v0.1/properties/pointgroups/laue_class.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/laue_class`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/laue_class.md)
                 
                 The Laue class associated with the space group or point group.
 
-            * **[N Conjugacy Classes](v0.1/properties/pointgroups/n_conjugacy_classes.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_conjugacy_classes`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_conjugacy_classes.md)
+            * **[Number of conjugacy classes](v0.1/properties/pointgroups/n_conjugacy_classes.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_conjugacy_classes`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_conjugacy_classes.md)
                 
                 Number of conjugacy classes in the crystallographic point group.
 
-            * **[number of pointgroup symops](v0.1/properties/pointgroups/n_pointgroup_symops.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops.md)
+            * **[Number of pointgroup symops](v0.1/properties/pointgroups/n_pointgroup_symops.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops.md)
                 
                 Number of point-group symmetry operations.
 
-            * **[Order](v0.1/properties/pointgroups/order.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order.md)
+            * **[Order of the point group](v0.1/properties/pointgroups/order.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order.md)
                 
                 Order of the point group, i.e. the number of operations in the finite point group.
 
-            * **[Schoenflies Symbol](v0.1/properties/pointgroups/schoenflies.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies.md)
+            * **[Schoenflies symbol](v0.1/properties/pointgroups/schoenflies.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies.md)
                 
-                The Schoenflies symbol for the space-group type.
+                The Schoenflies symbol for the crystallographic point group.
 
             * **[Schoenflies symbol markups](v0.1/properties/pointgroups/schoenflies_markup.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies_markup`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies_markup.md)
                 
@@ -92,8 +92,8 @@
             * **[Symmetry operations](v0.1/properties/pointgroups/symops.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/symops`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/symops.md)
                 
                 Full list of symmetry-operation descriptors for a point group.
-                Each list member is a `op` object as defined by `/properties/symmetry/op`.
-                For point-group operations, generated data currently uses `matrix` and `type`.
+                Each list member is an `op` object as defined by `/defs/v0.1/properties/symmetry/op`.
+                Point-group operations have a zero translation part, so the `screw_glide` and `origin_shift` classification fields are omitted.
 
         * **spacegroups**
             * **[Asymmetric unit](v0.1/properties/spacegroups/asu.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu.md)
@@ -102,7 +102,7 @@
 
             * **[Asymmetric-unit cut](v0.1/properties/spacegroups/asu_cut.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_cut`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_cut.md)
                 
-                One serialized asymmetric-unit half-space cut or logical cut expression.
+                One serialized asymmetric-unit half-space cut or logical cut expression in the recursive cctbx source representation.
 
             * **[Asymmetric unit markups](v0.1/properties/spacegroups/asu_markup.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_markup`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_markup.md)
                 
@@ -120,35 +120,31 @@
                 
                 Plain string rendering of the asymmetric-unit restrictions for the space-group setting.
 
-            * **[Bravais Type](v0.1/properties/spacegroups/bravais_type.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type.md)
+            * **[Bravais type](v0.1/properties/spacegroups/bravais_type.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type.md)
                 
                 The Bravais type of the translational lattice.
 
-            * **[Cctbx Fft Grid Factors](v0.1/properties/spacegroups/cctbx_fft_grid_factors.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/cctbx_fft_grid_factors`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/cctbx_fft_grid_factors.md)
+            * **[Cctbx FFT grid factors](v0.1/properties/spacegroups/cctbx_fft_grid_factors.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/cctbx_fft_grid_factors`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/cctbx_fft_grid_factors.md)
                 
-                FFT grid-factor recommendations derived from cctbx for the space group, its structure seminvariants, and its Euclidean normalizer.
+                FFT grid-factor requirements derived from cctbx for the space group, its structure seminvariants, and its Euclidean normalizer.
 
             * **[Centering translations](v0.1/properties/spacegroups/centering_translations.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations.md)
                 
                 Centering translations of the conventional cell.
 
-            * **[Centering translations as xyz strings](v0.1/properties/spacegroups/centering_translations_xyz.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations_xyz`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations_xyz.md)
-                
-                Centering translations of the conventional cell, represented as `x,y,z`-style coordinate shifts.
-
-            * **[Centring Type](v0.1/properties/spacegroups/centring_type.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centring_type`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centring_type.md)
+            * **[Centring type](v0.1/properties/spacegroups/centring_type.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centring_type`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centring_type.md)
                 
                 The lattice centring symbol for the crystallographic setting.
 
-            * **[Crystal System](v0.1/properties/spacegroups/crystal_system.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/crystal_system`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/crystal_system.md)
+            * **[Crystal system](v0.1/properties/spacegroups/crystal_system.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/crystal_system`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/crystal_system.md)
                 
                 The crystal system of the space group or point group.
 
-            * **[Hall Symbol](v0.1/properties/spacegroups/hall.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall.md)
+            * **[Hall symbol](v0.1/properties/spacegroups/hall.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall.md)
                 
                 The Hall symbol for a crystallographic space-group setting.
 
-            * **[Hall Aliases](v0.1/properties/spacegroups/hall_aliases.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_aliases`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_aliases.md)
+            * **[Hall symbol aliases](v0.1/properties/spacegroups/hall_aliases.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_aliases`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_aliases.md)
                 
                 Alternate ASCII Hall symbols or Hall-setting keys associated with the same generated setting.
 
@@ -168,15 +164,15 @@
                 
                 Harker planes of the space group in fractional Patterson coordinates.
 
-            * **[Hermann-Mauguin Cctbx Universal](v0.1/properties/spacegroups/hm_cctbx_universal.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal.md)
+            * **[Universal cctbx Hermann-Mauguin symbol](v0.1/properties/spacegroups/hm_cctbx_universal.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal.md)
                 
                 Universal Hermann-Mauguin symbol returned by cctbx for this setting.
 
-            * **[Hermann-Mauguin Entry](v0.1/properties/spacegroups/hm_entry.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry.md)
+            * **[Hermann-Mauguin entry](v0.1/properties/spacegroups/hm_entry.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry.md)
                 
                 The Hermann-Mauguin entry label for a conventional space-group setting from table A1.4.2.7 of the [International Tables for Crystallography (2006). Volume B, Reciprocal space. ISBN: 978-0-7923-6592-1, doi:10.1107/97809553602060000102](https://doi.org/10.1107/97809553602060000102).
 
-            * **[Hermann-Mauguin Entry Aliases](v0.1/properties/spacegroups/hm_entry_aliases.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_aliases`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_aliases.md)
+            * **[Hermann-Mauguin entry aliases](v0.1/properties/spacegroups/hm_entry_aliases.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_aliases`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_aliases.md)
                 
                 Alternative Hermann-Mauguin entry labels from International Tables for Crystallography Volume B table A1.4.2.7 that identify the same generated Hall-symbol row as `hm_entry`.
 
@@ -184,11 +180,11 @@
                 
                 Display-oriented renderings of the Hermann-Mauguin entry label in `hm_entry`.
 
-            * **[Extended Hermann-Mauguin Symbol](v0.1/properties/spacegroups/hm_extended.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended.md)
+            * **[Extended Hermann-Mauguin symbol](v0.1/properties/spacegroups/hm_extended.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended.md)
                 
                 The setting-specific extended Hermann-Mauguin symbol for the space-group setting.
 
-            * **[Hermann-Mauguin Extended Aliases](v0.1/properties/spacegroups/hm_extended_aliases.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_aliases`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_aliases.md)
+            * **[Extended Hermann-Mauguin symbol aliases](v0.1/properties/spacegroups/hm_extended_aliases.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_aliases`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_aliases.md)
                 
                 Alternate ASCII forms of `hm_extended` that are accepted for the same generated setting.
 
@@ -200,15 +196,15 @@
                 
                 Display-oriented renderings of the extended Hermann-Mauguin symbol in `hm_extended`.
 
-            * **[Hermann-Mauguin Extended Old](v0.1/properties/spacegroups/hm_extended_old.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_old`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_old.md)
+            * **[Extended Hermann-Mauguin symbol in old notation](v0.1/properties/spacegroups/hm_extended_old.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_old`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_old.md)
                 
                 The older extended Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.
 
-            * **[Full Hermann-Mauguin Symbol](v0.1/properties/spacegroups/hm_full.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full.md)
+            * **[Full Hermann-Mauguin symbol](v0.1/properties/spacegroups/hm_full.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full.md)
                 
                 The setting-specific full Hermann-Mauguin symbol for the space-group setting.
 
-            * **[Hermann-Mauguin Full Aliases](v0.1/properties/spacegroups/hm_full_aliases.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_aliases`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_aliases.md)
+            * **[Full Hermann-Mauguin symbol aliases](v0.1/properties/spacegroups/hm_full_aliases.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_aliases`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_aliases.md)
                 
                 Alternate ASCII forms of `hm_full` that are accepted for the same generated setting.
 
@@ -220,11 +216,11 @@
                 
                 Display-oriented renderings of the setting-specific full Hermann-Mauguin symbol in `hm_full`.
 
-            * **[Hermann-Mauguin Full Old](v0.1/properties/spacegroups/hm_full_old.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_old`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_old.md)
+            * **[Full Hermann-Mauguin symbol in old notation](v0.1/properties/spacegroups/hm_full_old.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_old`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_old.md)
                 
                 The older full Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.
 
-            * **[Hermann-Mauguin Full Std](v0.1/properties/spacegroups/hm_full_std.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_std`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_std.md)
+            * **[Standard full Hermann-Mauguin symbol](v0.1/properties/spacegroups/hm_full_std.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_std`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_std.md)
                 
                 The International Tables standard full Hermann-Mauguin symbol for the space-group type.
 
@@ -232,11 +228,11 @@
                 
                 Display-oriented renderings of the ITA-standard full Hermann-Mauguin symbol in `hm_full_std`.
 
-            * **[Short Hermann-Mauguin Symbol](v0.1/properties/spacegroups/hm_short.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short.md)
+            * **[Short Hermann-Mauguin symbol](v0.1/properties/spacegroups/hm_short.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short.md)
                 
                 The setting-specific short Hermann-Mauguin symbol for the space-group setting.
 
-            * **[Hermann-Mauguin Short Aliases](v0.1/properties/spacegroups/hm_short_aliases.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_aliases`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_aliases.md)
+            * **[Short Hermann-Mauguin symbol aliases](v0.1/properties/spacegroups/hm_short_aliases.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_aliases`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_aliases.md)
                 
                 Alternate ASCII forms of `hm_short` that are accepted for the same generated setting.
 
@@ -248,11 +244,11 @@
                 
                 Display-oriented renderings of the setting-specific short Hermann-Mauguin symbol in `hm_short`.
 
-            * **[Hermann-Mauguin Short Old](v0.1/properties/spacegroups/hm_short_old.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_old`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_old.md)
+            * **[Short Hermann-Mauguin symbol in old notation](v0.1/properties/spacegroups/hm_short_old.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_old`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_old.md)
                 
                 The older short Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.
 
-            * **[Hermann-Mauguin Short Standard](v0.1/properties/spacegroups/hm_short_std.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std.md)
+            * **[Standard short Hermann-Mauguin symbol](v0.1/properties/spacegroups/hm_short_std.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std.md)
                 
                 The International Tables standard short Hermann-Mauguin symbol for the space-group type.
 
@@ -264,31 +260,31 @@
                 
                 Boolean flag indicating whether the space group is centric.
 
-            * **[Is Chiral](v0.1/properties/spacegroups/is_chiral.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_chiral`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_chiral.md)
+            * **[is chiral](v0.1/properties/spacegroups/is_chiral.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_chiral`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_chiral.md)
                 
                 Boolean flag indicating whether the space group is chiral.
 
-            * **[Is Enantiomorphic](v0.1/properties/spacegroups/is_enantiomorphic.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_enantiomorphic`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_enantiomorphic.md)
+            * **[is enantiomorphic](v0.1/properties/spacegroups/is_enantiomorphic.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_enantiomorphic`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_enantiomorphic.md)
                 
                 Boolean flag indicating whether the space-group type belongs to an enantiomorphic pair.
 
-            * **[Is Reference Setting](v0.1/properties/spacegroups/is_reference_setting.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_reference_setting`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_reference_setting.md)
+            * **[is reference setting](v0.1/properties/spacegroups/is_reference_setting.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_reference_setting`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_reference_setting.md)
                 
                 Boolean flag indicating whether this Hall setting is the selected reference setting for its International Tables space-group number.
 
-            * **[International Tables Coordinate-System Code](v0.1/properties/spacegroups/it_coordinate_system_code.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_coordinate_system_code`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_coordinate_system_code.md)
+            * **[International Tables coordinate-system code](v0.1/properties/spacegroups/it_coordinate_system_code.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_coordinate_system_code`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_coordinate_system_code.md)
                 
                 The International Tables coordinate-system code for the setting.
 
-            * **[International Tables Space-Group Number](v0.1/properties/spacegroups/it_number.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number.md)
+            * **[International Tables space-group number](v0.1/properties/spacegroups/it_number.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number.md)
                 
                 The International Tables space-group number.
 
-            * **[It Number Enantiomorphic](v0.1/properties/spacegroups/it_number_enantiomorphic.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number_enantiomorphic`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number_enantiomorphic.md)
+            * **[International Tables number of the enantiomorph](v0.1/properties/spacegroups/it_number_enantiomorphic.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number_enantiomorphic`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number_enantiomorphic.md)
                 
                 International Tables number of the enantiomorphic partner space group, when one exists.
 
-            * **[Laue Class](v0.1/properties/spacegroups/laue_class.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/laue_class`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/laue_class.md)
+            * **[Laue class](v0.1/properties/spacegroups/laue_class.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/laue_class`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/laue_class.md)
                 
                 The Laue class associated with the space group or point group.
 
@@ -296,30 +292,30 @@
                 
                 Number of centering translations in the conventional cell of the space-group setting.
 
-            * **[number of pointgroup symops](v0.1/properties/spacegroups/n_pointgroup_symops.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops.md)
+            * **[Number of pointgroup symops](v0.1/properties/spacegroups/n_pointgroup_symops.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops.md)
                 
                 Number of point-group symmetry operations.
 
-            * **[number of symops](v0.1/properties/spacegroups/n_symops.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops.md)
+            * **[Number of symops](v0.1/properties/spacegroups/n_symops.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops.md)
                 
                 Number of symmetry operations in the finite operation list of the generated entry.
 
-            * **[Point-Group Hermann-Mauguin Symbol](v0.1/properties/spacegroups/point_group.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/point_group`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/point_group.md)
+            * **[Point-group Hermann-Mauguin symbol](v0.1/properties/spacegroups/point_group.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/point_group`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/point_group.md)
                 
-                The Hermann-Mauguin point-group symbol associated with the space group.
+                The Hermann-Mauguin point-group symbol for the crystallographic point group of the space group.
 
-            * **[Schoenflies Symbol](v0.1/properties/spacegroups/schoenflies.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies.md)
+            * **[Schoenflies symbol](v0.1/properties/spacegroups/schoenflies.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies.md)
                 
                 The Schoenflies symbol for the space-group type.
 
-            * **[Schoenflies symbol markups](v0.1/properties/spacegroups/schoenflies_markup.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies_markup`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies_markup.md)
+            * **[Schoenflies symbol markups](v0.1/properties/spacegroups/schoenflies_markup.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies_markup`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies_markup.md)
                 
-                Display-oriented renderings of the Schoenflies symbol in `schoenflies`.
+                Display-oriented renderings of the space-group Schoenflies symbol in `schoenflies`.
                 The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.
 
-            * **[Setting](v0.1/properties/spacegroups/setting.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting.md)
+            * **[Setting annotation](v0.1/properties/spacegroups/setting.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting.md)
                 
-                Setting suffix or setting annotation extracted from the cctbx universal Hermann-Mauguin symbol.
+                Setting suffix or setting annotation extracted from the cctbx universal Hermann-Mauguin symbol in `hm_cctbx_universal`.
 
             * **[International Tables setting code n:c](v0.1/properties/spacegroups/setting_it_nc.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc.md)
                 
@@ -329,7 +325,7 @@
                 
                 A list of International Tables `n:c` setting identifiers that are alternatives to the one designated as the main one.
 
-            * **[Setting Plaintext](v0.1/properties/spacegroups/setting_plaintext.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_plaintext`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_plaintext.md)
+            * **[Setting plaintext](v0.1/properties/spacegroups/setting_plaintext.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_plaintext`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_plaintext.md)
                 
                 Human-readable description of the International Tables coordinate-system setting.
 
@@ -337,15 +333,15 @@
                 
                 Ordered table of conventional space-group symbol rows.
 
-            * **[Spglib Hall](v0.1/properties/spacegroups/spglib_hall.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall.md)
+            * **[Spglib Hall symbol](v0.1/properties/spacegroups/spglib_hall.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall.md)
                 
-                The standard Hall setting used in spglib, e.g., for a space group number.
+                The Hall symbol for this setting as spelled by the spglib library.
 
-            * **[Spglib Hall Numbers](v0.1/properties/spacegroups/spglib_hall_numbers.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall_numbers`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall_numbers.md)
+            * **[Spglib Hall numbers](v0.1/properties/spacegroups/spglib_hall_numbers.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall_numbers`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall_numbers.md)
                 
-                A "Hall number" as assigned by spglib.
+                The spglib Hall numbers corresponding to this Hall setting.
 
-            * **[Structure Seminvariants](v0.1/properties/spacegroups/structure_seminvariants.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/structure_seminvariants`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/structure_seminvariants.md)
+            * **[Structure seminvariants](v0.1/properties/spacegroups/structure_seminvariants.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/structure_seminvariants`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/structure_seminvariants.md)
                 
                 Structure seminvariant vectors and moduli for the space-group setting.
 
@@ -357,35 +353,19 @@
                 
                 Minimal generator subset of the full symmetry-operation group for a space-group setting.
 
-            * **[Symops Generators xyz](v0.1/properties/spacegroups/symops_generators_xyz.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators_xyz`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators_xyz.md)
-                
-                Minimal generator subset of the full symmetry-operation group in fractional `x,y,z` notation, ordered consistently with `symops_generators`.
-
             * **[Symmetry operations modulo centering translations](v0.1/properties/spacegroups/symops_mod_centering.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering.md)
                 
                 Representative symmetry-operation descriptors modulo centering translations.
-
-            * **[Symmetry operations modulo centering in x,y,z notation](v0.1/properties/spacegroups/symops_mod_centering_xyz.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering_xyz`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering_xyz.md)
-                
-                Symmetry operations modulo centering translations in fractional `x,y,z` notation, ordered consistently with `symops_mod_centering`.
 
             * **[Representative symmetry operations](v0.1/properties/spacegroups/symops_representative.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative.md)
                 
                 Representative symmetry-operation descriptors modulo centering translations.
 
-            * **[Symops Representative Xyz](v0.1/properties/spacegroups/symops_representative_xyz.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative_xyz`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative_xyz.md)
-                
-                Representative symmetry operations modulo centering translations in fractional `x,y,z` notation, ordered consistently with `symops_representative`.
-
-            * **[Symmetry operations in x,y,z notation](v0.1/properties/spacegroups/symops_xyz.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_xyz`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_xyz.md)
-                
-                A list of symmetry operations given as general position x, y and z coordinates in algebraic form.
-
             * **[Wyckoff positions](v0.1/properties/spacegroups/wyckoff.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff.md)
                 
                 Wyckoff-position table for a specific space-group setting.
 
-            * **[Wyckoff Sets](v0.1/properties/spacegroups/wyckoff_sets.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_sets`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_sets.md)
+            * **[Wyckoff sets](v0.1/properties/spacegroups/wyckoff_sets.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_sets`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_sets.md)
                 
                 Sets of Wyckoff letters related by normalizer operations.
 
@@ -439,10 +419,6 @@
                 
                 Bärnighausen subgroup transform table for one parent setting or space-group type.
 
-            * **[Continuous Euclidean normalizer](v0.1/properties/transformations/continuous_euclidean_normalizer.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/continuous_euclidean_normalizer`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/continuous_euclidean_normalizer.md)
-                
-                Continuous Euclidean normalizer subspace before aggregation into the public transformation tables.
-
             * **[Continuous normalizer](v0.1/properties/transformations/continuous_normalizer.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/continuous_normalizer`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/continuous_normalizer.md)
                 
                 Parameterized continuous normalizer subspace for a setting.
@@ -455,7 +431,7 @@
                 
                 Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.
 
-            * **[Index](v0.1/properties/transformations/index.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/index`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/index.md)
+            * **[Subgroup or transform index](v0.1/properties/transformations/index.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/index`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/index.md)
                 
                 Subgroup or transform index.
 
@@ -471,27 +447,27 @@
                 
                 Maximal non-isomorphic subgroup relations for International Tables space-group types.
 
-            * **[N Coset Representatives](v0.1/properties/transformations/n_coset_representatives.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_coset_representatives`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_coset_representatives.md)
+            * **[Number of coset representatives](v0.1/properties/transformations/n_coset_representatives.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_coset_representatives`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_coset_representatives.md)
                 
                 Number of nontrivial coset representatives retained after deduplication modulo the space group.
 
-            * **[N Cosets](v0.1/properties/transformations/n_cosets.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_cosets`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_cosets.md)
+            * **[Number of cosets](v0.1/properties/transformations/n_cosets.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_cosets`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_cosets.md)
                 
                 Number of affine normalizer coset representatives stored for the setting.
 
-            * **[N Linear Parts](v0.1/properties/transformations/n_linear_parts.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts.md)
+            * **[Number of linear parts](v0.1/properties/transformations/n_linear_parts.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts.md)
                 
                 Number of distinct linear matrix parts represented in a normalizer or transform table.
 
-            * **[N Orthogonal Cosets](v0.1/properties/transformations/n_orthogonal_cosets.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_orthogonal_cosets`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_orthogonal_cosets.md)
+            * **[Number of orthogonal cosets](v0.1/properties/transformations/n_orthogonal_cosets.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_orthogonal_cosets`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_orthogonal_cosets.md)
                 
                 Number of orthogonal affine normalizer coset representatives stored for the setting.
 
-            * **[N Raw Candidates](v0.1/properties/transformations/n_raw_candidates.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_raw_candidates`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_raw_candidates.md)
+            * **[Number of raw candidates](v0.1/properties/transformations/n_raw_candidates.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_raw_candidates`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_raw_candidates.md)
                 
                 Number of candidate affine operations considered before filtering and deduplication.
 
-            * **[N Unique Candidates](v0.1/properties/transformations/n_unique_candidates.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_unique_candidates`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_unique_candidates.md)
+            * **[Number of unique candidates](v0.1/properties/transformations/n_unique_candidates.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_unique_candidates`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_unique_candidates.md)
                 
                 Number of candidate affine operations remaining after exact duplicate removal.
 
@@ -511,17 +487,13 @@
                 
                 International Tables maximal subgroup class.
 
-            * **[Target](v0.1/properties/transformations/target.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/target`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/target.md)
+            * **[Criterion target](v0.1/properties/transformations/target.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/target`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/target.md)
                 
-                Target vector or target value in a generated linear criterion.
+                Exact target vector or scalar of a generated linear criterion.
 
-            * **[To Hall](v0.1/properties/transformations/to_hall.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall.md)
+            * **[To Hall entry](v0.1/properties/transformations/to_hall_entry.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall_entry`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall_entry.md)
                 
-                Reference Hall-entry key to which a setting transform maps the current Hall setting.
-
-            * **[To Hall Symbol](v0.1/properties/transformations/to_hall_symbol.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall_symbol`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall_symbol.md)
-                
-                Display Hall symbol corresponding to `to_hall`.
+                Target Hall-entry key to which a setting transform maps the current Hall setting.
 
             * **[Transformations per H-M entry](v0.1/properties/transformations/transformations_per_hm_entry.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/transformations_per_hm_entry`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/transformations_per_hm_entry.md)
                 
@@ -538,5 +510,5 @@
     * **standards**
         * **[Anyterial definition provider standard](v0.1/standards/anyterial.md)** (standard) - [`https://schemas.anyterial.se/defs/v0.1/standards/anyterial`](https://schemas.anyterial.se/defs/v0.1/standards/anyterial.md)
             
-            Anyterial definition provider standard
+            The Anyterial definition provider standard, comprising the spacegroups, pointgroups, and transformations entry types for crystallographic symmetry data.
 

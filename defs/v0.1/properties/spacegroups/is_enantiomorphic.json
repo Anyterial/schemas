@@ -1,7 +1,7 @@
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_enantiomorphic",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Is Enantiomorphic",
+    "title": "is enantiomorphic",
     "x-optimade-type": "boolean",
     "x-optimade-definition": {
         "kind": "property",

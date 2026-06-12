@@ -1,11 +1,11 @@
-# Short Hermann-Mauguin Symbol (property)
+# Short Hermann-Mauguin symbol (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short.md)**  
 **Definition name:** `hm_short`
 
-**Property name:** Short Hermann-Mauguin Symbol  
+**Property name:** Short Hermann-Mauguin symbol  
 **Description:** The setting-specific short Hermann-Mauguin symbol for the space-group setting.  
 **Type:** string  
 
@@ -25,7 +25,7 @@ It is compatible with OPTIMADE's `space_group_symbol_hermann_mauguin`.
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Short Hermann-Mauguin Symbol",
+    "title": "Short Hermann-Mauguin symbol",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin"

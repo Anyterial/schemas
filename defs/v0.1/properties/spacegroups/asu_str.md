@@ -9,7 +9,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Description:** Plain string rendering of the asymmetric-unit restrictions for the space-group setting.  
 **Type:** string  
 
-
+The structured representation in `asu` is canonical; this string is a rendering for display and quick inspection.
 
 **Examples:**
 
@@ -37,7 +37,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "string",
         "null"
     ],
-    "description": "Plain string rendering of the asymmetric-unit restrictions for the space-group setting.",
+    "description": "Plain string rendering of the asymmetric-unit restrictions for the space-group setting.\n\nThe structured representation in `asu` is canonical; this string is a rendering for display and quick inspection.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         "x>=0; x<1; y>=0; y<1; z>=0; z<1",

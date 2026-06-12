@@ -105,7 +105,8 @@ overflow-wrap: break-word;
 <ul>
 <li>
 <p><strong>dimension</strong>: OPTIONAL; Integer.
-  Dimension of the continuous parameter subspace.</p>
+  Dimension of the continuous parameter subspace.
+  When present, it MUST equal the length of <code>basis_vectors</code>.</p>
 </li>
 <li>
 <p><strong>basis_vectors</strong>: REQUIRED; List of vectors.
@@ -146,7 +147,7 @@ overflow-wrap: break-word;
 <span class="w">        </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="s2">&quot;null&quot;</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Parameterized continuous normalizer subspace for a setting.\n\nIt describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Parameterized continuous normalizer subspace for a setting.\n\nIt describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n      When present, it MUST equal the length of `basis_vectors`.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
@@ -155,7 +156,7 @@ overflow-wrap: break-word;
 <span class="w">                </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="s2">&quot;null&quot;</span>
 <span class="w">            </span><span class="p">],</span>
-<span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Dimension of the continuous parameter subspace.&quot;</span>
+<span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Dimension of the continuous parameter subspace. When present, it MUST equal the length of `basis_vectors`.&quot;</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="nt">&quot;basis_vectors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
@@ -182,7 +183,7 @@ overflow-wrap: break-word;
 <span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One basis vector in fractional coordinates.&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/core/fraction&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fraction&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                        </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction_core&quot;</span><span class="p">,</span>

@@ -1,7 +1,7 @@
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_unique_candidates",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "N Unique Candidates",
+    "title": "Number of unique candidates",
     "x-optimade-type": "integer",
     "x-optimade-definition": {
         "kind": "property",
@@ -14,7 +14,7 @@
         "integer",
         "null"
     ],
-    "description": "Number of candidate affine operations remaining after exact duplicate removal.",
+    "description": "Number of candidate affine operations remaining after exact duplicate removal.\n\nThe counted candidate set itself is not stored; this value documents the size of the bounded search.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         48,

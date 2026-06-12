@@ -1,7 +1,7 @@
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Spglib Hall",
+    "title": "Spglib Hall symbol",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",
@@ -14,7 +14,7 @@
         "string",
         "null"
     ],
-    "description": "The standard Hall setting used in spglib, e.g., for a space group number.",
+    "description": "The Hall symbol for this setting as spelled by the spglib library.\n\nThis is the Hall symbol spglib associates with the Hall numbers in `spglib_hall_numbers`.\nIt denotes the same setting as `hall` but may differ in spelling or spacing conventions.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         "P 1",

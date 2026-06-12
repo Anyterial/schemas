@@ -71,7 +71,7 @@
             },
             "hall": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall",
-                "title": "Hall Symbol",
+                "title": "Hall symbol",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hall"
@@ -87,7 +87,7 @@
                     "string",
                     "null"
                 ],
-                "description": "The Hall symbol for a crystallographic space-group setting.\n\nHall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously.",
+                "description": "The Hall symbol for a crystallographic space-group setting.\n\nHall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously.\nThe normalized lookup-key form of this symbol, using lowercase letters and underscores in place of spaces, is provided by `hall_entry`.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "P 1",
@@ -96,7 +96,7 @@
             },
             "it_number": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
-                "title": "International Tables Space-Group Number",
+                "title": "International Tables space-group number",
                 "x-optimade-type": "integer",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -121,7 +121,7 @@
             },
             "hm_short": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short",
-                "title": "Short Hermann-Mauguin Symbol",
+                "title": "Short Hermann-Mauguin symbol",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin"
@@ -146,7 +146,7 @@
             },
             "hm_full": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full",
-                "title": "Full Hermann-Mauguin Symbol",
+                "title": "Full Hermann-Mauguin symbol",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_H-M_full.html"
@@ -171,7 +171,7 @@
             },
             "hm_extended": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended",
-                "title": "Extended Hermann-Mauguin Symbol",
+                "title": "Extended Hermann-Mauguin symbol",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin_extended"
@@ -187,7 +187,7 @@
                     "string",
                     "null"
                 ],
-                "description": "The setting-specific extended Hermann-Mauguin symbol for the space-group setting.\n\nExtended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol.\nMulti-line values preserve line breaks and spacing used to align the extended symbol components.",
+                "description": "The setting-specific extended Hermann-Mauguin symbol for the space-group setting.\n\nExtended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol.\nMulti-line values preserve line breaks and spacing used to align the extended symbol components.\nUnlike the short and full symbols, extended symbols are defined per setting only, so no `hm_extended_std` standard-symbol counterpart exists.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "P 1",
@@ -196,7 +196,7 @@
             },
             "hm_extended_old": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_old",
-                "title": "Hermann-Mauguin Extended Old",
+                "title": "Extended Hermann-Mauguin symbol in old notation",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -218,7 +218,7 @@
             },
             "hm_short_old": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_old",
-                "title": "Hermann-Mauguin Short Old",
+                "title": "Short Hermann-Mauguin symbol in old notation",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -240,7 +240,7 @@
             },
             "hm_full_old": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_old",
-                "title": "Hermann-Mauguin Full Old",
+                "title": "Full Hermann-Mauguin symbol in old notation",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",

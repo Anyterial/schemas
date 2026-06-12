@@ -1,11 +1,11 @@
-# Hermann-Mauguin Entry Aliases (property)
+# Hermann-Mauguin entry aliases (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_aliases`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_aliases.md)**  
 **Definition name:** `hm_entry_aliases`
 
-**Property name:** Hermann-Mauguin Entry Aliases  
+**Property name:** Hermann-Mauguin entry aliases  
 **Description:** Alternative Hermann-Mauguin entry labels from International Tables for Crystallography Volume B table A1.4.2.7 that identify the same generated Hall-symbol row as `hm_entry`.  
 **Type:** list  
 
@@ -31,7 +31,7 @@ The primary label is stored in `hm_entry`; this list stores the remaining labels
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_aliases",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Hermann-Mauguin Entry Aliases",
+    "title": "Hermann-Mauguin entry aliases",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",

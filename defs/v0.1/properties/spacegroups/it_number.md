@@ -1,11 +1,11 @@
-# International Tables Space-Group Number (property)
+# International Tables space-group number (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number.md)**  
 **Definition name:** `it_number`
 
-**Property name:** International Tables Space-Group Number  
+**Property name:** International Tables space-group number  
 **Description:** The International Tables space-group number.  
 **Type:** integer  
 
@@ -24,7 +24,7 @@ This integer identifies the space-group type numbered 1 through 230 in Internati
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "International Tables Space-Group Number",
+    "title": "International Tables space-group number",
     "x-optimade-type": "integer",
     "x-compatibility": [
         "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"

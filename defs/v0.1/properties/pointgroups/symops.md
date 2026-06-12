@@ -7,18 +7,18 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 
 **Property name:** Symmetry operations  
 **Description:** Full list of symmetry-operation descriptors for a point group.
-Each list member is a `op` object as defined by `/properties/symmetry/op`.
-For point-group operations, generated data currently uses `matrix` and `type`.  
+Each list member is an `op` object as defined by `/defs/v0.1/properties/symmetry/op`.
+Point-group operations have a zero translation part, so the `screw_glide` and `origin_shift` classification fields are omitted.  
 **Type:** list  
 
 **Requirements/Conventions**:
 
 - It MUST be a list of dictionaries.
-- Each dictionary MUST follow the schema inherited from `/properties/symmetry/op`.
+- Each dictionary MUST follow the schema inherited from `/defs/v0.1/properties/symmetry/op`.
 
 **Examples:**
 
-- `[{"affine_transformation": {"matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "1"]], "vector": ["0", "0", "0"], "xyz": "x,y,z"}, "rot_type": "1", "sense": 0, "axis": [0, 0, 0], "screw_glide": ["0", "0", "0"], "origin_shift": ["0", "0", "0"]}]`
+- `[{"affine_transformation": {"matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "1"]], "vector": ["0", "0", "0"], "xyz": "x,y,z", "det": 1, "is_orthogonal": true}, "rot_type": "1", "sense": 0, "axis": [0, 0, 0]}]`
 
 **Formats:** [[JSON](symops.json)] [[MD](symops.md)]
 
@@ -42,7 +42,7 @@ For point-group operations, generated data currently uses `matrix` and `type`.
         "array",
         "null"
     ],
-    "description": "Full list of symmetry-operation descriptors for a point group.\nEach list member is a `op` object as defined by `/properties/symmetry/op`.\nFor point-group operations, generated data currently uses `matrix` and `type`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/properties/symmetry/op`.",
+    "description": "Full list of symmetry-operation descriptors for a point group.\nEach list member is an `op` object as defined by `/defs/v0.1/properties/symmetry/op`.\nPoint-group operations have a zero translation part, so the `screw_glide` and `origin_shift` classification fields are omitted.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/defs/v0.1/properties/symmetry/op`.",
     "items": {
         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
         "title": "Operation",
@@ -59,7 +59,7 @@ For point-group operations, generated data currently uses `matrix` and `type`.
             "object",
             "null"
         ],
-        "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+        "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n- Whether the operation is proper follows from the sign of the `det` field of `affine_transformation`; no separate properness flag is stored.",
         "properties": {
             "affine_transformation": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
@@ -114,7 +114,7 @@ For point-group operations, generated data currently uses `matrix` and `type`.
                             "description": "One row of the exact 3 by 3 matrix.",
                             "items": {
                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                "title": "fraction",
+                                "title": "Fraction",
                                 "x-optimade-type": "string",
                                 "x-optimade-definition": {
                                     "label": "fraction_core",
@@ -156,7 +156,7 @@ For point-group operations, generated data currently uses `matrix` and `type`.
                         "description": "Exact fractional-coordinate vector part of the affine transformation.",
                         "items": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                            "title": "fraction",
+                            "title": "Fraction",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "label": "fraction_core",
@@ -262,7 +262,19 @@ For point-group operations, generated data currently uses `matrix` and `type`.
                     "string",
                     "null"
                 ],
-                "description": "Symbolic crystallographic operation-type label for the linear part."
+                "description": "Symbolic crystallographic operation-type label for the linear part.",
+                "enum": [
+                    "1",
+                    "-1",
+                    "2",
+                    "m",
+                    "3",
+                    "-3",
+                    "4",
+                    "-4",
+                    "6",
+                    "-6"
+                ]
             },
             "axis": {
                 "x-optimade-type": "list",
@@ -316,7 +328,7 @@ For point-group operations, generated data currently uses `matrix` and `type`.
                 "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                    "title": "fraction",
+                    "title": "Fraction",
                     "x-optimade-type": "string",
                     "x-optimade-definition": {
                         "label": "fraction_core",
@@ -357,7 +369,7 @@ For point-group operations, generated data currently uses `matrix` and `type`.
                 "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                    "title": "fraction",
+                    "title": "Fraction",
                     "x-optimade-type": "string",
                     "x-optimade-definition": {
                         "label": "fraction_core",
@@ -379,15 +391,6 @@ For point-group operations, generated data currently uses `matrix` and `type`.
                     ],
                     "x-optimade-unit": "inapplicable"
                 }
-            },
-            "is_proper": {
-                "x-optimade-type": "boolean",
-                "x-optimade-unit": "inapplicable",
-                "type": [
-                    "boolean",
-                    "null"
-                ],
-                "description": "Whether the linear operation is proper."
             }
         },
         "examples": [
@@ -465,7 +468,9 @@ For point-group operations, generated data currently uses `matrix` and `type`.
                         "0",
                         "0"
                     ],
-                    "xyz": "x,y,z"
+                    "xyz": "x,y,z",
+                    "det": 1,
+                    "is_orthogonal": true
                 },
                 "rot_type": "1",
                 "sense": 0,
@@ -473,16 +478,6 @@ For point-group operations, generated data currently uses `matrix` and `type`.
                     0,
                     0,
                     0
-                ],
-                "screw_glide": [
-                    "0",
-                    "0",
-                    "0"
-                ],
-                "origin_shift": [
-                    "0",
-                    "0",
-                    "0"
                 ]
             }
         ]

@@ -1,11 +1,11 @@
-# Hermann-Mauguin Entry (property)
+# Hermann-Mauguin entry (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry.md)**  
 **Definition name:** `hm_entry`
 
-**Property name:** Hermann-Mauguin Entry  
+**Property name:** Hermann-Mauguin entry  
 **Description:** The Hermann-Mauguin entry label for a conventional space-group setting from table A1.4.2.7 of the [International Tables for Crystallography (2006). Volume B, Reciprocal space. ISBN: 978-0-7923-6592-1, doi:10.1107/97809553602060000102](https://doi.org/10.1107/97809553602060000102).  
 **Type:** string  
 
@@ -33,7 +33,7 @@ The symbol is a full Hermann-Mauguin-style setting label, except that:
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Hermann-Mauguin Entry",
+    "title": "Hermann-Mauguin entry",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",

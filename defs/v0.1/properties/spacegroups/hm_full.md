@@ -1,11 +1,11 @@
-# Full Hermann-Mauguin Symbol (property)
+# Full Hermann-Mauguin symbol (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full.md)**  
 **Definition name:** `hm_full`
 
-**Property name:** Full Hermann-Mauguin Symbol  
+**Property name:** Full Hermann-Mauguin symbol  
 **Description:** The setting-specific full Hermann-Mauguin symbol for the space-group setting.  
 **Type:** string  
 
@@ -24,7 +24,7 @@ The full symbol expands the short Hermann-Mauguin notation to include the symmet
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Full Hermann-Mauguin Symbol",
+    "title": "Full Hermann-Mauguin symbol",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_H-M_full.html"

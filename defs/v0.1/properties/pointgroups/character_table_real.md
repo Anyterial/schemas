@@ -1,15 +1,16 @@
-# Character Table Real (property)
+# Real character table (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_real`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_real.md)**  
 **Definition name:** `character_table_real`
 
-**Property name:** Character Table Real  
-**Description:** Real irreducible character table of the crystallographic point group. Rows correspond to real irreducible representations and columns follow the order of `conjugacy_classes`.  
+**Property name:** Real character table  
+**Description:** Real irreducible character table of the crystallographic point group.  
 **Type:** list  
 
-
+Rows correspond to real irreducible representations and columns follow the order of `conjugacy_classes`.
+Characters of the real table are exact integers and are therefore stored as plain integers, unlike the `re`/`im` fraction-string pairs of `character_table_complex`.
 
 **Examples:**
 
@@ -24,7 +25,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_real",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Character Table Real",
+    "title": "Real character table",
     "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
@@ -38,7 +39,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "array",
         "null"
     ],
-    "description": "Real irreducible character table of the crystallographic point group. Rows correspond to real irreducible representations and columns follow the order of `conjugacy_classes`.",
+    "description": "Real irreducible character table of the crystallographic point group.\n\nRows correspond to real irreducible representations and columns follow the order of `conjugacy_classes`.\nCharacters of the real table are exact integers and are therefore stored as plain integers, unlike the `re`/`im` fraction-string pairs of `character_table_complex`.",
     "x-optimade-unit": "inapplicable",
     "items": {
         "x-optimade-type": "dictionary",

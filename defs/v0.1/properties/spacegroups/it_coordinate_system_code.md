@@ -1,11 +1,11 @@
-# International Tables Coordinate-System Code (property)
+# International Tables coordinate-system code (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_coordinate_system_code`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_coordinate_system_code.md)**  
 **Definition name:** `it_coordinate_system_code`
 
-**Property name:** International Tables Coordinate-System Code  
+**Property name:** International Tables coordinate-system code  
 **Description:** The International Tables coordinate-system code for the setting.  
 **Type:** string  
 
@@ -24,7 +24,7 @@ The code distinguishes setting choices such as monoclinic unique-axis and cell c
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_coordinate_system_code",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "International Tables Coordinate-System Code",
+    "title": "International Tables coordinate-system code",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.IT_coordinate_system_code.html"

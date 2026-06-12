@@ -1,11 +1,11 @@
-# Index (property)
+# Subgroup or transform index (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/index`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/index.md)**  
 **Definition name:** `index`
 
-**Property name:** Index  
+**Property name:** Subgroup or transform index  
 **Description:** Subgroup or transform index.  
 **Type:** integer  
 
@@ -24,7 +24,7 @@ For subgroup transforms it is the crystallographic subgroup index `[G:H]`, equal
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/index",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Index",
+    "title": "Subgroup or transform index",
     "x-optimade-type": "integer",
     "x-optimade-definition": {
         "kind": "property",

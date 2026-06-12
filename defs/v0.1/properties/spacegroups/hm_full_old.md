@@ -1,11 +1,11 @@
-# Hermann-Mauguin Full Old (property)
+# Full Hermann-Mauguin symbol in old notation (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_old`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_old.md)**  
 **Definition name:** `hm_full_old`
 
-**Property name:** Hermann-Mauguin Full Old  
+**Property name:** Full Hermann-Mauguin symbol in old notation  
 **Description:** The older full Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.  
 **Type:** string  
 
@@ -29,7 +29,7 @@ Hermann-Mauguin symbols describe crystallographic space groups using lattice-cen
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_old",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Hermann-Mauguin Full Old",
+    "title": "Full Hermann-Mauguin symbol in old notation",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",

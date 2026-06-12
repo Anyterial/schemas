@@ -1,7 +1,7 @@
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "N Linear Parts",
+    "title": "Number of linear parts",
     "x-optimade-type": "integer",
     "x-optimade-definition": {
         "kind": "property",
@@ -14,7 +14,7 @@
         "integer",
         "null"
     ],
-    "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+    "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         2,

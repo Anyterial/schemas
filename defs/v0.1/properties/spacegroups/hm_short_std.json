@@ -1,7 +1,7 @@
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Hermann-Mauguin Short Standard",
+    "title": "Standard short Hermann-Mauguin symbol",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",

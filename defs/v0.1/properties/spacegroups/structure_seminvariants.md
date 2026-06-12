@@ -1,11 +1,11 @@
-# Structure Seminvariants (property)
+# Structure seminvariants (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/structure_seminvariants`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/structure_seminvariants.md)**  
 **Definition name:** `structure_seminvariants`
 
-**Property name:** Structure Seminvariants  
+**Property name:** Structure seminvariants  
 **Description:** Structure seminvariant vectors and moduli for the space-group setting.  
 **Type:** list  
 
@@ -29,7 +29,7 @@ The dictionaries MUST contain the fields:
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/structure_seminvariants",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Structure Seminvariants",
+    "title": "Structure seminvariants",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -54,6 +54,14 @@ The dictionaries MUST contain the fields:
         "properties": {
             "vector": {
                 "x-optimade-type": "list",
+                "x-optimade-dimensions": {
+                    "names": [
+                        "dim_lattice"
+                    ],
+                    "sizes": [
+                        3
+                    ]
+                },
                 "type": [
                     "array",
                     "null"

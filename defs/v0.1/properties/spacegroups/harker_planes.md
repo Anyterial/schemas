@@ -108,7 +108,7 @@ Each entry describes one plane or special-position condition with an expression 
                 "description": "Point on the plane.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                    "title": "fraction",
+                    "title": "Fraction",
                     "x-optimade-type": "string",
                     "x-optimade-definition": {
                         "label": "fraction_core",
@@ -133,7 +133,7 @@ Each entry describes one plane or special-position condition with an expression 
             },
             "const": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                "title": "fraction",
+                "title": "Fraction",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "label": "fraction_core",

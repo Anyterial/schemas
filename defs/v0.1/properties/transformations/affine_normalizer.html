@@ -102,6 +102,10 @@ This property contains representatives generated from bounded unimodular integer
 <p>The <code>candidate_set</code> field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.
 For this property <code>candidate_set</code> is <code>bounded_unimodular_integer_matrices</code>, meaning unimodular 3 by 3 integer matrices satisfying the recorded <code>bounds</code>.
 The plural field <code>candidate_sets</code> is not part of the emitted data and MUST NOT be used here.</p>
+<p>This property is one of three related normalizer tables for a setting:
+<code>euclidean_normalizer</code> holds the finite Euclidean normalizer operations obtained from cctbx,
+<code>orthogonal_affine_normalizer</code> holds the older bounded table restricted to signed-permutation linear parts,
+and this property holds the bounded table generated from unimodular integer linear parts, which is a superset of the orthogonal one.</p>
 <p><strong>Requirements/Conventions</strong>:</p>
 <ul>
 <li>
@@ -146,7 +150,8 @@ The plural field <code>candidate_sets</code> is not part of the emitted data and
 <li>
 <p><strong>symops</strong>: REQUIRED; List of dictionaries.
   Listed affine normalizer coset representatives.
-  Each item follows <code>/defs/v0.1/properties/symmetry/basis_transform</code>.</p>
+  Each item follows <code>/defs/v0.1/properties/symmetry/basis_transform</code>.
+  Each item MUST carry <code>compatible_systems</code>, the list of crystal systems for which the representative's linear part is compatible with a crystallographic metric.</p>
 </li>
 </ul>
 </li>
@@ -174,7 +179,7 @@ The plural field <code>candidate_sets</code> is not part of the emitted data and
 <span class="w">        </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="s2">&quot;null&quot;</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\nThis property is one of three related normalizer tables for a setting:\n`euclidean_normalizer` holds the finite Euclidean normalizer operations obtained from cctbx,\n`orthogonal_affine_normalizer` holds the older bounded table restricted to signed-permutation linear parts,\nand this property holds the bounded table generated from unimodular integer linear parts, which is a superset of the orthogonal one.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.\n      Each item MUST carry `compatible_systems`, the list of crystal systems for which the representative&#39;s linear part is compatible with a crystallographic metric.&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;normalizer_kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
@@ -205,7 +210,7 @@ The plural field <code>candidate_sets</code> is not part of the emitted data and
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="nt">&quot;n_symops&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number of symops&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Number of symops&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;property&quot;</span><span class="p">,</span>
@@ -218,7 +223,7 @@ The plural field <code>candidate_sets</code> is not part of the emitted data and
 <span class="w">                </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="s2">&quot;null&quot;</span>
 <span class="w">            </span><span class="p">],</span>
-<span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Number of symmetry operations in the finite operation list of the generated entry.&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Number of symmetry operations in the finite operation list of the generated entry.\n\nWhen the entry contains a `symops` list, this value MUST equal its length.&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;examples&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                </span><span class="mi">1</span><span class="p">,</span>
@@ -227,7 +232,7 @@ The plural field <code>candidate_sets</code> is not part of the emitted data and
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="nt">&quot;n_linear_parts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;N Linear Parts&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Number of linear parts&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;property&quot;</span><span class="p">,</span>
@@ -240,7 +245,7 @@ The plural field <code>candidate_sets</code> is not part of the emitted data and
 <span class="w">                </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="s2">&quot;null&quot;</span>
 <span class="w">            </span><span class="p">],</span>
-<span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Number of distinct linear matrix parts represented in a normalizer or transform table.&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;examples&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                </span><span class="mi">2</span><span class="p">,</span>
@@ -382,7 +387,7 @@ The plural field <code>candidate_sets</code> is not part of the emitted data and
 <span class="w">                                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One row of the exact 3 by 3 matrix.&quot;</span><span class="p">,</span>
 <span class="w">                                    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                        </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/core/fraction&quot;</span><span class="p">,</span>
-<span class="w">                                        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction&quot;</span><span class="p">,</span>
+<span class="w">                                        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fraction&quot;</span><span class="p">,</span>
 <span class="w">                                        </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 <span class="w">                                        </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction_core&quot;</span><span class="p">,</span>
@@ -424,7 +429,7 @@ The plural field <code>candidate_sets</code> is not part of the emitted data and
 <span class="w">                                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Exact fractional-coordinate vector part of the affine transformation.&quot;</span><span class="p">,</span>
 <span class="w">                                </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/core/fraction&quot;</span><span class="p">,</span>
-<span class="w">                                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction&quot;</span><span class="p">,</span>
+<span class="w">                                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fraction&quot;</span><span class="p">,</span>
 <span class="w">                                    </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 <span class="w">                                    </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                        </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction_core&quot;</span><span class="p">,</span>
@@ -593,13 +598,22 @@ The plural field <code>candidate_sets</code> is not part of the emitted data and
 <span class="w">                        </span><span class="p">]</span>
 <span class="w">                    </span><span class="p">},</span>
 <span class="w">                    </span><span class="nt">&quot;wyckoff_splitting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wyckoff splitting&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;property&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.3&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wyckoff_splitting&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wyckoff_splitting_transformations&quot;</span>
+<span class="w">                        </span><span class="p">},</span>
 <span class="w">                        </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                            </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s2">&quot;null&quot;</span>
 <span class="w">                        </span><span class="p">],</span>
-<span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.&quot;</span><span class="p">,</span>
 <span class="w">                        </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                            </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dictionary&quot;</span><span class="p">,</span>
 <span class="w">                            </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
@@ -659,20 +673,38 @@ The plural field <code>candidate_sets</code> is not part of the emitted data and
 <span class="w">                                            </span><span class="nt">&quot;affine&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                                </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
 <span class="w">                                                </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
+<span class="w">                                                </span><span class="nt">&quot;x-optimade-dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                                    </span><span class="nt">&quot;names&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                                        </span><span class="s2">&quot;dim_lattice&quot;</span><span class="p">,</span>
+<span class="w">                                                        </span><span class="s2">&quot;dim_affine&quot;</span>
+<span class="w">                                                    </span><span class="p">],</span>
+<span class="w">                                                    </span><span class="nt">&quot;sizes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                                        </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">                                                        </span><span class="mi">4</span>
+<span class="w">                                                    </span><span class="p">]</span>
+<span class="w">                                                </span><span class="p">},</span>
 <span class="w">                                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                                                    </span><span class="s2">&quot;array&quot;</span>
 <span class="w">                                                </span><span class="p">],</span>
-<span class="w">                                                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Exact affine representation for the split branch.&quot;</span><span class="p">,</span>
+<span class="w">                                                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.&quot;</span><span class="p">,</span>
 <span class="w">                                                </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                                    </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
 <span class="w">                                                    </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="nt">&quot;x-optimade-dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                                        </span><span class="nt">&quot;names&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                                            </span><span class="s2">&quot;dim_affine&quot;</span>
+<span class="w">                                                        </span><span class="p">],</span>
+<span class="w">                                                        </span><span class="nt">&quot;sizes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                                            </span><span class="mi">4</span>
+<span class="w">                                                        </span><span class="p">]</span>
+<span class="w">                                                    </span><span class="p">},</span>
 <span class="w">                                                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                                                        </span><span class="s2">&quot;array&quot;</span>
 <span class="w">                                                    </span><span class="p">],</span>
-<span class="w">                                                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One affine row.&quot;</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One row of the augmented affine matrix.&quot;</span><span class="p">,</span>
 <span class="w">                                                    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                                        </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/core/fraction&quot;</span><span class="p">,</span>
-<span class="w">                                                        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction&quot;</span><span class="p">,</span>
+<span class="w">                                                        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fraction&quot;</span><span class="p">,</span>
 <span class="w">                                                        </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 <span class="w">                                                        </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                                            </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction_core&quot;</span><span class="p">,</span>
@@ -700,7 +732,40 @@ The plural field <code>candidate_sets</code> is not part of the emitted data and
 <span class="w">                                    </span><span class="p">}</span>
 <span class="w">                                </span><span class="p">}</span>
 <span class="w">                            </span><span class="p">}</span>
-<span class="w">                        </span><span class="p">}</span>
+<span class="w">                        </span><span class="p">},</span>
+<span class="w">                        </span><span class="nt">&quot;examples&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                            </span><span class="p">[</span>
+<span class="w">                                </span><span class="p">{</span>
+<span class="w">                                    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;c&quot;</span><span class="p">,</span>
+<span class="w">                                    </span><span class="nt">&quot;splits&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                        </span><span class="p">{</span>
+<span class="w">                                            </span><span class="nt">&quot;letter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;e&quot;</span><span class="p">,</span>
+<span class="w">                                            </span><span class="nt">&quot;xyz&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x,y,z&quot;</span><span class="p">,</span>
+<span class="w">                                            </span><span class="nt">&quot;affine&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                                </span><span class="p">[</span>
+<span class="w">                                                    </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="s2">&quot;0&quot;</span>
+<span class="w">                                                </span><span class="p">],</span>
+<span class="w">                                                </span><span class="p">[</span>
+<span class="w">                                                    </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="s2">&quot;0&quot;</span>
+<span class="w">                                                </span><span class="p">],</span>
+<span class="w">                                                </span><span class="p">[</span>
+<span class="w">                                                    </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="s2">&quot;0&quot;</span>
+<span class="w">                                                </span><span class="p">]</span>
+<span class="w">                                            </span><span class="p">]</span>
+<span class="w">                                        </span><span class="p">}</span>
+<span class="w">                                    </span><span class="p">]</span>
+<span class="w">                                </span><span class="p">}</span>
+<span class="w">                            </span><span class="p">]</span>
+<span class="w">                        </span><span class="p">]</span>
 <span class="w">                    </span><span class="p">},</span>
 <span class="w">                    </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                        </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
@@ -800,13 +865,21 @@ The plural field <code>candidate_sets</code> is not part of the emitted data and
 <span class="w">                                                    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                                        </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
 <span class="w">                                                        </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
+<span class="w">                                                        </span><span class="nt">&quot;x-optimade-dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                                                            </span><span class="nt">&quot;names&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                                                </span><span class="s2">&quot;dim_lattice&quot;</span>
+<span class="w">                                                            </span><span class="p">],</span>
+<span class="w">                                                            </span><span class="nt">&quot;sizes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                                                                </span><span class="mi">3</span>
+<span class="w">                                                            </span><span class="p">]</span>
+<span class="w">                                                        </span><span class="p">},</span>
 <span class="w">                                                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                                                            </span><span class="s2">&quot;array&quot;</span>
 <span class="w">                                                        </span><span class="p">],</span>
 <span class="w">                                                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One exact coefficient vector.&quot;</span><span class="p">,</span>
 <span class="w">                                                        </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                                            </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/core/fraction&quot;</span><span class="p">,</span>
-<span class="w">                                                            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction&quot;</span><span class="p">,</span>
+<span class="w">                                                            </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fraction&quot;</span><span class="p">,</span>
 <span class="w">                                                            </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 <span class="w">                                                            </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                                                </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction_core&quot;</span><span class="p">,</span>
@@ -840,7 +913,7 @@ The plural field <code>candidate_sets</code> is not part of the emitted data and
 <span class="w">                                                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Exact target vector or scalar for the constraint.&quot;</span><span class="p">,</span>
 <span class="w">                                                </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                                    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/core/fraction&quot;</span><span class="p">,</span>
-<span class="w">                                                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction&quot;</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fraction&quot;</span><span class="p">,</span>
 <span class="w">                                                    </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 <span class="w">                                                    </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                                        </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fraction_core&quot;</span><span class="p">,</span>

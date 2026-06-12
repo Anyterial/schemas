@@ -16,6 +16,11 @@ The `candidate_set` field belongs in this property because the listed representa
 For this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.
 The plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.
 
+This property is one of three related normalizer tables for a setting:
+`euclidean_normalizer` holds the finite Euclidean normalizer operations obtained from cctbx,
+`orthogonal_affine_normalizer` holds the older bounded table restricted to signed-permutation linear parts,
+and this property holds the bounded table generated from unimodular integer linear parts, which is a superset of the orthogonal one.
+
 **Requirements/Conventions**:
 
 - It MUST be a dictionary with the following keys:
@@ -50,6 +55,7 @@ The plural field `candidate_sets` is not part of the emitted data and MUST NOT b
     - **symops**: REQUIRED; List of dictionaries.
       Listed affine normalizer coset representatives.
       Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.
+      Each item MUST carry `compatible_systems`, the list of crystal systems for which the representative's linear part is compatible with a crystallographic metric.
 
 **Examples:**
 
@@ -77,7 +83,7 @@ The plural field `candidate_sets` is not part of the emitted data and MUST NOT b
         "object",
         "null"
     ],
-    "description": "Affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
+    "description": "Affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\nThis property is one of three related normalizer tables for a setting:\n`euclidean_normalizer` holds the finite Euclidean normalizer operations obtained from cctbx,\n`orthogonal_affine_normalizer` holds the older bounded table restricted to signed-permutation linear parts,\nand this property holds the bounded table generated from unimodular integer linear parts, which is a superset of the orthogonal one.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.\n      Each item MUST carry `compatible_systems`, the list of crystal systems for which the representative's linear part is compatible with a crystallographic metric.",
     "properties": {
         "normalizer_kind": {
             "x-optimade-type": "string",
@@ -108,7 +114,7 @@ The plural field `candidate_sets` is not part of the emitted data and MUST NOT b
         },
         "n_symops": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-            "title": "number of symops",
+            "title": "Number of symops",
             "x-optimade-type": "integer",
             "x-optimade-definition": {
                 "kind": "property",
@@ -121,7 +127,7 @@ The plural field `candidate_sets` is not part of the emitted data and MUST NOT b
                 "integer",
                 "null"
             ],
-            "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+            "description": "Number of symmetry operations in the finite operation list of the generated entry.\n\nWhen the entry contains a `symops` list, this value MUST equal its length.",
             "x-optimade-unit": "inapplicable",
             "examples": [
                 1,
@@ -130,7 +136,7 @@ The plural field `candidate_sets` is not part of the emitted data and MUST NOT b
         },
         "n_linear_parts": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
-            "title": "N Linear Parts",
+            "title": "Number of linear parts",
             "x-optimade-type": "integer",
             "x-optimade-definition": {
                 "kind": "property",
@@ -143,7 +149,7 @@ The plural field `candidate_sets` is not part of the emitted data and MUST NOT b
                 "integer",
                 "null"
             ],
-            "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+            "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
             "x-optimade-unit": "inapplicable",
             "examples": [
                 2,
@@ -285,7 +291,7 @@ The plural field `candidate_sets` is not part of the emitted data and MUST NOT b
                                     "description": "One row of the exact 3 by 3 matrix.",
                                     "items": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                        "title": "Fraction",
                                         "x-optimade-type": "string",
                                         "x-optimade-definition": {
                                             "label": "fraction_core",
@@ -327,7 +333,7 @@ The plural field `candidate_sets` is not part of the emitted data and MUST NOT b
                                 "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                 "items": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                    "title": "fraction",
+                                    "title": "Fraction",
                                     "x-optimade-type": "string",
                                     "x-optimade-definition": {
                                         "label": "fraction_core",
@@ -496,13 +502,22 @@ The plural field `candidate_sets` is not part of the emitted data and MUST NOT b
                         ]
                     },
                     "wyckoff_splitting": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                        "title": "Wyckoff splitting",
                         "x-optimade-type": "list",
+                        "x-optimade-definition": {
+                            "kind": "property",
+                            "version": "0.1.0",
+                            "format": "1.3",
+                            "name": "wyckoff_splitting",
+                            "label": "wyckoff_splitting_transformations"
+                        },
                         "x-optimade-unit": "inapplicable",
                         "type": [
                             "array",
                             "null"
                         ],
-                        "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                        "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                         "items": {
                             "x-optimade-type": "dictionary",
                             "x-optimade-unit": "inapplicable",
@@ -562,20 +577,38 @@ The plural field `candidate_sets` is not part of the emitted data and MUST NOT b
                                             "affine": {
                                                 "x-optimade-type": "list",
                                                 "x-optimade-unit": "inapplicable",
+                                                "x-optimade-dimensions": {
+                                                    "names": [
+                                                        "dim_lattice",
+                                                        "dim_affine"
+                                                    ],
+                                                    "sizes": [
+                                                        3,
+                                                        4
+                                                    ]
+                                                },
                                                 "type": [
                                                     "array"
                                                 ],
-                                                "description": "Exact affine representation for the split branch.",
+                                                "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                 "items": {
                                                     "x-optimade-type": "list",
                                                     "x-optimade-unit": "inapplicable",
+                                                    "x-optimade-dimensions": {
+                                                        "names": [
+                                                            "dim_affine"
+                                                        ],
+                                                        "sizes": [
+                                                            4
+                                                        ]
+                                                    },
                                                     "type": [
                                                         "array"
                                                     ],
-                                                    "description": "One affine row.",
+                                                    "description": "One row of the augmented affine matrix.",
                                                     "items": {
                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                        "title": "fraction",
+                                                        "title": "Fraction",
                                                         "x-optimade-type": "string",
                                                         "x-optimade-definition": {
                                                             "label": "fraction_core",
@@ -603,7 +636,40 @@ The plural field `candidate_sets` is not part of the emitted data and MUST NOT b
                                     }
                                 }
                             }
-                        }
+                        },
+                        "examples": [
+                            [
+                                {
+                                    "parent": "c",
+                                    "splits": [
+                                        {
+                                            "letter": "e",
+                                            "xyz": "x,y,z",
+                                            "affine": [
+                                                [
+                                                    "1",
+                                                    "0",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "1",
+                                                    "0"
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        ]
                     },
                     "criteria": {
                         "x-optimade-type": "list",
@@ -703,13 +769,21 @@ The plural field `candidate_sets` is not part of the emitted data and MUST NOT b
                                                     "items": {
                                                         "x-optimade-type": "list",
                                                         "x-optimade-unit": "inapplicable",
+                                                        "x-optimade-dimensions": {
+                                                            "names": [
+                                                                "dim_lattice"
+                                                            ],
+                                                            "sizes": [
+                                                                3
+                                                            ]
+                                                        },
                                                         "type": [
                                                             "array"
                                                         ],
                                                         "description": "One exact coefficient vector.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -743,7 +817,7 @@ The plural field `candidate_sets` is not part of the emitted data and MUST NOT b
                                                 "description": "Exact target vector or scalar for the constraint.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",

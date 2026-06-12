@@ -1,11 +1,11 @@
-# Wyckoff Sets (property)
+# Wyckoff sets (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_sets`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_sets.md)**  
 **Definition name:** `wyckoff_sets`
 
-**Property name:** Wyckoff Sets  
+**Property name:** Wyckoff sets  
 **Description:** Sets of Wyckoff letters related by normalizer operations.  
 **Type:** list  
 
@@ -24,7 +24,7 @@ Each inner list groups Wyckoff positions that can be interchanged by the relevan
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_sets",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Wyckoff Sets",
+    "title": "Wyckoff sets",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",

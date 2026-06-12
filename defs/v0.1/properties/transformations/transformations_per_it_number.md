@@ -58,7 +58,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
         "properties": {
             "it_number": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
-                "title": "International Tables Space-Group Number",
+                "title": "International Tables space-group number",
                 "x-optimade-type": "integer",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -205,7 +205,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                     "description": "One row of the exact 3 by 3 matrix.",
                                                     "items": {
                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                        "title": "fraction",
+                                                        "title": "Fraction",
                                                         "x-optimade-type": "string",
                                                         "x-optimade-definition": {
                                                             "label": "fraction_core",
@@ -247,7 +247,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -416,13 +416,22 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                         ]
                                     },
                                     "wyckoff_splitting": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                        "title": "Wyckoff splitting",
                                         "x-optimade-type": "list",
+                                        "x-optimade-definition": {
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "wyckoff_splitting",
+                                            "label": "wyckoff_splitting_transformations"
+                                        },
                                         "x-optimade-unit": "inapplicable",
                                         "type": [
                                             "array",
                                             "null"
                                         ],
-                                        "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                        "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                         "items": {
                                             "x-optimade-type": "dictionary",
                                             "x-optimade-unit": "inapplicable",
@@ -482,20 +491,38 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                             "affine": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_lattice",
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        3,
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "Exact affine representation for the split branch.",
+                                                                "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_affine"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            4
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
-                                                                    "description": "One affine row.",
+                                                                    "description": "One row of the augmented affine matrix.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -523,7 +550,40 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                     }
                                                 }
                                             }
-                                        }
+                                        },
+                                        "examples": [
+                                            [
+                                                {
+                                                    "parent": "c",
+                                                    "splits": [
+                                                        {
+                                                            "letter": "e",
+                                                            "xyz": "x,y,z",
+                                                            "affine": [
+                                                                [
+                                                                    "1",
+                                                                    "0",
+                                                                    "0",
+                                                                    "0"
+                                                                ],
+                                                                [
+                                                                    "0",
+                                                                    "1",
+                                                                    "0",
+                                                                    "0"
+                                                                ],
+                                                                [
+                                                                    "0",
+                                                                    "0",
+                                                                    "1",
+                                                                    "0"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        ]
                                     },
                                     "criteria": {
                                         "x-optimade-type": "list",
@@ -623,13 +683,21 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                     "items": {
                                                                         "x-optimade-type": "list",
                                                                         "x-optimade-unit": "inapplicable",
+                                                                        "x-optimade-dimensions": {
+                                                                            "names": [
+                                                                                "dim_lattice"
+                                                                            ],
+                                                                            "sizes": [
+                                                                                3
+                                                                            ]
+                                                                        },
                                                                         "type": [
                                                                             "array"
                                                                         ],
                                                                         "description": "One exact coefficient vector.",
                                                                         "items": {
                                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                            "title": "fraction",
+                                                                            "title": "Fraction",
                                                                             "x-optimade-type": "string",
                                                                             "x-optimade-definition": {
                                                                                 "label": "fraction_core",
@@ -663,7 +731,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                 "description": "Exact target vector or scalar for the constraint.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -980,7 +1048,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                     "description": "One row of the exact 3 by 3 matrix.",
                                                     "items": {
                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                        "title": "fraction",
+                                                        "title": "Fraction",
                                                         "x-optimade-type": "string",
                                                         "x-optimade-definition": {
                                                             "label": "fraction_core",
@@ -1022,7 +1090,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -1191,13 +1259,22 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                         ]
                                     },
                                     "wyckoff_splitting": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                        "title": "Wyckoff splitting",
                                         "x-optimade-type": "list",
+                                        "x-optimade-definition": {
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "wyckoff_splitting",
+                                            "label": "wyckoff_splitting_transformations"
+                                        },
                                         "x-optimade-unit": "inapplicable",
                                         "type": [
                                             "array",
                                             "null"
                                         ],
-                                        "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                        "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                         "items": {
                                             "x-optimade-type": "dictionary",
                                             "x-optimade-unit": "inapplicable",
@@ -1257,20 +1334,38 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                             "affine": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_lattice",
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        3,
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "Exact affine representation for the split branch.",
+                                                                "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_affine"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            4
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
-                                                                    "description": "One affine row.",
+                                                                    "description": "One row of the augmented affine matrix.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -1298,7 +1393,40 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                     }
                                                 }
                                             }
-                                        }
+                                        },
+                                        "examples": [
+                                            [
+                                                {
+                                                    "parent": "c",
+                                                    "splits": [
+                                                        {
+                                                            "letter": "e",
+                                                            "xyz": "x,y,z",
+                                                            "affine": [
+                                                                [
+                                                                    "1",
+                                                                    "0",
+                                                                    "0",
+                                                                    "0"
+                                                                ],
+                                                                [
+                                                                    "0",
+                                                                    "1",
+                                                                    "0",
+                                                                    "0"
+                                                                ],
+                                                                [
+                                                                    "0",
+                                                                    "0",
+                                                                    "1",
+                                                                    "0"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        ]
                                     },
                                     "criteria": {
                                         "x-optimade-type": "list",
@@ -1398,13 +1526,21 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                     "items": {
                                                                         "x-optimade-type": "list",
                                                                         "x-optimade-unit": "inapplicable",
+                                                                        "x-optimade-dimensions": {
+                                                                            "names": [
+                                                                                "dim_lattice"
+                                                                            ],
+                                                                            "sizes": [
+                                                                                3
+                                                                            ]
+                                                                        },
                                                                         "type": [
                                                                             "array"
                                                                         ],
                                                                         "description": "One exact coefficient vector.",
                                                                         "items": {
                                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                            "title": "fraction",
+                                                                            "title": "Fraction",
                                                                             "x-optimade-type": "string",
                                                                             "x-optimade-definition": {
                                                                                 "label": "fraction_core",
@@ -1438,7 +1574,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                 "description": "Exact target vector or scalar for the constraint.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -1766,7 +1902,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -1808,7 +1944,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                             "items": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                "title": "fraction",
+                                                "title": "Fraction",
                                                 "x-optimade-type": "string",
                                                 "x-optimade-definition": {
                                                     "label": "fraction_core",
@@ -1977,13 +2113,22 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                     ]
                                 },
                                 "wyckoff_splitting": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                    "title": "Wyckoff splitting",
                                     "x-optimade-type": "list",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "wyckoff_splitting",
+                                        "label": "wyckoff_splitting_transformations"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "array",
                                         "null"
                                     ],
-                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                     "items": {
                                         "x-optimade-type": "dictionary",
                                         "x-optimade-unit": "inapplicable",
@@ -2043,20 +2188,38 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                         "affine": {
                                                             "x-optimade-type": "list",
                                                             "x-optimade-unit": "inapplicable",
+                                                            "x-optimade-dimensions": {
+                                                                "names": [
+                                                                    "dim_lattice",
+                                                                    "dim_affine"
+                                                                ],
+                                                                "sizes": [
+                                                                    3,
+                                                                    4
+                                                                ]
+                                                            },
                                                             "type": [
                                                                 "array"
                                                             ],
-                                                            "description": "Exact affine representation for the split branch.",
+                                                            "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                             "items": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "One affine row.",
+                                                                "description": "One row of the augmented affine matrix.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -2084,7 +2247,40 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 }
                                             }
                                         }
-                                    }
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "parent": "c",
+                                                "splits": [
+                                                    {
+                                                        "letter": "e",
+                                                        "xyz": "x,y,z",
+                                                        "affine": [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "0",
+                                                                "1",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ]
                                 },
                                 "criteria": {
                                     "x-optimade-type": "list",
@@ -2184,13 +2380,21 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_lattice"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            3
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
                                                                     "description": "One exact coefficient vector.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -2224,7 +2428,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                             "description": "Exact target vector or scalar for the constraint.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -2494,7 +2698,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                 "properties": {
                     "it_number": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
-                        "title": "International Tables Space-Group Number",
+                        "title": "International Tables space-group number",
                         "x-optimade-type": "integer",
                         "x-compatibility": [
                             "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -2618,7 +2822,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -2660,7 +2864,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                             "items": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                "title": "fraction",
+                                                "title": "Fraction",
                                                 "x-optimade-type": "string",
                                                 "x-optimade-definition": {
                                                     "label": "fraction_core",
@@ -2829,13 +3033,22 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                     ]
                                 },
                                 "wyckoff_splitting": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                    "title": "Wyckoff splitting",
                                     "x-optimade-type": "list",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "wyckoff_splitting",
+                                        "label": "wyckoff_splitting_transformations"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "array",
                                         "null"
                                     ],
-                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                     "items": {
                                         "x-optimade-type": "dictionary",
                                         "x-optimade-unit": "inapplicable",
@@ -2895,20 +3108,38 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                         "affine": {
                                                             "x-optimade-type": "list",
                                                             "x-optimade-unit": "inapplicable",
+                                                            "x-optimade-dimensions": {
+                                                                "names": [
+                                                                    "dim_lattice",
+                                                                    "dim_affine"
+                                                                ],
+                                                                "sizes": [
+                                                                    3,
+                                                                    4
+                                                                ]
+                                                            },
                                                             "type": [
                                                                 "array"
                                                             ],
-                                                            "description": "Exact affine representation for the split branch.",
+                                                            "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                             "items": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "One affine row.",
+                                                                "description": "One row of the augmented affine matrix.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -2936,7 +3167,40 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 }
                                             }
                                         }
-                                    }
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "parent": "c",
+                                                "splits": [
+                                                    {
+                                                        "letter": "e",
+                                                        "xyz": "x,y,z",
+                                                        "affine": [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "0",
+                                                                "1",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ]
                                 },
                                 "criteria": {
                                     "x-optimade-type": "list",
@@ -3036,13 +3300,21 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_lattice"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            3
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
                                                                     "description": "One exact coefficient vector.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -3076,7 +3348,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                             "description": "Exact target vector or scalar for the constraint.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -3291,7 +3563,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     "object",
                     "null"
                 ],
-                "description": "Parameterized continuous normalizer subspace for a setting.\n\nIt describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
+                "description": "Parameterized continuous normalizer subspace for a setting.\n\nIt describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n      When present, it MUST equal the length of `basis_vectors`.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
                 "properties": {
                     "dimension": {
                         "x-optimade-type": "integer",
@@ -3300,7 +3572,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                             "integer",
                             "null"
                         ],
-                        "description": "Dimension of the continuous parameter subspace."
+                        "description": "Dimension of the continuous parameter subspace. When present, it MUST equal the length of `basis_vectors`."
                     },
                     "basis_vectors": {
                         "x-optimade-type": "list",
@@ -3327,7 +3599,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                             "description": "One basis vector in fractional coordinates.",
                             "items": {
                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                "title": "fraction",
+                                "title": "Fraction",
                                 "x-optimade-type": "string",
                                 "x-optimade-definition": {
                                     "label": "fraction_core",
@@ -3410,7 +3682,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     "object",
                     "null"
                 ],
-                "description": "Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains the signed-permutation subset of affine normalizer representatives.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `signed_permutation_matrices`, meaning 3 by 3 integer matrices with exactly one nonzero entry in each row and column and each nonzero entry equal to `-1` or `1`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds satisfied by the signed-permutation candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed orthogonal affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
+                "description": "Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains the signed-permutation subset of affine normalizer representatives.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `signed_permutation_matrices`, meaning 3 by 3 integer matrices with exactly one nonzero entry in each row and column and each nonzero entry equal to `-1` or `1`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\nThis property is one of three related normalizer tables for a setting:\n`euclidean_normalizer` holds the finite Euclidean normalizer operations obtained from cctbx,\nthis property holds the older bounded table restricted to signed-permutation linear parts,\nand `affine_normalizer` holds the bounded table generated from unimodular integer linear parts, which is a superset of this one.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds satisfied by the signed-permutation candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed orthogonal affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.\n      Each item MUST carry `compatible_systems`, the list of crystal systems for which the representative's linear part is compatible with a crystallographic metric.",
                 "properties": {
                     "normalizer_kind": {
                         "x-optimade-type": "string",
@@ -3441,7 +3713,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     },
                     "n_symops": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-                        "title": "number of symops",
+                        "title": "Number of symops",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -3454,7 +3726,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                             "integer",
                             "null"
                         ],
-                        "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+                        "description": "Number of symmetry operations in the finite operation list of the generated entry.\n\nWhen the entry contains a `symops` list, this value MUST equal its length.",
                         "x-optimade-unit": "inapplicable",
                         "examples": [
                             1,
@@ -3463,7 +3735,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     },
                     "n_linear_parts": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
-                        "title": "N Linear Parts",
+                        "title": "Number of linear parts",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -3476,7 +3748,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                             "integer",
                             "null"
                         ],
-                        "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+                        "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
                         "x-optimade-unit": "inapplicable",
                         "examples": [
                             2,
@@ -3618,7 +3890,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -3660,7 +3932,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                             "items": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                "title": "fraction",
+                                                "title": "Fraction",
                                                 "x-optimade-type": "string",
                                                 "x-optimade-definition": {
                                                     "label": "fraction_core",
@@ -3829,13 +4101,22 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                     ]
                                 },
                                 "wyckoff_splitting": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                    "title": "Wyckoff splitting",
                                     "x-optimade-type": "list",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "wyckoff_splitting",
+                                        "label": "wyckoff_splitting_transformations"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "array",
                                         "null"
                                     ],
-                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                     "items": {
                                         "x-optimade-type": "dictionary",
                                         "x-optimade-unit": "inapplicable",
@@ -3895,20 +4176,38 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                         "affine": {
                                                             "x-optimade-type": "list",
                                                             "x-optimade-unit": "inapplicable",
+                                                            "x-optimade-dimensions": {
+                                                                "names": [
+                                                                    "dim_lattice",
+                                                                    "dim_affine"
+                                                                ],
+                                                                "sizes": [
+                                                                    3,
+                                                                    4
+                                                                ]
+                                                            },
                                                             "type": [
                                                                 "array"
                                                             ],
-                                                            "description": "Exact affine representation for the split branch.",
+                                                            "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                             "items": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "One affine row.",
+                                                                "description": "One row of the augmented affine matrix.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -3936,7 +4235,40 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 }
                                             }
                                         }
-                                    }
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "parent": "c",
+                                                "splits": [
+                                                    {
+                                                        "letter": "e",
+                                                        "xyz": "x,y,z",
+                                                        "affine": [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "0",
+                                                                "1",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ]
                                 },
                                 "criteria": {
                                     "x-optimade-type": "list",
@@ -4036,13 +4368,21 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_lattice"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            3
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
                                                                     "description": "One exact coefficient vector.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -4076,7 +4416,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                             "description": "Exact target vector or scalar for the constraint.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -4314,7 +4654,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     "object",
                     "null"
                 ],
-                "description": "Affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
+                "description": "Affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\nThis property is one of three related normalizer tables for a setting:\n`euclidean_normalizer` holds the finite Euclidean normalizer operations obtained from cctbx,\n`orthogonal_affine_normalizer` holds the older bounded table restricted to signed-permutation linear parts,\nand this property holds the bounded table generated from unimodular integer linear parts, which is a superset of the orthogonal one.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.\n      Each item MUST carry `compatible_systems`, the list of crystal systems for which the representative's linear part is compatible with a crystallographic metric.",
                 "properties": {
                     "normalizer_kind": {
                         "x-optimade-type": "string",
@@ -4345,7 +4685,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     },
                     "n_symops": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-                        "title": "number of symops",
+                        "title": "Number of symops",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -4358,7 +4698,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                             "integer",
                             "null"
                         ],
-                        "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+                        "description": "Number of symmetry operations in the finite operation list of the generated entry.\n\nWhen the entry contains a `symops` list, this value MUST equal its length.",
                         "x-optimade-unit": "inapplicable",
                         "examples": [
                             1,
@@ -4367,7 +4707,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     },
                     "n_linear_parts": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
-                        "title": "N Linear Parts",
+                        "title": "Number of linear parts",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -4380,7 +4720,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                             "integer",
                             "null"
                         ],
-                        "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+                        "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
                         "x-optimade-unit": "inapplicable",
                         "examples": [
                             2,
@@ -4522,7 +4862,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -4564,7 +4904,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                             "items": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                "title": "fraction",
+                                                "title": "Fraction",
                                                 "x-optimade-type": "string",
                                                 "x-optimade-definition": {
                                                     "label": "fraction_core",
@@ -4733,13 +5073,22 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                     ]
                                 },
                                 "wyckoff_splitting": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                    "title": "Wyckoff splitting",
                                     "x-optimade-type": "list",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "wyckoff_splitting",
+                                        "label": "wyckoff_splitting_transformations"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "array",
                                         "null"
                                     ],
-                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                     "items": {
                                         "x-optimade-type": "dictionary",
                                         "x-optimade-unit": "inapplicable",
@@ -4799,20 +5148,38 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                         "affine": {
                                                             "x-optimade-type": "list",
                                                             "x-optimade-unit": "inapplicable",
+                                                            "x-optimade-dimensions": {
+                                                                "names": [
+                                                                    "dim_lattice",
+                                                                    "dim_affine"
+                                                                ],
+                                                                "sizes": [
+                                                                    3,
+                                                                    4
+                                                                ]
+                                                            },
                                                             "type": [
                                                                 "array"
                                                             ],
-                                                            "description": "Exact affine representation for the split branch.",
+                                                            "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                             "items": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "One affine row.",
+                                                                "description": "One row of the augmented affine matrix.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -4840,7 +5207,40 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 }
                                             }
                                         }
-                                    }
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "parent": "c",
+                                                "splits": [
+                                                    {
+                                                        "letter": "e",
+                                                        "xyz": "x,y,z",
+                                                        "affine": [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "0",
+                                                                "1",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ]
                                 },
                                 "criteria": {
                                     "x-optimade-type": "list",
@@ -4940,13 +5340,21 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_lattice"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            3
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
                                                                     "description": "One exact coefficient vector.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -4980,7 +5388,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                             "description": "Exact target vector or scalar for the constraint.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",

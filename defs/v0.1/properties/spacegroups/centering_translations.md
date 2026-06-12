@@ -67,7 +67,7 @@ The zero translation `(0,0,0)` is listed first.
         },
         "items": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-            "title": "fraction",
+            "title": "Fraction",
             "x-optimade-type": "string",
             "x-optimade-definition": {
                 "label": "fraction_core",

@@ -1,20 +1,23 @@
-# Setting (property)
+# Setting annotation (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting.md)**  
 **Definition name:** `setting`
 
-**Property name:** Setting  
-**Description:** Setting suffix or setting annotation extracted from the cctbx universal Hermann-Mauguin symbol.  
+**Property name:** Setting annotation  
+**Description:** Setting suffix or setting annotation extracted from the cctbx universal Hermann-Mauguin symbol in `hm_cctbx_universal`.  
 **Type:** string  
 
-This value is a compact textual description of the coordinate setting portion of the cctbx symbol, for example an origin choice or axis-setting annotation.
+The value is the part of the universal symbol after the colon when one is present, for example the origin-choice code `1` or `2`, the rhombohedral- or hexagonal-axes code `r` or `h`, or an axis code such as `b1`.
+When the universal symbol has no colon, the value is any trailing parenthesized basis-change qualifier, for example `(c,a,b)`.
+The value is an empty string when the universal symbol carries no setting annotation.
+See also `setting_it_nc` and `it_coordinate_system_code` for the corresponding International Tables identifiers.
 
 **Examples:**
 
+- `"2"`
 - `"(c,a,b)"`
-- `"(b,c,a)"`
 
 **Formats:** [[JSON](setting.json)] [[MD](setting.md)]
 
@@ -24,7 +27,7 @@ This value is a compact textual description of the coordinate setting portion of
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Setting",
+    "title": "Setting annotation",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",
@@ -37,11 +40,11 @@ This value is a compact textual description of the coordinate setting portion of
         "string",
         "null"
     ],
-    "description": "Setting suffix or setting annotation extracted from the cctbx universal Hermann-Mauguin symbol.\n\nThis value is a compact textual description of the coordinate setting portion of the cctbx symbol, for example an origin choice or axis-setting annotation.",
+    "description": "Setting suffix or setting annotation extracted from the cctbx universal Hermann-Mauguin symbol in `hm_cctbx_universal`.\n\nThe value is the part of the universal symbol after the colon when one is present, for example the origin-choice code `1` or `2`, the rhombohedral- or hexagonal-axes code `r` or `h`, or an axis code such as `b1`.\nWhen the universal symbol has no colon, the value is any trailing parenthesized basis-change qualifier, for example `(c,a,b)`.\nThe value is an empty string when the universal symbol carries no setting annotation.\nSee also `setting_it_nc` and `it_coordinate_system_code` for the corresponding International Tables identifiers.",
     "x-optimade-unit": "inapplicable",
     "examples": [
-        "(c,a,b)",
-        "(b,c,a)"
+        "2",
+        "(c,a,b)"
     ]
 }
 ```

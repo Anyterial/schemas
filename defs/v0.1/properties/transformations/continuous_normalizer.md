@@ -17,6 +17,7 @@ It describes continuous origin-shift freedoms by dimension and fractional-coordi
 
     - **dimension**: OPTIONAL; Integer.
       Dimension of the continuous parameter subspace.
+      When present, it MUST equal the length of `basis_vectors`.
 
     - **basis\_vectors**: REQUIRED; List of vectors.
       Basis vectors spanning the continuous normalizer parameter space.
@@ -54,7 +55,7 @@ It describes continuous origin-shift freedoms by dimension and fractional-coordi
         "object",
         "null"
     ],
-    "description": "Parameterized continuous normalizer subspace for a setting.\n\nIt describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
+    "description": "Parameterized continuous normalizer subspace for a setting.\n\nIt describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n      When present, it MUST equal the length of `basis_vectors`.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
     "properties": {
         "dimension": {
             "x-optimade-type": "integer",
@@ -63,7 +64,7 @@ It describes continuous origin-shift freedoms by dimension and fractional-coordi
                 "integer",
                 "null"
             ],
-            "description": "Dimension of the continuous parameter subspace."
+            "description": "Dimension of the continuous parameter subspace. When present, it MUST equal the length of `basis_vectors`."
         },
         "basis_vectors": {
             "x-optimade-type": "list",
@@ -90,7 +91,7 @@ It describes continuous origin-shift freedoms by dimension and fractional-coordi
                 "description": "One basis vector in fractional coordinates.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                    "title": "fraction",
+                    "title": "Fraction",
                     "x-optimade-type": "string",
                     "x-optimade-definition": {
                         "label": "fraction_core",

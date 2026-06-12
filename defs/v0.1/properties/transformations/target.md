@@ -1,16 +1,16 @@
-# Target (property)
+# Criterion target (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/transformations/target`](https://schemas.anyterial.se/defs/v0.1/properties/transformations/target.md)**  
 **Definition name:** `target`
 
-**Property name:** Target  
-**Description:** Target vector or target value in a generated linear criterion.  
+**Property name:** Criterion target  
+**Description:** Exact target vector or scalar of a generated linear criterion.  
 **Type:** list  
 
-In current generated criteria it is usually represented as exact rational components serialized as strings.
-The semantic meaning of `target` is parent-specific and should not be reused as a broad standalone concept.
+This field appears in `criteria` items of basis-transform records, for example in backward-lift criteria, where it gives the value that the linear form evaluated on the constrained coordinates must equal.
+The components are exact rational values serialized as fraction strings.
 
 **Examples:**
 
@@ -25,7 +25,7 @@ The semantic meaning of `target` is parent-specific and should not be reused as 
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/target",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Target",
+    "title": "Criterion target",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -39,10 +39,10 @@ The semantic meaning of `target` is parent-specific and should not be reused as 
         "array",
         "null"
     ],
-    "description": "Target vector or target value in a generated linear criterion.\n\nIn current generated criteria it is usually represented as exact rational components serialized as strings.\nThe semantic meaning of `target` is parent-specific and should not be reused as a broad standalone concept.",
+    "description": "Exact target vector or scalar of a generated linear criterion.\n\nThis field appears in `criteria` items of basis-transform records, for example in backward-lift criteria, where it gives the value that the linear form evaluated on the constrained coordinates must equal.\nThe components are exact rational values serialized as fraction strings.",
     "items": {
         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-        "title": "fraction",
+        "title": "Fraction",
         "x-optimade-type": "string",
         "x-optimade-definition": {
             "label": "fraction_core",

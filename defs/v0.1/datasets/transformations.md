@@ -19,7 +19,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
 
 **Examples:**
 
-- `[{"hm_entry": "P 1", "hall_entry": "p_1", "centering_translations": [["0", "0", "0"]], "centering_translations_xyz": ["0,0,0"], "baernighausen": []}]`
+- `[{"hm_entry": "P 1", "hall_entry": "p_1", "centering_translations": [["0", "0", "0"]], "baernighausen": []}]`
 
 **Formats:** [[JSON](transformations.json)] [[MD](transformations.md)]
 
@@ -182,7 +182,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Hermann-Mauguin Entry",
+                "title": "Hermann-Mauguin entry",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -239,7 +239,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "International Tables Space-Group Number",
+                "title": "International Tables space-group number",
                 "x-optimade-type": "integer",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -263,14 +263,14 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                 ]
             },
             "crystal_system": {
-                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/crystal_system",
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/crystal_system",
                 "x-optimade-requirements": {
                     "support": "may",
                     "sortable": false,
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Crystal System",
+                "title": "Crystal system",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.crystal_system.html"
@@ -280,14 +280,23 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "version": "0.1.0",
                     "format": "1.3",
                     "name": "crystal_system",
-                    "label": "crystal_system_spacegroups"
+                    "label": "crystal_system_pointgroups"
                 },
                 "type": [
                     "string",
                     "null"
                 ],
-                "description": "The crystal system of the space group or point group.\n\nValues use the conventional crystallographic system names such as triclinic, monoclinic, orthorhombic, tetragonal, trigonal, hexagonal, and cubic.",
+                "description": "The crystal system of the space group or point group.\n\nValues use the conventional crystallographic system names.",
                 "x-optimade-unit": "inapplicable",
+                "enum": [
+                    "triclinic",
+                    "monoclinic",
+                    "orthorhombic",
+                    "tetragonal",
+                    "trigonal",
+                    "hexagonal",
+                    "cubic"
+                ],
                 "examples": [
                     "triclinic",
                     "monoclinic"
@@ -343,7 +352,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     },
                     "items": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                        "title": "fraction",
+                        "title": "Fraction",
                         "x-optimade-type": "string",
                         "x-optimade-definition": {
                             "label": "fraction_core",
@@ -400,46 +409,6 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     ]
                 ]
             },
-            "centering_translations_xyz": {
-                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations_xyz",
-                "x-optimade-requirements": {
-                    "support": "may",
-                    "sortable": false,
-                    "query-support": "none",
-                    "response-level": "may"
-                },
-                "title": "Centering translations as xyz strings",
-                "x-optimade-type": "list",
-                "x-optimade-definition": {
-                    "kind": "property",
-                    "version": "0.1.0",
-                    "format": "1.3",
-                    "name": "centering_translations_xyz",
-                    "label": "centering_translations_xyz_spacegroups"
-                },
-                "type": [
-                    "array",
-                    "null"
-                ],
-                "description": "Centering translations of the conventional cell, represented as `x,y,z`-style coordinate shifts.\n\nThe zero translation is listed first.",
-                "x-optimade-unit": "inapplicable",
-                "items": {
-                    "x-optimade-type": "string",
-                    "x-optimade-unit": "inapplicable",
-                    "type": [
-                        "string"
-                    ]
-                },
-                "examples": [
-                    [
-                        "0,0,0"
-                    ],
-                    [
-                        "0,0,0",
-                        "1/2,1/2,0"
-                    ]
-                ]
-            },
             "euclidean_normalizer": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/euclidean_normalizer",
                 "x-optimade-requirements": {
@@ -462,7 +431,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "object",
                     "null"
                 ],
-                "description": "Finite Euclidean normalizer operations for one crystallographic space-group setting.\n\nThe Euclidean normalizer consists of metric-preserving affine operations that normalize the space group in the chosen setting.\nThese operations are useful for algorithms that need to compare or enumerate equivalent descriptions of the same setting under rigid crystallographic changes of coordinates.\n\nThis object is generated from the finite Euclidean normalizer operations exposed by cctbx.\nIt is not a bounded candidate search table.\nTherefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `bounds` do not belong to this property.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n      For this property the value is `euclidean`.\n\n    - **n\\_centering\\_translations**: REQUIRED; Integer.\n      Number of centering translations represented in the underlying Euclidean normalizer operation construction.\n\n    - **n\\_pointgroup\\_symops**: REQUIRED; Integer.\n      Number of point-group symmetry operations represented before centering translations are combined with them.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of Euclidean normalizer operations listed in `symops`.\n      This value MUST equal the length of `symops`.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Finite Euclidean normalizer operations for the setting.\n      Each item follows `/defs/v0.1/properties/symmetry/op`.\n\n    - **symops\\_mod\\_centering**: REQUIRED; List of dictionaries.\n      Euclidean normalizer operations factorized modulo the centering translations of the setting.\n      This keeps one operation for each linear part and translation class modulo centering, while `symops` keeps the complete operation list.\n      Each item follows `/defs/v0.1/properties/symmetry/op`.\n\n    - **symops\\_mod\\_centering\\_xyz**: REQUIRED; List of strings.\n      The `x,y,z` notation for the operations in `symops_mod_centering`, ordered element-by-element with that list.",
+                "description": "Finite Euclidean normalizer operations for one crystallographic space-group setting.\n\nThe Euclidean normalizer consists of metric-preserving affine operations that normalize the space group in the chosen setting.\nThese operations are useful for algorithms that need to compare or enumerate equivalent descriptions of the same setting under rigid crystallographic changes of coordinates.\n\nThis object is generated from the finite Euclidean normalizer operations exposed by cctbx.\nIt is not a bounded candidate search table.\nTherefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `bounds` do not belong to this property.\n\nThis property is one of three related normalizer tables for a setting:\nthis property holds the finite Euclidean normalizer operations obtained from cctbx,\n`orthogonal_affine_normalizer` holds the older bounded coset table restricted to signed-permutation linear parts,\nand `affine_normalizer` holds the bounded coset table generated from unimodular integer linear parts.\nContinuous origin-shift freedoms are described separately by `continuous_normalizer`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n      For this property the value is `euclidean`.\n\n    - **n\\_centering\\_translations**: REQUIRED; Integer.\n      Number of centering translations represented in the underlying Euclidean normalizer operation construction.\n\n    - **n\\_pointgroup\\_symops**: REQUIRED; Integer.\n      Number of point-group symmetry operations represented before centering translations are combined with them.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of Euclidean normalizer operations listed in `symops`.\n      This value MUST equal the length of `symops`.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Finite Euclidean normalizer operations for the setting.\n      Each item follows `/defs/v0.1/properties/symmetry/op`.\n\n    - **symops\\_mod\\_centering**: REQUIRED; List of dictionaries.\n      Euclidean normalizer operations factorized modulo the centering translations of the setting.\n      This keeps one operation for each linear part and translation class modulo centering, while `symops` keeps the complete operation list.\n      Each item follows `/defs/v0.1/properties/symmetry/op`.",
                 "properties": {
                     "normalizer_kind": {
                         "x-optimade-type": "string",
@@ -488,7 +457,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             "integer",
                             "null"
                         ],
-                        "description": "Number of centering translations in the conventional cell of the space-group setting.",
+                        "description": "Number of centering translations in the conventional cell of the space-group setting.\n\nWhen the entry contains a `centering_translations` list, this value MUST equal its length.",
                         "x-optimade-unit": "inapplicable",
                         "examples": [
                             1,
@@ -497,7 +466,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     },
                     "n_pointgroup_symops": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops",
-                        "title": "number of pointgroup symops",
+                        "title": "Number of pointgroup symops",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -510,7 +479,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             "integer",
                             "null"
                         ],
-                        "description": "Number of point-group symmetry operations.",
+                        "description": "Number of point-group symmetry operations.\n\nFor a space-group entry this is the number of operations of the point group of the space group, and it MUST equal the length of the `symops_representative` list when present.",
                         "x-optimade-unit": "inapplicable",
                         "examples": [
                             1,
@@ -519,7 +488,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     },
                     "n_symops": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-                        "title": "number of symops",
+                        "title": "Number of symops",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -532,7 +501,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             "integer",
                             "null"
                         ],
-                        "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+                        "description": "Number of symmetry operations in the finite operation list of the generated entry.\n\nWhen the entry contains a `symops` list, this value MUST equal its length.",
                         "x-optimade-unit": "inapplicable",
                         "examples": [
                             1,
@@ -541,7 +510,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     },
                     "n_linear_parts": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
-                        "title": "N Linear Parts",
+                        "title": "Number of linear parts",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -554,7 +523,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             "integer",
                             "null"
                         ],
-                        "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+                        "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
                         "x-optimade-unit": "inapplicable",
                         "examples": [
                             2,
@@ -585,7 +554,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "object",
                                 "null"
                             ],
-                            "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                            "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n- Whether the operation is proper follows from the sign of the `det` field of `affine_transformation`; no separate properness flag is stored.",
                             "properties": {
                                 "affine_transformation": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
@@ -640,7 +609,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -682,7 +651,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                             "items": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                "title": "fraction",
+                                                "title": "Fraction",
                                                 "x-optimade-type": "string",
                                                 "x-optimade-definition": {
                                                     "label": "fraction_core",
@@ -788,7 +757,19 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "string",
                                         "null"
                                     ],
-                                    "description": "Symbolic crystallographic operation-type label for the linear part."
+                                    "description": "Symbolic crystallographic operation-type label for the linear part.",
+                                    "enum": [
+                                        "1",
+                                        "-1",
+                                        "2",
+                                        "m",
+                                        "3",
+                                        "-3",
+                                        "4",
+                                        "-4",
+                                        "6",
+                                        "-6"
+                                    ]
                                 },
                                 "axis": {
                                     "x-optimade-type": "list",
@@ -842,7 +823,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
                                     "items": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                        "title": "Fraction",
                                         "x-optimade-type": "string",
                                         "x-optimade-definition": {
                                             "label": "fraction_core",
@@ -883,7 +864,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
                                     "items": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                        "title": "Fraction",
                                         "x-optimade-type": "string",
                                         "x-optimade-definition": {
                                             "label": "fraction_core",
@@ -905,15 +886,6 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         ],
                                         "x-optimade-unit": "inapplicable"
                                     }
-                                },
-                                "is_proper": {
-                                    "x-optimade-type": "boolean",
-                                    "x-optimade-unit": "inapplicable",
-                                    "type": [
-                                        "boolean",
-                                        "null"
-                                    ],
-                                    "description": "Whether the linear operation is proper."
                                 }
                             },
                             "examples": [
@@ -999,7 +971,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "object",
                                 "null"
                             ],
-                            "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                            "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n- Whether the operation is proper follows from the sign of the `det` field of `affine_transformation`; no separate properness flag is stored.",
                             "properties": {
                                 "affine_transformation": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
@@ -1054,7 +1026,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -1096,7 +1068,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                             "items": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                "title": "fraction",
+                                                "title": "Fraction",
                                                 "x-optimade-type": "string",
                                                 "x-optimade-definition": {
                                                     "label": "fraction_core",
@@ -1202,7 +1174,19 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "string",
                                         "null"
                                     ],
-                                    "description": "Symbolic crystallographic operation-type label for the linear part."
+                                    "description": "Symbolic crystallographic operation-type label for the linear part.",
+                                    "enum": [
+                                        "1",
+                                        "-1",
+                                        "2",
+                                        "m",
+                                        "3",
+                                        "-3",
+                                        "4",
+                                        "-4",
+                                        "6",
+                                        "-6"
+                                    ]
                                 },
                                 "axis": {
                                     "x-optimade-type": "list",
@@ -1256,7 +1240,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
                                     "items": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                        "title": "Fraction",
                                         "x-optimade-type": "string",
                                         "x-optimade-definition": {
                                             "label": "fraction_core",
@@ -1297,7 +1281,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
                                     "items": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                        "title": "Fraction",
                                         "x-optimade-type": "string",
                                         "x-optimade-definition": {
                                             "label": "fraction_core",
@@ -1319,15 +1303,6 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         ],
                                         "x-optimade-unit": "inapplicable"
                                     }
-                                },
-                                "is_proper": {
-                                    "x-optimade-type": "boolean",
-                                    "x-optimade-unit": "inapplicable",
-                                    "type": [
-                                        "boolean",
-                                        "null"
-                                    ],
-                                    "description": "Whether the linear operation is proper."
                                 }
                             },
                             "examples": [
@@ -1425,429 +1400,6 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "0"
                                     ]
                                 }
-                            ]
-                        ]
-                    },
-                    "symops_mod_centering_xyz": {
-                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering_xyz",
-                        "title": "Symmetry operations modulo centering in x,y,z notation",
-                        "x-optimade-type": "list",
-                        "x-optimade-definition": {
-                            "kind": "property",
-                            "version": "0.1.0",
-                            "format": "1.3",
-                            "name": "symops_mod_centering_xyz",
-                            "label": "symops_mod_centering_xyz_spacegroups"
-                        },
-                        "type": [
-                            "array",
-                            "null"
-                        ],
-                        "description": "Symmetry operations modulo centering translations in fractional `x,y,z` notation, ordered consistently with `symops_mod_centering`.",
-                        "x-optimade-unit": "inapplicable",
-                        "items": {
-                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
-                            "title": "Operation",
-                            "x-optimade-type": "dictionary",
-                            "x-optimade-definition": {
-                                "kind": "property",
-                                "version": "0.1.0",
-                                "format": "1.3",
-                                "name": "op",
-                                "label": "op_symmetry"
-                            },
-                            "x-optimade-unit": "inapplicable",
-                            "type": [
-                                "object",
-                                "null"
-                            ],
-                            "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
-                            "properties": {
-                                "affine_transformation": {
-                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
-                                    "title": "Affine transformation",
-                                    "x-optimade-type": "dictionary",
-                                    "x-optimade-definition": {
-                                        "kind": "property",
-                                        "version": "0.1.0",
-                                        "format": "1.3",
-                                        "name": "affine_transformation",
-                                        "label": "affine_transformation_symmetry"
-                                    },
-                                    "x-optimade-unit": "inapplicable",
-                                    "type": [
-                                        "object",
-                                        "null"
-                                    ],
-                                    "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
-                                    "properties": {
-                                        "matrix": {
-                                            "x-optimade-type": "list",
-                                            "x-optimade-unit": "inapplicable",
-                                            "x-optimade-dimensions": {
-                                                "names": [
-                                                    "dim_lattice",
-                                                    "dim_lattice"
-                                                ],
-                                                "sizes": [
-                                                    3,
-                                                    3
-                                                ]
-                                            },
-                                            "type": [
-                                                "array",
-                                                "null"
-                                            ],
-                                            "description": "Exact 3 by 3 matrix part of the affine transformation.",
-                                            "items": {
-                                                "x-optimade-type": "list",
-                                                "x-optimade-unit": "inapplicable",
-                                                "x-optimade-dimensions": {
-                                                    "names": [
-                                                        "dim_lattice"
-                                                    ],
-                                                    "sizes": [
-                                                        3
-                                                    ]
-                                                },
-                                                "type": [
-                                                    "array"
-                                                ],
-                                                "description": "One row of the exact 3 by 3 matrix.",
-                                                "items": {
-                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
-                                                    "x-optimade-type": "string",
-                                                    "x-optimade-definition": {
-                                                        "label": "fraction_core",
-                                                        "kind": "property",
-                                                        "version": "0.1.0",
-                                                        "format": "1.3",
-                                                        "name": "fraction"
-                                                    },
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ],
-                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
-                                                    "examples": [
-                                                        "2/3",
-                                                        "5/42",
-                                                        "10",
-                                                        "0"
-                                                    ],
-                                                    "x-optimade-unit": "inapplicable"
-                                                }
-                                            }
-                                        },
-                                        "vector": {
-                                            "x-optimade-type": "list",
-                                            "x-optimade-unit": "inapplicable",
-                                            "x-optimade-dimensions": {
-                                                "names": [
-                                                    "dim_lattice"
-                                                ],
-                                                "sizes": [
-                                                    3
-                                                ]
-                                            },
-                                            "type": [
-                                                "array",
-                                                "null"
-                                            ],
-                                            "description": "Exact fractional-coordinate vector part of the affine transformation.",
-                                            "items": {
-                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                "title": "fraction",
-                                                "x-optimade-type": "string",
-                                                "x-optimade-definition": {
-                                                    "label": "fraction_core",
-                                                    "kind": "property",
-                                                    "version": "0.1.0",
-                                                    "format": "1.3",
-                                                    "name": "fraction"
-                                                },
-                                                "type": [
-                                                    "string",
-                                                    "null"
-                                                ],
-                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
-                                                "examples": [
-                                                    "2/3",
-                                                    "5/42",
-                                                    "10",
-                                                    "0"
-                                                ],
-                                                "x-optimade-unit": "inapplicable"
-                                            }
-                                        },
-                                        "xyz": {
-                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
-                                            "title": "Operation xyz",
-                                            "x-optimade-type": "string",
-                                            "x-compatibility": [
-                                                "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
-                                                "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
-                                            ],
-                                            "x-optimade-definition": {
-                                                "kind": "property",
-                                                "version": "0.1.0",
-                                                "format": "1.3",
-                                                "name": "op_xyz",
-                                                "label": "op_xyz_symmetry"
-                                            },
-                                            "x-optimade-unit": "inapplicable",
-                                            "type": [
-                                                "string",
-                                                "null"
-                                            ],
-                                            "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
-                                            "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
-                                            "examples": [
-                                                "-x,-y,z",
-                                                "x,1/2-y,1/2+z"
-                                            ]
-                                        },
-                                        "det": {
-                                            "x-optimade-type": "integer",
-                                            "x-optimade-unit": "inapplicable",
-                                            "type": [
-                                                "integer",
-                                                "null"
-                                            ],
-                                            "description": "Determinant of the matrix part when emitted by the generator."
-                                        },
-                                        "is_orthogonal": {
-                                            "x-optimade-type": "boolean",
-                                            "x-optimade-unit": "inapplicable",
-                                            "type": [
-                                                "boolean",
-                                                "null"
-                                            ],
-                                            "description": "Whether the matrix part is orthogonal."
-                                        }
-                                    },
-                                    "examples": [
-                                        {
-                                            "matrix": [
-                                                [
-                                                    "-1",
-                                                    "0",
-                                                    "0"
-                                                ],
-                                                [
-                                                    "0",
-                                                    "-1",
-                                                    "0"
-                                                ],
-                                                [
-                                                    "0",
-                                                    "0",
-                                                    "1"
-                                                ]
-                                            ],
-                                            "vector": [
-                                                "0",
-                                                "0",
-                                                "0"
-                                            ],
-                                            "xyz": "-x,-y,z",
-                                            "det": 1,
-                                            "is_orthogonal": true
-                                        }
-                                    ]
-                                },
-                                "rot_type": {
-                                    "x-optimade-type": "string",
-                                    "x-optimade-unit": "inapplicable",
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ],
-                                    "description": "Symbolic crystallographic operation-type label for the linear part."
-                                },
-                                "axis": {
-                                    "x-optimade-type": "list",
-                                    "x-optimade-unit": "inapplicable",
-                                    "x-optimade-dimensions": {
-                                        "names": [
-                                            "dim_lattice"
-                                        ],
-                                        "sizes": [
-                                            3
-                                        ]
-                                    },
-                                    "type": [
-                                        "array",
-                                        "null"
-                                    ],
-                                    "description": "Integer-vector axis or invariant-direction descriptor for the operation.",
-                                    "items": {
-                                        "x-optimade-type": "integer",
-                                        "x-optimade-unit": "inapplicable",
-                                        "type": [
-                                            "integer"
-                                        ],
-                                        "description": "One integer component of the axis vector."
-                                    }
-                                },
-                                "sense": {
-                                    "x-optimade-type": "integer",
-                                    "x-optimade-unit": "inapplicable",
-                                    "type": [
-                                        "integer",
-                                        "null"
-                                    ],
-                                    "description": "Rotation sense/sign convention returned by the generator."
-                                },
-                                "screw_glide": {
-                                    "x-optimade-type": "list",
-                                    "x-optimade-unit": "inapplicable",
-                                    "x-optimade-dimensions": {
-                                        "names": [
-                                            "dim_lattice"
-                                        ],
-                                        "sizes": [
-                                            3
-                                        ]
-                                    },
-                                    "type": [
-                                        "array",
-                                        "null"
-                                    ],
-                                    "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
-                                    "items": {
-                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
-                                        "x-optimade-type": "string",
-                                        "x-optimade-definition": {
-                                            "label": "fraction_core",
-                                            "kind": "property",
-                                            "version": "0.1.0",
-                                            "format": "1.3",
-                                            "name": "fraction"
-                                        },
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
-                                        "examples": [
-                                            "2/3",
-                                            "5/42",
-                                            "10",
-                                            "0"
-                                        ],
-                                        "x-optimade-unit": "inapplicable"
-                                    }
-                                },
-                                "origin_shift": {
-                                    "x-optimade-type": "list",
-                                    "x-optimade-unit": "inapplicable",
-                                    "x-optimade-dimensions": {
-                                        "names": [
-                                            "dim_lattice"
-                                        ],
-                                        "sizes": [
-                                            3
-                                        ]
-                                    },
-                                    "type": [
-                                        "array",
-                                        "null"
-                                    ],
-                                    "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
-                                    "items": {
-                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
-                                        "x-optimade-type": "string",
-                                        "x-optimade-definition": {
-                                            "label": "fraction_core",
-                                            "kind": "property",
-                                            "version": "0.1.0",
-                                            "format": "1.3",
-                                            "name": "fraction"
-                                        },
-                                        "type": [
-                                            "string",
-                                            "null"
-                                        ],
-                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
-                                        "examples": [
-                                            "2/3",
-                                            "5/42",
-                                            "10",
-                                            "0"
-                                        ],
-                                        "x-optimade-unit": "inapplicable"
-                                    }
-                                },
-                                "is_proper": {
-                                    "x-optimade-type": "boolean",
-                                    "x-optimade-unit": "inapplicable",
-                                    "type": [
-                                        "boolean",
-                                        "null"
-                                    ],
-                                    "description": "Whether the linear operation is proper."
-                                }
-                            },
-                            "examples": [
-                                {
-                                    "affine_transformation": {
-                                        "matrix": [
-                                            [
-                                                "-1",
-                                                "0",
-                                                "0"
-                                            ],
-                                            [
-                                                "0",
-                                                "-1",
-                                                "0"
-                                            ],
-                                            [
-                                                "0",
-                                                "0",
-                                                "1"
-                                            ]
-                                        ],
-                                        "vector": [
-                                            "0",
-                                            "0",
-                                            "0"
-                                        ],
-                                        "xyz": "-x,-y,z",
-                                        "det": 1,
-                                        "is_orthogonal": true
-                                    },
-                                    "rot_type": "2",
-                                    "sense": 0,
-                                    "axis": [
-                                        0,
-                                        0,
-                                        1
-                                    ],
-                                    "screw_glide": [
-                                        "0",
-                                        "0",
-                                        "0"
-                                    ],
-                                    "origin_shift": [
-                                        "0",
-                                        "0",
-                                        "0"
-                                    ]
-                                }
-                            ]
-                        },
-                        "examples": [
-                            [
-                                "x,y,z"
-                            ],
-                            [
-                                "-x,y,-z",
-                                "x,y,z"
                             ]
                         ]
                     }
@@ -1956,9 +1508,6 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 ],
                                 "operation_kind": "euclidean"
                             }
-                        ],
-                        "symops_mod_centering_xyz": [
-                            "-x,-y,-z"
                         ]
                     }
                 ]
@@ -1985,7 +1534,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "object",
                     "null"
                 ],
-                "description": "Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.\n\nThis transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.\nThe transform is represented by `matrix` and `vector`, following the same affine-transformation convention as the other generated transformation tables.\n\nIf `x_to_ref_hall` is a fractional coordinate column vector in the target IT-standard Hall setting, and `x_from_hall` is the corresponding fractional coordinate column vector in the source Hall setting keyed by the containing map, then the stored transform satisfies:\n`x_from_hall = matrix * x_to_ref_hall + vector`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary describing one exact transform from the containing Hall setting to the IT-standard Hall setting of the same `it_number`.\n- The `index` value is always `1`, because this is a same-space-group setting transform rather than a proper subgroup transform.\n- Matrix and vector entries MUST be exact strings, using integer strings or fraction strings as appropriate.\n- It MUST be a dictionary with the following keys:\n\n    - **hall\\_entry**: REQUIRED; String.\n      Source Hall-entry key for the setting transformed by this object.\n\n    - **it\\_number**: REQUIRED; Integer.\n      International Tables space-group number shared by the source and target Hall settings.\n\n    - **to\\_hall**: REQUIRED; String.\n      Target Hall-entry key for the IT-standard Hall setting of the same space-group type.\n\n    - **to\\_hall\\_symbol**: REQUIRED; String.\n      Display Hall symbol corresponding to `to_hall`, using spaces rather than the normalized Hall-entry key syntax.\n\n    - **index**: REQUIRED; Integer.\n      Transform index.\n      For this table the value is `1` because the transform maps between settings of the same space group.\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for this setting transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`, where `matrix` and `vector` are the fields inside `affine_transformation`.",
+                "description": "Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.\n\nThis transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.\nThe transform is represented by `matrix` and `vector`, following the same affine-transformation convention as the other generated transformation tables.\n\nIf `x_to_ref_hall` is a fractional coordinate column vector in the target IT-standard Hall setting, and `x_from_hall` is the corresponding fractional coordinate column vector in the source Hall setting keyed by the containing map, then the stored transform satisfies:\n`x_from_hall = matrix * x_to_ref_hall + vector`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary describing one exact transform from the containing Hall setting to the IT-standard Hall setting of the same `it_number`.\n- The `index` value is always `1`, because this is a same-space-group setting transform rather than a proper subgroup transform.\n- Matrix and vector entries MUST be exact strings, using integer strings or fraction strings as appropriate.\n- It MUST be a dictionary with the following keys:\n\n    - **hall\\_entry**: REQUIRED; String.\n      Source Hall-entry key for the setting transformed by this object.\n\n    - **it\\_number**: REQUIRED; Integer.\n      International Tables space-group number shared by the source and target Hall settings.\n\n    - **to\\_hall\\_entry**: REQUIRED; String.\n      Target Hall-entry key for the IT-standard Hall setting of the same space-group type.\n\n    - **index**: REQUIRED; Integer.\n      Transform index.\n      For this table the value is `1` because the transform maps between settings of the same space group.\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for this setting transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`, where `matrix` and `vector` are the fields inside `affine_transformation`.",
                 "properties": {
                     "hall_entry": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
@@ -2011,7 +1560,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     },
                     "it_number": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
-                        "title": "International Tables Space-Group Number",
+                        "title": "International Tables space-group number",
                         "x-optimade-type": "integer",
                         "x-compatibility": [
                             "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -2034,53 +1583,31 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             5
                         ]
                     },
-                    "to_hall": {
-                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall",
-                        "title": "To Hall",
+                    "to_hall_entry": {
+                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall_entry",
+                        "title": "To Hall entry",
                         "x-optimade-type": "string",
                         "x-optimade-definition": {
                             "kind": "property",
                             "version": "0.1.0",
                             "format": "1.3",
-                            "name": "to_hall",
-                            "label": "to_hall_transformations"
+                            "name": "to_hall_entry",
+                            "label": "to_hall_entry_transformations"
                         },
                         "type": [
                             "string",
                             "null"
                         ],
-                        "description": "Reference Hall-entry key to which a setting transform maps the current Hall setting.",
+                        "description": "Target Hall-entry key to which a setting transform maps the current Hall setting.\n\nThe value is a normalized Hall-entry key following the same convention as `/defs/v0.1/properties/spacegroups/hall_entry`, i.e., derived from the Hall symbol by using lowercase letters and underscores in place of spaces.\nThe corresponding display Hall symbol can be recovered by looking up the key in the spacegroups dataset.",
                         "x-optimade-unit": "inapplicable",
                         "examples": [
                             "p_1",
                             "-p_1"
                         ]
                     },
-                    "to_hall_symbol": {
-                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall_symbol",
-                        "title": "To Hall Symbol",
-                        "x-optimade-type": "string",
-                        "x-optimade-definition": {
-                            "kind": "property",
-                            "version": "0.1.0",
-                            "format": "1.3",
-                            "name": "to_hall_symbol",
-                            "label": "to_hall_symbol_transformations"
-                        },
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "Display Hall symbol corresponding to `to_hall`.",
-                        "x-optimade-unit": "inapplicable",
-                        "examples": [
-                            "p 1",
-                            "-p 1"
-                        ]
-                    },
                     "index": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/index",
-                        "title": "Index",
+                        "title": "Subgroup or transform index",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -2153,7 +1680,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     "description": "One row of the exact 3 by 3 matrix.",
                                     "items": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                        "title": "Fraction",
                                         "x-optimade-type": "string",
                                         "x-optimade-definition": {
                                             "label": "fraction_core",
@@ -2195,7 +1722,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                 "items": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                    "title": "fraction",
+                                    "title": "Fraction",
                                     "x-optimade-type": "string",
                                     "x-optimade-definition": {
                                         "label": "fraction_core",
@@ -2299,8 +1826,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     {
                         "hall_entry": "p_1",
                         "it_number": 1,
-                        "to_hall": "p_1",
-                        "to_hall_symbol": "p 1",
+                        "to_hall_entry": "p_1",
                         "index": 1,
                         "affine_transformation": {
                             "matrix": [
@@ -2351,7 +1877,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "object",
                     "null"
                 ],
-                "description": "Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains the signed-permutation subset of affine normalizer representatives.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `signed_permutation_matrices`, meaning 3 by 3 integer matrices with exactly one nonzero entry in each row and column and each nonzero entry equal to `-1` or `1`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds satisfied by the signed-permutation candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed orthogonal affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
+                "description": "Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains the signed-permutation subset of affine normalizer representatives.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `signed_permutation_matrices`, meaning 3 by 3 integer matrices with exactly one nonzero entry in each row and column and each nonzero entry equal to `-1` or `1`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\nThis property is one of three related normalizer tables for a setting:\n`euclidean_normalizer` holds the finite Euclidean normalizer operations obtained from cctbx,\nthis property holds the older bounded table restricted to signed-permutation linear parts,\nand `affine_normalizer` holds the bounded table generated from unimodular integer linear parts, which is a superset of this one.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds satisfied by the signed-permutation candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed orthogonal affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.\n      Each item MUST carry `compatible_systems`, the list of crystal systems for which the representative's linear part is compatible with a crystallographic metric.",
                 "properties": {
                     "normalizer_kind": {
                         "x-optimade-type": "string",
@@ -2382,7 +1908,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     },
                     "n_symops": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-                        "title": "number of symops",
+                        "title": "Number of symops",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -2395,7 +1921,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             "integer",
                             "null"
                         ],
-                        "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+                        "description": "Number of symmetry operations in the finite operation list of the generated entry.\n\nWhen the entry contains a `symops` list, this value MUST equal its length.",
                         "x-optimade-unit": "inapplicable",
                         "examples": [
                             1,
@@ -2404,7 +1930,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     },
                     "n_linear_parts": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
-                        "title": "N Linear Parts",
+                        "title": "Number of linear parts",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -2417,7 +1943,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             "integer",
                             "null"
                         ],
-                        "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+                        "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
                         "x-optimade-unit": "inapplicable",
                         "examples": [
                             2,
@@ -2559,7 +2085,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -2601,7 +2127,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                             "items": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                "title": "fraction",
+                                                "title": "Fraction",
                                                 "x-optimade-type": "string",
                                                 "x-optimade-definition": {
                                                     "label": "fraction_core",
@@ -2770,13 +2296,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     ]
                                 },
                                 "wyckoff_splitting": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                    "title": "Wyckoff splitting",
                                     "x-optimade-type": "list",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "wyckoff_splitting",
+                                        "label": "wyckoff_splitting_transformations"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "array",
                                         "null"
                                     ],
-                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                     "items": {
                                         "x-optimade-type": "dictionary",
                                         "x-optimade-unit": "inapplicable",
@@ -2836,20 +2371,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "affine": {
                                                             "x-optimade-type": "list",
                                                             "x-optimade-unit": "inapplicable",
+                                                            "x-optimade-dimensions": {
+                                                                "names": [
+                                                                    "dim_lattice",
+                                                                    "dim_affine"
+                                                                ],
+                                                                "sizes": [
+                                                                    3,
+                                                                    4
+                                                                ]
+                                                            },
                                                             "type": [
                                                                 "array"
                                                             ],
-                                                            "description": "Exact affine representation for the split branch.",
+                                                            "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                             "items": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "One affine row.",
+                                                                "description": "One row of the augmented affine matrix.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -2877,7 +2430,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 }
                                             }
                                         }
-                                    }
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "parent": "c",
+                                                "splits": [
+                                                    {
+                                                        "letter": "e",
+                                                        "xyz": "x,y,z",
+                                                        "affine": [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "0",
+                                                                "1",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ]
                                 },
                                 "criteria": {
                                     "x-optimade-type": "list",
@@ -2977,13 +2563,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_lattice"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            3
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
                                                                     "description": "One exact coefficient vector.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -3017,7 +2611,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "Exact target vector or scalar for the constraint.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -3261,7 +2855,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "object",
                     "null"
                 ],
-                "description": "Affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
+                "description": "Affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\nThis property is one of three related normalizer tables for a setting:\n`euclidean_normalizer` holds the finite Euclidean normalizer operations obtained from cctbx,\n`orthogonal_affine_normalizer` holds the older bounded table restricted to signed-permutation linear parts,\nand this property holds the bounded table generated from unimodular integer linear parts, which is a superset of the orthogonal one.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.\n      Each item MUST carry `compatible_systems`, the list of crystal systems for which the representative's linear part is compatible with a crystallographic metric.",
                 "properties": {
                     "normalizer_kind": {
                         "x-optimade-type": "string",
@@ -3292,7 +2886,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     },
                     "n_symops": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-                        "title": "number of symops",
+                        "title": "Number of symops",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -3305,7 +2899,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             "integer",
                             "null"
                         ],
-                        "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+                        "description": "Number of symmetry operations in the finite operation list of the generated entry.\n\nWhen the entry contains a `symops` list, this value MUST equal its length.",
                         "x-optimade-unit": "inapplicable",
                         "examples": [
                             1,
@@ -3314,7 +2908,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     },
                     "n_linear_parts": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
-                        "title": "N Linear Parts",
+                        "title": "Number of linear parts",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -3327,7 +2921,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             "integer",
                             "null"
                         ],
-                        "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+                        "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
                         "x-optimade-unit": "inapplicable",
                         "examples": [
                             2,
@@ -3469,7 +3063,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -3511,7 +3105,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                             "items": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                "title": "fraction",
+                                                "title": "Fraction",
                                                 "x-optimade-type": "string",
                                                 "x-optimade-definition": {
                                                     "label": "fraction_core",
@@ -3680,13 +3274,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     ]
                                 },
                                 "wyckoff_splitting": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                    "title": "Wyckoff splitting",
                                     "x-optimade-type": "list",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "wyckoff_splitting",
+                                        "label": "wyckoff_splitting_transformations"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "array",
                                         "null"
                                     ],
-                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                     "items": {
                                         "x-optimade-type": "dictionary",
                                         "x-optimade-unit": "inapplicable",
@@ -3746,20 +3349,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "affine": {
                                                             "x-optimade-type": "list",
                                                             "x-optimade-unit": "inapplicable",
+                                                            "x-optimade-dimensions": {
+                                                                "names": [
+                                                                    "dim_lattice",
+                                                                    "dim_affine"
+                                                                ],
+                                                                "sizes": [
+                                                                    3,
+                                                                    4
+                                                                ]
+                                                            },
                                                             "type": [
                                                                 "array"
                                                             ],
-                                                            "description": "Exact affine representation for the split branch.",
+                                                            "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                             "items": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "One affine row.",
+                                                                "description": "One row of the augmented affine matrix.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -3787,7 +3408,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 }
                                             }
                                         }
-                                    }
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "parent": "c",
+                                                "splits": [
+                                                    {
+                                                        "letter": "e",
+                                                        "xyz": "x,y,z",
+                                                        "affine": [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "0",
+                                                                "1",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ]
                                 },
                                 "criteria": {
                                     "x-optimade-type": "list",
@@ -3887,13 +3541,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_lattice"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            3
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
                                                                     "description": "One exact coefficient vector.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -3927,7 +3589,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "Exact target vector or scalar for the constraint.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -4171,7 +3833,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "object",
                     "null"
                 ],
-                "description": "Parameterized continuous normalizer subspace for a setting.\n\nIt describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
+                "description": "Parameterized continuous normalizer subspace for a setting.\n\nIt describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n      When present, it MUST equal the length of `basis_vectors`.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
                 "properties": {
                     "dimension": {
                         "x-optimade-type": "integer",
@@ -4180,7 +3842,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             "integer",
                             "null"
                         ],
-                        "description": "Dimension of the continuous parameter subspace."
+                        "description": "Dimension of the continuous parameter subspace. When present, it MUST equal the length of `basis_vectors`."
                     },
                     "basis_vectors": {
                         "x-optimade-type": "list",
@@ -4207,7 +3869,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             "description": "One basis vector in fractional coordinates.",
                             "items": {
                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                "title": "fraction",
+                                "title": "Fraction",
                                 "x-optimade-type": "string",
                                 "x-optimade-definition": {
                                     "label": "fraction_core",
@@ -4377,7 +4039,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -4419,7 +4081,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                             "items": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                "title": "fraction",
+                                                "title": "Fraction",
                                                 "x-optimade-type": "string",
                                                 "x-optimade-definition": {
                                                     "label": "fraction_core",
@@ -4588,13 +4250,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     ]
                                 },
                                 "wyckoff_splitting": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                    "title": "Wyckoff splitting",
                                     "x-optimade-type": "list",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "wyckoff_splitting",
+                                        "label": "wyckoff_splitting_transformations"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "array",
                                         "null"
                                     ],
-                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                     "items": {
                                         "x-optimade-type": "dictionary",
                                         "x-optimade-unit": "inapplicable",
@@ -4654,20 +4325,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "affine": {
                                                             "x-optimade-type": "list",
                                                             "x-optimade-unit": "inapplicable",
+                                                            "x-optimade-dimensions": {
+                                                                "names": [
+                                                                    "dim_lattice",
+                                                                    "dim_affine"
+                                                                ],
+                                                                "sizes": [
+                                                                    3,
+                                                                    4
+                                                                ]
+                                                            },
                                                             "type": [
                                                                 "array"
                                                             ],
-                                                            "description": "Exact affine representation for the split branch.",
+                                                            "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                             "items": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "One affine row.",
+                                                                "description": "One row of the augmented affine matrix.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -4695,7 +4384,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 }
                                             }
                                         }
-                                    }
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "parent": "c",
+                                                "splits": [
+                                                    {
+                                                        "letter": "e",
+                                                        "xyz": "x,y,z",
+                                                        "affine": [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "0",
+                                                                "1",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ]
                                 },
                                 "criteria": {
                                     "x-optimade-type": "list",
@@ -4795,13 +4517,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_lattice"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            3
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
                                                                     "description": "One exact coefficient vector.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -4835,7 +4565,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "Exact target vector or scalar for the constraint.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -5215,7 +4945,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     "description": "One row of the exact 3 by 3 matrix.",
                                                     "items": {
                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                        "title": "fraction",
+                                                        "title": "Fraction",
                                                         "x-optimade-type": "string",
                                                         "x-optimade-definition": {
                                                             "label": "fraction_core",
@@ -5257,7 +4987,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -5426,13 +5156,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         ]
                                     },
                                     "wyckoff_splitting": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                        "title": "Wyckoff splitting",
                                         "x-optimade-type": "list",
+                                        "x-optimade-definition": {
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "wyckoff_splitting",
+                                            "label": "wyckoff_splitting_transformations"
+                                        },
                                         "x-optimade-unit": "inapplicable",
                                         "type": [
                                             "array",
                                             "null"
                                         ],
-                                        "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                        "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                         "items": {
                                             "x-optimade-type": "dictionary",
                                             "x-optimade-unit": "inapplicable",
@@ -5492,20 +5231,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "affine": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_lattice",
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        3,
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "Exact affine representation for the split branch.",
+                                                                "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_affine"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            4
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
-                                                                    "description": "One affine row.",
+                                                                    "description": "One row of the augmented affine matrix.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -5533,7 +5290,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     }
                                                 }
                                             }
-                                        }
+                                        },
+                                        "examples": [
+                                            [
+                                                {
+                                                    "parent": "c",
+                                                    "splits": [
+                                                        {
+                                                            "letter": "e",
+                                                            "xyz": "x,y,z",
+                                                            "affine": [
+                                                                [
+                                                                    "1",
+                                                                    "0",
+                                                                    "0",
+                                                                    "0"
+                                                                ],
+                                                                [
+                                                                    "0",
+                                                                    "1",
+                                                                    "0",
+                                                                    "0"
+                                                                ],
+                                                                [
+                                                                    "0",
+                                                                    "0",
+                                                                    "1",
+                                                                    "0"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        ]
                                     },
                                     "criteria": {
                                         "x-optimade-type": "list",
@@ -5633,13 +5423,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                     "items": {
                                                                         "x-optimade-type": "list",
                                                                         "x-optimade-unit": "inapplicable",
+                                                                        "x-optimade-dimensions": {
+                                                                            "names": [
+                                                                                "dim_lattice"
+                                                                            ],
+                                                                            "sizes": [
+                                                                                3
+                                                                            ]
+                                                                        },
                                                                         "type": [
                                                                             "array"
                                                                         ],
                                                                         "description": "One exact coefficient vector.",
                                                                         "items": {
                                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                            "title": "fraction",
+                                                                            "title": "Fraction",
                                                                             "x-optimade-type": "string",
                                                                             "x-optimade-definition": {
                                                                                 "label": "fraction_core",
@@ -5673,7 +5471,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 "description": "Exact target vector or scalar for the constraint.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -5996,7 +5794,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     "description": "One row of the exact 3 by 3 matrix.",
                                                     "items": {
                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                        "title": "fraction",
+                                                        "title": "Fraction",
                                                         "x-optimade-type": "string",
                                                         "x-optimade-definition": {
                                                             "label": "fraction_core",
@@ -6038,7 +5836,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -6207,13 +6005,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         ]
                                     },
                                     "wyckoff_splitting": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                        "title": "Wyckoff splitting",
                                         "x-optimade-type": "list",
+                                        "x-optimade-definition": {
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "wyckoff_splitting",
+                                            "label": "wyckoff_splitting_transformations"
+                                        },
                                         "x-optimade-unit": "inapplicable",
                                         "type": [
                                             "array",
                                             "null"
                                         ],
-                                        "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                        "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                         "items": {
                                             "x-optimade-type": "dictionary",
                                             "x-optimade-unit": "inapplicable",
@@ -6273,20 +6080,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "affine": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_lattice",
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        3,
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "Exact affine representation for the split branch.",
+                                                                "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_affine"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            4
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
-                                                                    "description": "One affine row.",
+                                                                    "description": "One row of the augmented affine matrix.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -6314,7 +6139,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     }
                                                 }
                                             }
-                                        }
+                                        },
+                                        "examples": [
+                                            [
+                                                {
+                                                    "parent": "c",
+                                                    "splits": [
+                                                        {
+                                                            "letter": "e",
+                                                            "xyz": "x,y,z",
+                                                            "affine": [
+                                                                [
+                                                                    "1",
+                                                                    "0",
+                                                                    "0",
+                                                                    "0"
+                                                                ],
+                                                                [
+                                                                    "0",
+                                                                    "1",
+                                                                    "0",
+                                                                    "0"
+                                                                ],
+                                                                [
+                                                                    "0",
+                                                                    "0",
+                                                                    "1",
+                                                                    "0"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        ]
                                     },
                                     "criteria": {
                                         "x-optimade-type": "list",
@@ -6414,13 +6272,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                     "items": {
                                                                         "x-optimade-type": "list",
                                                                         "x-optimade-unit": "inapplicable",
+                                                                        "x-optimade-dimensions": {
+                                                                            "names": [
+                                                                                "dim_lattice"
+                                                                            ],
+                                                                            "sizes": [
+                                                                                3
+                                                                            ]
+                                                                        },
                                                                         "type": [
                                                                             "array"
                                                                         ],
                                                                         "description": "One exact coefficient vector.",
                                                                         "items": {
                                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                            "title": "fraction",
+                                                                            "title": "Fraction",
                                                                             "x-optimade-type": "string",
                                                                             "x-optimade-definition": {
                                                                                 "label": "fraction_core",
@@ -6454,7 +6320,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 "description": "Exact target vector or scalar for the constraint.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -6711,7 +6577,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                 "properties": {
                     "it_number": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
-                        "title": "International Tables Space-Group Number",
+                        "title": "International Tables space-group number",
                         "x-optimade-type": "integer",
                         "x-compatibility": [
                             "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -6835,7 +6701,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -6877,7 +6743,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                             "items": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                "title": "fraction",
+                                                "title": "Fraction",
                                                 "x-optimade-type": "string",
                                                 "x-optimade-definition": {
                                                     "label": "fraction_core",
@@ -7046,13 +6912,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     ]
                                 },
                                 "wyckoff_splitting": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                    "title": "Wyckoff splitting",
                                     "x-optimade-type": "list",
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "wyckoff_splitting",
+                                        "label": "wyckoff_splitting_transformations"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "array",
                                         "null"
                                     ],
-                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                     "items": {
                                         "x-optimade-type": "dictionary",
                                         "x-optimade-unit": "inapplicable",
@@ -7112,20 +6987,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "affine": {
                                                             "x-optimade-type": "list",
                                                             "x-optimade-unit": "inapplicable",
+                                                            "x-optimade-dimensions": {
+                                                                "names": [
+                                                                    "dim_lattice",
+                                                                    "dim_affine"
+                                                                ],
+                                                                "sizes": [
+                                                                    3,
+                                                                    4
+                                                                ]
+                                                            },
                                                             "type": [
                                                                 "array"
                                                             ],
-                                                            "description": "Exact affine representation for the split branch.",
+                                                            "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                             "items": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "One affine row.",
+                                                                "description": "One row of the augmented affine matrix.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -7153,7 +7046,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 }
                                             }
                                         }
-                                    }
+                                    },
+                                    "examples": [
+                                        [
+                                            {
+                                                "parent": "c",
+                                                "splits": [
+                                                    {
+                                                        "letter": "e",
+                                                        "xyz": "x,y,z",
+                                                        "affine": [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "0",
+                                                                "1",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ]
                                 },
                                 "criteria": {
                                     "x-optimade-type": "list",
@@ -7253,13 +7179,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_lattice"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            3
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
                                                                     "description": "One exact coefficient vector.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -7293,7 +7227,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "Exact target vector or scalar for the constraint.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -7548,7 +7482,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                         },
                         "it_number": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
-                            "title": "International Tables Space-Group Number",
+                            "title": "International Tables space-group number",
                             "x-optimade-type": "integer",
                             "x-compatibility": [
                                 "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -7572,8 +7506,8 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             ]
                         },
                         "crystal_system": {
-                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/crystal_system",
-                            "title": "Crystal System",
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/crystal_system",
+                            "title": "Crystal system",
                             "x-optimade-type": "string",
                             "x-compatibility": [
                                 "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.crystal_system.html"
@@ -7583,14 +7517,23 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "version": "0.1.0",
                                 "format": "1.3",
                                 "name": "crystal_system",
-                                "label": "crystal_system_spacegroups"
+                                "label": "crystal_system_pointgroups"
                             },
                             "type": [
                                 "string",
                                 "null"
                             ],
-                            "description": "The crystal system of the space group or point group.\n\nValues use the conventional crystallographic system names such as triclinic, monoclinic, orthorhombic, tetragonal, trigonal, hexagonal, and cubic.",
+                            "description": "The crystal system of the space group or point group.\n\nValues use the conventional crystallographic system names.",
                             "x-optimade-unit": "inapplicable",
+                            "enum": [
+                                "triclinic",
+                                "monoclinic",
+                                "orthorhombic",
+                                "tetragonal",
+                                "trigonal",
+                                "hexagonal",
+                                "cubic"
+                            ],
                             "examples": [
                                 "triclinic",
                                 "monoclinic"
@@ -7684,7 +7627,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     "description": "One row of the exact 3 by 3 matrix.",
                                                     "items": {
                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                        "title": "fraction",
+                                                        "title": "Fraction",
                                                         "x-optimade-type": "string",
                                                         "x-optimade-definition": {
                                                             "label": "fraction_core",
@@ -7726,7 +7669,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -7895,13 +7838,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         ]
                                     },
                                     "wyckoff_splitting": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                        "title": "Wyckoff splitting",
                                         "x-optimade-type": "list",
+                                        "x-optimade-definition": {
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "wyckoff_splitting",
+                                            "label": "wyckoff_splitting_transformations"
+                                        },
                                         "x-optimade-unit": "inapplicable",
                                         "type": [
                                             "array",
                                             "null"
                                         ],
-                                        "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                        "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                         "items": {
                                             "x-optimade-type": "dictionary",
                                             "x-optimade-unit": "inapplicable",
@@ -7961,20 +7913,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "affine": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_lattice",
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        3,
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "Exact affine representation for the split branch.",
+                                                                "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_affine"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            4
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
-                                                                    "description": "One affine row.",
+                                                                    "description": "One row of the augmented affine matrix.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -8002,7 +7972,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     }
                                                 }
                                             }
-                                        }
+                                        },
+                                        "examples": [
+                                            [
+                                                {
+                                                    "parent": "c",
+                                                    "splits": [
+                                                        {
+                                                            "letter": "e",
+                                                            "xyz": "x,y,z",
+                                                            "affine": [
+                                                                [
+                                                                    "1",
+                                                                    "0",
+                                                                    "0",
+                                                                    "0"
+                                                                ],
+                                                                [
+                                                                    "0",
+                                                                    "1",
+                                                                    "0",
+                                                                    "0"
+                                                                ],
+                                                                [
+                                                                    "0",
+                                                                    "0",
+                                                                    "1",
+                                                                    "0"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        ]
                                     },
                                     "criteria": {
                                         "x-optimade-type": "list",
@@ -8102,13 +8105,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                     "items": {
                                                                         "x-optimade-type": "list",
                                                                         "x-optimade-unit": "inapplicable",
+                                                                        "x-optimade-dimensions": {
+                                                                            "names": [
+                                                                                "dim_lattice"
+                                                                            ],
+                                                                            "sizes": [
+                                                                                3
+                                                                            ]
+                                                                        },
                                                                         "type": [
                                                                             "array"
                                                                         ],
                                                                         "description": "One exact coefficient vector.",
                                                                         "items": {
                                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                            "title": "fraction",
+                                                                            "title": "Fraction",
                                                                             "x-optimade-type": "string",
                                                                             "x-optimade-definition": {
                                                                                 "label": "fraction_core",
@@ -8142,7 +8153,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 "description": "Exact target vector or scalar for the constraint.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -8426,7 +8437,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     "description": "One row of the exact 3 by 3 matrix.",
                                                     "items": {
                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                        "title": "fraction",
+                                                        "title": "Fraction",
                                                         "x-optimade-type": "string",
                                                         "x-optimade-definition": {
                                                             "label": "fraction_core",
@@ -8468,7 +8479,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -8637,13 +8648,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         ]
                                     },
                                     "wyckoff_splitting": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                        "title": "Wyckoff splitting",
                                         "x-optimade-type": "list",
+                                        "x-optimade-definition": {
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "wyckoff_splitting",
+                                            "label": "wyckoff_splitting_transformations"
+                                        },
                                         "x-optimade-unit": "inapplicable",
                                         "type": [
                                             "array",
                                             "null"
                                         ],
-                                        "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                        "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                         "items": {
                                             "x-optimade-type": "dictionary",
                                             "x-optimade-unit": "inapplicable",
@@ -8703,20 +8723,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "affine": {
                                                                 "x-optimade-type": "list",
                                                                 "x-optimade-unit": "inapplicable",
+                                                                "x-optimade-dimensions": {
+                                                                    "names": [
+                                                                        "dim_lattice",
+                                                                        "dim_affine"
+                                                                    ],
+                                                                    "sizes": [
+                                                                        3,
+                                                                        4
+                                                                    ]
+                                                                },
                                                                 "type": [
                                                                     "array"
                                                                 ],
-                                                                "description": "Exact affine representation for the split branch.",
+                                                                "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                 "items": {
                                                                     "x-optimade-type": "list",
                                                                     "x-optimade-unit": "inapplicable",
+                                                                    "x-optimade-dimensions": {
+                                                                        "names": [
+                                                                            "dim_affine"
+                                                                        ],
+                                                                        "sizes": [
+                                                                            4
+                                                                        ]
+                                                                    },
                                                                     "type": [
                                                                         "array"
                                                                     ],
-                                                                    "description": "One affine row.",
+                                                                    "description": "One row of the augmented affine matrix.",
                                                                     "items": {
                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                        "title": "fraction",
+                                                                        "title": "Fraction",
                                                                         "x-optimade-type": "string",
                                                                         "x-optimade-definition": {
                                                                             "label": "fraction_core",
@@ -8744,7 +8782,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     }
                                                 }
                                             }
-                                        }
+                                        },
+                                        "examples": [
+                                            [
+                                                {
+                                                    "parent": "c",
+                                                    "splits": [
+                                                        {
+                                                            "letter": "e",
+                                                            "xyz": "x,y,z",
+                                                            "affine": [
+                                                                [
+                                                                    "1",
+                                                                    "0",
+                                                                    "0",
+                                                                    "0"
+                                                                ],
+                                                                [
+                                                                    "0",
+                                                                    "1",
+                                                                    "0",
+                                                                    "0"
+                                                                ],
+                                                                [
+                                                                    "0",
+                                                                    "0",
+                                                                    "1",
+                                                                    "0"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        ]
                                     },
                                     "criteria": {
                                         "x-optimade-type": "list",
@@ -8844,13 +8915,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                     "items": {
                                                                         "x-optimade-type": "list",
                                                                         "x-optimade-unit": "inapplicable",
+                                                                        "x-optimade-dimensions": {
+                                                                            "names": [
+                                                                                "dim_lattice"
+                                                                            ],
+                                                                            "sizes": [
+                                                                                3
+                                                                            ]
+                                                                        },
                                                                         "type": [
                                                                             "array"
                                                                         ],
                                                                         "description": "One exact coefficient vector.",
                                                                         "items": {
                                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                            "title": "fraction",
+                                                                            "title": "Fraction",
                                                                             "x-optimade-type": "string",
                                                                             "x-optimade-definition": {
                                                                                 "label": "fraction_core",
@@ -8884,7 +8963,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 "description": "Exact target vector or scalar for the constraint.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -9082,7 +9161,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                         },
                         "n_orthogonal_cosets": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_orthogonal_cosets",
-                            "title": "N Orthogonal Cosets",
+                            "title": "Number of orthogonal cosets",
                             "x-optimade-type": "integer",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -9095,7 +9174,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "integer",
                                 "null"
                             ],
-                            "description": "Number of orthogonal affine normalizer coset representatives stored for the setting.",
+                            "description": "Number of orthogonal affine normalizer coset representatives stored for the setting.\n\nThis value MUST equal the length of the `orthogonal_affine_normalizer_cosets` list of the containing record.",
                             "x-optimade-unit": "inapplicable",
                             "examples": [
                                 47,
@@ -9104,7 +9183,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                         },
                         "n_cosets": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_cosets",
-                            "title": "N Cosets",
+                            "title": "Number of cosets",
                             "x-optimade-type": "integer",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -9117,7 +9196,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "integer",
                                 "null"
                             ],
-                            "description": "Number of affine normalizer coset representatives stored for the setting.",
+                            "description": "Number of affine normalizer coset representatives stored for the setting.\n\nThis value MUST equal the length of the `affine_normalizer_cosets` list of the containing record.",
                             "x-optimade-unit": "inapplicable",
                             "examples": [
                                 63,
@@ -9464,7 +9543,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "description": "One row of the exact 3 by 3 matrix.",
                                         "items": {
                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                            "title": "fraction",
+                                            "title": "Fraction",
                                             "x-optimade-type": "string",
                                             "x-optimade-definition": {
                                                 "label": "fraction_core",
@@ -9506,7 +9585,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                     "items": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                        "title": "Fraction",
                                         "x-optimade-type": "string",
                                         "x-optimade-definition": {
                                             "label": "fraction_core",
@@ -9675,13 +9754,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             ]
                         },
                         "wyckoff_splitting": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                            "title": "Wyckoff splitting",
                             "x-optimade-type": "list",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "wyckoff_splitting",
+                                "label": "wyckoff_splitting_transformations"
+                            },
                             "x-optimade-unit": "inapplicable",
                             "type": [
                                 "array",
                                 "null"
                             ],
-                            "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                            "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                             "items": {
                                 "x-optimade-type": "dictionary",
                                 "x-optimade-unit": "inapplicable",
@@ -9741,20 +9829,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "affine": {
                                                     "x-optimade-type": "list",
                                                     "x-optimade-unit": "inapplicable",
+                                                    "x-optimade-dimensions": {
+                                                        "names": [
+                                                            "dim_lattice",
+                                                            "dim_affine"
+                                                        ],
+                                                        "sizes": [
+                                                            3,
+                                                            4
+                                                        ]
+                                                    },
                                                     "type": [
                                                         "array"
                                                     ],
-                                                    "description": "Exact affine representation for the split branch.",
+                                                    "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                     "items": {
                                                         "x-optimade-type": "list",
                                                         "x-optimade-unit": "inapplicable",
+                                                        "x-optimade-dimensions": {
+                                                            "names": [
+                                                                "dim_affine"
+                                                            ],
+                                                            "sizes": [
+                                                                4
+                                                            ]
+                                                        },
                                                         "type": [
                                                             "array"
                                                         ],
-                                                        "description": "One affine row.",
+                                                        "description": "One row of the augmented affine matrix.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -9782,7 +9888,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         }
                                     }
                                 }
-                            }
+                            },
+                            "examples": [
+                                [
+                                    {
+                                        "parent": "c",
+                                        "splits": [
+                                            {
+                                                "letter": "e",
+                                                "xyz": "x,y,z",
+                                                "affine": [
+                                                    [
+                                                        "1",
+                                                        "0",
+                                                        "0",
+                                                        "0"
+                                                    ],
+                                                    [
+                                                        "0",
+                                                        "1",
+                                                        "0",
+                                                        "0"
+                                                    ],
+                                                    [
+                                                        "0",
+                                                        "0",
+                                                        "1",
+                                                        "0"
+                                                    ]
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            ]
                         },
                         "criteria": {
                             "x-optimade-type": "list",
@@ -9882,13 +10021,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "items": {
                                                             "x-optimade-type": "list",
                                                             "x-optimade-unit": "inapplicable",
+                                                            "x-optimade-dimensions": {
+                                                                "names": [
+                                                                    "dim_lattice"
+                                                                ],
+                                                                "sizes": [
+                                                                    3
+                                                                ]
+                                                            },
                                                             "type": [
                                                                 "array"
                                                             ],
                                                             "description": "One exact coefficient vector.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -9922,7 +10069,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     "description": "Exact target vector or scalar for the constraint.",
                                                     "items": {
                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                        "title": "fraction",
+                                                        "title": "Fraction",
                                                         "x-optimade-type": "string",
                                                         "x-optimade-definition": {
                                                             "label": "fraction_core",
@@ -10212,7 +10359,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "description": "One row of the exact 3 by 3 matrix.",
                                         "items": {
                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                            "title": "fraction",
+                                            "title": "Fraction",
                                             "x-optimade-type": "string",
                                             "x-optimade-definition": {
                                                 "label": "fraction_core",
@@ -10254,7 +10401,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                     "items": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                        "title": "Fraction",
                                         "x-optimade-type": "string",
                                         "x-optimade-definition": {
                                             "label": "fraction_core",
@@ -10423,13 +10570,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             ]
                         },
                         "wyckoff_splitting": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                            "title": "Wyckoff splitting",
                             "x-optimade-type": "list",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "wyckoff_splitting",
+                                "label": "wyckoff_splitting_transformations"
+                            },
                             "x-optimade-unit": "inapplicable",
                             "type": [
                                 "array",
                                 "null"
                             ],
-                            "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                            "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                             "items": {
                                 "x-optimade-type": "dictionary",
                                 "x-optimade-unit": "inapplicable",
@@ -10489,20 +10645,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "affine": {
                                                     "x-optimade-type": "list",
                                                     "x-optimade-unit": "inapplicable",
+                                                    "x-optimade-dimensions": {
+                                                        "names": [
+                                                            "dim_lattice",
+                                                            "dim_affine"
+                                                        ],
+                                                        "sizes": [
+                                                            3,
+                                                            4
+                                                        ]
+                                                    },
                                                     "type": [
                                                         "array"
                                                     ],
-                                                    "description": "Exact affine representation for the split branch.",
+                                                    "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                     "items": {
                                                         "x-optimade-type": "list",
                                                         "x-optimade-unit": "inapplicable",
+                                                        "x-optimade-dimensions": {
+                                                            "names": [
+                                                                "dim_affine"
+                                                            ],
+                                                            "sizes": [
+                                                                4
+                                                            ]
+                                                        },
                                                         "type": [
                                                             "array"
                                                         ],
-                                                        "description": "One affine row.",
+                                                        "description": "One row of the augmented affine matrix.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -10530,7 +10704,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         }
                                     }
                                 }
-                            }
+                            },
+                            "examples": [
+                                [
+                                    {
+                                        "parent": "c",
+                                        "splits": [
+                                            {
+                                                "letter": "e",
+                                                "xyz": "x,y,z",
+                                                "affine": [
+                                                    [
+                                                        "1",
+                                                        "0",
+                                                        "0",
+                                                        "0"
+                                                    ],
+                                                    [
+                                                        "0",
+                                                        "1",
+                                                        "0",
+                                                        "0"
+                                                    ],
+                                                    [
+                                                        "0",
+                                                        "0",
+                                                        "1",
+                                                        "0"
+                                                    ]
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            ]
                         },
                         "criteria": {
                             "x-optimade-type": "list",
@@ -10630,13 +10837,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "items": {
                                                             "x-optimade-type": "list",
                                                             "x-optimade-unit": "inapplicable",
+                                                            "x-optimade-dimensions": {
+                                                                "names": [
+                                                                    "dim_lattice"
+                                                                ],
+                                                                "sizes": [
+                                                                    3
+                                                                ]
+                                                            },
                                                             "type": [
                                                                 "array"
                                                             ],
                                                             "description": "One exact coefficient vector.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -10670,7 +10885,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     "description": "Exact target vector or scalar for the constraint.",
                                                     "items": {
                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                        "title": "fraction",
+                                                        "title": "Fraction",
                                                         "x-optimade-type": "string",
                                                         "x-optimade-definition": {
                                                             "label": "fraction_core",
@@ -11082,7 +11297,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "description": "One row of the exact 3 by 3 matrix.",
                                         "items": {
                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                            "title": "fraction",
+                                            "title": "Fraction",
                                             "x-optimade-type": "string",
                                             "x-optimade-definition": {
                                                 "label": "fraction_core",
@@ -11124,7 +11339,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                     "items": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                        "title": "Fraction",
                                         "x-optimade-type": "string",
                                         "x-optimade-definition": {
                                             "label": "fraction_core",
@@ -11293,13 +11508,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             ]
                         },
                         "wyckoff_splitting": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                            "title": "Wyckoff splitting",
                             "x-optimade-type": "list",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "wyckoff_splitting",
+                                "label": "wyckoff_splitting_transformations"
+                            },
                             "x-optimade-unit": "inapplicable",
                             "type": [
                                 "array",
                                 "null"
                             ],
-                            "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                            "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                             "items": {
                                 "x-optimade-type": "dictionary",
                                 "x-optimade-unit": "inapplicable",
@@ -11359,20 +11583,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "affine": {
                                                     "x-optimade-type": "list",
                                                     "x-optimade-unit": "inapplicable",
+                                                    "x-optimade-dimensions": {
+                                                        "names": [
+                                                            "dim_lattice",
+                                                            "dim_affine"
+                                                        ],
+                                                        "sizes": [
+                                                            3,
+                                                            4
+                                                        ]
+                                                    },
                                                     "type": [
                                                         "array"
                                                     ],
-                                                    "description": "Exact affine representation for the split branch.",
+                                                    "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                     "items": {
                                                         "x-optimade-type": "list",
                                                         "x-optimade-unit": "inapplicable",
+                                                        "x-optimade-dimensions": {
+                                                            "names": [
+                                                                "dim_affine"
+                                                            ],
+                                                            "sizes": [
+                                                                4
+                                                            ]
+                                                        },
                                                         "type": [
                                                             "array"
                                                         ],
-                                                        "description": "One affine row.",
+                                                        "description": "One row of the augmented affine matrix.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -11400,7 +11642,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         }
                                     }
                                 }
-                            }
+                            },
+                            "examples": [
+                                [
+                                    {
+                                        "parent": "c",
+                                        "splits": [
+                                            {
+                                                "letter": "e",
+                                                "xyz": "x,y,z",
+                                                "affine": [
+                                                    [
+                                                        "1",
+                                                        "0",
+                                                        "0",
+                                                        "0"
+                                                    ],
+                                                    [
+                                                        "0",
+                                                        "1",
+                                                        "0",
+                                                        "0"
+                                                    ],
+                                                    [
+                                                        "0",
+                                                        "0",
+                                                        "1",
+                                                        "0"
+                                                    ]
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            ]
                         },
                         "criteria": {
                             "x-optimade-type": "list",
@@ -11500,13 +11775,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "items": {
                                                             "x-optimade-type": "list",
                                                             "x-optimade-unit": "inapplicable",
+                                                            "x-optimade-dimensions": {
+                                                                "names": [
+                                                                    "dim_lattice"
+                                                                ],
+                                                                "sizes": [
+                                                                    3
+                                                                ]
+                                                            },
                                                             "type": [
                                                                 "array"
                                                             ],
                                                             "description": "One exact coefficient vector.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -11540,7 +11823,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     "description": "Exact target vector or scalar for the constraint.",
                                                     "items": {
                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                        "title": "fraction",
+                                                        "title": "Fraction",
                                                         "x-optimade-type": "string",
                                                         "x-optimade-definition": {
                                                             "label": "fraction_core",
@@ -11739,7 +12022,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Index",
+                "title": "Subgroup or transform index",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -11813,6 +12096,10 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                 ],
                 "description": "Subtype of a klassengleiche (`k`) subgroup relation.\n\nThe value distinguishes loss of centering translations from enlarged-unit-cell subgroups.\nThe value is null for non-`k` relations and for records that are not subgroup relations.",
                 "x-optimade-unit": "inapplicable",
+                "enum": [
+                    "loss_of_centering_translation",
+                    "enlarged_unit_cell"
+                ],
                 "examples": [
                     "enlarged_unit_cell",
                     "loss_of_centering_translation"
@@ -11826,7 +12113,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Target",
+                "title": "Criterion target",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -11840,10 +12127,10 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "array",
                     "null"
                 ],
-                "description": "Target vector or target value in a generated linear criterion.\n\nIn current generated criteria it is usually represented as exact rational components serialized as strings.\nThe semantic meaning of `target` is parent-specific and should not be reused as a broad standalone concept.",
+                "description": "Exact target vector or scalar of a generated linear criterion.\n\nThis field appears in `criteria` items of basis-transform records, for example in backward-lift criteria, where it gives the value that the linear form evaluated on the constrained coordinates must equal.\nThe components are exact rational values serialized as fraction strings.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                    "title": "fraction",
+                    "title": "Fraction",
                     "x-optimade-type": "string",
                     "x-optimade-definition": {
                         "label": "fraction_core",
@@ -11878,60 +12165,32 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     ]
                 ]
             },
-            "to_hall": {
-                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall",
+            "to_hall_entry": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall_entry",
                 "x-optimade-requirements": {
                     "support": "may",
                     "sortable": false,
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "To Hall",
+                "title": "To Hall entry",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
                     "version": "0.1.0",
                     "format": "1.3",
-                    "name": "to_hall",
-                    "label": "to_hall_transformations"
+                    "name": "to_hall_entry",
+                    "label": "to_hall_entry_transformations"
                 },
                 "type": [
                     "string",
                     "null"
                 ],
-                "description": "Reference Hall-entry key to which a setting transform maps the current Hall setting.",
+                "description": "Target Hall-entry key to which a setting transform maps the current Hall setting.\n\nThe value is a normalized Hall-entry key following the same convention as `/defs/v0.1/properties/spacegroups/hall_entry`, i.e., derived from the Hall symbol by using lowercase letters and underscores in place of spaces.\nThe corresponding display Hall symbol can be recovered by looking up the key in the spacegroups dataset.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "p_1",
                     "-p_1"
-                ]
-            },
-            "to_hall_symbol": {
-                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall_symbol",
-                "x-optimade-requirements": {
-                    "support": "may",
-                    "sortable": false,
-                    "query-support": "none",
-                    "response-level": "may"
-                },
-                "title": "To Hall Symbol",
-                "x-optimade-type": "string",
-                "x-optimade-definition": {
-                    "kind": "property",
-                    "version": "0.1.0",
-                    "format": "1.3",
-                    "name": "to_hall_symbol",
-                    "label": "to_hall_symbol_transformations"
-                },
-                "type": [
-                    "string",
-                    "null"
-                ],
-                "description": "Display Hall symbol corresponding to `to_hall`.",
-                "x-optimade-unit": "inapplicable",
-                "examples": [
-                    "p 1",
-                    "-p 1"
                 ]
             },
             "wyckoff_splitting": {
@@ -12016,20 +12275,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     "affine": {
                                         "x-optimade-type": "list",
                                         "x-optimade-unit": "inapplicable",
+                                        "x-optimade-dimensions": {
+                                            "names": [
+                                                "dim_lattice",
+                                                "dim_affine"
+                                            ],
+                                            "sizes": [
+                                                3,
+                                                4
+                                            ]
+                                        },
                                         "type": [
                                             "array"
                                         ],
-                                        "description": "Exact affine representation for the split branch.",
+                                        "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                         "items": {
                                             "x-optimade-type": "list",
                                             "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_affine"
+                                                ],
+                                                "sizes": [
+                                                    4
+                                                ]
+                                            },
                                             "type": [
                                                 "array"
                                             ],
-                                            "description": "One affine row.",
+                                            "description": "One row of the augmented affine matrix.",
                                             "items": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                "title": "fraction",
+                                                "title": "Fraction",
                                                 "x-optimade-type": "string",
                                                 "x-optimade-definition": {
                                                     "label": "fraction_core",
@@ -12063,18 +12340,30 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                         {
                             "parent": "c",
                             "splits": [
-                                [
-                                    "e",
-                                    "x",
-                                    "y",
-                                    "z"
-                                ],
-                                [
-                                    "e",
-                                    "-x",
-                                    "y",
-                                    "-z"
-                                ]
+                                {
+                                    "letter": "e",
+                                    "xyz": "x,y,z",
+                                    "affine": [
+                                        [
+                                            "1",
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "1",
+                                            "0",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "0",
+                                            "1",
+                                            "0"
+                                        ]
+                                    ]
+                                }
                             ]
                         }
                     ]
@@ -12102,7 +12391,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "array",
                     "null"
                 ],
-                "description": "Transformation data grouped by H-M entry.\n\nEach list item contains the H-M entry as ordinary data together with all transformation sections generated for that setting.\nThis representation avoids using H-M entries as JSON dictionary keys in the OPTIMADE-described payload.\nThe accompanying `hall_entry` field identifies the Hall symbol used to compute the symmetry operations and normalizer data.\nThe `centering_translations` and `centering_translations_xyz` fields give the setting's centering translations directly in each record, so modulo-centering operation lists can be interpreted without joining against another dataset.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `hm_entry`.\n- Each dictionary SHOULD contain `hall_entry` and the generated transformation sections for that setting.\n- If `euclidean_normalizer.symops_mod_centering` is present, the same dictionary SHOULD contain `centering_translations` and `centering_translations_xyz`.",
+                "description": "Transformation data grouped by H-M entry.\n\nEach list item contains the H-M entry as ordinary data together with all transformation sections generated for that setting.\nThis representation avoids using H-M entries as JSON dictionary keys in the OPTIMADE-described payload.\nThe accompanying `hall_entry` field identifies the Hall symbol used to compute the symmetry operations and normalizer data.\nThe `centering_translations` field gives the setting's centering translations directly in each record, so modulo-centering operation lists can be interpreted without joining against another dataset.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `hm_entry`.\n- Each dictionary SHOULD contain `hall_entry` and the generated transformation sections for that setting.\n- If `euclidean_normalizer.symops_mod_centering` is present, the same dictionary SHOULD contain `centering_translations`.",
                 "items": {
                     "x-optimade-type": "dictionary",
                     "x-optimade-unit": "inapplicable",
@@ -12116,7 +12405,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "properties": {
                         "hm_entry": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry",
-                            "title": "Hermann-Mauguin Entry",
+                            "title": "Hermann-Mauguin entry",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -12203,7 +12492,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 },
                                 "items": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                    "title": "fraction",
+                                    "title": "Fraction",
                                     "x-optimade-type": "string",
                                     "x-optimade-definition": {
                                         "label": "fraction_core",
@@ -12260,40 +12549,6 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 ]
                             ]
                         },
-                        "centering_translations_xyz": {
-                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations_xyz",
-                            "title": "Centering translations as xyz strings",
-                            "x-optimade-type": "list",
-                            "x-optimade-definition": {
-                                "kind": "property",
-                                "version": "0.1.0",
-                                "format": "1.3",
-                                "name": "centering_translations_xyz",
-                                "label": "centering_translations_xyz_spacegroups"
-                            },
-                            "type": [
-                                "array",
-                                "null"
-                            ],
-                            "description": "Centering translations of the conventional cell, represented as `x,y,z`-style coordinate shifts.\n\nThe zero translation is listed first.",
-                            "x-optimade-unit": "inapplicable",
-                            "items": {
-                                "x-optimade-type": "string",
-                                "x-optimade-unit": "inapplicable",
-                                "type": [
-                                    "string"
-                                ]
-                            },
-                            "examples": [
-                                [
-                                    "0,0,0"
-                                ],
-                                [
-                                    "0,0,0",
-                                    "1/2,1/2,0"
-                                ]
-                            ]
-                        },
                         "euclidean_normalizer": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/euclidean_normalizer",
                             "title": "Euclidean normalizer",
@@ -12310,7 +12565,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "object",
                                 "null"
                             ],
-                            "description": "Finite Euclidean normalizer operations for one crystallographic space-group setting.\n\nThe Euclidean normalizer consists of metric-preserving affine operations that normalize the space group in the chosen setting.\nThese operations are useful for algorithms that need to compare or enumerate equivalent descriptions of the same setting under rigid crystallographic changes of coordinates.\n\nThis object is generated from the finite Euclidean normalizer operations exposed by cctbx.\nIt is not a bounded candidate search table.\nTherefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `bounds` do not belong to this property.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n      For this property the value is `euclidean`.\n\n    - **n\\_centering\\_translations**: REQUIRED; Integer.\n      Number of centering translations represented in the underlying Euclidean normalizer operation construction.\n\n    - **n\\_pointgroup\\_symops**: REQUIRED; Integer.\n      Number of point-group symmetry operations represented before centering translations are combined with them.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of Euclidean normalizer operations listed in `symops`.\n      This value MUST equal the length of `symops`.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Finite Euclidean normalizer operations for the setting.\n      Each item follows `/defs/v0.1/properties/symmetry/op`.\n\n    - **symops\\_mod\\_centering**: REQUIRED; List of dictionaries.\n      Euclidean normalizer operations factorized modulo the centering translations of the setting.\n      This keeps one operation for each linear part and translation class modulo centering, while `symops` keeps the complete operation list.\n      Each item follows `/defs/v0.1/properties/symmetry/op`.\n\n    - **symops\\_mod\\_centering\\_xyz**: REQUIRED; List of strings.\n      The `x,y,z` notation for the operations in `symops_mod_centering`, ordered element-by-element with that list.",
+                            "description": "Finite Euclidean normalizer operations for one crystallographic space-group setting.\n\nThe Euclidean normalizer consists of metric-preserving affine operations that normalize the space group in the chosen setting.\nThese operations are useful for algorithms that need to compare or enumerate equivalent descriptions of the same setting under rigid crystallographic changes of coordinates.\n\nThis object is generated from the finite Euclidean normalizer operations exposed by cctbx.\nIt is not a bounded candidate search table.\nTherefore fields such as `candidate_set`, `candidate_sets`, and bounded-search `bounds` do not belong to this property.\n\nThis property is one of three related normalizer tables for a setting:\nthis property holds the finite Euclidean normalizer operations obtained from cctbx,\n`orthogonal_affine_normalizer` holds the older bounded coset table restricted to signed-permutation linear parts,\nand `affine_normalizer` holds the bounded coset table generated from unimodular integer linear parts.\nContinuous origin-shift freedoms are described separately by `continuous_normalizer`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n      For this property the value is `euclidean`.\n\n    - **n\\_centering\\_translations**: REQUIRED; Integer.\n      Number of centering translations represented in the underlying Euclidean normalizer operation construction.\n\n    - **n\\_pointgroup\\_symops**: REQUIRED; Integer.\n      Number of point-group symmetry operations represented before centering translations are combined with them.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of Euclidean normalizer operations listed in `symops`.\n      This value MUST equal the length of `symops`.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Finite Euclidean normalizer operations for the setting.\n      Each item follows `/defs/v0.1/properties/symmetry/op`.\n\n    - **symops\\_mod\\_centering**: REQUIRED; List of dictionaries.\n      Euclidean normalizer operations factorized modulo the centering translations of the setting.\n      This keeps one operation for each linear part and translation class modulo centering, while `symops` keeps the complete operation list.\n      Each item follows `/defs/v0.1/properties/symmetry/op`.",
                             "properties": {
                                 "normalizer_kind": {
                                     "x-optimade-type": "string",
@@ -12336,7 +12591,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Number of centering translations in the conventional cell of the space-group setting.",
+                                    "description": "Number of centering translations in the conventional cell of the space-group setting.\n\nWhen the entry contains a `centering_translations` list, this value MUST equal its length.",
                                     "x-optimade-unit": "inapplicable",
                                     "examples": [
                                         1,
@@ -12345,7 +12600,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 },
                                 "n_pointgroup_symops": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops",
-                                    "title": "number of pointgroup symops",
+                                    "title": "Number of pointgroup symops",
                                     "x-optimade-type": "integer",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -12358,7 +12613,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Number of point-group symmetry operations.",
+                                    "description": "Number of point-group symmetry operations.\n\nFor a space-group entry this is the number of operations of the point group of the space group, and it MUST equal the length of the `symops_representative` list when present.",
                                     "x-optimade-unit": "inapplicable",
                                     "examples": [
                                         1,
@@ -12367,7 +12622,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 },
                                 "n_symops": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-                                    "title": "number of symops",
+                                    "title": "Number of symops",
                                     "x-optimade-type": "integer",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -12380,7 +12635,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+                                    "description": "Number of symmetry operations in the finite operation list of the generated entry.\n\nWhen the entry contains a `symops` list, this value MUST equal its length.",
                                     "x-optimade-unit": "inapplicable",
                                     "examples": [
                                         1,
@@ -12389,7 +12644,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 },
                                 "n_linear_parts": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
-                                    "title": "N Linear Parts",
+                                    "title": "Number of linear parts",
                                     "x-optimade-type": "integer",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -12402,7 +12657,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+                                    "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
                                     "x-optimade-unit": "inapplicable",
                                     "examples": [
                                         2,
@@ -12433,7 +12688,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                             "object",
                                             "null"
                                         ],
-                                        "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                                        "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n- Whether the operation is proper follows from the sign of the `det` field of `affine_transformation`; no separate properness flag is stored.",
                                         "properties": {
                                             "affine_transformation": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
@@ -12488,7 +12743,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "One row of the exact 3 by 3 matrix.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -12530,7 +12785,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -12636,7 +12891,19 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     "string",
                                                     "null"
                                                 ],
-                                                "description": "Symbolic crystallographic operation-type label for the linear part."
+                                                "description": "Symbolic crystallographic operation-type label for the linear part.",
+                                                "enum": [
+                                                    "1",
+                                                    "-1",
+                                                    "2",
+                                                    "m",
+                                                    "3",
+                                                    "-3",
+                                                    "4",
+                                                    "-4",
+                                                    "6",
+                                                    "-6"
+                                                ]
                                             },
                                             "axis": {
                                                 "x-optimade-type": "list",
@@ -12690,7 +12957,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -12731,7 +12998,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -12753,15 +13020,6 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     ],
                                                     "x-optimade-unit": "inapplicable"
                                                 }
-                                            },
-                                            "is_proper": {
-                                                "x-optimade-type": "boolean",
-                                                "x-optimade-unit": "inapplicable",
-                                                "type": [
-                                                    "boolean",
-                                                    "null"
-                                                ],
-                                                "description": "Whether the linear operation is proper."
                                             }
                                         },
                                         "examples": [
@@ -12847,7 +13105,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                             "object",
                                             "null"
                                         ],
-                                        "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                                        "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n- Whether the operation is proper follows from the sign of the `det` field of `affine_transformation`; no separate properness flag is stored.",
                                         "properties": {
                                             "affine_transformation": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
@@ -12902,7 +13160,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "One row of the exact 3 by 3 matrix.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -12944,7 +13202,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -13050,7 +13308,19 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     "string",
                                                     "null"
                                                 ],
-                                                "description": "Symbolic crystallographic operation-type label for the linear part."
+                                                "description": "Symbolic crystallographic operation-type label for the linear part.",
+                                                "enum": [
+                                                    "1",
+                                                    "-1",
+                                                    "2",
+                                                    "m",
+                                                    "3",
+                                                    "-3",
+                                                    "4",
+                                                    "-4",
+                                                    "6",
+                                                    "-6"
+                                                ]
                                             },
                                             "axis": {
                                                 "x-optimade-type": "list",
@@ -13104,7 +13374,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -13145,7 +13415,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -13167,15 +13437,6 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     ],
                                                     "x-optimade-unit": "inapplicable"
                                                 }
-                                            },
-                                            "is_proper": {
-                                                "x-optimade-type": "boolean",
-                                                "x-optimade-unit": "inapplicable",
-                                                "type": [
-                                                    "boolean",
-                                                    "null"
-                                                ],
-                                                "description": "Whether the linear operation is proper."
                                             }
                                         },
                                         "examples": [
@@ -13273,429 +13534,6 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     "0"
                                                 ]
                                             }
-                                        ]
-                                    ]
-                                },
-                                "symops_mod_centering_xyz": {
-                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering_xyz",
-                                    "title": "Symmetry operations modulo centering in x,y,z notation",
-                                    "x-optimade-type": "list",
-                                    "x-optimade-definition": {
-                                        "kind": "property",
-                                        "version": "0.1.0",
-                                        "format": "1.3",
-                                        "name": "symops_mod_centering_xyz",
-                                        "label": "symops_mod_centering_xyz_spacegroups"
-                                    },
-                                    "type": [
-                                        "array",
-                                        "null"
-                                    ],
-                                    "description": "Symmetry operations modulo centering translations in fractional `x,y,z` notation, ordered consistently with `symops_mod_centering`.",
-                                    "x-optimade-unit": "inapplicable",
-                                    "items": {
-                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
-                                        "title": "Operation",
-                                        "x-optimade-type": "dictionary",
-                                        "x-optimade-definition": {
-                                            "kind": "property",
-                                            "version": "0.1.0",
-                                            "format": "1.3",
-                                            "name": "op",
-                                            "label": "op_symmetry"
-                                        },
-                                        "x-optimade-unit": "inapplicable",
-                                        "type": [
-                                            "object",
-                                            "null"
-                                        ],
-                                        "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
-                                        "properties": {
-                                            "affine_transformation": {
-                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
-                                                "title": "Affine transformation",
-                                                "x-optimade-type": "dictionary",
-                                                "x-optimade-definition": {
-                                                    "kind": "property",
-                                                    "version": "0.1.0",
-                                                    "format": "1.3",
-                                                    "name": "affine_transformation",
-                                                    "label": "affine_transformation_symmetry"
-                                                },
-                                                "x-optimade-unit": "inapplicable",
-                                                "type": [
-                                                    "object",
-                                                    "null"
-                                                ],
-                                                "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
-                                                "properties": {
-                                                    "matrix": {
-                                                        "x-optimade-type": "list",
-                                                        "x-optimade-unit": "inapplicable",
-                                                        "x-optimade-dimensions": {
-                                                            "names": [
-                                                                "dim_lattice",
-                                                                "dim_lattice"
-                                                            ],
-                                                            "sizes": [
-                                                                3,
-                                                                3
-                                                            ]
-                                                        },
-                                                        "type": [
-                                                            "array",
-                                                            "null"
-                                                        ],
-                                                        "description": "Exact 3 by 3 matrix part of the affine transformation.",
-                                                        "items": {
-                                                            "x-optimade-type": "list",
-                                                            "x-optimade-unit": "inapplicable",
-                                                            "x-optimade-dimensions": {
-                                                                "names": [
-                                                                    "dim_lattice"
-                                                                ],
-                                                                "sizes": [
-                                                                    3
-                                                                ]
-                                                            },
-                                                            "type": [
-                                                                "array"
-                                                            ],
-                                                            "description": "One row of the exact 3 by 3 matrix.",
-                                                            "items": {
-                                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
-                                                                "x-optimade-type": "string",
-                                                                "x-optimade-definition": {
-                                                                    "label": "fraction_core",
-                                                                    "kind": "property",
-                                                                    "version": "0.1.0",
-                                                                    "format": "1.3",
-                                                                    "name": "fraction"
-                                                                },
-                                                                "type": [
-                                                                    "string",
-                                                                    "null"
-                                                                ],
-                                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
-                                                                "examples": [
-                                                                    "2/3",
-                                                                    "5/42",
-                                                                    "10",
-                                                                    "0"
-                                                                ],
-                                                                "x-optimade-unit": "inapplicable"
-                                                            }
-                                                        }
-                                                    },
-                                                    "vector": {
-                                                        "x-optimade-type": "list",
-                                                        "x-optimade-unit": "inapplicable",
-                                                        "x-optimade-dimensions": {
-                                                            "names": [
-                                                                "dim_lattice"
-                                                            ],
-                                                            "sizes": [
-                                                                3
-                                                            ]
-                                                        },
-                                                        "type": [
-                                                            "array",
-                                                            "null"
-                                                        ],
-                                                        "description": "Exact fractional-coordinate vector part of the affine transformation.",
-                                                        "items": {
-                                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
-                                                            "x-optimade-type": "string",
-                                                            "x-optimade-definition": {
-                                                                "label": "fraction_core",
-                                                                "kind": "property",
-                                                                "version": "0.1.0",
-                                                                "format": "1.3",
-                                                                "name": "fraction"
-                                                            },
-                                                            "type": [
-                                                                "string",
-                                                                "null"
-                                                            ],
-                                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
-                                                            "examples": [
-                                                                "2/3",
-                                                                "5/42",
-                                                                "10",
-                                                                "0"
-                                                            ],
-                                                            "x-optimade-unit": "inapplicable"
-                                                        }
-                                                    },
-                                                    "xyz": {
-                                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
-                                                        "title": "Operation xyz",
-                                                        "x-optimade-type": "string",
-                                                        "x-compatibility": [
-                                                            "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
-                                                            "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
-                                                        ],
-                                                        "x-optimade-definition": {
-                                                            "kind": "property",
-                                                            "version": "0.1.0",
-                                                            "format": "1.3",
-                                                            "name": "op_xyz",
-                                                            "label": "op_xyz_symmetry"
-                                                        },
-                                                        "x-optimade-unit": "inapplicable",
-                                                        "type": [
-                                                            "string",
-                                                            "null"
-                                                        ],
-                                                        "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
-                                                        "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
-                                                        "examples": [
-                                                            "-x,-y,z",
-                                                            "x,1/2-y,1/2+z"
-                                                        ]
-                                                    },
-                                                    "det": {
-                                                        "x-optimade-type": "integer",
-                                                        "x-optimade-unit": "inapplicable",
-                                                        "type": [
-                                                            "integer",
-                                                            "null"
-                                                        ],
-                                                        "description": "Determinant of the matrix part when emitted by the generator."
-                                                    },
-                                                    "is_orthogonal": {
-                                                        "x-optimade-type": "boolean",
-                                                        "x-optimade-unit": "inapplicable",
-                                                        "type": [
-                                                            "boolean",
-                                                            "null"
-                                                        ],
-                                                        "description": "Whether the matrix part is orthogonal."
-                                                    }
-                                                },
-                                                "examples": [
-                                                    {
-                                                        "matrix": [
-                                                            [
-                                                                "-1",
-                                                                "0",
-                                                                "0"
-                                                            ],
-                                                            [
-                                                                "0",
-                                                                "-1",
-                                                                "0"
-                                                            ],
-                                                            [
-                                                                "0",
-                                                                "0",
-                                                                "1"
-                                                            ]
-                                                        ],
-                                                        "vector": [
-                                                            "0",
-                                                            "0",
-                                                            "0"
-                                                        ],
-                                                        "xyz": "-x,-y,z",
-                                                        "det": 1,
-                                                        "is_orthogonal": true
-                                                    }
-                                                ]
-                                            },
-                                            "rot_type": {
-                                                "x-optimade-type": "string",
-                                                "x-optimade-unit": "inapplicable",
-                                                "type": [
-                                                    "string",
-                                                    "null"
-                                                ],
-                                                "description": "Symbolic crystallographic operation-type label for the linear part."
-                                            },
-                                            "axis": {
-                                                "x-optimade-type": "list",
-                                                "x-optimade-unit": "inapplicable",
-                                                "x-optimade-dimensions": {
-                                                    "names": [
-                                                        "dim_lattice"
-                                                    ],
-                                                    "sizes": [
-                                                        3
-                                                    ]
-                                                },
-                                                "type": [
-                                                    "array",
-                                                    "null"
-                                                ],
-                                                "description": "Integer-vector axis or invariant-direction descriptor for the operation.",
-                                                "items": {
-                                                    "x-optimade-type": "integer",
-                                                    "x-optimade-unit": "inapplicable",
-                                                    "type": [
-                                                        "integer"
-                                                    ],
-                                                    "description": "One integer component of the axis vector."
-                                                }
-                                            },
-                                            "sense": {
-                                                "x-optimade-type": "integer",
-                                                "x-optimade-unit": "inapplicable",
-                                                "type": [
-                                                    "integer",
-                                                    "null"
-                                                ],
-                                                "description": "Rotation sense/sign convention returned by the generator."
-                                            },
-                                            "screw_glide": {
-                                                "x-optimade-type": "list",
-                                                "x-optimade-unit": "inapplicable",
-                                                "x-optimade-dimensions": {
-                                                    "names": [
-                                                        "dim_lattice"
-                                                    ],
-                                                    "sizes": [
-                                                        3
-                                                    ]
-                                                },
-                                                "type": [
-                                                    "array",
-                                                    "null"
-                                                ],
-                                                "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
-                                                "items": {
-                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
-                                                    "x-optimade-type": "string",
-                                                    "x-optimade-definition": {
-                                                        "label": "fraction_core",
-                                                        "kind": "property",
-                                                        "version": "0.1.0",
-                                                        "format": "1.3",
-                                                        "name": "fraction"
-                                                    },
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ],
-                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
-                                                    "examples": [
-                                                        "2/3",
-                                                        "5/42",
-                                                        "10",
-                                                        "0"
-                                                    ],
-                                                    "x-optimade-unit": "inapplicable"
-                                                }
-                                            },
-                                            "origin_shift": {
-                                                "x-optimade-type": "list",
-                                                "x-optimade-unit": "inapplicable",
-                                                "x-optimade-dimensions": {
-                                                    "names": [
-                                                        "dim_lattice"
-                                                    ],
-                                                    "sizes": [
-                                                        3
-                                                    ]
-                                                },
-                                                "type": [
-                                                    "array",
-                                                    "null"
-                                                ],
-                                                "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
-                                                "items": {
-                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
-                                                    "x-optimade-type": "string",
-                                                    "x-optimade-definition": {
-                                                        "label": "fraction_core",
-                                                        "kind": "property",
-                                                        "version": "0.1.0",
-                                                        "format": "1.3",
-                                                        "name": "fraction"
-                                                    },
-                                                    "type": [
-                                                        "string",
-                                                        "null"
-                                                    ],
-                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
-                                                    "examples": [
-                                                        "2/3",
-                                                        "5/42",
-                                                        "10",
-                                                        "0"
-                                                    ],
-                                                    "x-optimade-unit": "inapplicable"
-                                                }
-                                            },
-                                            "is_proper": {
-                                                "x-optimade-type": "boolean",
-                                                "x-optimade-unit": "inapplicable",
-                                                "type": [
-                                                    "boolean",
-                                                    "null"
-                                                ],
-                                                "description": "Whether the linear operation is proper."
-                                            }
-                                        },
-                                        "examples": [
-                                            {
-                                                "affine_transformation": {
-                                                    "matrix": [
-                                                        [
-                                                            "-1",
-                                                            "0",
-                                                            "0"
-                                                        ],
-                                                        [
-                                                            "0",
-                                                            "-1",
-                                                            "0"
-                                                        ],
-                                                        [
-                                                            "0",
-                                                            "0",
-                                                            "1"
-                                                        ]
-                                                    ],
-                                                    "vector": [
-                                                        "0",
-                                                        "0",
-                                                        "0"
-                                                    ],
-                                                    "xyz": "-x,-y,z",
-                                                    "det": 1,
-                                                    "is_orthogonal": true
-                                                },
-                                                "rot_type": "2",
-                                                "sense": 0,
-                                                "axis": [
-                                                    0,
-                                                    0,
-                                                    1
-                                                ],
-                                                "screw_glide": [
-                                                    "0",
-                                                    "0",
-                                                    "0"
-                                                ],
-                                                "origin_shift": [
-                                                    "0",
-                                                    "0",
-                                                    "0"
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    "examples": [
-                                        [
-                                            "x,y,z"
-                                        ],
-                                        [
-                                            "-x,y,-z",
-                                            "x,y,z"
                                         ]
                                     ]
                                 }
@@ -13804,9 +13642,6 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                             ],
                                             "operation_kind": "euclidean"
                                         }
-                                    ],
-                                    "symops_mod_centering_xyz": [
-                                        "-x,-y,-z"
                                     ]
                                 }
                             ]
@@ -13827,7 +13662,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "object",
                                 "null"
                             ],
-                            "description": "Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.\n\nThis transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.\nThe transform is represented by `matrix` and `vector`, following the same affine-transformation convention as the other generated transformation tables.\n\nIf `x_to_ref_hall` is a fractional coordinate column vector in the target IT-standard Hall setting, and `x_from_hall` is the corresponding fractional coordinate column vector in the source Hall setting keyed by the containing map, then the stored transform satisfies:\n`x_from_hall = matrix * x_to_ref_hall + vector`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary describing one exact transform from the containing Hall setting to the IT-standard Hall setting of the same `it_number`.\n- The `index` value is always `1`, because this is a same-space-group setting transform rather than a proper subgroup transform.\n- Matrix and vector entries MUST be exact strings, using integer strings or fraction strings as appropriate.\n- It MUST be a dictionary with the following keys:\n\n    - **hall\\_entry**: REQUIRED; String.\n      Source Hall-entry key for the setting transformed by this object.\n\n    - **it\\_number**: REQUIRED; Integer.\n      International Tables space-group number shared by the source and target Hall settings.\n\n    - **to\\_hall**: REQUIRED; String.\n      Target Hall-entry key for the IT-standard Hall setting of the same space-group type.\n\n    - **to\\_hall\\_symbol**: REQUIRED; String.\n      Display Hall symbol corresponding to `to_hall`, using spaces rather than the normalized Hall-entry key syntax.\n\n    - **index**: REQUIRED; Integer.\n      Transform index.\n      For this table the value is `1` because the transform maps between settings of the same space group.\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for this setting transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`, where `matrix` and `vector` are the fields inside `affine_transformation`.",
+                            "description": "Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.\n\nThis transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.\nThe transform is represented by `matrix` and `vector`, following the same affine-transformation convention as the other generated transformation tables.\n\nIf `x_to_ref_hall` is a fractional coordinate column vector in the target IT-standard Hall setting, and `x_from_hall` is the corresponding fractional coordinate column vector in the source Hall setting keyed by the containing map, then the stored transform satisfies:\n`x_from_hall = matrix * x_to_ref_hall + vector`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary describing one exact transform from the containing Hall setting to the IT-standard Hall setting of the same `it_number`.\n- The `index` value is always `1`, because this is a same-space-group setting transform rather than a proper subgroup transform.\n- Matrix and vector entries MUST be exact strings, using integer strings or fraction strings as appropriate.\n- It MUST be a dictionary with the following keys:\n\n    - **hall\\_entry**: REQUIRED; String.\n      Source Hall-entry key for the setting transformed by this object.\n\n    - **it\\_number**: REQUIRED; Integer.\n      International Tables space-group number shared by the source and target Hall settings.\n\n    - **to\\_hall\\_entry**: REQUIRED; String.\n      Target Hall-entry key for the IT-standard Hall setting of the same space-group type.\n\n    - **index**: REQUIRED; Integer.\n      Transform index.\n      For this table the value is `1` because the transform maps between settings of the same space group.\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for this setting transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`, where `matrix` and `vector` are the fields inside `affine_transformation`.",
                             "properties": {
                                 "hall_entry": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
@@ -13853,7 +13688,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 },
                                 "it_number": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
-                                    "title": "International Tables Space-Group Number",
+                                    "title": "International Tables space-group number",
                                     "x-optimade-type": "integer",
                                     "x-compatibility": [
                                         "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -13876,53 +13711,31 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         5
                                     ]
                                 },
-                                "to_hall": {
-                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall",
-                                    "title": "To Hall",
+                                "to_hall_entry": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall_entry",
+                                    "title": "To Hall entry",
                                     "x-optimade-type": "string",
                                     "x-optimade-definition": {
                                         "kind": "property",
                                         "version": "0.1.0",
                                         "format": "1.3",
-                                        "name": "to_hall",
-                                        "label": "to_hall_transformations"
+                                        "name": "to_hall_entry",
+                                        "label": "to_hall_entry_transformations"
                                     },
                                     "type": [
                                         "string",
                                         "null"
                                     ],
-                                    "description": "Reference Hall-entry key to which a setting transform maps the current Hall setting.",
+                                    "description": "Target Hall-entry key to which a setting transform maps the current Hall setting.\n\nThe value is a normalized Hall-entry key following the same convention as `/defs/v0.1/properties/spacegroups/hall_entry`, i.e., derived from the Hall symbol by using lowercase letters and underscores in place of spaces.\nThe corresponding display Hall symbol can be recovered by looking up the key in the spacegroups dataset.",
                                     "x-optimade-unit": "inapplicable",
                                     "examples": [
                                         "p_1",
                                         "-p_1"
                                     ]
                                 },
-                                "to_hall_symbol": {
-                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall_symbol",
-                                    "title": "To Hall Symbol",
-                                    "x-optimade-type": "string",
-                                    "x-optimade-definition": {
-                                        "kind": "property",
-                                        "version": "0.1.0",
-                                        "format": "1.3",
-                                        "name": "to_hall_symbol",
-                                        "label": "to_hall_symbol_transformations"
-                                    },
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ],
-                                    "description": "Display Hall symbol corresponding to `to_hall`.",
-                                    "x-optimade-unit": "inapplicable",
-                                    "examples": [
-                                        "p 1",
-                                        "-p 1"
-                                    ]
-                                },
                                 "index": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/index",
-                                    "title": "Index",
+                                    "title": "Subgroup or transform index",
                                     "x-optimade-type": "integer",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -13995,7 +13808,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                 "items": {
                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                    "title": "fraction",
+                                                    "title": "Fraction",
                                                     "x-optimade-type": "string",
                                                     "x-optimade-definition": {
                                                         "label": "fraction_core",
@@ -14037,7 +13850,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                             "items": {
                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                "title": "fraction",
+                                                "title": "Fraction",
                                                 "x-optimade-type": "string",
                                                 "x-optimade-definition": {
                                                     "label": "fraction_core",
@@ -14141,8 +13954,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 {
                                     "hall_entry": "p_1",
                                     "it_number": 1,
-                                    "to_hall": "p_1",
-                                    "to_hall_symbol": "p 1",
+                                    "to_hall_entry": "p_1",
                                     "index": 1,
                                     "affine_transformation": {
                                         "matrix": [
@@ -14187,7 +13999,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "object",
                                 "null"
                             ],
-                            "description": "Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains the signed-permutation subset of affine normalizer representatives.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `signed_permutation_matrices`, meaning 3 by 3 integer matrices with exactly one nonzero entry in each row and column and each nonzero entry equal to `-1` or `1`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds satisfied by the signed-permutation candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed orthogonal affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
+                            "description": "Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains the signed-permutation subset of affine normalizer representatives.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `signed_permutation_matrices`, meaning 3 by 3 integer matrices with exactly one nonzero entry in each row and column and each nonzero entry equal to `-1` or `1`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\nThis property is one of three related normalizer tables for a setting:\n`euclidean_normalizer` holds the finite Euclidean normalizer operations obtained from cctbx,\nthis property holds the older bounded table restricted to signed-permutation linear parts,\nand `affine_normalizer` holds the bounded table generated from unimodular integer linear parts, which is a superset of this one.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds satisfied by the signed-permutation candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed orthogonal affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.\n      Each item MUST carry `compatible_systems`, the list of crystal systems for which the representative's linear part is compatible with a crystallographic metric.",
                             "properties": {
                                 "normalizer_kind": {
                                     "x-optimade-type": "string",
@@ -14218,7 +14030,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 },
                                 "n_symops": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-                                    "title": "number of symops",
+                                    "title": "Number of symops",
                                     "x-optimade-type": "integer",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -14231,7 +14043,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+                                    "description": "Number of symmetry operations in the finite operation list of the generated entry.\n\nWhen the entry contains a `symops` list, this value MUST equal its length.",
                                     "x-optimade-unit": "inapplicable",
                                     "examples": [
                                         1,
@@ -14240,7 +14052,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 },
                                 "n_linear_parts": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
-                                    "title": "N Linear Parts",
+                                    "title": "Number of linear parts",
                                     "x-optimade-type": "integer",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -14253,7 +14065,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+                                    "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
                                     "x-optimade-unit": "inapplicable",
                                     "examples": [
                                         2,
@@ -14395,7 +14207,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "One row of the exact 3 by 3 matrix.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -14437,7 +14249,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -14606,13 +14418,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 ]
                                             },
                                             "wyckoff_splitting": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                                "title": "Wyckoff splitting",
                                                 "x-optimade-type": "list",
+                                                "x-optimade-definition": {
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "wyckoff_splitting",
+                                                    "label": "wyckoff_splitting_transformations"
+                                                },
                                                 "x-optimade-unit": "inapplicable",
                                                 "type": [
                                                     "array",
                                                     "null"
                                                 ],
-                                                "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                                "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                                 "items": {
                                                     "x-optimade-type": "dictionary",
                                                     "x-optimade-unit": "inapplicable",
@@ -14672,20 +14493,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                     "affine": {
                                                                         "x-optimade-type": "list",
                                                                         "x-optimade-unit": "inapplicable",
+                                                                        "x-optimade-dimensions": {
+                                                                            "names": [
+                                                                                "dim_lattice",
+                                                                                "dim_affine"
+                                                                            ],
+                                                                            "sizes": [
+                                                                                3,
+                                                                                4
+                                                                            ]
+                                                                        },
                                                                         "type": [
                                                                             "array"
                                                                         ],
-                                                                        "description": "Exact affine representation for the split branch.",
+                                                                        "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                         "items": {
                                                                             "x-optimade-type": "list",
                                                                             "x-optimade-unit": "inapplicable",
+                                                                            "x-optimade-dimensions": {
+                                                                                "names": [
+                                                                                    "dim_affine"
+                                                                                ],
+                                                                                "sizes": [
+                                                                                    4
+                                                                                ]
+                                                                            },
                                                                             "type": [
                                                                                 "array"
                                                                             ],
-                                                                            "description": "One affine row.",
+                                                                            "description": "One row of the augmented affine matrix.",
                                                                             "items": {
                                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                "title": "fraction",
+                                                                                "title": "Fraction",
                                                                                 "x-optimade-type": "string",
                                                                                 "x-optimade-definition": {
                                                                                     "label": "fraction_core",
@@ -14713,7 +14552,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             }
                                                         }
                                                     }
-                                                }
+                                                },
+                                                "examples": [
+                                                    [
+                                                        {
+                                                            "parent": "c",
+                                                            "splits": [
+                                                                {
+                                                                    "letter": "e",
+                                                                    "xyz": "x,y,z",
+                                                                    "affine": [
+                                                                        [
+                                                                            "1",
+                                                                            "0",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "1",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "0",
+                                                                            "1",
+                                                                            "0"
+                                                                        ]
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                ]
                                             },
                                             "criteria": {
                                                 "x-optimade-type": "list",
@@ -14813,13 +14685,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                             "items": {
                                                                                 "x-optimade-type": "list",
                                                                                 "x-optimade-unit": "inapplicable",
+                                                                                "x-optimade-dimensions": {
+                                                                                    "names": [
+                                                                                        "dim_lattice"
+                                                                                    ],
+                                                                                    "sizes": [
+                                                                                        3
+                                                                                    ]
+                                                                                },
                                                                                 "type": [
                                                                                     "array"
                                                                                 ],
                                                                                 "description": "One exact coefficient vector.",
                                                                                 "items": {
                                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                    "title": "fraction",
+                                                                                    "title": "Fraction",
                                                                                     "x-optimade-type": "string",
                                                                                     "x-optimade-definition": {
                                                                                         "label": "fraction_core",
@@ -14853,7 +14733,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                         "description": "Exact target vector or scalar for the constraint.",
                                                                         "items": {
                                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                            "title": "fraction",
+                                                                            "title": "Fraction",
                                                                             "x-optimade-type": "string",
                                                                             "x-optimade-definition": {
                                                                                 "label": "fraction_core",
@@ -15091,7 +14971,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "object",
                                 "null"
                             ],
-                            "description": "Affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
+                            "description": "Affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\nThis property is one of three related normalizer tables for a setting:\n`euclidean_normalizer` holds the finite Euclidean normalizer operations obtained from cctbx,\n`orthogonal_affine_normalizer` holds the older bounded table restricted to signed-permutation linear parts,\nand this property holds the bounded table generated from unimodular integer linear parts, which is a superset of the orthogonal one.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.\n      Each item MUST carry `compatible_systems`, the list of crystal systems for which the representative's linear part is compatible with a crystallographic metric.",
                             "properties": {
                                 "normalizer_kind": {
                                     "x-optimade-type": "string",
@@ -15122,7 +15002,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 },
                                 "n_symops": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-                                    "title": "number of symops",
+                                    "title": "Number of symops",
                                     "x-optimade-type": "integer",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -15135,7 +15015,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+                                    "description": "Number of symmetry operations in the finite operation list of the generated entry.\n\nWhen the entry contains a `symops` list, this value MUST equal its length.",
                                     "x-optimade-unit": "inapplicable",
                                     "examples": [
                                         1,
@@ -15144,7 +15024,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 },
                                 "n_linear_parts": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
-                                    "title": "N Linear Parts",
+                                    "title": "Number of linear parts",
                                     "x-optimade-type": "integer",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -15157,7 +15037,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+                                    "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
                                     "x-optimade-unit": "inapplicable",
                                     "examples": [
                                         2,
@@ -15299,7 +15179,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "One row of the exact 3 by 3 matrix.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -15341,7 +15221,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -15510,13 +15390,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 ]
                                             },
                                             "wyckoff_splitting": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                                "title": "Wyckoff splitting",
                                                 "x-optimade-type": "list",
+                                                "x-optimade-definition": {
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "wyckoff_splitting",
+                                                    "label": "wyckoff_splitting_transformations"
+                                                },
                                                 "x-optimade-unit": "inapplicable",
                                                 "type": [
                                                     "array",
                                                     "null"
                                                 ],
-                                                "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                                "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                                 "items": {
                                                     "x-optimade-type": "dictionary",
                                                     "x-optimade-unit": "inapplicable",
@@ -15576,20 +15465,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                     "affine": {
                                                                         "x-optimade-type": "list",
                                                                         "x-optimade-unit": "inapplicable",
+                                                                        "x-optimade-dimensions": {
+                                                                            "names": [
+                                                                                "dim_lattice",
+                                                                                "dim_affine"
+                                                                            ],
+                                                                            "sizes": [
+                                                                                3,
+                                                                                4
+                                                                            ]
+                                                                        },
                                                                         "type": [
                                                                             "array"
                                                                         ],
-                                                                        "description": "Exact affine representation for the split branch.",
+                                                                        "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                         "items": {
                                                                             "x-optimade-type": "list",
                                                                             "x-optimade-unit": "inapplicable",
+                                                                            "x-optimade-dimensions": {
+                                                                                "names": [
+                                                                                    "dim_affine"
+                                                                                ],
+                                                                                "sizes": [
+                                                                                    4
+                                                                                ]
+                                                                            },
                                                                             "type": [
                                                                                 "array"
                                                                             ],
-                                                                            "description": "One affine row.",
+                                                                            "description": "One row of the augmented affine matrix.",
                                                                             "items": {
                                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                "title": "fraction",
+                                                                                "title": "Fraction",
                                                                                 "x-optimade-type": "string",
                                                                                 "x-optimade-definition": {
                                                                                     "label": "fraction_core",
@@ -15617,7 +15524,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             }
                                                         }
                                                     }
-                                                }
+                                                },
+                                                "examples": [
+                                                    [
+                                                        {
+                                                            "parent": "c",
+                                                            "splits": [
+                                                                {
+                                                                    "letter": "e",
+                                                                    "xyz": "x,y,z",
+                                                                    "affine": [
+                                                                        [
+                                                                            "1",
+                                                                            "0",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "1",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "0",
+                                                                            "1",
+                                                                            "0"
+                                                                        ]
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                ]
                                             },
                                             "criteria": {
                                                 "x-optimade-type": "list",
@@ -15717,13 +15657,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                             "items": {
                                                                                 "x-optimade-type": "list",
                                                                                 "x-optimade-unit": "inapplicable",
+                                                                                "x-optimade-dimensions": {
+                                                                                    "names": [
+                                                                                        "dim_lattice"
+                                                                                    ],
+                                                                                    "sizes": [
+                                                                                        3
+                                                                                    ]
+                                                                                },
                                                                                 "type": [
                                                                                     "array"
                                                                                 ],
                                                                                 "description": "One exact coefficient vector.",
                                                                                 "items": {
                                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                    "title": "fraction",
+                                                                                    "title": "Fraction",
                                                                                     "x-optimade-type": "string",
                                                                                     "x-optimade-definition": {
                                                                                         "label": "fraction_core",
@@ -15757,7 +15705,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                         "description": "Exact target vector or scalar for the constraint.",
                                                                         "items": {
                                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                            "title": "fraction",
+                                                                            "title": "Fraction",
                                                                             "x-optimade-type": "string",
                                                                             "x-optimade-definition": {
                                                                                 "label": "fraction_core",
@@ -15995,7 +15943,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "object",
                                 "null"
                             ],
-                            "description": "Parameterized continuous normalizer subspace for a setting.\n\nIt describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
+                            "description": "Parameterized continuous normalizer subspace for a setting.\n\nIt describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n      When present, it MUST equal the length of `basis_vectors`.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
                             "properties": {
                                 "dimension": {
                                     "x-optimade-type": "integer",
@@ -16004,7 +15952,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Dimension of the continuous parameter subspace."
+                                    "description": "Dimension of the continuous parameter subspace. When present, it MUST equal the length of `basis_vectors`."
                                 },
                                 "basis_vectors": {
                                     "x-optimade-type": "list",
@@ -16031,7 +15979,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "description": "One basis vector in fractional coordinates.",
                                         "items": {
                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                            "title": "fraction",
+                                            "title": "Fraction",
                                             "x-optimade-type": "string",
                                             "x-optimade-definition": {
                                                 "label": "fraction_core",
@@ -16195,7 +16143,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "One row of the exact 3 by 3 matrix.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -16237,7 +16185,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -16406,13 +16354,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 ]
                                             },
                                             "wyckoff_splitting": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                                "title": "Wyckoff splitting",
                                                 "x-optimade-type": "list",
+                                                "x-optimade-definition": {
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "wyckoff_splitting",
+                                                    "label": "wyckoff_splitting_transformations"
+                                                },
                                                 "x-optimade-unit": "inapplicable",
                                                 "type": [
                                                     "array",
                                                     "null"
                                                 ],
-                                                "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                                "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                                 "items": {
                                                     "x-optimade-type": "dictionary",
                                                     "x-optimade-unit": "inapplicable",
@@ -16472,20 +16429,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                     "affine": {
                                                                         "x-optimade-type": "list",
                                                                         "x-optimade-unit": "inapplicable",
+                                                                        "x-optimade-dimensions": {
+                                                                            "names": [
+                                                                                "dim_lattice",
+                                                                                "dim_affine"
+                                                                            ],
+                                                                            "sizes": [
+                                                                                3,
+                                                                                4
+                                                                            ]
+                                                                        },
                                                                         "type": [
                                                                             "array"
                                                                         ],
-                                                                        "description": "Exact affine representation for the split branch.",
+                                                                        "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                         "items": {
                                                                             "x-optimade-type": "list",
                                                                             "x-optimade-unit": "inapplicable",
+                                                                            "x-optimade-dimensions": {
+                                                                                "names": [
+                                                                                    "dim_affine"
+                                                                                ],
+                                                                                "sizes": [
+                                                                                    4
+                                                                                ]
+                                                                            },
                                                                             "type": [
                                                                                 "array"
                                                                             ],
-                                                                            "description": "One affine row.",
+                                                                            "description": "One row of the augmented affine matrix.",
                                                                             "items": {
                                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                "title": "fraction",
+                                                                                "title": "Fraction",
                                                                                 "x-optimade-type": "string",
                                                                                 "x-optimade-definition": {
                                                                                     "label": "fraction_core",
@@ -16513,7 +16488,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             }
                                                         }
                                                     }
-                                                }
+                                                },
+                                                "examples": [
+                                                    [
+                                                        {
+                                                            "parent": "c",
+                                                            "splits": [
+                                                                {
+                                                                    "letter": "e",
+                                                                    "xyz": "x,y,z",
+                                                                    "affine": [
+                                                                        [
+                                                                            "1",
+                                                                            "0",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "1",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "0",
+                                                                            "1",
+                                                                            "0"
+                                                                        ]
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                ]
                                             },
                                             "criteria": {
                                                 "x-optimade-type": "list",
@@ -16613,13 +16621,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                             "items": {
                                                                                 "x-optimade-type": "list",
                                                                                 "x-optimade-unit": "inapplicable",
+                                                                                "x-optimade-dimensions": {
+                                                                                    "names": [
+                                                                                        "dim_lattice"
+                                                                                    ],
+                                                                                    "sizes": [
+                                                                                        3
+                                                                                    ]
+                                                                                },
                                                                                 "type": [
                                                                                     "array"
                                                                                 ],
                                                                                 "description": "One exact coefficient vector.",
                                                                                 "items": {
                                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                    "title": "fraction",
+                                                                                    "title": "Fraction",
                                                                                     "x-optimade-type": "string",
                                                                                     "x-optimade-definition": {
                                                                                         "label": "fraction_core",
@@ -16653,7 +16669,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                         "description": "Exact target vector or scalar for the constraint.",
                                                                         "items": {
                                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                            "title": "fraction",
+                                                                            "title": "Fraction",
                                                                             "x-optimade-type": "string",
                                                                             "x-optimade-definition": {
                                                                                 "label": "fraction_core",
@@ -17027,7 +17043,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -17069,7 +17085,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -17238,13 +17254,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     ]
                                                 },
                                                 "wyckoff_splitting": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                                    "title": "Wyckoff splitting",
                                                     "x-optimade-type": "list",
+                                                    "x-optimade-definition": {
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "wyckoff_splitting",
+                                                        "label": "wyckoff_splitting_transformations"
+                                                    },
                                                     "x-optimade-unit": "inapplicable",
                                                     "type": [
                                                         "array",
                                                         "null"
                                                     ],
-                                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                                    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                                     "items": {
                                                         "x-optimade-type": "dictionary",
                                                         "x-optimade-unit": "inapplicable",
@@ -17304,20 +17329,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                         "affine": {
                                                                             "x-optimade-type": "list",
                                                                             "x-optimade-unit": "inapplicable",
+                                                                            "x-optimade-dimensions": {
+                                                                                "names": [
+                                                                                    "dim_lattice",
+                                                                                    "dim_affine"
+                                                                                ],
+                                                                                "sizes": [
+                                                                                    3,
+                                                                                    4
+                                                                                ]
+                                                                            },
                                                                             "type": [
                                                                                 "array"
                                                                             ],
-                                                                            "description": "Exact affine representation for the split branch.",
+                                                                            "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                             "items": {
                                                                                 "x-optimade-type": "list",
                                                                                 "x-optimade-unit": "inapplicable",
+                                                                                "x-optimade-dimensions": {
+                                                                                    "names": [
+                                                                                        "dim_affine"
+                                                                                    ],
+                                                                                    "sizes": [
+                                                                                        4
+                                                                                    ]
+                                                                                },
                                                                                 "type": [
                                                                                     "array"
                                                                                 ],
-                                                                                "description": "One affine row.",
+                                                                                "description": "One row of the augmented affine matrix.",
                                                                                 "items": {
                                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                    "title": "fraction",
+                                                                                    "title": "Fraction",
                                                                                     "x-optimade-type": "string",
                                                                                     "x-optimade-definition": {
                                                                                         "label": "fraction_core",
@@ -17345,7 +17388,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 }
                                                             }
                                                         }
-                                                    }
+                                                    },
+                                                    "examples": [
+                                                        [
+                                                            {
+                                                                "parent": "c",
+                                                                "splits": [
+                                                                    {
+                                                                        "letter": "e",
+                                                                        "xyz": "x,y,z",
+                                                                        "affine": [
+                                                                            [
+                                                                                "1",
+                                                                                "0",
+                                                                                "0",
+                                                                                "0"
+                                                                            ],
+                                                                            [
+                                                                                "0",
+                                                                                "1",
+                                                                                "0",
+                                                                                "0"
+                                                                            ],
+                                                                            [
+                                                                                "0",
+                                                                                "0",
+                                                                                "1",
+                                                                                "0"
+                                                                            ]
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    ]
                                                 },
                                                 "criteria": {
                                                     "x-optimade-type": "list",
@@ -17445,13 +17521,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                                 "items": {
                                                                                     "x-optimade-type": "list",
                                                                                     "x-optimade-unit": "inapplicable",
+                                                                                    "x-optimade-dimensions": {
+                                                                                        "names": [
+                                                                                            "dim_lattice"
+                                                                                        ],
+                                                                                        "sizes": [
+                                                                                            3
+                                                                                        ]
+                                                                                    },
                                                                                     "type": [
                                                                                         "array"
                                                                                     ],
                                                                                     "description": "One exact coefficient vector.",
                                                                                     "items": {
                                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                        "title": "fraction",
+                                                                                        "title": "Fraction",
                                                                                         "x-optimade-type": "string",
                                                                                         "x-optimade-definition": {
                                                                                             "label": "fraction_core",
@@ -17485,7 +17569,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                             "description": "Exact target vector or scalar for the constraint.",
                                                                             "items": {
                                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                "title": "fraction",
+                                                                                "title": "Fraction",
                                                                                 "x-optimade-type": "string",
                                                                                 "x-optimade-definition": {
                                                                                     "label": "fraction_core",
@@ -17701,9 +17785,6 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                     "0"
                                 ]
                             ],
-                            "centering_translations_xyz": [
-                                "0,0,0"
-                            ],
                             "baernighausen": []
                         }
                     ]
@@ -17745,7 +17826,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "properties": {
                         "it_number": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
-                            "title": "International Tables Space-Group Number",
+                            "title": "International Tables space-group number",
                             "x-optimade-type": "integer",
                             "x-compatibility": [
                                 "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -17892,7 +17973,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -17934,7 +18015,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -18103,13 +18184,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     ]
                                                 },
                                                 "wyckoff_splitting": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                                    "title": "Wyckoff splitting",
                                                     "x-optimade-type": "list",
+                                                    "x-optimade-definition": {
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "wyckoff_splitting",
+                                                        "label": "wyckoff_splitting_transformations"
+                                                    },
                                                     "x-optimade-unit": "inapplicable",
                                                     "type": [
                                                         "array",
                                                         "null"
                                                     ],
-                                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                                    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                                     "items": {
                                                         "x-optimade-type": "dictionary",
                                                         "x-optimade-unit": "inapplicable",
@@ -18169,20 +18259,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                         "affine": {
                                                                             "x-optimade-type": "list",
                                                                             "x-optimade-unit": "inapplicable",
+                                                                            "x-optimade-dimensions": {
+                                                                                "names": [
+                                                                                    "dim_lattice",
+                                                                                    "dim_affine"
+                                                                                ],
+                                                                                "sizes": [
+                                                                                    3,
+                                                                                    4
+                                                                                ]
+                                                                            },
                                                                             "type": [
                                                                                 "array"
                                                                             ],
-                                                                            "description": "Exact affine representation for the split branch.",
+                                                                            "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                             "items": {
                                                                                 "x-optimade-type": "list",
                                                                                 "x-optimade-unit": "inapplicable",
+                                                                                "x-optimade-dimensions": {
+                                                                                    "names": [
+                                                                                        "dim_affine"
+                                                                                    ],
+                                                                                    "sizes": [
+                                                                                        4
+                                                                                    ]
+                                                                                },
                                                                                 "type": [
                                                                                     "array"
                                                                                 ],
-                                                                                "description": "One affine row.",
+                                                                                "description": "One row of the augmented affine matrix.",
                                                                                 "items": {
                                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                    "title": "fraction",
+                                                                                    "title": "Fraction",
                                                                                     "x-optimade-type": "string",
                                                                                     "x-optimade-definition": {
                                                                                         "label": "fraction_core",
@@ -18210,7 +18318,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 }
                                                             }
                                                         }
-                                                    }
+                                                    },
+                                                    "examples": [
+                                                        [
+                                                            {
+                                                                "parent": "c",
+                                                                "splits": [
+                                                                    {
+                                                                        "letter": "e",
+                                                                        "xyz": "x,y,z",
+                                                                        "affine": [
+                                                                            [
+                                                                                "1",
+                                                                                "0",
+                                                                                "0",
+                                                                                "0"
+                                                                            ],
+                                                                            [
+                                                                                "0",
+                                                                                "1",
+                                                                                "0",
+                                                                                "0"
+                                                                            ],
+                                                                            [
+                                                                                "0",
+                                                                                "0",
+                                                                                "1",
+                                                                                "0"
+                                                                            ]
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    ]
                                                 },
                                                 "criteria": {
                                                     "x-optimade-type": "list",
@@ -18310,13 +18451,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                                 "items": {
                                                                                     "x-optimade-type": "list",
                                                                                     "x-optimade-unit": "inapplicable",
+                                                                                    "x-optimade-dimensions": {
+                                                                                        "names": [
+                                                                                            "dim_lattice"
+                                                                                        ],
+                                                                                        "sizes": [
+                                                                                            3
+                                                                                        ]
+                                                                                    },
                                                                                     "type": [
                                                                                         "array"
                                                                                     ],
                                                                                     "description": "One exact coefficient vector.",
                                                                                     "items": {
                                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                        "title": "fraction",
+                                                                                        "title": "Fraction",
                                                                                         "x-optimade-type": "string",
                                                                                         "x-optimade-definition": {
                                                                                             "label": "fraction_core",
@@ -18350,7 +18499,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                             "description": "Exact target vector or scalar for the constraint.",
                                                                             "items": {
                                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                "title": "fraction",
+                                                                                "title": "Fraction",
                                                                                 "x-optimade-type": "string",
                                                                                 "x-optimade-definition": {
                                                                                     "label": "fraction_core",
@@ -18667,7 +18816,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 "description": "One row of the exact 3 by 3 matrix.",
                                                                 "items": {
                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                    "title": "fraction",
+                                                                    "title": "Fraction",
                                                                     "x-optimade-type": "string",
                                                                     "x-optimade-definition": {
                                                                         "label": "fraction_core",
@@ -18709,7 +18858,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -18878,13 +19027,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                     ]
                                                 },
                                                 "wyckoff_splitting": {
+                                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                                    "title": "Wyckoff splitting",
                                                     "x-optimade-type": "list",
+                                                    "x-optimade-definition": {
+                                                        "kind": "property",
+                                                        "version": "0.1.0",
+                                                        "format": "1.3",
+                                                        "name": "wyckoff_splitting",
+                                                        "label": "wyckoff_splitting_transformations"
+                                                    },
                                                     "x-optimade-unit": "inapplicable",
                                                     "type": [
                                                         "array",
                                                         "null"
                                                     ],
-                                                    "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                                    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                                     "items": {
                                                         "x-optimade-type": "dictionary",
                                                         "x-optimade-unit": "inapplicable",
@@ -18944,20 +19102,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                         "affine": {
                                                                             "x-optimade-type": "list",
                                                                             "x-optimade-unit": "inapplicable",
+                                                                            "x-optimade-dimensions": {
+                                                                                "names": [
+                                                                                    "dim_lattice",
+                                                                                    "dim_affine"
+                                                                                ],
+                                                                                "sizes": [
+                                                                                    3,
+                                                                                    4
+                                                                                ]
+                                                                            },
                                                                             "type": [
                                                                                 "array"
                                                                             ],
-                                                                            "description": "Exact affine representation for the split branch.",
+                                                                            "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                             "items": {
                                                                                 "x-optimade-type": "list",
                                                                                 "x-optimade-unit": "inapplicable",
+                                                                                "x-optimade-dimensions": {
+                                                                                    "names": [
+                                                                                        "dim_affine"
+                                                                                    ],
+                                                                                    "sizes": [
+                                                                                        4
+                                                                                    ]
+                                                                                },
                                                                                 "type": [
                                                                                     "array"
                                                                                 ],
-                                                                                "description": "One affine row.",
+                                                                                "description": "One row of the augmented affine matrix.",
                                                                                 "items": {
                                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                    "title": "fraction",
+                                                                                    "title": "Fraction",
                                                                                     "x-optimade-type": "string",
                                                                                     "x-optimade-definition": {
                                                                                         "label": "fraction_core",
@@ -18985,7 +19161,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                 }
                                                             }
                                                         }
-                                                    }
+                                                    },
+                                                    "examples": [
+                                                        [
+                                                            {
+                                                                "parent": "c",
+                                                                "splits": [
+                                                                    {
+                                                                        "letter": "e",
+                                                                        "xyz": "x,y,z",
+                                                                        "affine": [
+                                                                            [
+                                                                                "1",
+                                                                                "0",
+                                                                                "0",
+                                                                                "0"
+                                                                            ],
+                                                                            [
+                                                                                "0",
+                                                                                "1",
+                                                                                "0",
+                                                                                "0"
+                                                                            ],
+                                                                            [
+                                                                                "0",
+                                                                                "0",
+                                                                                "1",
+                                                                                "0"
+                                                                            ]
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    ]
                                                 },
                                                 "criteria": {
                                                     "x-optimade-type": "list",
@@ -19085,13 +19294,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                                 "items": {
                                                                                     "x-optimade-type": "list",
                                                                                     "x-optimade-unit": "inapplicable",
+                                                                                    "x-optimade-dimensions": {
+                                                                                        "names": [
+                                                                                            "dim_lattice"
+                                                                                        ],
+                                                                                        "sizes": [
+                                                                                            3
+                                                                                        ]
+                                                                                    },
                                                                                     "type": [
                                                                                         "array"
                                                                                     ],
                                                                                     "description": "One exact coefficient vector.",
                                                                                     "items": {
                                                                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                        "title": "fraction",
+                                                                                        "title": "Fraction",
                                                                                         "x-optimade-type": "string",
                                                                                         "x-optimade-definition": {
                                                                                             "label": "fraction_core",
@@ -19125,7 +19342,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                             "description": "Exact target vector or scalar for the constraint.",
                                                                             "items": {
                                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                "title": "fraction",
+                                                                                "title": "Fraction",
                                                                                 "x-optimade-type": "string",
                                                                                 "x-optimade-definition": {
                                                                                     "label": "fraction_core",
@@ -19453,7 +19670,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "One row of the exact 3 by 3 matrix.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -19495,7 +19712,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -19664,13 +19881,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 ]
                                             },
                                             "wyckoff_splitting": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                                "title": "Wyckoff splitting",
                                                 "x-optimade-type": "list",
+                                                "x-optimade-definition": {
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "wyckoff_splitting",
+                                                    "label": "wyckoff_splitting_transformations"
+                                                },
                                                 "x-optimade-unit": "inapplicable",
                                                 "type": [
                                                     "array",
                                                     "null"
                                                 ],
-                                                "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                                "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                                 "items": {
                                                     "x-optimade-type": "dictionary",
                                                     "x-optimade-unit": "inapplicable",
@@ -19730,20 +19956,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                     "affine": {
                                                                         "x-optimade-type": "list",
                                                                         "x-optimade-unit": "inapplicable",
+                                                                        "x-optimade-dimensions": {
+                                                                            "names": [
+                                                                                "dim_lattice",
+                                                                                "dim_affine"
+                                                                            ],
+                                                                            "sizes": [
+                                                                                3,
+                                                                                4
+                                                                            ]
+                                                                        },
                                                                         "type": [
                                                                             "array"
                                                                         ],
-                                                                        "description": "Exact affine representation for the split branch.",
+                                                                        "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                         "items": {
                                                                             "x-optimade-type": "list",
                                                                             "x-optimade-unit": "inapplicable",
+                                                                            "x-optimade-dimensions": {
+                                                                                "names": [
+                                                                                    "dim_affine"
+                                                                                ],
+                                                                                "sizes": [
+                                                                                    4
+                                                                                ]
+                                                                            },
                                                                             "type": [
                                                                                 "array"
                                                                             ],
-                                                                            "description": "One affine row.",
+                                                                            "description": "One row of the augmented affine matrix.",
                                                                             "items": {
                                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                "title": "fraction",
+                                                                                "title": "Fraction",
                                                                                 "x-optimade-type": "string",
                                                                                 "x-optimade-definition": {
                                                                                     "label": "fraction_core",
@@ -19771,7 +20015,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             }
                                                         }
                                                     }
-                                                }
+                                                },
+                                                "examples": [
+                                                    [
+                                                        {
+                                                            "parent": "c",
+                                                            "splits": [
+                                                                {
+                                                                    "letter": "e",
+                                                                    "xyz": "x,y,z",
+                                                                    "affine": [
+                                                                        [
+                                                                            "1",
+                                                                            "0",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "1",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "0",
+                                                                            "1",
+                                                                            "0"
+                                                                        ]
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                ]
                                             },
                                             "criteria": {
                                                 "x-optimade-type": "list",
@@ -19871,13 +20148,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                             "items": {
                                                                                 "x-optimade-type": "list",
                                                                                 "x-optimade-unit": "inapplicable",
+                                                                                "x-optimade-dimensions": {
+                                                                                    "names": [
+                                                                                        "dim_lattice"
+                                                                                    ],
+                                                                                    "sizes": [
+                                                                                        3
+                                                                                    ]
+                                                                                },
                                                                                 "type": [
                                                                                     "array"
                                                                                 ],
                                                                                 "description": "One exact coefficient vector.",
                                                                                 "items": {
                                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                    "title": "fraction",
+                                                                                    "title": "Fraction",
                                                                                     "x-optimade-type": "string",
                                                                                     "x-optimade-definition": {
                                                                                         "label": "fraction_core",
@@ -19911,7 +20196,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                         "description": "Exact target vector or scalar for the constraint.",
                                                                         "items": {
                                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                            "title": "fraction",
+                                                                            "title": "Fraction",
                                                                             "x-optimade-type": "string",
                                                                             "x-optimade-definition": {
                                                                                 "label": "fraction_core",
@@ -20181,7 +20466,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                             "properties": {
                                 "it_number": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
-                                    "title": "International Tables Space-Group Number",
+                                    "title": "International Tables space-group number",
                                     "x-optimade-type": "integer",
                                     "x-compatibility": [
                                         "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -20305,7 +20590,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "One row of the exact 3 by 3 matrix.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -20347,7 +20632,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -20516,13 +20801,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 ]
                                             },
                                             "wyckoff_splitting": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                                "title": "Wyckoff splitting",
                                                 "x-optimade-type": "list",
+                                                "x-optimade-definition": {
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "wyckoff_splitting",
+                                                    "label": "wyckoff_splitting_transformations"
+                                                },
                                                 "x-optimade-unit": "inapplicable",
                                                 "type": [
                                                     "array",
                                                     "null"
                                                 ],
-                                                "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                                "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                                 "items": {
                                                     "x-optimade-type": "dictionary",
                                                     "x-optimade-unit": "inapplicable",
@@ -20582,20 +20876,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                     "affine": {
                                                                         "x-optimade-type": "list",
                                                                         "x-optimade-unit": "inapplicable",
+                                                                        "x-optimade-dimensions": {
+                                                                            "names": [
+                                                                                "dim_lattice",
+                                                                                "dim_affine"
+                                                                            ],
+                                                                            "sizes": [
+                                                                                3,
+                                                                                4
+                                                                            ]
+                                                                        },
                                                                         "type": [
                                                                             "array"
                                                                         ],
-                                                                        "description": "Exact affine representation for the split branch.",
+                                                                        "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                         "items": {
                                                                             "x-optimade-type": "list",
                                                                             "x-optimade-unit": "inapplicable",
+                                                                            "x-optimade-dimensions": {
+                                                                                "names": [
+                                                                                    "dim_affine"
+                                                                                ],
+                                                                                "sizes": [
+                                                                                    4
+                                                                                ]
+                                                                            },
                                                                             "type": [
                                                                                 "array"
                                                                             ],
-                                                                            "description": "One affine row.",
+                                                                            "description": "One row of the augmented affine matrix.",
                                                                             "items": {
                                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                "title": "fraction",
+                                                                                "title": "Fraction",
                                                                                 "x-optimade-type": "string",
                                                                                 "x-optimade-definition": {
                                                                                     "label": "fraction_core",
@@ -20623,7 +20935,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             }
                                                         }
                                                     }
-                                                }
+                                                },
+                                                "examples": [
+                                                    [
+                                                        {
+                                                            "parent": "c",
+                                                            "splits": [
+                                                                {
+                                                                    "letter": "e",
+                                                                    "xyz": "x,y,z",
+                                                                    "affine": [
+                                                                        [
+                                                                            "1",
+                                                                            "0",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "1",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "0",
+                                                                            "1",
+                                                                            "0"
+                                                                        ]
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                ]
                                             },
                                             "criteria": {
                                                 "x-optimade-type": "list",
@@ -20723,13 +21068,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                             "items": {
                                                                                 "x-optimade-type": "list",
                                                                                 "x-optimade-unit": "inapplicable",
+                                                                                "x-optimade-dimensions": {
+                                                                                    "names": [
+                                                                                        "dim_lattice"
+                                                                                    ],
+                                                                                    "sizes": [
+                                                                                        3
+                                                                                    ]
+                                                                                },
                                                                                 "type": [
                                                                                     "array"
                                                                                 ],
                                                                                 "description": "One exact coefficient vector.",
                                                                                 "items": {
                                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                    "title": "fraction",
+                                                                                    "title": "Fraction",
                                                                                     "x-optimade-type": "string",
                                                                                     "x-optimade-definition": {
                                                                                         "label": "fraction_core",
@@ -20763,7 +21116,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                         "description": "Exact target vector or scalar for the constraint.",
                                                                         "items": {
                                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                            "title": "fraction",
+                                                                            "title": "Fraction",
                                                                             "x-optimade-type": "string",
                                                                             "x-optimade-definition": {
                                                                                 "label": "fraction_core",
@@ -20978,7 +21331,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "object",
                                 "null"
                             ],
-                            "description": "Parameterized continuous normalizer subspace for a setting.\n\nIt describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
+                            "description": "Parameterized continuous normalizer subspace for a setting.\n\nIt describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n      When present, it MUST equal the length of `basis_vectors`.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
                             "properties": {
                                 "dimension": {
                                     "x-optimade-type": "integer",
@@ -20987,7 +21340,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Dimension of the continuous parameter subspace."
+                                    "description": "Dimension of the continuous parameter subspace. When present, it MUST equal the length of `basis_vectors`."
                                 },
                                 "basis_vectors": {
                                     "x-optimade-type": "list",
@@ -21014,7 +21367,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "description": "One basis vector in fractional coordinates.",
                                         "items": {
                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                            "title": "fraction",
+                                            "title": "Fraction",
                                             "x-optimade-type": "string",
                                             "x-optimade-definition": {
                                                 "label": "fraction_core",
@@ -21097,7 +21450,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "object",
                                 "null"
                             ],
-                            "description": "Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains the signed-permutation subset of affine normalizer representatives.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `signed_permutation_matrices`, meaning 3 by 3 integer matrices with exactly one nonzero entry in each row and column and each nonzero entry equal to `-1` or `1`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds satisfied by the signed-permutation candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed orthogonal affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
+                            "description": "Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains the signed-permutation subset of affine normalizer representatives.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `signed_permutation_matrices`, meaning 3 by 3 integer matrices with exactly one nonzero entry in each row and column and each nonzero entry equal to `-1` or `1`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\nThis property is one of three related normalizer tables for a setting:\n`euclidean_normalizer` holds the finite Euclidean normalizer operations obtained from cctbx,\nthis property holds the older bounded table restricted to signed-permutation linear parts,\nand `affine_normalizer` holds the bounded table generated from unimodular integer linear parts, which is a superset of this one.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds satisfied by the signed-permutation candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed orthogonal affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.\n      Each item MUST carry `compatible_systems`, the list of crystal systems for which the representative's linear part is compatible with a crystallographic metric.",
                             "properties": {
                                 "normalizer_kind": {
                                     "x-optimade-type": "string",
@@ -21128,7 +21481,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 },
                                 "n_symops": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-                                    "title": "number of symops",
+                                    "title": "Number of symops",
                                     "x-optimade-type": "integer",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -21141,7 +21494,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+                                    "description": "Number of symmetry operations in the finite operation list of the generated entry.\n\nWhen the entry contains a `symops` list, this value MUST equal its length.",
                                     "x-optimade-unit": "inapplicable",
                                     "examples": [
                                         1,
@@ -21150,7 +21503,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 },
                                 "n_linear_parts": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
-                                    "title": "N Linear Parts",
+                                    "title": "Number of linear parts",
                                     "x-optimade-type": "integer",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -21163,7 +21516,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+                                    "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
                                     "x-optimade-unit": "inapplicable",
                                     "examples": [
                                         2,
@@ -21305,7 +21658,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "One row of the exact 3 by 3 matrix.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -21347,7 +21700,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -21516,13 +21869,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 ]
                                             },
                                             "wyckoff_splitting": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                                "title": "Wyckoff splitting",
                                                 "x-optimade-type": "list",
+                                                "x-optimade-definition": {
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "wyckoff_splitting",
+                                                    "label": "wyckoff_splitting_transformations"
+                                                },
                                                 "x-optimade-unit": "inapplicable",
                                                 "type": [
                                                     "array",
                                                     "null"
                                                 ],
-                                                "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                                "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                                 "items": {
                                                     "x-optimade-type": "dictionary",
                                                     "x-optimade-unit": "inapplicable",
@@ -21582,20 +21944,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                     "affine": {
                                                                         "x-optimade-type": "list",
                                                                         "x-optimade-unit": "inapplicable",
+                                                                        "x-optimade-dimensions": {
+                                                                            "names": [
+                                                                                "dim_lattice",
+                                                                                "dim_affine"
+                                                                            ],
+                                                                            "sizes": [
+                                                                                3,
+                                                                                4
+                                                                            ]
+                                                                        },
                                                                         "type": [
                                                                             "array"
                                                                         ],
-                                                                        "description": "Exact affine representation for the split branch.",
+                                                                        "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                         "items": {
                                                                             "x-optimade-type": "list",
                                                                             "x-optimade-unit": "inapplicable",
+                                                                            "x-optimade-dimensions": {
+                                                                                "names": [
+                                                                                    "dim_affine"
+                                                                                ],
+                                                                                "sizes": [
+                                                                                    4
+                                                                                ]
+                                                                            },
                                                                             "type": [
                                                                                 "array"
                                                                             ],
-                                                                            "description": "One affine row.",
+                                                                            "description": "One row of the augmented affine matrix.",
                                                                             "items": {
                                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                "title": "fraction",
+                                                                                "title": "Fraction",
                                                                                 "x-optimade-type": "string",
                                                                                 "x-optimade-definition": {
                                                                                     "label": "fraction_core",
@@ -21623,7 +22003,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             }
                                                         }
                                                     }
-                                                }
+                                                },
+                                                "examples": [
+                                                    [
+                                                        {
+                                                            "parent": "c",
+                                                            "splits": [
+                                                                {
+                                                                    "letter": "e",
+                                                                    "xyz": "x,y,z",
+                                                                    "affine": [
+                                                                        [
+                                                                            "1",
+                                                                            "0",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "1",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "0",
+                                                                            "1",
+                                                                            "0"
+                                                                        ]
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                ]
                                             },
                                             "criteria": {
                                                 "x-optimade-type": "list",
@@ -21723,13 +22136,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                             "items": {
                                                                                 "x-optimade-type": "list",
                                                                                 "x-optimade-unit": "inapplicable",
+                                                                                "x-optimade-dimensions": {
+                                                                                    "names": [
+                                                                                        "dim_lattice"
+                                                                                    ],
+                                                                                    "sizes": [
+                                                                                        3
+                                                                                    ]
+                                                                                },
                                                                                 "type": [
                                                                                     "array"
                                                                                 ],
                                                                                 "description": "One exact coefficient vector.",
                                                                                 "items": {
                                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                    "title": "fraction",
+                                                                                    "title": "Fraction",
                                                                                     "x-optimade-type": "string",
                                                                                     "x-optimade-definition": {
                                                                                         "label": "fraction_core",
@@ -21763,7 +22184,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                         "description": "Exact target vector or scalar for the constraint.",
                                                                         "items": {
                                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                            "title": "fraction",
+                                                                            "title": "Fraction",
                                                                             "x-optimade-type": "string",
                                                                             "x-optimade-definition": {
                                                                                 "label": "fraction_core",
@@ -22001,7 +22422,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 "object",
                                 "null"
                             ],
-                            "description": "Affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
+                            "description": "Affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\nThis property is one of three related normalizer tables for a setting:\n`euclidean_normalizer` holds the finite Euclidean normalizer operations obtained from cctbx,\n`orthogonal_affine_normalizer` holds the older bounded table restricted to signed-permutation linear parts,\nand this property holds the bounded table generated from unimodular integer linear parts, which is a superset of the orthogonal one.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.\n      Each item MUST carry `compatible_systems`, the list of crystal systems for which the representative's linear part is compatible with a crystallographic metric.",
                             "properties": {
                                 "normalizer_kind": {
                                     "x-optimade-type": "string",
@@ -22032,7 +22453,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 },
                                 "n_symops": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-                                    "title": "number of symops",
+                                    "title": "Number of symops",
                                     "x-optimade-type": "integer",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -22045,7 +22466,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Number of symmetry operations in the finite operation list of the generated entry.",
+                                    "description": "Number of symmetry operations in the finite operation list of the generated entry.\n\nWhen the entry contains a `symops` list, this value MUST equal its length.",
                                     "x-optimade-unit": "inapplicable",
                                     "examples": [
                                         1,
@@ -22054,7 +22475,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                 },
                                 "n_linear_parts": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
-                                    "title": "N Linear Parts",
+                                    "title": "Number of linear parts",
                                     "x-optimade-type": "integer",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -22067,7 +22488,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                         "integer",
                                         "null"
                                     ],
-                                    "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+                                    "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
                                     "x-optimade-unit": "inapplicable",
                                     "examples": [
                                         2,
@@ -22209,7 +22630,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             "description": "One row of the exact 3 by 3 matrix.",
                                                             "items": {
                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                "title": "fraction",
+                                                                "title": "Fraction",
                                                                 "x-optimade-type": "string",
                                                                 "x-optimade-definition": {
                                                                     "label": "fraction_core",
@@ -22251,7 +22672,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                         "description": "Exact fractional-coordinate vector part of the affine transformation.",
                                                         "items": {
                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                            "title": "fraction",
+                                                            "title": "Fraction",
                                                             "x-optimade-type": "string",
                                                             "x-optimade-definition": {
                                                                 "label": "fraction_core",
@@ -22420,13 +22841,22 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                 ]
                                             },
                                             "wyckoff_splitting": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
+                                                "title": "Wyckoff splitting",
                                                 "x-optimade-type": "list",
+                                                "x-optimade-definition": {
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "wyckoff_splitting",
+                                                    "label": "wyckoff_splitting_transformations"
+                                                },
                                                 "x-optimade-unit": "inapplicable",
                                                 "type": [
                                                     "array",
                                                     "null"
                                                 ],
-                                                "description": "Wyckoff-position splitting metadata induced by the transform, grouped by explicit parent Wyckoff letter.",
+                                                "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
                                                 "items": {
                                                     "x-optimade-type": "dictionary",
                                                     "x-optimade-unit": "inapplicable",
@@ -22486,20 +22916,38 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                     "affine": {
                                                                         "x-optimade-type": "list",
                                                                         "x-optimade-unit": "inapplicable",
+                                                                        "x-optimade-dimensions": {
+                                                                            "names": [
+                                                                                "dim_lattice",
+                                                                                "dim_affine"
+                                                                            ],
+                                                                            "sizes": [
+                                                                                3,
+                                                                                4
+                                                                            ]
+                                                                        },
                                                                         "type": [
                                                                             "array"
                                                                         ],
-                                                                        "description": "Exact affine representation for the split branch.",
+                                                                        "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                                                                         "items": {
                                                                             "x-optimade-type": "list",
                                                                             "x-optimade-unit": "inapplicable",
+                                                                            "x-optimade-dimensions": {
+                                                                                "names": [
+                                                                                    "dim_affine"
+                                                                                ],
+                                                                                "sizes": [
+                                                                                    4
+                                                                                ]
+                                                                            },
                                                                             "type": [
                                                                                 "array"
                                                                             ],
-                                                                            "description": "One affine row.",
+                                                                            "description": "One row of the augmented affine matrix.",
                                                                             "items": {
                                                                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                "title": "fraction",
+                                                                                "title": "Fraction",
                                                                                 "x-optimade-type": "string",
                                                                                 "x-optimade-definition": {
                                                                                     "label": "fraction_core",
@@ -22527,7 +22975,40 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                             }
                                                         }
                                                     }
-                                                }
+                                                },
+                                                "examples": [
+                                                    [
+                                                        {
+                                                            "parent": "c",
+                                                            "splits": [
+                                                                {
+                                                                    "letter": "e",
+                                                                    "xyz": "x,y,z",
+                                                                    "affine": [
+                                                                        [
+                                                                            "1",
+                                                                            "0",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "1",
+                                                                            "0",
+                                                                            "0"
+                                                                        ],
+                                                                        [
+                                                                            "0",
+                                                                            "0",
+                                                                            "1",
+                                                                            "0"
+                                                                        ]
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                ]
                                             },
                                             "criteria": {
                                                 "x-optimade-type": "list",
@@ -22627,13 +23108,21 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                             "items": {
                                                                                 "x-optimade-type": "list",
                                                                                 "x-optimade-unit": "inapplicable",
+                                                                                "x-optimade-dimensions": {
+                                                                                    "names": [
+                                                                                        "dim_lattice"
+                                                                                    ],
+                                                                                    "sizes": [
+                                                                                        3
+                                                                                    ]
+                                                                                },
                                                                                 "type": [
                                                                                     "array"
                                                                                 ],
                                                                                 "description": "One exact coefficient vector.",
                                                                                 "items": {
                                                                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                                    "title": "fraction",
+                                                                                    "title": "Fraction",
                                                                                     "x-optimade-type": "string",
                                                                                     "x-optimade-definition": {
                                                                                         "label": "fraction_core",
@@ -22667,7 +23156,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                                                                         "description": "Exact target vector or scalar for the constraint.",
                                                                         "items": {
                                                                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                                                            "title": "fraction",
+                                                                            "title": "Fraction",
                                                                             "x-optimade-type": "string",
                                                                             "x-optimade-definition": {
                                                                                 "label": "fraction_core",
@@ -22908,7 +23397,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "N Coset Representatives",
+                "title": "Number of coset representatives",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -22921,7 +23410,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "integer",
                     "null"
                 ],
-                "description": "Number of nontrivial coset representatives retained after deduplication modulo the space group.",
+                "description": "Number of nontrivial coset representatives retained after deduplication modulo the space group.\n\nThis count is taken before metric-compatibility filtering, so it MAY exceed the length of the stored `symops` list of the containing record.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     47,
@@ -22936,7 +23425,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "N Cosets",
+                "title": "Number of cosets",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -22949,7 +23438,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "integer",
                     "null"
                 ],
-                "description": "Number of affine normalizer coset representatives stored for the setting.",
+                "description": "Number of affine normalizer coset representatives stored for the setting.\n\nThis value MUST equal the length of the `affine_normalizer_cosets` list of the containing record.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     63,
@@ -22964,7 +23453,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "N Linear Parts",
+                "title": "Number of linear parts",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -22977,7 +23466,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "integer",
                     "null"
                 ],
-                "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.",
+                "description": "Number of distinct linear matrix parts represented in a normalizer or transform table.\n\nDistinctness is determined by exact element-wise comparison of the 3 by 3 matrix parts of the listed operations.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     2,
@@ -22992,7 +23481,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "N Orthogonal Cosets",
+                "title": "Number of orthogonal cosets",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -23005,7 +23494,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "integer",
                     "null"
                 ],
-                "description": "Number of orthogonal affine normalizer coset representatives stored for the setting.",
+                "description": "Number of orthogonal affine normalizer coset representatives stored for the setting.\n\nThis value MUST equal the length of the `orthogonal_affine_normalizer_cosets` list of the containing record.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     47,
@@ -23020,7 +23509,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "N Raw Candidates",
+                "title": "Number of raw candidates",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -23033,7 +23522,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "integer",
                     "null"
                 ],
-                "description": "Number of candidate affine operations considered before filtering and deduplication.",
+                "description": "Number of candidate affine operations considered before filtering and deduplication.\n\nThe counted candidate set itself is not stored; this value documents the size of the bounded search.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     48,
@@ -23048,7 +23537,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "N Unique Candidates",
+                "title": "Number of unique candidates",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -23061,7 +23550,7 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                     "integer",
                     "null"
                 ],
-                "description": "Number of candidate affine operations remaining after exact duplicate removal.",
+                "description": "Number of candidate affine operations remaining after exact duplicate removal.\n\nThe counted candidate set itself is not stored; this value documents the size of the bounded search.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     48,
@@ -23081,9 +23570,6 @@ In `transformations_hm_entry.json.gz`, items are keyed for lookup by the compani
                         "0",
                         "0"
                     ]
-                ],
-                "centering_translations_xyz": [
-                    "0,0,0"
                 ],
                 "baernighausen": []
             }

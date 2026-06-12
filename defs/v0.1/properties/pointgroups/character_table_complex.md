@@ -1,15 +1,16 @@
-# Character Table Complex (property)
+# Complex character table (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_complex`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_complex.md)**  
 **Definition name:** `character_table_complex`
 
-**Property name:** Character Table Complex  
-**Description:** Complex irreducible character table of the crystallographic point group. Rows correspond to complex irreducible representations and columns follow the order of `conjugacy_classes`.  
+**Property name:** Complex character table  
+**Description:** Complex irreducible character table of the crystallographic point group.  
 **Type:** list  
 
-
+Rows correspond to complex irreducible representations and columns follow the order of `conjugacy_classes`.
+Characters are exact complex rational values stored as dictionaries with `re` and `im` fraction strings, so that they round-trip without floating-point loss.
 
 **Examples:**
 
@@ -24,7 +25,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/character_table_complex",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Character Table Complex",
+    "title": "Complex character table",
     "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
@@ -38,7 +39,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "array",
         "null"
     ],
-    "description": "Complex irreducible character table of the crystallographic point group. Rows correspond to complex irreducible representations and columns follow the order of `conjugacy_classes`.",
+    "description": "Complex irreducible character table of the crystallographic point group.\n\nRows correspond to complex irreducible representations and columns follow the order of `conjugacy_classes`.\nCharacters are exact complex rational values stored as dictionaries with `re` and `im` fraction strings, so that they round-trip without floating-point loss.",
     "x-optimade-unit": "inapplicable",
     "items": {
         "x-optimade-type": "dictionary",

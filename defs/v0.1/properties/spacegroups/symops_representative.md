@@ -54,7 +54,7 @@ Each list member is an operation on the format defined by the property definitio
             "object",
             "null"
         ],
-        "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+        "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n- Whether the operation is proper follows from the sign of the `det` field of `affine_transformation`; no separate properness flag is stored.",
         "properties": {
             "affine_transformation": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
@@ -109,7 +109,7 @@ Each list member is an operation on the format defined by the property definitio
                             "description": "One row of the exact 3 by 3 matrix.",
                             "items": {
                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                "title": "fraction",
+                                "title": "Fraction",
                                 "x-optimade-type": "string",
                                 "x-optimade-definition": {
                                     "label": "fraction_core",
@@ -151,7 +151,7 @@ Each list member is an operation on the format defined by the property definitio
                         "description": "Exact fractional-coordinate vector part of the affine transformation.",
                         "items": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                            "title": "fraction",
+                            "title": "Fraction",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "label": "fraction_core",
@@ -257,7 +257,19 @@ Each list member is an operation on the format defined by the property definitio
                     "string",
                     "null"
                 ],
-                "description": "Symbolic crystallographic operation-type label for the linear part."
+                "description": "Symbolic crystallographic operation-type label for the linear part.",
+                "enum": [
+                    "1",
+                    "-1",
+                    "2",
+                    "m",
+                    "3",
+                    "-3",
+                    "4",
+                    "-4",
+                    "6",
+                    "-6"
+                ]
             },
             "axis": {
                 "x-optimade-type": "list",
@@ -311,7 +323,7 @@ Each list member is an operation on the format defined by the property definitio
                 "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                    "title": "fraction",
+                    "title": "Fraction",
                     "x-optimade-type": "string",
                     "x-optimade-definition": {
                         "label": "fraction_core",
@@ -352,7 +364,7 @@ Each list member is an operation on the format defined by the property definitio
                 "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                    "title": "fraction",
+                    "title": "Fraction",
                     "x-optimade-type": "string",
                     "x-optimade-definition": {
                         "label": "fraction_core",
@@ -374,15 +386,6 @@ Each list member is an operation on the format defined by the property definitio
                     ],
                     "x-optimade-unit": "inapplicable"
                 }
-            },
-            "is_proper": {
-                "x-optimade-type": "boolean",
-                "x-optimade-unit": "inapplicable",
-                "type": [
-                    "boolean",
-                    "null"
-                ],
-                "description": "Whether the linear operation is proper."
             }
         },
         "examples": [

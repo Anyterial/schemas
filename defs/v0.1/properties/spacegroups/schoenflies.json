@@ -1,7 +1,7 @@
 {
-    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies",
+    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Schoenflies Symbol",
+    "title": "Schoenflies symbol",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_Schoenflies.html"
@@ -11,7 +11,7 @@
         "version": "0.1.0",
         "format": "1.3",
         "name": "schoenflies",
-        "label": "schoenflies_pointgroups"
+        "label": "schoenflies_spacegroups"
     },
     "type": [
         "string",

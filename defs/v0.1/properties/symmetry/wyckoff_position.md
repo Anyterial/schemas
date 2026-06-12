@@ -9,7 +9,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Description:** Information related to a Wyckoff position in a space-group setting.  
 **Type:** dictionary  
 
-Wyckoff positions represent symmetry-equivalent sites paritioned by multiplicity and site symmetry in a given space group.
+Wyckoff positions represent symmetry-equivalent sites partitioned by multiplicity and site symmetry in a given space group.
 The property is a dictionary containing information about the multiplicity, oriented site-symmetry symbol, representative coordinate, full orbit, and orbit factorized modulo centering translations.
 
 **Requirements/Conventions**:
@@ -21,6 +21,7 @@ The property is a dictionary containing information about the multiplicity, orie
 
     - **multiplicity**: REQUIRED; Integer.
       Multiplicity of the Wyckoff position in the conventional cell.
+      It MUST equal the length of `orbit`.
 
     - **sitesym**: REQUIRED; String.
       Oriented site-symmetry symbol.
@@ -30,9 +31,11 @@ The property is a dictionary containing information about the multiplicity, orie
 
     - **first\_orbit**: REQUIRED; String.
       First representative coordinate expression used by the generator.
+      It MUST equal the `xyz` field of `orbit[0]`.
 
     - **orbit**: REQUIRED; List.
       Full orbit as a list of affine transformations from Wyckoff-position parameters to fractional coordinates.
+      The first item is the canonical representative whose degrees of freedom can be chosen to place it inside the asymmetric unit.
 
     - **orbit\_mod\_centering**: REQUIRED; List.
       Orbit representatives modulo centering translations, represented in the same form as `orbit`.
@@ -63,7 +66,7 @@ The property is a dictionary containing information about the multiplicity, orie
         "object",
         "null"
     ],
-    "description": "Information related to a Wyckoff position in a space-group setting.\n\nWyckoff positions represent symmetry-equivalent sites paritioned by multiplicity and site symmetry in a given space group.\nThe property is a dictionary containing information about the multiplicity, oriented site-symmetry symbol, representative coordinate, full orbit, and orbit factorized modulo centering translations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **letter**: REQUIRED; String.\n      Wyckoff letter for this position in the setting.\n\n    - **multiplicity**: REQUIRED; Integer.\n      Multiplicity of the Wyckoff position in the conventional cell.\n\n    - **sitesym**: REQUIRED; String.\n      Oriented site-symmetry symbol.\n\n    - **hasfreedom**: REQUIRED; List of booleans.\n      Flags indicating whether each fractional coordinate has a free parameter.\n\n    - **first\\_orbit**: REQUIRED; String.\n      First representative coordinate expression used by the generator.\n\n    - **orbit**: REQUIRED; List.\n      Full orbit as a list of affine transformations from Wyckoff-position parameters to fractional coordinates.\n\n    - **orbit\\_mod\\_centering**: REQUIRED; List.\n      Orbit representatives modulo centering translations, represented in the same form as `orbit`.",
+    "description": "Information related to a Wyckoff position in a space-group setting.\n\nWyckoff positions represent symmetry-equivalent sites partitioned by multiplicity and site symmetry in a given space group.\nThe property is a dictionary containing information about the multiplicity, oriented site-symmetry symbol, representative coordinate, full orbit, and orbit factorized modulo centering translations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **letter**: REQUIRED; String.\n      Wyckoff letter for this position in the setting.\n\n    - **multiplicity**: REQUIRED; Integer.\n      Multiplicity of the Wyckoff position in the conventional cell.\n      It MUST equal the length of `orbit`.\n\n    - **sitesym**: REQUIRED; String.\n      Oriented site-symmetry symbol.\n\n    - **hasfreedom**: REQUIRED; List of booleans.\n      Flags indicating whether each fractional coordinate has a free parameter.\n\n    - **first\\_orbit**: REQUIRED; String.\n      First representative coordinate expression used by the generator.\n      It MUST equal the `xyz` field of `orbit[0]`.\n\n    - **orbit**: REQUIRED; List.\n      Full orbit as a list of affine transformations from Wyckoff-position parameters to fractional coordinates.\n      The first item is the canonical representative whose degrees of freedom can be chosen to place it inside the asymmetric unit.\n\n    - **orbit\\_mod\\_centering**: REQUIRED; List.\n      Orbit representatives modulo centering translations, represented in the same form as `orbit`.",
     "properties": {
         "letter": {
             "$id": "https://schemas.optimade.org/defs/v1.3/properties/optimade/structures/wyckoff_positions",
@@ -203,7 +206,7 @@ The property is a dictionary containing information about the multiplicity, orie
                 "string",
                 "null"
             ],
-            "description": "Representative coordinate expression for the Wyckoff position chosen such that the degrees of freedom can be chosen to place it inside the asymmetric unit obtained from cctbx."
+            "description": "Representative coordinate expression for the Wyckoff position chosen such that the degrees of freedom can be chosen to place it inside the asymmetric unit obtained from cctbx.\nThis value MUST equal the `xyz` field of `orbit[0]`; it is repeated here as a directly queryable convenience field."
         },
         "orbit": {
             "x-optimade-type": "list",
@@ -266,7 +269,7 @@ The property is a dictionary containing information about the multiplicity, orie
                             "description": "One row of the exact 3 by 3 matrix.",
                             "items": {
                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                "title": "fraction",
+                                "title": "Fraction",
                                 "x-optimade-type": "string",
                                 "x-optimade-definition": {
                                     "label": "fraction_core",
@@ -308,7 +311,7 @@ The property is a dictionary containing information about the multiplicity, orie
                         "description": "Exact fractional-coordinate vector part of the affine transformation.",
                         "items": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                            "title": "fraction",
+                            "title": "Fraction",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "label": "fraction_core",
@@ -469,7 +472,7 @@ The property is a dictionary containing information about the multiplicity, orie
                             "description": "One row of the exact 3 by 3 matrix.",
                             "items": {
                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                "title": "fraction",
+                                "title": "Fraction",
                                 "x-optimade-type": "string",
                                 "x-optimade-definition": {
                                     "label": "fraction_core",
@@ -511,7 +514,7 @@ The property is a dictionary containing information about the multiplicity, orie
                         "description": "Exact fractional-coordinate vector part of the affine transformation.",
                         "items": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                            "title": "fraction",
+                            "title": "Fraction",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "label": "fraction_core",

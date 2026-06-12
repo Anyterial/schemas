@@ -20,7 +20,7 @@ The parent Wyckoff letter is stored in the `parent` field rather than as a JSON 
 
 **Examples:**
 
-- `[{"parent": "c", "splits": [["e", "x", "y", "z"], ["e", "-x", "y", "-z"]]}]`
+- `[{"parent": "c", "splits": [{"letter": "e", "xyz": "x,y,z", "affine": [["1", "0", "0", "0"], ["0", "1", "0", "0"], ["0", "0", "1", "0"]]}]}]`
 
 **Formats:** [[JSON](wyckoff_splitting.json)] [[MD](wyckoff_splitting.md)]
 
@@ -104,20 +104,38 @@ The parent Wyckoff letter is stored in the `parent` field rather than as a JSON 
                         "affine": {
                             "x-optimade-type": "list",
                             "x-optimade-unit": "inapplicable",
+                            "x-optimade-dimensions": {
+                                "names": [
+                                    "dim_lattice",
+                                    "dim_affine"
+                                ],
+                                "sizes": [
+                                    3,
+                                    4
+                                ]
+                            },
                             "type": [
                                 "array"
                             ],
-                            "description": "Exact affine representation for the split branch.",
+                            "description": "Exact affine representation for the split branch as a 3 by 4 augmented matrix.\nEach row holds the three linear coefficients followed by the translation component, all as exact fraction strings.",
                             "items": {
                                 "x-optimade-type": "list",
                                 "x-optimade-unit": "inapplicable",
+                                "x-optimade-dimensions": {
+                                    "names": [
+                                        "dim_affine"
+                                    ],
+                                    "sizes": [
+                                        4
+                                    ]
+                                },
                                 "type": [
                                     "array"
                                 ],
-                                "description": "One affine row.",
+                                "description": "One row of the augmented affine matrix.",
                                 "items": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                    "title": "fraction",
+                                    "title": "Fraction",
                                     "x-optimade-type": "string",
                                     "x-optimade-definition": {
                                         "label": "fraction_core",
@@ -151,18 +169,30 @@ The parent Wyckoff letter is stored in the `parent` field rather than as a JSON 
             {
                 "parent": "c",
                 "splits": [
-                    [
-                        "e",
-                        "x",
-                        "y",
-                        "z"
-                    ],
-                    [
-                        "e",
-                        "-x",
-                        "y",
-                        "-z"
-                    ]
+                    {
+                        "letter": "e",
+                        "xyz": "x,y,z",
+                        "affine": [
+                            [
+                                "1",
+                                "0",
+                                "0",
+                                "0"
+                            ],
+                            [
+                                "0",
+                                "1",
+                                "0",
+                                "0"
+                            ],
+                            [
+                                "0",
+                                "0",
+                                "1",
+                                "0"
+                            ]
+                        ]
+                    }
                 ]
             }
         ]

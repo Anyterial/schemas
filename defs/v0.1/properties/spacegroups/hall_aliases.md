@@ -1,11 +1,11 @@
-# Hall Aliases (property)
+# Hall symbol aliases (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_aliases`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_aliases.md)**  
 **Definition name:** `hall_aliases`
 
-**Property name:** Hall Aliases  
+**Property name:** Hall symbol aliases  
 **Description:** Alternate ASCII Hall symbols or Hall-setting keys associated with the same generated setting.  
 **Type:** list  
 
@@ -29,7 +29,7 @@ Aliases capture duplicate or equivalent Hall-table forms that identify the same 
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_aliases",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Hall Aliases",
+    "title": "Hall symbol aliases",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",

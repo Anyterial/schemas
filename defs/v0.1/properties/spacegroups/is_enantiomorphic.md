@@ -1,11 +1,11 @@
-# Is Enantiomorphic (property)
+# is enantiomorphic (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_enantiomorphic`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_enantiomorphic.md)**  
 **Definition name:** `is_enantiomorphic`
 
-**Property name:** Is Enantiomorphic  
+**Property name:** is enantiomorphic  
 **Description:** Boolean flag indicating whether the space-group type belongs to an enantiomorphic pair.  
 **Type:** boolean  
 
@@ -24,7 +24,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_enantiomorphic",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Is Enantiomorphic",
+    "title": "is enantiomorphic",
     "x-optimade-type": "boolean",
     "x-optimade-definition": {
         "kind": "property",

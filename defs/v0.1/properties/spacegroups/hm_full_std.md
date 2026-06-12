@@ -1,11 +1,11 @@
-# Hermann-Mauguin Full Std (property)
+# Standard full Hermann-Mauguin symbol (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_std`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_std.md)**  
 **Definition name:** `hm_full_std`
 
-**Property name:** Hermann-Mauguin Full Std  
+**Property name:** Standard full Hermann-Mauguin symbol  
 **Description:** The International Tables standard full Hermann-Mauguin symbol for the space-group type.  
 **Type:** string  
 
@@ -29,7 +29,7 @@ Hermann-Mauguin symbols describe crystallographic space groups using lattice-cen
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_std",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Hermann-Mauguin Full Std",
+    "title": "Standard full Hermann-Mauguin symbol",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",

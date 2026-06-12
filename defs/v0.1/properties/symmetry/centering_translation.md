@@ -54,7 +54,7 @@ The translation is represented in fractional coordinates using exact fraction st
     },
     "items": {
         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-        "title": "fraction",
+        "title": "Fraction",
         "x-optimade-type": "string",
         "x-optimade-definition": {
             "label": "fraction_core",

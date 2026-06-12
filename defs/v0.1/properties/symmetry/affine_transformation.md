@@ -97,7 +97,7 @@ When used as a parametric coordinate map, the matrix may be singular because spe
                 "description": "One row of the exact 3 by 3 matrix.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                    "title": "fraction",
+                    "title": "Fraction",
                     "x-optimade-type": "string",
                     "x-optimade-definition": {
                         "label": "fraction_core",
@@ -139,7 +139,7 @@ When used as a parametric coordinate map, the matrix may be singular because spe
             "description": "Exact fractional-coordinate vector part of the affine transformation.",
             "items": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                "title": "fraction",
+                "title": "Fraction",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "label": "fraction_core",

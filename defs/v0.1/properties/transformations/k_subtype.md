@@ -40,6 +40,10 @@ The value is null for non-`k` relations and for records that are not subgroup re
     ],
     "description": "Subtype of a klassengleiche (`k`) subgroup relation.\n\nThe value distinguishes loss of centering translations from enlarged-unit-cell subgroups.\nThe value is null for non-`k` relations and for records that are not subgroup relations.",
     "x-optimade-unit": "inapplicable",
+    "enum": [
+        "loss_of_centering_translation",
+        "enlarged_unit_cell"
+    ],
     "examples": [
         "enlarged_unit_cell",
         "loss_of_centering_translation"

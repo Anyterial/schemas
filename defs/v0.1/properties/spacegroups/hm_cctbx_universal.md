@@ -1,11 +1,11 @@
-# Hermann-Mauguin Cctbx Universal (property)
+# Universal cctbx Hermann-Mauguin symbol (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal.md)**  
 **Definition name:** `hm_cctbx_universal`
 
-**Property name:** Hermann-Mauguin Cctbx Universal  
+**Property name:** Universal cctbx Hermann-Mauguin symbol  
 **Description:** Universal Hermann-Mauguin symbol returned by cctbx for this setting.  
 **Type:** string  
 
@@ -24,7 +24,7 @@ This field records the cctbx-internal universal symbol used during generation. I
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Hermann-Mauguin Cctbx Universal",
+    "title": "Universal cctbx Hermann-Mauguin symbol",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",

@@ -1,11 +1,11 @@
-# Laue Class (property)
+# Laue class (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/laue_class`](https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/laue_class.md)**  
 **Definition name:** `laue_class`
 
-**Property name:** Laue Class  
+**Property name:** Laue class  
 **Description:** The Laue class associated with the space group or point group.  
 **Type:** string  
 
@@ -24,7 +24,7 @@ The Laue class groups point groups that become equivalent when inversion symmetr
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/laue_class",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "Laue Class",
+    "title": "Laue class",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.Laue_class.html"

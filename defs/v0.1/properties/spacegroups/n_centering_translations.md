@@ -9,7 +9,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Description:** Number of centering translations in the conventional cell of the space-group setting.  
 **Type:** integer  
 
-
+When the entry contains a `centering_translations` list, this value MUST equal its length.
 
 **Examples:**
 
@@ -37,7 +37,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "integer",
         "null"
     ],
-    "description": "Number of centering translations in the conventional cell of the space-group setting.",
+    "description": "Number of centering translations in the conventional cell of the space-group setting.\n\nWhen the entry contains a `centering_translations` list, this value MUST equal its length.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         1,
