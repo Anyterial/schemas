@@ -9,7 +9,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Description:** Setting suffix or setting annotation extracted from the cctbx universal Hermann-Mauguin symbol.  
 **Type:** string  
 
-This value is a compact textual description of the coordinate setting portion of the cctbx symbol, for example an origin choice or axis-setting annotation. It is primarily an auxiliary generator field and SHOULD NOT be used as a substitute for the International Tables `setting_it_nc` identifier.
+This value is a compact textual description of the coordinate setting portion of the cctbx symbol, for example an origin choice or axis-setting annotation.
 
 **Examples:**
 
@@ -25,7 +25,6 @@ This value is a compact textual description of the coordinate setting portion of
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Setting",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",
@@ -38,7 +37,7 @@ This value is a compact textual description of the coordinate setting portion of
         "string",
         "null"
     ],
-    "description": "Setting suffix or setting annotation extracted from the cctbx universal Hermann-Mauguin symbol.\n\nThis value is a compact textual description of the coordinate setting portion of the cctbx symbol, for example an origin choice or axis-setting annotation. It is primarily an auxiliary generator field and SHOULD NOT be used as a substitute for the International Tables `setting_it_nc` identifier.",
+    "description": "Setting suffix or setting annotation extracted from the cctbx universal Hermann-Mauguin symbol.\n\nThis value is a compact textual description of the coordinate setting portion of the cctbx symbol, for example an origin choice or axis-setting annotation.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         "(c,a,b)",

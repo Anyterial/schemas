@@ -31,7 +31,6 @@ Hermann-Mauguin symbols describe crystallographic space groups using lattice-cen
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_old",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Hermann-Mauguin Extended Old",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",

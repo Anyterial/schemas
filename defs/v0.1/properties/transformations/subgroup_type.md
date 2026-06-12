@@ -6,10 +6,11 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `subgroup_type`
 
 **Property name:** Maximal subgroup type  
-**Description:** International Tables maximal subgroup class: `t` for translationengleiche or `k` for klassengleiche.  
+**Description:** International Tables maximal subgroup class.  
 **Type:** string  
 
-
+The value is `t` for a translationengleiche subgroup and `k` for a klassengleiche subgroup.
+The field is omitted when the enclosing record is not a maximal subgroup relation.
 
 **Examples:**
 
@@ -25,7 +26,6 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/subgroup_type",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Maximal subgroup type",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",
@@ -35,10 +35,13 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "label": "subgroup_type_transformations"
     },
     "type": [
-        "string",
-        "null"
+        "string"
     ],
-    "description": "International Tables maximal subgroup class: `t` for translationengleiche or `k` for klassengleiche.",
+    "description": "International Tables maximal subgroup class.\n\nThe value is `t` for a translationengleiche subgroup and `k` for a klassengleiche subgroup.\nThe field is omitted when the enclosing record is not a maximal subgroup relation.",
+    "enum": [
+        "t",
+        "k"
+    ],
     "x-optimade-unit": "inapplicable",
     "examples": [
         "k",

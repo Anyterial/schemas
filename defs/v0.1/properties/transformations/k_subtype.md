@@ -6,10 +6,11 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `k_subtype`
 
 **Property name:** Klassengleiche subgroup subtype  
-**Description:** Subtype of a klassengleiche (`k`) subgroup relation. Values distinguish loss of centering translations from enlarged-unit-cell subgroups; the value is null for non-`k` relations.  
+**Description:** Subtype of a klassengleiche (`k`) subgroup relation.  
 **Type:** string  
 
-
+The value distinguishes loss of centering translations from enlarged-unit-cell subgroups.
+The value is null for non-`k` relations and for records that are not subgroup relations.
 
 **Examples:**
 
@@ -25,7 +26,6 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/k_subtype",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Klassengleiche subgroup subtype",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",
@@ -38,7 +38,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "string",
         "null"
     ],
-    "description": "Subtype of a klassengleiche (`k`) subgroup relation. Values distinguish loss of centering translations from enlarged-unit-cell subgroups; the value is null for non-`k` relations.",
+    "description": "Subtype of a klassengleiche (`k`) subgroup relation.\n\nThe value distinguishes loss of centering translations from enlarged-unit-cell subgroups.\nThe value is null for non-`k` relations and for records that are not subgroup relations.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         "enlarged_unit_cell",

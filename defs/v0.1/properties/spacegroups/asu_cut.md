@@ -6,9 +6,10 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `asu_cut`
 
 **Property name:** Asymmetric-unit cut  
-**Description:** One serialized asymmetric-unit half-space cut or logical cut expression.
-Cut objects may recursively refer to other cut objects through `condition`, `lhs`, and `rhs`.  
+**Description:** One serialized asymmetric-unit half-space cut or logical cut expression.  
 **Type:** dictionary  
+
+Cut objects may recursively refer to other cut objects through `condition`, `lhs`, and `rhs`.
 
 **Requirements/Conventions**:
 
@@ -48,7 +49,6 @@ Cut objects may recursively refer to other cut objects through `condition`, `lhs
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_cut",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Asymmetric-unit cut",
-    "$comment": "Reusable Anyterial source definition for one serialized asymmetric-unit cut expression.",
     "x-optimade-type": "dictionary",
     "x-optimade-definition": {
         "kind": "property",
@@ -62,7 +62,7 @@ Cut objects may recursively refer to other cut objects through `condition`, `lhs
         "object",
         "null"
     ],
-    "description": "One serialized asymmetric-unit half-space cut or logical cut expression.\nCut objects may recursively refer to other cut objects through `condition`, `lhs`, and `rhs`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **kind**: REQUIRED; String.\n      Kind of cut expression, for example a half-space cut or a logical expression.\n\n    - **ascii**: OPTIONAL; String.\n      Compact plain-text rendering of the cut expression.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the cut in fractional `x,y,z` notation.\n\n    - **inclusive**: OPTIONAL; Boolean.\n      Whether the cut boundary is included.\n\n    - **normal**: OPTIONAL; List of 3 Fractions (String).\n      Normal vector of a half-space cut.\n\n    - **const**: OPTIONAL; Fraction (String).\n      Right-hand-side constant of a half-space cut.\n\n    - **condition**, **lhs**, **rhs**: OPTIONAL; Dictionary.\n      Recursive cut-expression objects.",
+    "description": "One serialized asymmetric-unit half-space cut or logical cut expression.\n\nCut objects may recursively refer to other cut objects through `condition`, `lhs`, and `rhs`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **kind**: REQUIRED; String.\n      Kind of cut expression, for example a half-space cut or a logical expression.\n\n    - **ascii**: OPTIONAL; String.\n      Compact plain-text rendering of the cut expression.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the cut in fractional `x,y,z` notation.\n\n    - **inclusive**: OPTIONAL; Boolean.\n      Whether the cut boundary is included.\n\n    - **normal**: OPTIONAL; List of 3 Fractions (String).\n      Normal vector of a half-space cut.\n\n    - **const**: OPTIONAL; Fraction (String).\n      Right-hand-side constant of a half-space cut.\n\n    - **condition**, **lhs**, **rhs**: OPTIONAL; Dictionary.\n      Recursive cut-expression objects.",
     "properties": {
         "kind": {
             "x-optimade-type": "string",
@@ -140,7 +140,7 @@ Cut objects may recursively refer to other cut objects through `condition`, `lhs
                     "string",
                     "null"
                 ],
-                "description": "A fraction represented as a string.",
+                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                 "examples": [
                     "2/3",
                     "5/42",
@@ -165,7 +165,7 @@ Cut objects may recursively refer to other cut objects through `condition`, `lhs
                 "string",
                 "null"
             ],
-            "description": "A fraction represented as a string.",
+            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
             "examples": [
                 "2/3",
                 "5/42",
@@ -268,7 +268,7 @@ Cut objects may recursively refer to other cut objects through `condition`, `lhs
                             "string",
                             "null"
                         ],
-                        "description": "A fraction represented as a string.",
+                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                         "examples": [
                             "2/3",
                             "5/42",
@@ -293,7 +293,7 @@ Cut objects may recursively refer to other cut objects through `condition`, `lhs
                         "string",
                         "null"
                     ],
-                    "description": "A fraction represented as a string.",
+                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                     "examples": [
                         "2/3",
                         "5/42",
@@ -398,7 +398,7 @@ Cut objects may recursively refer to other cut objects through `condition`, `lhs
                             "string",
                             "null"
                         ],
-                        "description": "A fraction represented as a string.",
+                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                         "examples": [
                             "2/3",
                             "5/42",
@@ -423,7 +423,7 @@ Cut objects may recursively refer to other cut objects through `condition`, `lhs
                         "string",
                         "null"
                     ],
-                    "description": "A fraction represented as a string.",
+                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                     "examples": [
                         "2/3",
                         "5/42",
@@ -528,7 +528,7 @@ Cut objects may recursively refer to other cut objects through `condition`, `lhs
                             "string",
                             "null"
                         ],
-                        "description": "A fraction represented as a string.",
+                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                         "examples": [
                             "2/3",
                             "5/42",
@@ -553,7 +553,7 @@ Cut objects may recursively refer to other cut objects through `condition`, `lhs
                         "string",
                         "null"
                     ],
-                    "description": "A fraction represented as a string.",
+                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                     "examples": [
                         "2/3",
                         "5/42",

@@ -95,8 +95,9 @@ overflow-wrap: break-word;
 <p><strong>ID: <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc_aliases"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc_aliases</code></a></strong><br>
 <strong>Definition name:</strong> <code>setting_it_nc_aliases</code></p>
 <p><strong>Property name:</strong> International Tables setting-code aliases<br>
-<strong>Description:</strong> Alternative International Tables <code>n:c</code> setting identifiers that refer to the same Hall setting or are otherwise treated as aliases of <code>setting_it_nc</code> by the generator. This field is used only when the source tables expose more than one conventional label for the same generated setting.<br>
+<strong>Description:</strong> A list of International Tables <code>n:c</code> setting identifiers that are alternatives to the one designated as the main one.<br>
 <strong>Type:</strong> list  </p>
+<p>This field is used only when the source tables expose more than one conventional label for the same setting.</p>
 <p><strong>Examples:</strong></p>
 <ul>
 <li><code>["68:1ba-c"]</code></li>
@@ -108,7 +109,6 @@ overflow-wrap: break-word;
 <span class="w">    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc_aliases&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;International Tables setting-code aliases&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;$comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Generated from data-generators JSON-LD fields without external definition URLs.&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;property&quot;</span><span class="p">,</span>
@@ -121,7 +121,7 @@ overflow-wrap: break-word;
 <span class="w">        </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="s2">&quot;null&quot;</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alternative International Tables `n:c` setting identifiers that refer to the same Hall setting or are otherwise treated as aliases of `setting_it_nc` by the generator. This field is used only when the source tables expose more than one conventional label for the same generated setting.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A list of International Tables `n:c` setting identifiers that are alternatives to the one designated as the main one.\n\nThis field is used only when the source tables expose more than one conventional label for the same setting.&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;x-optimade-unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inapplicable&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>

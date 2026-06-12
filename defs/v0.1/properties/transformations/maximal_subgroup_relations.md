@@ -6,10 +6,11 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `maximal_subgroup_relations`
 
 **Property name:** Maximal subgroup relations  
-**Description:** Maximal non-isomorphic subgroup relations for International Tables space-group types.
-Each list item describes all known maximal non-isomorphic subgroup relations for one supergroup IT number.
-The supergroup IT number is stored in `supergroup_it_number` rather than as a JSON dictionary key.  
+**Description:** Maximal non-isomorphic subgroup relations for International Tables space-group types.  
 **Type:** list  
+
+Each list item describes all known maximal non-isomorphic subgroup relations for one supergroup IT number.
+The supergroup IT number is stored in `supergroup_it_number` rather than as a JSON dictionary key.
 
 **Requirements/Conventions**:
 
@@ -31,7 +32,6 @@ The supergroup IT number is stored in `supergroup_it_number` rather than as a JS
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/maximal_subgroup_relations",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Maximal subgroup relations",
-    "$comment": "Anyterial property definition for maximal non-isomorphic subgroup relation metadata.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -45,7 +45,7 @@ The supergroup IT number is stored in `supergroup_it_number` rather than as a JS
         "array",
         "null"
     ],
-    "description": "Maximal non-isomorphic subgroup relations for International Tables space-group types.\nEach list item describes all known maximal non-isomorphic subgroup relations for one supergroup IT number.\nThe supergroup IT number is stored in `supergroup_it_number` rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `supergroup_it_number`, an International Tables space-group number.\n- Each dictionary MUST contain `relations`, a list of subgroup-relation records for that supergroup.\n- Each relation record MUST include the subgroup IT number, subgroup index, subgroup type, and optional klassengleiche subtype.",
+    "description": "Maximal non-isomorphic subgroup relations for International Tables space-group types.\n\nEach list item describes all known maximal non-isomorphic subgroup relations for one supergroup IT number.\nThe supergroup IT number is stored in `supergroup_it_number` rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `supergroup_it_number`, an International Tables space-group number.\n- Each dictionary MUST contain `relations`, a list of subgroup-relation records for that supergroup.\n- Each relation record MUST include the subgroup IT number, subgroup index, subgroup type, and optional klassengleiche subtype.",
     "items": {
         "x-optimade-type": "dictionary",
         "x-optimade-unit": "inapplicable",

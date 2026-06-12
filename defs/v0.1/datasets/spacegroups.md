@@ -183,7 +183,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Asymmetric unit",
-                "$comment": "Bounded non-recursive direct-space asymmetric-unit representation for one space-group setting.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -197,7 +196,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "object",
                     "null"
                 ],
-                "description": "Direct-space asymmetric unit for the space-group setting, represented as a bounded non-recursive set of half-space cuts and boundary ownership rules.\nThe representation is equivalent to the recursive cctbx direct-space ASU cut expression documented by Grosse-Kunstleve et al., Acta Cryst. A67, 269 (2011), but stores the volume, face, edge, and vertex rules in separate fixed-depth tables.\nA point is inside the ASU volume only if all `volume_cuts` pass.\nEach volume cut tests an oriented plane from `planes`: a positive plane value includes the point, a negative value excludes it, and an exactly zero value uses `when_zero`.\nBoundary rules are disjunctive normal form rule tables: the outer `dnf` list is OR, each inner list is AND, and each term tests one oriented plane and uses its own `on_zero` action.\nFace rules may descend to edge rules on equality, edge rules may descend to vertex rules on equality, and vertex rules terminate with include or exclude actions.\n\nThe original cctbx-style recursive data structure can be recovered from this bounded representation with the following routine:\n\n```python\ndef bounded_asu_to_cctbx_recursive_data(bounded):\n    planes = {plane[\"id\"]: plane for plane in bounded[\"planes\"]}\n    rules = {level: {rule[\"id\"]: rule for rule in bounded[f\"{level}_rules\"]}\n             for level in (\"face\", \"edge\", \"vertex\")}\n\n    def expr_from_terms(terms, op):\n        out = terms[0] if terms else None\n        for term in terms[1:]:\n            out = {\"kind\": \"expr\", \"op\": op, \"lhs\": out, \"rhs\": term}\n        return out\n\n    def expr_from_rule(level, rule_id):\n        clauses = []\n        for clause in rules[level][rule_id][\"dnf\"]:\n            terms = [cut_from_action(t[\"plane_id\"], t[\"on_zero\"], level)\n                     for t in clause]\n            clauses.append(expr_from_terms(terms, \"&\"))\n        return expr_from_terms(clauses, \"|\")\n\n    def cut_from_action(plane_id, action, level):\n        plane = planes[plane_id]\n        if action[\"action\"] in (\"include\", \"exclude\"):\n            condition = None\n            inclusive = action[\"action\"] == \"include\"\n        else:\n            next_level = {\"volume\": \"face\", \"face\": \"edge\", \"edge\": \"vertex\"}[level]\n            condition = expr_from_rule(next_level, action[\"rule_id\"])\n            inclusive = True\n        return {\n            \"kind\": \"cut\",\n            \"normal\": plane[\"normal\"],\n            \"const\": plane[\"const\"],\n            \"inclusive\": inclusive,\n            \"condition\": condition,\n        }\n\n    return {\n        \"cuts\": [cut_from_action(cut[\"plane_id\"], cut[\"when_zero\"], \"volume\")\n                 for cut in bounded[\"volume_cuts\"]],\n        \"shape_only_cuts\": [\n            {\n                \"kind\": \"cut\",\n                \"normal\": planes[cut[\"plane_id\"]][\"normal\"],\n                \"const\": planes[cut[\"plane_id\"]][\"const\"],\n                \"inclusive\": True,\n                \"condition\": None,\n            }\n            for cut in bounded[\"volume_cuts\"]\n        ],\n    }\n```\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **planes**: REQUIRED; List of dictionaries.\n      Registry of all oriented affine planes used by volume cuts and boundary rules.\n      The plane value is `normal[0]*x + normal[1]*y + normal[2]*z + const` in fractional coordinates.\n      The positive side of the plane is the inside half-space for the corresponding cut term.\n\n    - **volume\\_cuts**: REQUIRED; List of dictionaries.\n      Top-level volume cuts combined as one conjunction.\n      Each volume cut references one plane and gives explicit actions for positive, negative, and zero plane values.\n\n    - **face\\_rules**: REQUIRED; List of dictionaries.\n      Rule table for two-dimensional face-boundary ownership.\n      Face rules are evaluated only when a volume cut plane value is exactly zero.\n\n    - **edge\\_rules**: REQUIRED; List of dictionaries.\n      Rule table for one-dimensional edge-boundary ownership.\n      Edge rules are evaluated only after a volume cut and a face-level term both evaluate exactly to zero.\n\n    - **vertex\\_rules**: REQUIRED; List of dictionaries.\n      Terminal rule table for zero-dimensional vertex-boundary ownership.\n      Vertex rules cannot descend to another rule level.",
+                "description": "Direct-space asymmetric unit for the space-group setting, represented as a bounded non-recursive set of half-space cuts and boundary ownership rules.\n\nThe representation is equivalent to the recursive cctbx direct-space ASU cut expression documented by Grosse-Kunstleve et al., Acta Cryst. A67, 269 (2011), but stores the volume, face, edge, and vertex rules in separate fixed-depth tables.\nA point is inside the ASU volume only if all `volume_cuts` pass.\nEach volume cut tests an oriented plane from `planes`: a positive plane value includes the point, a negative value excludes it, and an exactly zero value uses `when_zero`.\nBoundary rules are disjunctive normal form rule tables: the outer `dnf` list is OR, each inner list is AND, and each term tests one oriented plane and uses its own `on_zero` action.\nFace rules may descend to edge rules on equality, edge rules may descend to vertex rules on equality, and vertex rules terminate with include or exclude actions.\n\nThe original cctbx-style recursive data structure can be recovered from this bounded representation with the following routine:\n\n```python\ndef bounded_asu_to_cctbx_recursive_data(bounded):\n    planes = {plane[\"id\"]: plane for plane in bounded[\"planes\"]}\n    rules = {level: {rule[\"id\"]: rule for rule in bounded[f\"{level}_rules\"]}\n             for level in (\"face\", \"edge\", \"vertex\")}\n\n    def expr_from_terms(terms, op):\n        out = terms[0] if terms else None\n        for term in terms[1:]:\n            out = {\"kind\": \"expr\", \"op\": op, \"lhs\": out, \"rhs\": term}\n        return out\n\n    def expr_from_rule(level, rule_id):\n        clauses = []\n        for clause in rules[level][rule_id][\"dnf\"]:\n            terms = [cut_from_action(t[\"plane_id\"], t[\"on_zero\"], level)\n                     for t in clause]\n            clauses.append(expr_from_terms(terms, \"&\"))\n        return expr_from_terms(clauses, \"|\")\n\n    def cut_from_action(plane_id, action, level):\n        plane = planes[plane_id]\n        if action[\"action\"] in (\"include\", \"exclude\"):\n            condition = None\n            inclusive = action[\"action\"] == \"include\"\n        else:\n            next_level = {\"volume\": \"face\", \"face\": \"edge\", \"edge\": \"vertex\"}[level]\n            condition = expr_from_rule(next_level, action[\"rule_id\"])\n            inclusive = True\n        return {\n            \"kind\": \"cut\",\n            \"normal\": plane[\"normal\"],\n            \"const\": plane[\"const\"],\n            \"inclusive\": inclusive,\n            \"condition\": condition,\n        }\n\n    return {\n        \"cuts\": [cut_from_action(cut[\"plane_id\"], cut[\"when_zero\"], \"volume\")\n                 for cut in bounded[\"volume_cuts\"]],\n        \"shape_only_cuts\": [\n            {\n                \"kind\": \"cut\",\n                \"normal\": planes[cut[\"plane_id\"]][\"normal\"],\n                \"const\": planes[cut[\"plane_id\"]][\"const\"],\n                \"inclusive\": True,\n                \"condition\": None,\n            }\n            for cut in bounded[\"volume_cuts\"]\n        ],\n    }\n```\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **planes**: REQUIRED; List of dictionaries.\n      Registry of all oriented affine planes used by volume cuts and boundary rules.\n      The plane value is `normal[0]*x + normal[1]*y + normal[2]*z + const` in fractional coordinates.\n      The positive side of the plane is the inside half-space for the corresponding cut term.\n\n    - **volume\\_cuts**: REQUIRED; List of dictionaries.\n      Top-level volume cuts combined as one conjunction.\n      Each volume cut references one plane and gives explicit actions for positive, negative, and zero plane values.\n\n    - **face\\_rules**: REQUIRED; List of dictionaries.\n      Rule table for two-dimensional face-boundary ownership.\n      Face rules are evaluated only when a volume cut plane value is exactly zero.\n\n    - **edge\\_rules**: REQUIRED; List of dictionaries.\n      Rule table for one-dimensional edge-boundary ownership.\n      Edge rules are evaluated only after a volume cut and a face-level term both evaluate exactly to zero.\n\n    - **vertex\\_rules**: REQUIRED; List of dictionaries.\n      Terminal rule table for zero-dimensional vertex-boundary ownership.\n      Vertex rules cannot descend to another rule level.",
                 "properties": {
                     "planes": {
                         "x-optimade-type": "list",
@@ -258,7 +257,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                             "string",
                                             "null"
                                         ],
-                                        "description": "A fraction represented as a string.",
+                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                         "examples": [
                                             "2/3",
                                             "5/42",
@@ -283,7 +282,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                         "string",
                                         "null"
                                     ],
-                                    "description": "A fraction represented as a string.",
+                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                     "examples": [
                                         "2/3",
                                         "5/42",
@@ -754,7 +753,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Asymmetric unit string",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -783,7 +781,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Shape-only asymmetric unit string",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -812,7 +809,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Bravais Type",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.Bravais_type.html"
@@ -844,7 +840,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Cctbx Fft Grid Factors",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -955,7 +950,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Centering translations",
-                "$comment": "Anyterial property definition using the common reusable centering-translation definition.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -969,11 +963,10 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Centering translations of the conventional cell.\nEach list member is one exact fractional-coordinate centering translation as defined by `/properties/symmetry/centering_translation`.\nThe zero translation `(0,0,0)` is listed first.",
+                "description": "Centering translations of the conventional cell.\n\nEach list member is one exact fractional-coordinate centering translation as defined by `/properties/symmetry/centering_translation`.\nThe zero translation `(0,0,0)` is listed first.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/centering_translation",
                     "title": "Centering translation",
-                    "$comment": "Reusable Anyterial definition for one conventional-cell centering translation.",
                     "x-optimade-type": "list",
                     "x-optimade-definition": {
                         "kind": "property",
@@ -987,7 +980,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "array",
                         "null"
                     ],
-                    "description": "One centering translation of a conventional crystallographic cell.\nThe translation is represented in fractional coordinates using exact fraction strings.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of three exact fractional-coordinate components.\n- The zero translation is included in centering-translation lists and is normally listed first.",
+                    "description": "One centering translation of a conventional crystallographic cell.\n\nThe translation is represented in fractional coordinates using exact fraction strings.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of three exact fractional-coordinate components.\n- The zero translation is included in centering-translation lists and is normally listed first.",
                     "x-optimade-dimensions": {
                         "names": [
                             "dim_lattice"
@@ -1011,7 +1004,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                             "string",
                             "null"
                         ],
-                        "description": "A fraction represented as a string.",
+                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                         "examples": [
                             "2/3",
                             "5/42",
@@ -1064,7 +1057,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Centering translations as xyz strings",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1077,7 +1069,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Centering translations of the conventional cell, represented as `x,y,z`-style coordinate shifts. The zero translation is listed first.",
+                "description": "Centering translations of the conventional cell, represented as `x,y,z`-style coordinate shifts.\n\nThe zero translation is listed first.",
                 "x-optimade-unit": "inapplicable",
                 "items": {
                     "x-optimade-type": "string",
@@ -1105,7 +1097,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Centring Type",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.centring_type.html"
@@ -1137,7 +1128,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Crystal System",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.crystal_system.html"
@@ -1169,7 +1159,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hall Symbol",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hall"
@@ -1185,7 +1174,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "string",
                     "null"
                 ],
-                "description": "The Hall symbol for a crystallographic space-group setting.\n\nHall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously. In the Anyterial symmetry data, this property is the plain ASCII Hall symbol corresponding to the Hall-keyed record.",
+                "description": "The Hall symbol for a crystallographic space-group setting.\n\nHall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "P 1",
@@ -1201,7 +1190,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hall Aliases",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1243,7 +1231,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hall entry",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1272,7 +1259,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hermann-Mauguin Entry",
-                "$comment": "Anyterial symmetry property definition based on International Tables for Crystallography Volume B table A1.4.2.7.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1302,7 +1288,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Harker planes",
-                "$comment": "Anyterial property definition for Harker planes or special-position conditions.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1316,7 +1301,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Harker planes of the space group in fractional Patterson coordinates, as generated by cctbx.\nEach entry describes one plane or special-position condition with an expression and optional exact normal, point, and constant data.",
+                "description": "Harker planes of the space group in fractional Patterson coordinates.\n\nEach entry describes one plane or special-position condition with an expression and optional exact normal, point, and constant data.",
                 "items": {
                     "x-optimade-type": "dictionary",
                     "x-optimade-unit": "inapplicable",
@@ -1400,7 +1385,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                     "string",
                                     "null"
                                 ],
-                                "description": "A fraction represented as a string.",
+                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                 "examples": [
                                     "2/3",
                                     "5/42",
@@ -1425,7 +1410,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "string",
                                 "null"
                             ],
-                            "description": "A fraction represented as a string.",
+                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                             "examples": [
                                 "2/3",
                                 "5/42",
@@ -1463,7 +1448,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hermann-Mauguin Cctbx Universal",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1492,7 +1476,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Extended Hermann-Mauguin Symbol",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin_extended"
@@ -1508,7 +1491,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "string",
                     "null"
                 ],
-                "description": "The setting-specific extended Hermann-Mauguin symbol for the space-group setting.\n\nExtended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol. Multi-line values preserve line breaks and spacing used to align the extended symbol components.",
+                "description": "The setting-specific extended Hermann-Mauguin symbol for the space-group setting.\n\nExtended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol.\nMulti-line values preserve line breaks and spacing used to align the extended symbol components.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "P 1",
@@ -1524,7 +1507,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hermann-Mauguin Extended Aliases",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1537,7 +1519,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Alternate ASCII forms of `hm_extended` that are accepted for the same generated setting. The preferred symbol is stored in `hm_extended`.",
+                "description": "Alternate ASCII forms of `hm_extended` that are accepted for the same generated setting.\n\nThe preferred symbol is stored in `hm_extended`.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     [
@@ -1566,7 +1548,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hermann-Mauguin Extended Old",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1595,7 +1576,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Full Hermann-Mauguin Symbol",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_H-M_full.html"
@@ -1627,7 +1607,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hermann-Mauguin Full Aliases",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1640,7 +1619,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Alternate ASCII forms of `hm_full` that are accepted for the same generated setting. The preferred symbol is stored in `hm_full`.",
+                "description": "Alternate ASCII forms of `hm_full` that are accepted for the same generated setting.\n\nThe preferred symbol is stored in `hm_full`.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     [
@@ -1669,7 +1648,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hermann-Mauguin Full Old",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1682,7 +1660,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "string",
                     "null"
                 ],
-                "description": "The older full Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- The extended symbol MAY contain multiple lines; line breaks and spacing encode the alignment used in International Tables extended symbols.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
+                "description": "The older full Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "A b m 2",
@@ -1698,7 +1676,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hermann-Mauguin Full Std",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1711,7 +1688,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "string",
                     "null"
                 ],
-                "description": "The International Tables standard full Hermann-Mauguin symbol for the space-group type.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- The extended symbol MAY contain multiple lines; line breaks and spacing encode the alignment used in International Tables extended symbols.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
+                "description": "The International Tables standard full Hermann-Mauguin symbol for the space-group type.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "P 1",
@@ -1727,7 +1704,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Short Hermann-Mauguin Symbol",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin"
@@ -1743,7 +1719,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "string",
                     "null"
                 ],
-                "description": "The setting-specific short Hermann-Mauguin symbol for the space-group setting.\n\nThis field gives the concise Hermann-Mauguin notation used for the concrete Hall setting represented by the containing record. It is compatible with OPTIMADE's `space_group_symbol_hermann_mauguin` when used as the conventional short Hermann-Mauguin symbol.",
+                "description": "The setting-specific short Hermann-Mauguin symbol for the space-group setting.\n\nThis field gives the concise Hermann-Mauguin notation used for the concrete Hall setting represented by the containing record.\nIt is compatible with OPTIMADE's `space_group_symbol_hermann_mauguin`.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "P 1",
@@ -1759,7 +1735,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hermann-Mauguin Short Aliases",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1772,7 +1747,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Alternate ASCII forms of `hm_short` that are accepted for the same generated setting. The preferred symbol is stored in `hm_short`.",
+                "description": "Alternate ASCII forms of `hm_short` that are accepted for the same generated setting.\n\nThe preferred symbol is stored in `hm_short`.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     [
@@ -1803,7 +1778,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hermann-Mauguin Short Old",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1816,7 +1790,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "string",
                     "null"
                 ],
-                "description": "The older short Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- The extended symbol MAY contain multiple lines; line breaks and spacing encode the alignment used in International Tables extended symbols.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
+                "description": "The older short Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols.\nThe setting-specific fields describe the concrete Hall/International Tables setting of the current record.\nThe `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "A b m 2",
@@ -1831,8 +1805,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Hermann-Mauguin Short Std",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                "title": "Hermann-Mauguin Short Standard",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1845,7 +1818,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "string",
                     "null"
                 ],
-                "description": "The International Tables standard short Hermann-Mauguin symbol for the space-group type.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- The extended symbol MAY contain multiple lines; line breaks and spacing encode the alignment used in International Tables extended symbols.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
+                "description": "The International Tables standard short Hermann-Mauguin symbol for the space-group type.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols.\nThe setting-specific fields describe the concrete Hall/International Tables setting of the current record.\nThe `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "P 1",
@@ -1860,8 +1833,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Is Centric",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                "title": "is centric",
                 "x-optimade-type": "boolean",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1874,7 +1846,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "boolean",
                     "null"
                 ],
-                "description": "Boolean flag indicating whether the cctbx space group is centric.",
+                "description": "Boolean flag indicating whether the space group is centric.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     false,
@@ -1890,7 +1862,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Is Chiral",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "boolean",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1919,7 +1890,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Is Enantiomorphic",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "boolean",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1948,7 +1918,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Is Reference Setting",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "boolean",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1977,7 +1946,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "International Tables Coordinate-System Code",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.IT_coordinate_system_code.html"
@@ -2009,7 +1977,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "International Tables Space-Group Number",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "integer",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -2041,7 +2008,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "It Number Enantiomorphic",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2054,7 +2020,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "integer",
                     "null"
                 ],
-                "description": "International Tables number of the enantiomorphic partner space group, when one exists. The value is null for space groups without a distinct enantiomorphic partner.",
+                "description": "International Tables number of the enantiomorphic partner space group, when one exists.\n\nThe value is null for space groups without a distinct enantiomorphic partner.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     78,
@@ -2070,7 +2036,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Laue Class",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.Laue_class.html"
@@ -2101,8 +2066,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "N Centering Translations",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                "title": "Number of centering translations",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2123,28 +2087,27 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                 ]
             },
             "n_pointgroup_symops": {
-                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_pointgroup_symops",
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops",
                 "x-optimade-requirements": {
                     "support": "may",
                     "sortable": false,
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "N Pointgroup Symops",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                "title": "number of pointgroup symops",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
                     "version": "0.1.0",
                     "format": "1.3",
                     "name": "n_pointgroup_symops",
-                    "label": "n_pointgroup_symops_spacegroups"
+                    "label": "n_pointgroup_symops_pointgroups"
                 },
                 "type": [
                     "integer",
                     "null"
                 ],
-                "description": "Number of point-group symmetry operations represented by the space group, excluding centering translations.",
+                "description": "Number of point-group symmetry operations.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     1,
@@ -2159,8 +2122,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "N Symops",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                "title": "number of symops",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2189,7 +2151,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Point-Group Hermann-Mauguin Symbol",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.point_group_H-M.html"
@@ -2213,7 +2174,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                 ]
             },
             "schoenflies": {
-                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies",
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies",
                 "x-optimade-requirements": {
                     "support": "may",
                     "sortable": false,
@@ -2221,7 +2182,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Schoenflies Symbol",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_Schoenflies.html"
@@ -2231,7 +2191,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "version": "0.1.0",
                     "format": "1.3",
                     "name": "schoenflies",
-                    "label": "schoenflies_spacegroups"
+                    "label": "schoenflies_pointgroups"
                 },
                 "type": [
                     "string",
@@ -2239,6 +2199,238 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                 ],
                 "description": "The Schoenflies symbol for the space-group type.\n\nThe ASCII form follows the CIF convention for `_space_group.name_Schoenflies`, using a period to separate the Schoenflies point-group symbol from the superscript index.",
                 "x-optimade-unit": "inapplicable",
+                "enum": [
+                    "C1.1",
+                    "Ci.1",
+                    "C2.1",
+                    "C2.2",
+                    "C2.3",
+                    "Cs.1",
+                    "Cs.2",
+                    "Cs.3",
+                    "Cs.4",
+                    "C2h.1",
+                    "C2h.2",
+                    "C2h.3",
+                    "C2h.4",
+                    "C2h.5",
+                    "C2h.6",
+                    "D2.1",
+                    "D2.2",
+                    "D2.3",
+                    "D2.4",
+                    "D2.5",
+                    "D2.6",
+                    "D2.7",
+                    "D2.8",
+                    "D2.9",
+                    "C2v.1",
+                    "C2v.2",
+                    "C2v.3",
+                    "C2v.4",
+                    "C2v.5",
+                    "C2v.6",
+                    "C2v.7",
+                    "C2v.8",
+                    "C2v.9",
+                    "C2v.10",
+                    "C2v.11",
+                    "C2v.12",
+                    "C2v.13",
+                    "C2v.14",
+                    "C2v.15",
+                    "C2v.16",
+                    "C2v.17",
+                    "C2v.18",
+                    "C2v.19",
+                    "C2v.20",
+                    "C2v.21",
+                    "C2v.22",
+                    "D2h.1",
+                    "D2h.2",
+                    "D2h.3",
+                    "D2h.4",
+                    "D2h.5",
+                    "D2h.6",
+                    "D2h.7",
+                    "D2h.8",
+                    "D2h.9",
+                    "D2h.10",
+                    "D2h.11",
+                    "D2h.12",
+                    "D2h.13",
+                    "D2h.14",
+                    "D2h.15",
+                    "D2h.16",
+                    "D2h.17",
+                    "D2h.18",
+                    "D2h.19",
+                    "D2h.20",
+                    "D2h.21",
+                    "D2h.22",
+                    "D2h.23",
+                    "D2h.24",
+                    "D2h.25",
+                    "D2h.26",
+                    "D2h.27",
+                    "D2h.28",
+                    "C4.1",
+                    "C4.2",
+                    "C4.3",
+                    "C4.4",
+                    "C4.5",
+                    "C4.6",
+                    "S4.1",
+                    "S4.2",
+                    "C4h.1",
+                    "C4h.2",
+                    "C4h.3",
+                    "C4h.4",
+                    "C4h.5",
+                    "C4h.6",
+                    "D4.1",
+                    "D4.2",
+                    "D4.3",
+                    "D4.4",
+                    "D4.5",
+                    "D4.6",
+                    "D4.7",
+                    "D4.8",
+                    "D4.9",
+                    "D4.10",
+                    "C4v.1",
+                    "C4v.2",
+                    "C4v.3",
+                    "C4v.4",
+                    "C4v.5",
+                    "C4v.6",
+                    "C4v.7",
+                    "C4v.8",
+                    "C4v.9",
+                    "C4v.10",
+                    "C4v.11",
+                    "C4v.12",
+                    "D2d.1",
+                    "D2d.2",
+                    "D2d.3",
+                    "D2d.4",
+                    "D2d.5",
+                    "D2d.6",
+                    "D2d.7",
+                    "D2d.8",
+                    "D2d.9",
+                    "D2d.10",
+                    "D2d.11",
+                    "D2d.12",
+                    "D4h.1",
+                    "D4h.2",
+                    "D4h.3",
+                    "D4h.4",
+                    "D4h.5",
+                    "D4h.6",
+                    "D4h.7",
+                    "D4h.8",
+                    "D4h.9",
+                    "D4h.10",
+                    "D4h.11",
+                    "D4h.12",
+                    "D4h.13",
+                    "D4h.14",
+                    "D4h.15",
+                    "D4h.16",
+                    "D4h.17",
+                    "D4h.18",
+                    "D4h.19",
+                    "D4h.20",
+                    "C3.1",
+                    "C3.2",
+                    "C3.3",
+                    "C3.4",
+                    "C3i.1",
+                    "C3i.2",
+                    "D3.1",
+                    "D3.2",
+                    "D3.3",
+                    "D3.4",
+                    "D3.5",
+                    "D3.6",
+                    "D3.7",
+                    "C3v.1",
+                    "C3v.2",
+                    "C3v.3",
+                    "C3v.4",
+                    "C3v.5",
+                    "C3v.6",
+                    "D3d.1",
+                    "D3d.2",
+                    "D3d.3",
+                    "D3d.4",
+                    "D3d.5",
+                    "D3d.6",
+                    "C6.1",
+                    "C6.2",
+                    "C6.3",
+                    "C6.4",
+                    "C6.5",
+                    "C6.6",
+                    "C3h.1",
+                    "C6h.1",
+                    "C6h.2",
+                    "D6.1",
+                    "D6.2",
+                    "D6.3",
+                    "D6.4",
+                    "D6.5",
+                    "D6.6",
+                    "C6v.1",
+                    "C6v.2",
+                    "C6v.3",
+                    "C6v.4",
+                    "D3h.1",
+                    "D3h.2",
+                    "D3h.3",
+                    "D3h.4",
+                    "D6h.1",
+                    "D6h.2",
+                    "D6h.3",
+                    "D6h.4",
+                    "T.1",
+                    "T.2",
+                    "T.3",
+                    "T.4",
+                    "T.5",
+                    "Th.1",
+                    "Th.2",
+                    "Th.3",
+                    "Th.4",
+                    "Th.5",
+                    "Th.6",
+                    "Th.7",
+                    "O.1",
+                    "O.2",
+                    "O.3",
+                    "O.4",
+                    "O.5",
+                    "O.6",
+                    "O.7",
+                    "O.8",
+                    "Td.1",
+                    "Td.2",
+                    "Td.3",
+                    "Td.4",
+                    "Td.5",
+                    "Td.6",
+                    "Oh.1",
+                    "Oh.2",
+                    "Oh.3",
+                    "Oh.4",
+                    "Oh.5",
+                    "Oh.6",
+                    "Oh.7",
+                    "Oh.8",
+                    "Oh.9",
+                    "Oh.10"
+                ],
                 "examples": [
                     "C1.1",
                     "C2.3"
@@ -2253,7 +2445,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Setting",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2266,7 +2457,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "string",
                     "null"
                 ],
-                "description": "Setting suffix or setting annotation extracted from the cctbx universal Hermann-Mauguin symbol.\n\nThis value is a compact textual description of the coordinate setting portion of the cctbx symbol, for example an origin choice or axis-setting annotation. It is primarily an auxiliary generator field and SHOULD NOT be used as a substitute for the International Tables `setting_it_nc` identifier.",
+                "description": "Setting suffix or setting annotation extracted from the cctbx universal Hermann-Mauguin symbol.\n\nThis value is a compact textual description of the coordinate setting portion of the cctbx symbol, for example an origin choice or axis-setting annotation.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "(c,a,b)",
@@ -2282,7 +2473,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "International Tables setting code n:c",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2295,7 +2485,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "string",
                     "null"
                 ],
-                "description": "International Tables setting identifier in `n:c` notation.\n\nThe part before the colon is the International Tables space-group number. The part after the colon is the coordinate-system or origin-choice qualifier used to distinguish settings that share the same IT number.\n\n**Requirements/Conventions**:\n\n- Triclinic, hexagonal, and many unique settings use only the IT number, for example `1`.\n- Monoclinic settings use qualifiers such as `b1`, `-b1`, `c2`, or `a3`.\n- Orthorhombic settings use qualifiers such as `abc`, `cab`, `1abc`, or `2bca` when needed.\n- Tetragonal and cubic origin choices use qualifiers such as `1` and `2`; trigonal axis choices use qualifiers such as `h` and `r`.",
+                "description": "International Tables setting identifier in `n:c` notation.\n\nThe part before the colon is the International Tables space-group number.\nThe part after the colon is the coordinate-system or origin-choice qualifier used to distinguish settings that share the same IT number.\n\n**Requirements/Conventions**:\n\n- Triclinic, hexagonal, and many unique settings use only the IT number, for example `1`.\n- Monoclinic settings use qualifiers such as `b1`, `-b1`, `c2`, or `a3`.\n- Orthorhombic settings use qualifiers such as `abc`, `cab`, `1abc`, or `2bca` when needed.\n- Tetragonal and cubic origin choices use qualifiers such as `1` and `2`; trigonal axis choices use qualifiers such as `h` and `r`.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "1",
@@ -2311,7 +2501,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "International Tables setting-code aliases",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2324,7 +2513,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Alternative International Tables `n:c` setting identifiers that refer to the same Hall setting or are otherwise treated as aliases of `setting_it_nc` by the generator. This field is used only when the source tables expose more than one conventional label for the same generated setting.",
+                "description": "A list of International Tables `n:c` setting identifiers that are alternatives to the one designated as the main one.\n\nThis field is used only when the source tables expose more than one conventional label for the same setting.",
                 "x-optimade-unit": "inapplicable",
                 "items": {
                     "x-optimade-type": "string",
@@ -2353,7 +2542,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Setting Plaintext",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2382,7 +2570,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Space-group symbols",
-                "$comment": "Ordered Anyterial table of conventional space-group symbols.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2396,7 +2583,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Ordered table of conventional space-group symbol rows.\nEach row describes one Hall setting where the International Tables symbol data is available, including the IT coordinate-system code, Hall symbol, IT number, and Hermann-Mauguin symbols.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary SHOULD contain the setting identifier `setting_it_nc`, the Hall symbol `hall`, the International Tables number `it_number`, and the setting-specific Hermann-Mauguin symbols `hm_short`, `hm_full`, and `hm_extended` when available.\n- The order SHOULD follow the conventional ITA/Hall setting order used by the generated `symmetry_basics` space-group table.",
+                "description": "Ordered table of conventional space-group symbol rows.\n\nEach row describes one Hall setting where the International Tables symbol data is available, including the IT coordinate-system code, Hall symbol, IT number, and Hermann-Mauguin symbols.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary SHOULD contain the setting identifier `setting_it_nc`, the Hall symbol `hall`, the International Tables number `it_number`, and the setting-specific Hermann-Mauguin symbols `hm_short`, `hm_full`, and `hm_extended` when available.\n- The order SHOULD follow the conventional ITA/Hall setting order used by the generated `symmetry_basics` space-group table.",
                 "items": {
                     "x-optimade-type": "dictionary",
                     "x-optimade-unit": "inapplicable",
@@ -2409,7 +2596,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "setting_it_nc": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc",
                             "title": "International Tables setting code n:c",
-                            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -2422,7 +2608,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "string",
                                 "null"
                             ],
-                            "description": "International Tables setting identifier in `n:c` notation.\n\nThe part before the colon is the International Tables space-group number. The part after the colon is the coordinate-system or origin-choice qualifier used to distinguish settings that share the same IT number.\n\n**Requirements/Conventions**:\n\n- Triclinic, hexagonal, and many unique settings use only the IT number, for example `1`.\n- Monoclinic settings use qualifiers such as `b1`, `-b1`, `c2`, or `a3`.\n- Orthorhombic settings use qualifiers such as `abc`, `cab`, `1abc`, or `2bca` when needed.\n- Tetragonal and cubic origin choices use qualifiers such as `1` and `2`; trigonal axis choices use qualifiers such as `h` and `r`.",
+                            "description": "International Tables setting identifier in `n:c` notation.\n\nThe part before the colon is the International Tables space-group number.\nThe part after the colon is the coordinate-system or origin-choice qualifier used to distinguish settings that share the same IT number.\n\n**Requirements/Conventions**:\n\n- Triclinic, hexagonal, and many unique settings use only the IT number, for example `1`.\n- Monoclinic settings use qualifiers such as `b1`, `-b1`, `c2`, or `a3`.\n- Orthorhombic settings use qualifiers such as `abc`, `cab`, `1abc`, or `2bca` when needed.\n- Tetragonal and cubic origin choices use qualifiers such as `1` and `2`; trigonal axis choices use qualifiers such as `h` and `r`.",
                             "x-optimade-unit": "inapplicable",
                             "examples": [
                                 "1",
@@ -2432,7 +2618,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "hall_entry": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
                             "title": "Hall entry",
-                            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -2455,7 +2640,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "hall": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall",
                             "title": "Hall Symbol",
-                            "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                             "x-optimade-type": "string",
                             "x-compatibility": [
                                 "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hall"
@@ -2471,7 +2655,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "string",
                                 "null"
                             ],
-                            "description": "The Hall symbol for a crystallographic space-group setting.\n\nHall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously. In the Anyterial symmetry data, this property is the plain ASCII Hall symbol corresponding to the Hall-keyed record.",
+                            "description": "The Hall symbol for a crystallographic space-group setting.\n\nHall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously.",
                             "x-optimade-unit": "inapplicable",
                             "examples": [
                                 "P 1",
@@ -2481,7 +2665,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "it_number": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
                             "title": "International Tables Space-Group Number",
-                            "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                             "x-optimade-type": "integer",
                             "x-compatibility": [
                                 "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -2507,7 +2690,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "hm_short": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short",
                             "title": "Short Hermann-Mauguin Symbol",
-                            "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                             "x-optimade-type": "string",
                             "x-compatibility": [
                                 "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin"
@@ -2523,7 +2705,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "string",
                                 "null"
                             ],
-                            "description": "The setting-specific short Hermann-Mauguin symbol for the space-group setting.\n\nThis field gives the concise Hermann-Mauguin notation used for the concrete Hall setting represented by the containing record. It is compatible with OPTIMADE's `space_group_symbol_hermann_mauguin` when used as the conventional short Hermann-Mauguin symbol.",
+                            "description": "The setting-specific short Hermann-Mauguin symbol for the space-group setting.\n\nThis field gives the concise Hermann-Mauguin notation used for the concrete Hall setting represented by the containing record.\nIt is compatible with OPTIMADE's `space_group_symbol_hermann_mauguin`.",
                             "x-optimade-unit": "inapplicable",
                             "examples": [
                                 "P 1",
@@ -2533,7 +2715,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "hm_full": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full",
                             "title": "Full Hermann-Mauguin Symbol",
-                            "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                             "x-optimade-type": "string",
                             "x-compatibility": [
                                 "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_H-M_full.html"
@@ -2559,7 +2740,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "hm_extended": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended",
                             "title": "Extended Hermann-Mauguin Symbol",
-                            "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                             "x-optimade-type": "string",
                             "x-compatibility": [
                                 "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin_extended"
@@ -2575,7 +2755,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "string",
                                 "null"
                             ],
-                            "description": "The setting-specific extended Hermann-Mauguin symbol for the space-group setting.\n\nExtended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol. Multi-line values preserve line breaks and spacing used to align the extended symbol components.",
+                            "description": "The setting-specific extended Hermann-Mauguin symbol for the space-group setting.\n\nExtended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol.\nMulti-line values preserve line breaks and spacing used to align the extended symbol components.",
                             "x-optimade-unit": "inapplicable",
                             "examples": [
                                 "P 1",
@@ -2585,7 +2765,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "hm_extended_old": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_old",
                             "title": "Hermann-Mauguin Extended Old",
-                            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -2608,7 +2787,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "hm_short_old": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_old",
                             "title": "Hermann-Mauguin Short Old",
-                            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -2621,7 +2799,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "string",
                                 "null"
                             ],
-                            "description": "The older short Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- The extended symbol MAY contain multiple lines; line breaks and spacing encode the alignment used in International Tables extended symbols.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
+                            "description": "The older short Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols.\nThe setting-specific fields describe the concrete Hall/International Tables setting of the current record.\nThe `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
                             "x-optimade-unit": "inapplicable",
                             "examples": [
                                 "A b m 2",
@@ -2631,7 +2809,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "hm_full_old": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_old",
                             "title": "Hermann-Mauguin Full Old",
-                            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                             "x-optimade-type": "string",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -2644,7 +2821,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "string",
                                 "null"
                             ],
-                            "description": "The older full Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- The extended symbol MAY contain multiple lines; line breaks and spacing encode the alignment used in International Tables extended symbols.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
+                            "description": "The older full Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
                             "x-optimade-unit": "inapplicable",
                             "examples": [
                                 "A b m 2",
@@ -2675,7 +2852,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Spglib Hall",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2688,7 +2864,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "string",
                     "null"
                 ],
-                "description": "Hall setting selected by spglib for the space-group type or setting, represented as a normalized Hall key.",
+                "description": "The standard Hall setting used in spglib, e.g., for a space group number.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "P 1",
@@ -2704,7 +2880,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Spglib Hall Numbers",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2717,7 +2892,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "spglib Hall numbers corresponding to the generated setting.",
+                "description": "A \"Hall number\" as assigned by spglib.",
                 "x-optimade-unit": "inapplicable",
                 "items": {
                     "x-optimade-type": "integer",
@@ -2744,7 +2919,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Structure Seminvariants",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2757,7 +2931,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Structure seminvariant vectors and moduli for the space-group setting. These characterize phase restrictions and FFT grid constraints associated with the symmetry.",
+                "description": "Structure seminvariant vectors and moduli for the space-group setting.\n\nThese characterize phase restrictions and FFT grid constraints associated with the symmetry.\nThey are on format of a list of dictionaries.\nThe dictionaries MUST contain the fields:\n\n- vector: List of Integer. One structure-seminvariant condition vector.\n- modulus: Integer. Modulus for the seminvariant congruence. ",
                 "x-optimade-unit": "inapplicable",
                 "items": {
                     "x-optimade-type": "dictionary",
@@ -2855,7 +3029,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Symmetry operations",
-                "$comment": "Anyterial property definition using the common reusable op object definition.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2869,11 +3042,10 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Full list of symmetry-operation descriptors for a space-group setting.\nEach list member is a `op` object as defined by `/properties/symmetry/op`.\nFor space-group operations, generated data currently uses `rot_type`, `axis`, `sense`, `screw_glide`, and `origin_shift`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/properties/symmetry/op`.",
+                "description": "Full list of symmetry-operation descriptors for a space-group setting.\n\nEach list member is an operation on the format defined by the property definition: https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
                     "title": "Operation",
-                    "$comment": "Reusable Anyterial definition for one classified crystallographic operation descriptor.",
                     "x-optimade-type": "dictionary",
                     "x-optimade-definition": {
                         "kind": "property",
@@ -2887,12 +3059,11 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "object",
                         "null"
                     ],
-                    "description": "A classified crystallographic operation acting within one coordinate setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **type**: OPTIONAL; Integer.\n      Legacy numeric operation-type code used by point-group operation descriptors.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                    "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
                     "properties": {
                         "affine_transformation": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
                             "title": "Affine transformation",
-                            "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
                             "x-optimade-type": "dictionary",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -2906,7 +3077,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "object",
                                 "null"
                             ],
-                            "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                            "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
                             "properties": {
                                 "matrix": {
                                     "x-optimade-type": "list",
@@ -2956,7 +3127,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "A fraction represented as a string.",
+                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                             "examples": [
                                                 "2/3",
                                                 "5/42",
@@ -2998,7 +3169,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                             "string",
                                             "null"
                                         ],
-                                        "description": "A fraction represented as a string.",
+                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                         "examples": [
                                             "2/3",
                                             "5/42",
@@ -3009,13 +3180,31 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                     }
                                 },
                                 "xyz": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                    "title": "Operation xyz",
                                     "x-optimade-type": "string",
+                                    "x-compatibility": [
+                                        "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                        "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                    ],
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "op_xyz",
+                                        "label": "op_xyz_symmetry"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "string",
                                         "null"
                                     ],
-                                    "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                    "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                    "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                                    "examples": [
+                                        "-x,-y,z",
+                                        "x,1/2-y,1/2+z"
+                                    ]
                                 },
                                 "det": {
                                     "x-optimade-type": "integer",
@@ -3074,15 +3263,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "null"
                             ],
                             "description": "Symbolic crystallographic operation-type label for the linear part."
-                        },
-                        "type": {
-                            "x-optimade-type": "integer",
-                            "x-optimade-unit": "inapplicable",
-                            "type": [
-                                "integer",
-                                "null"
-                            ],
-                            "description": "Legacy numeric point-group operation-type code."
                         },
                         "axis": {
                             "x-optimade-type": "list",
@@ -3149,7 +3329,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                     "string",
                                     "null"
                                 ],
-                                "description": "A fraction represented as a string.",
+                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                 "examples": [
                                     "2/3",
                                     "5/42",
@@ -3190,7 +3370,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                     "string",
                                     "null"
                                 ],
-                                "description": "A fraction represented as a string.",
+                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                 "examples": [
                                     "2/3",
                                     "5/42",
@@ -3317,7 +3497,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Symmetry operations modulo centering translations",
-                "$comment": "Anyterial property definition using the common reusable op object definition.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -3331,11 +3510,10 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Representative symmetry-operation descriptors modulo centering translations.\nEach list member is a `op` object as defined by `/properties/symmetry/op`.\nFor space-group operations, generated data currently uses `rot_type`, `axis`, `sense`, `screw_glide`, and `origin_shift`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/properties/symmetry/op`.",
+                "description": "Representative symmetry-operation descriptors modulo centering translations.\n\nEach list member is an operation on the format defined by the property definition: https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
                     "title": "Operation",
-                    "$comment": "Reusable Anyterial definition for one classified crystallographic operation descriptor.",
                     "x-optimade-type": "dictionary",
                     "x-optimade-definition": {
                         "kind": "property",
@@ -3349,12 +3527,11 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "object",
                         "null"
                     ],
-                    "description": "A classified crystallographic operation acting within one coordinate setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **type**: OPTIONAL; Integer.\n      Legacy numeric operation-type code used by point-group operation descriptors.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                    "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
                     "properties": {
                         "affine_transformation": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
                             "title": "Affine transformation",
-                            "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
                             "x-optimade-type": "dictionary",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -3368,7 +3545,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "object",
                                 "null"
                             ],
-                            "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                            "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
                             "properties": {
                                 "matrix": {
                                     "x-optimade-type": "list",
@@ -3418,7 +3595,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "A fraction represented as a string.",
+                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                             "examples": [
                                                 "2/3",
                                                 "5/42",
@@ -3460,7 +3637,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                             "string",
                                             "null"
                                         ],
-                                        "description": "A fraction represented as a string.",
+                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                         "examples": [
                                             "2/3",
                                             "5/42",
@@ -3471,13 +3648,31 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                     }
                                 },
                                 "xyz": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                    "title": "Operation xyz",
                                     "x-optimade-type": "string",
+                                    "x-compatibility": [
+                                        "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                        "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                    ],
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "op_xyz",
+                                        "label": "op_xyz_symmetry"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "string",
                                         "null"
                                     ],
-                                    "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                    "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                    "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                                    "examples": [
+                                        "-x,-y,z",
+                                        "x,1/2-y,1/2+z"
+                                    ]
                                 },
                                 "det": {
                                     "x-optimade-type": "integer",
@@ -3536,15 +3731,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "null"
                             ],
                             "description": "Symbolic crystallographic operation-type label for the linear part."
-                        },
-                        "type": {
-                            "x-optimade-type": "integer",
-                            "x-optimade-unit": "inapplicable",
-                            "type": [
-                                "integer",
-                                "null"
-                            ],
-                            "description": "Legacy numeric point-group operation-type code."
                         },
                         "axis": {
                             "x-optimade-type": "list",
@@ -3611,7 +3797,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                     "string",
                                     "null"
                                 ],
-                                "description": "A fraction represented as a string.",
+                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                 "examples": [
                                     "2/3",
                                     "5/42",
@@ -3652,7 +3838,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                     "string",
                                     "null"
                                 ],
-                                "description": "A fraction represented as a string.",
+                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                 "examples": [
                                     "2/3",
                                     "5/42",
@@ -3779,7 +3965,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Symmetry operations modulo centering in x,y,z notation",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -3795,50 +3980,8 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                 "description": "Symmetry operations modulo centering translations in fractional `x,y,z` notation, ordered consistently with `symops_mod_centering`.",
                 "x-optimade-unit": "inapplicable",
                 "items": {
-                    "x-optimade-type": "string",
-                    "x-optimade-unit": "inapplicable",
-                    "type": [
-                        "string"
-                    ]
-                },
-                "examples": [
-                    [
-                        "x,y,z"
-                    ],
-                    [
-                        "-x,y,-z",
-                        "x,y,z"
-                    ]
-                ]
-            },
-            "symops_generators": {
-                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators",
-                "x-optimade-requirements": {
-                    "support": "may",
-                    "sortable": false,
-                    "query-support": "none",
-                    "response-level": "may"
-                },
-                "title": "Symmetry operation generators",
-                "$comment": "Anyterial property definition using the common reusable op object definition.",
-                "x-optimade-type": "list",
-                "x-optimade-definition": {
-                    "kind": "property",
-                    "version": "0.1.0",
-                    "format": "1.3",
-                    "name": "symops_generators",
-                    "label": "symops_generators_spacegroups"
-                },
-                "x-optimade-unit": "inapplicable",
-                "type": [
-                    "array",
-                    "null"
-                ],
-                "description": "Minimal generator subset of the full symmetry-operation group for a space-group setting.\nEach list member is a `op` object as defined by `/properties/symmetry/op`.\nFor space-group operations, generated data currently uses `rot_type`, `axis`, `sense`, `screw_glide`, and `origin_shift`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/properties/symmetry/op`.",
-                "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
                     "title": "Operation",
-                    "$comment": "Reusable Anyterial definition for one classified crystallographic operation descriptor.",
                     "x-optimade-type": "dictionary",
                     "x-optimade-definition": {
                         "kind": "property",
@@ -3852,12 +3995,11 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "object",
                         "null"
                     ],
-                    "description": "A classified crystallographic operation acting within one coordinate setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **type**: OPTIONAL; Integer.\n      Legacy numeric operation-type code used by point-group operation descriptors.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                    "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
                     "properties": {
                         "affine_transformation": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
                             "title": "Affine transformation",
-                            "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
                             "x-optimade-type": "dictionary",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -3871,7 +4013,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "object",
                                 "null"
                             ],
-                            "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                            "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
                             "properties": {
                                 "matrix": {
                                     "x-optimade-type": "list",
@@ -3921,7 +4063,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "A fraction represented as a string.",
+                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                             "examples": [
                                                 "2/3",
                                                 "5/42",
@@ -3963,7 +4105,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                             "string",
                                             "null"
                                         ],
-                                        "description": "A fraction represented as a string.",
+                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                         "examples": [
                                             "2/3",
                                             "5/42",
@@ -3974,13 +4116,31 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                     }
                                 },
                                 "xyz": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                    "title": "Operation xyz",
                                     "x-optimade-type": "string",
+                                    "x-compatibility": [
+                                        "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                        "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                    ],
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "op_xyz",
+                                        "label": "op_xyz_symmetry"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "string",
                                         "null"
                                     ],
-                                    "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                    "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                    "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                                    "examples": [
+                                        "-x,-y,z",
+                                        "x,1/2-y,1/2+z"
+                                    ]
                                 },
                                 "det": {
                                     "x-optimade-type": "integer",
@@ -4039,15 +4199,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "null"
                             ],
                             "description": "Symbolic crystallographic operation-type label for the linear part."
-                        },
-                        "type": {
-                            "x-optimade-type": "integer",
-                            "x-optimade-unit": "inapplicable",
-                            "type": [
-                                "integer",
-                                "null"
-                            ],
-                            "description": "Legacy numeric point-group operation-type code."
                         },
                         "axis": {
                             "x-optimade-type": "list",
@@ -4114,7 +4265,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                     "string",
                                     "null"
                                 ],
-                                "description": "A fraction represented as a string.",
+                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                 "examples": [
                                     "2/3",
                                     "5/42",
@@ -4155,7 +4306,436 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                     "string",
                                     "null"
                                 ],
-                                "description": "A fraction represented as a string.",
+                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
+                                "examples": [
+                                    "2/3",
+                                    "5/42",
+                                    "10",
+                                    "0"
+                                ],
+                                "x-optimade-unit": "inapplicable"
+                            }
+                        },
+                        "is_proper": {
+                            "x-optimade-type": "boolean",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "boolean",
+                                "null"
+                            ],
+                            "description": "Whether the linear operation is proper."
+                        }
+                    },
+                    "examples": [
+                        {
+                            "affine_transformation": {
+                                "matrix": [
+                                    [
+                                        "-1",
+                                        "0",
+                                        "0"
+                                    ],
+                                    [
+                                        "0",
+                                        "-1",
+                                        "0"
+                                    ],
+                                    [
+                                        "0",
+                                        "0",
+                                        "1"
+                                    ]
+                                ],
+                                "vector": [
+                                    "0",
+                                    "0",
+                                    "0"
+                                ],
+                                "xyz": "-x,-y,z",
+                                "det": 1,
+                                "is_orthogonal": true
+                            },
+                            "rot_type": "2",
+                            "sense": 0,
+                            "axis": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "screw_glide": [
+                                "0",
+                                "0",
+                                "0"
+                            ],
+                            "origin_shift": [
+                                "0",
+                                "0",
+                                "0"
+                            ]
+                        }
+                    ]
+                },
+                "examples": [
+                    [
+                        "x,y,z"
+                    ],
+                    [
+                        "-x,y,-z",
+                        "x,y,z"
+                    ]
+                ]
+            },
+            "symops_generators": {
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators",
+                "x-optimade-requirements": {
+                    "support": "may",
+                    "sortable": false,
+                    "query-support": "none",
+                    "response-level": "may"
+                },
+                "title": "Symmetry operation generators",
+                "x-optimade-type": "list",
+                "x-optimade-definition": {
+                    "kind": "property",
+                    "version": "0.1.0",
+                    "format": "1.3",
+                    "name": "symops_generators",
+                    "label": "symops_generators_spacegroups"
+                },
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "array",
+                    "null"
+                ],
+                "description": "Minimal generator subset of the full symmetry-operation group for a space-group setting.\n\nEach list member is an operation on the format defined by the property definition: https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
+                "items": {
+                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
+                    "title": "Operation",
+                    "x-optimade-type": "dictionary",
+                    "x-optimade-definition": {
+                        "kind": "property",
+                        "version": "0.1.0",
+                        "format": "1.3",
+                        "name": "op",
+                        "label": "op_symmetry"
+                    },
+                    "x-optimade-unit": "inapplicable",
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                    "properties": {
+                        "affine_transformation": {
+                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+                            "title": "Affine transformation",
+                            "x-optimade-type": "dictionary",
+                            "x-optimade-definition": {
+                                "kind": "property",
+                                "version": "0.1.0",
+                                "format": "1.3",
+                                "name": "affine_transformation",
+                                "label": "affine_transformation_symmetry"
+                            },
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                            "properties": {
+                                "matrix": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice",
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3,
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Exact 3 by 3 matrix part of the affine transformation.",
+                                    "items": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "x-optimade-dimensions": {
+                                            "names": [
+                                                "dim_lattice"
+                                            ],
+                                            "sizes": [
+                                                3
+                                            ]
+                                        },
+                                        "type": [
+                                            "array"
+                                        ],
+                                        "description": "One row of the exact 3 by 3 matrix.",
+                                        "items": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                            "title": "fraction",
+                                            "x-optimade-type": "string",
+                                            "x-optimade-definition": {
+                                                "label": "fraction_core",
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "fraction"
+                                            },
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
+                                            "examples": [
+                                                "2/3",
+                                                "5/42",
+                                                "10",
+                                                "0"
+                                            ],
+                                            "x-optimade-unit": "inapplicable"
+                                        }
+                                    }
+                                },
+                                "vector": {
+                                    "x-optimade-type": "list",
+                                    "x-optimade-unit": "inapplicable",
+                                    "x-optimade-dimensions": {
+                                        "names": [
+                                            "dim_lattice"
+                                        ],
+                                        "sizes": [
+                                            3
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "description": "Exact fractional-coordinate vector part of the affine transformation.",
+                                    "items": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                        "title": "fraction",
+                                        "x-optimade-type": "string",
+                                        "x-optimade-definition": {
+                                            "label": "fraction_core",
+                                            "kind": "property",
+                                            "version": "0.1.0",
+                                            "format": "1.3",
+                                            "name": "fraction"
+                                        },
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ],
+                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
+                                        "examples": [
+                                            "2/3",
+                                            "5/42",
+                                            "10",
+                                            "0"
+                                        ],
+                                        "x-optimade-unit": "inapplicable"
+                                    }
+                                },
+                                "xyz": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                    "title": "Operation xyz",
+                                    "x-optimade-type": "string",
+                                    "x-compatibility": [
+                                        "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                        "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                    ],
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "op_xyz",
+                                        "label": "op_xyz_symmetry"
+                                    },
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                    "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                                    "examples": [
+                                        "-x,-y,z",
+                                        "x,1/2-y,1/2+z"
+                                    ]
+                                },
+                                "det": {
+                                    "x-optimade-type": "integer",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ],
+                                    "description": "Determinant of the matrix part when emitted by the generator."
+                                },
+                                "is_orthogonal": {
+                                    "x-optimade-type": "boolean",
+                                    "x-optimade-unit": "inapplicable",
+                                    "type": [
+                                        "boolean",
+                                        "null"
+                                    ],
+                                    "description": "Whether the matrix part is orthogonal."
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "matrix": [
+                                        [
+                                            "-1",
+                                            "0",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "-1",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "0",
+                                            "1"
+                                        ]
+                                    ],
+                                    "vector": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "xyz": "-x,-y,z",
+                                    "det": 1,
+                                    "is_orthogonal": true
+                                }
+                            ]
+                        },
+                        "rot_type": {
+                            "x-optimade-type": "string",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Symbolic crystallographic operation-type label for the linear part."
+                        },
+                        "axis": {
+                            "x-optimade-type": "list",
+                            "x-optimade-unit": "inapplicable",
+                            "x-optimade-dimensions": {
+                                "names": [
+                                    "dim_lattice"
+                                ],
+                                "sizes": [
+                                    3
+                                ]
+                            },
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Integer-vector axis or invariant-direction descriptor for the operation.",
+                            "items": {
+                                "x-optimade-type": "integer",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "integer"
+                                ],
+                                "description": "One integer component of the axis vector."
+                            }
+                        },
+                        "sense": {
+                            "x-optimade-type": "integer",
+                            "x-optimade-unit": "inapplicable",
+                            "type": [
+                                "integer",
+                                "null"
+                            ],
+                            "description": "Rotation sense/sign convention returned by the generator."
+                        },
+                        "screw_glide": {
+                            "x-optimade-type": "list",
+                            "x-optimade-unit": "inapplicable",
+                            "x-optimade-dimensions": {
+                                "names": [
+                                    "dim_lattice"
+                                ],
+                                "sizes": [
+                                    3
+                                ]
+                            },
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Screw-axis or glide-plane component represented exactly as a list of fraction strings.",
+                            "items": {
+                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                "title": "fraction",
+                                "x-optimade-type": "string",
+                                "x-optimade-definition": {
+                                    "label": "fraction_core",
+                                    "kind": "property",
+                                    "version": "0.1.0",
+                                    "format": "1.3",
+                                    "name": "fraction"
+                                },
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
+                                "examples": [
+                                    "2/3",
+                                    "5/42",
+                                    "10",
+                                    "0"
+                                ],
+                                "x-optimade-unit": "inapplicable"
+                            }
+                        },
+                        "origin_shift": {
+                            "x-optimade-type": "list",
+                            "x-optimade-unit": "inapplicable",
+                            "x-optimade-dimensions": {
+                                "names": [
+                                    "dim_lattice"
+                                ],
+                                "sizes": [
+                                    3
+                                ]
+                            },
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Origin-shift descriptor represented exactly as a list of fraction strings.",
+                            "items": {
+                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                "title": "fraction",
+                                "x-optimade-type": "string",
+                                "x-optimade-definition": {
+                                    "label": "fraction_core",
+                                    "kind": "property",
+                                    "version": "0.1.0",
+                                    "format": "1.3",
+                                    "name": "fraction"
+                                },
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                 "examples": [
                                     "2/3",
                                     "5/42",
@@ -4281,8 +4861,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "query-support": "none",
                     "response-level": "may"
                 },
-                "title": "Symops Generators Xyz",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                "title": "Symops Generators xyz",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -4295,13 +4874,33 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Minimal generator subset of the full symmetry-operation group in fractional `x,y,z` notation, ordered consistently with `symops_generators`.",
+                "description": "Minimal generator subset of the full symmetry-operation group in fractional `x,y,z` notation, ordered consistently with `symops_generators`.\n\nEach list member is an operation on the format defined by the property definition: https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
                 "x-optimade-unit": "inapplicable",
                 "items": {
+                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                    "title": "Operation xyz",
                     "x-optimade-type": "string",
+                    "x-compatibility": [
+                        "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                        "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                    ],
+                    "x-optimade-definition": {
+                        "kind": "property",
+                        "version": "0.1.0",
+                        "format": "1.3",
+                        "name": "op_xyz",
+                        "label": "op_xyz_symmetry"
+                    },
                     "x-optimade-unit": "inapplicable",
                     "type": [
-                        "string"
+                        "string",
+                        "null"
+                    ],
+                    "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                    "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                    "examples": [
+                        "-x,-y,z",
+                        "x,1/2-y,1/2+z"
                     ]
                 },
                 "examples": [
@@ -4322,7 +4921,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Representative symmetry operations",
-                "$comment": "Anyterial property definition using the common reusable op object definition.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -4336,11 +4934,10 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Representative symmetry-operation descriptors modulo centering translations.\nEach list member is a `op` object as defined by `/properties/symmetry/op`.\nFor space-group operations, generated data currently uses `rot_type`, `axis`, `sense`, `screw_glide`, and `origin_shift`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST follow the schema inherited from `/properties/symmetry/op`.",
+                "description": "Representative symmetry-operation descriptors modulo centering translations.\n\nEach list member is an operation on the format defined by the property definition: https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
                     "title": "Operation",
-                    "$comment": "Reusable Anyterial definition for one classified crystallographic operation descriptor.",
                     "x-optimade-type": "dictionary",
                     "x-optimade-definition": {
                         "kind": "property",
@@ -4354,12 +4951,11 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "object",
                         "null"
                     ],
-                    "description": "A classified crystallographic operation acting within one coordinate setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **type**: OPTIONAL; Integer.\n      Legacy numeric operation-type code used by point-group operation descriptors.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
+                    "description": "Information related to a crystallographic operation acting within one coordinate setting.\n\nRepresents an affine_transformation that is a crystallographic operation within one setting.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the operation.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **rot\\_type**: OPTIONAL; String.\n      Crystallographic operation-type label for the linear part, such as `1`, `-1`, `2`, `m`, `-3`, `4`, `-4`, `6`, or `-6`.\n\n    - **axis**: OPTIONAL; List of 3 Integers.\n      Operation axis or invariant direction using the integer-vector convention returned by the generator.\n\n    - **sense**: OPTIONAL; Integer.\n      Rotation sense/sign convention returned by the generator; `0` is used when no handed rotation sense is applicable.\n\n    - **screw\\_glide**: OPTIONAL; List of 3 Fractions (String).\n      Screw-axis or glide-plane component associated with a space-group affine operation.\n\n    - **origin\\_shift**: OPTIONAL; List of 3 Fractions (String).\n      Origin shift associated with the screw/glide decomposition of a space-group affine operation.\n\n    - **is\\_proper**: OPTIONAL; Boolean.\n      States whether the linear operation is proper, i.e., whether its determinant is +1.",
                     "properties": {
                         "affine_transformation": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
                             "title": "Affine transformation",
-                            "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
                             "x-optimade-type": "dictionary",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -4373,7 +4969,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "object",
                                 "null"
                             ],
-                            "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                            "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
                             "properties": {
                                 "matrix": {
                                     "x-optimade-type": "list",
@@ -4423,7 +5019,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "A fraction represented as a string.",
+                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                             "examples": [
                                                 "2/3",
                                                 "5/42",
@@ -4465,7 +5061,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                             "string",
                                             "null"
                                         ],
-                                        "description": "A fraction represented as a string.",
+                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                         "examples": [
                                             "2/3",
                                             "5/42",
@@ -4476,13 +5072,31 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                     }
                                 },
                                 "xyz": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                    "title": "Operation xyz",
                                     "x-optimade-type": "string",
+                                    "x-compatibility": [
+                                        "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                        "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                    ],
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "op_xyz",
+                                        "label": "op_xyz_symmetry"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "string",
                                         "null"
                                     ],
-                                    "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                    "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                    "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                                    "examples": [
+                                        "-x,-y,z",
+                                        "x,1/2-y,1/2+z"
+                                    ]
                                 },
                                 "det": {
                                     "x-optimade-type": "integer",
@@ -4541,15 +5155,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "null"
                             ],
                             "description": "Symbolic crystallographic operation-type label for the linear part."
-                        },
-                        "type": {
-                            "x-optimade-type": "integer",
-                            "x-optimade-unit": "inapplicable",
-                            "type": [
-                                "integer",
-                                "null"
-                            ],
-                            "description": "Legacy numeric point-group operation-type code."
                         },
                         "axis": {
                             "x-optimade-type": "list",
@@ -4616,7 +5221,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                     "string",
                                     "null"
                                 ],
-                                "description": "A fraction represented as a string.",
+                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                 "examples": [
                                     "2/3",
                                     "5/42",
@@ -4657,7 +5262,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                     "string",
                                     "null"
                                 ],
-                                "description": "A fraction represented as a string.",
+                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                 "examples": [
                                     "2/3",
                                     "5/42",
@@ -4784,7 +5389,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Symops Representative Xyz",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -4800,10 +5404,30 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                 "description": "Representative symmetry operations modulo centering translations in fractional `x,y,z` notation, ordered consistently with `symops_representative`.",
                 "x-optimade-unit": "inapplicable",
                 "items": {
+                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                    "title": "Operation xyz",
                     "x-optimade-type": "string",
+                    "x-compatibility": [
+                        "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                        "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                    ],
+                    "x-optimade-definition": {
+                        "kind": "property",
+                        "version": "0.1.0",
+                        "format": "1.3",
+                        "name": "op_xyz",
+                        "label": "op_xyz_symmetry"
+                    },
                     "x-optimade-unit": "inapplicable",
                     "type": [
-                        "string"
+                        "string",
+                        "null"
+                    ],
+                    "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                    "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                    "examples": [
+                        "-x,-y,z",
+                        "x,1/2-y,1/2+z"
                     ]
                 },
                 "examples": [
@@ -4825,7 +5449,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Symmetry operations in x,y,z notation",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -4838,15 +5461,34 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Full list of symmetry operations for the space-group setting written in fractional `x,y,z` coordinate notation. Each expression acts on fractional coordinates in the setting represented by the containing Hall entry.",
+                "description": "A list of symmetry operations given as general position x, y and z coordinates in algebraic form.\n\nEach list member is an operation on the format defined by the property definition: https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op",
                 "x-optimade-unit": "inapplicable",
                 "items": {
+                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                    "title": "Operation xyz",
                     "x-optimade-type": "string",
+                    "x-compatibility": [
+                        "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                        "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                    ],
+                    "x-optimade-definition": {
+                        "kind": "property",
+                        "version": "0.1.0",
+                        "format": "1.3",
+                        "name": "op_xyz",
+                        "label": "op_xyz_symmetry"
+                    },
                     "x-optimade-unit": "inapplicable",
                     "type": [
-                        "string"
+                        "string",
+                        "null"
                     ],
-                    "description": "One symmetry operation in x,y,z notation."
+                    "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                    "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                    "examples": [
+                        "-x,-y,z",
+                        "x,1/2-y,1/2+z"
+                    ]
                 },
                 "examples": [
                     [
@@ -4870,7 +5512,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Wyckoff positions",
-                "$comment": "Anyterial Wyckoff-position list property using the common wyckoff-position record definition.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -4884,11 +5525,10 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Wyckoff-position table for a specific space-group setting.\nEach list item describes one Wyckoff position and includes the Wyckoff letter as ordinary data.\nThis list representation avoids using JSON dictionary keys as crystallographic data.\nItems follow `/properties/symmetry/wyckoff_position`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each item MUST include `letter`, identifying the Wyckoff letter for that position in the setting.\n- `orbit_affine` and `orbit_xyz` contain the full orbit.\n- `orbit_mod_centering_affine` and `orbit_mod_centering_xyz` contain one representative modulo centering translations.",
+                "description": "Wyckoff-position table for a specific space-group setting.\n\nEach list item describes one Wyckoff position and includes the Wyckoff letter as ordinary data.\nThis list representation avoids using JSON dictionary keys as crystallographic data.\nItems follow `/properties/symmetry/wyckoff_position`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each item MUST include `letter`, identifying the Wyckoff letter for that position in the setting.\n- `orbit` contains the full orbit as affine transformations from Wyckoff-position parameters to fractional coordinates.\n- `orbit_mod_centering` contains one representative modulo centering translations in the same representation.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/wyckoff_position",
                     "title": "Wyckoff position",
-                    "$comment": "Reusable Anyterial definition for one Wyckoff-position record in a space-group setting.",
                     "x-optimade-type": "dictionary",
                     "x-optimade-definition": {
                         "kind": "property",
@@ -4902,20 +5542,87 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "object",
                         "null"
                     ],
-                    "description": "One Wyckoff position in a space-group setting.\nThe record gives the multiplicity, oriented site-symmetry symbol, representative coordinate, full orbit, and orbit factorized modulo centering translations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **letter**: REQUIRED; String.\n      Wyckoff letter for this position in the setting.\n\n    - **multiplicity**: REQUIRED; Integer.\n      Multiplicity of the Wyckoff position in the conventional cell.\n\n    - **sitesym**: REQUIRED; String.\n      Oriented site-symmetry symbol.\n\n    - **hasfreedom**: REQUIRED; List of booleans.\n      Flags indicating whether each fractional coordinate has a free parameter.\n\n    - **first\\_orbit**: REQUIRED; String.\n      First representative coordinate expression used by the generator.\n\n    - **orbit\\_affine**: REQUIRED; List.\n      Full orbit in affine matrix/vector representation.\n\n    - **orbit\\_xyz**: REQUIRED; List of strings.\n      Full orbit in `x,y,z` coordinate notation.\n\n    - **orbit\\_mod\\_centering\\_affine**: REQUIRED; List.\n      Orbit representatives modulo centering translations in affine representation.\n\n    - **orbit\\_mod\\_centering\\_xyz**: REQUIRED; List of strings.\n      Orbit representatives modulo centering translations in `x,y,z` notation.",
+                    "description": "Information related to a Wyckoff position in a space-group setting.\n\nWyckoff positions represent symmetry-equivalent sites paritioned by multiplicity and site symmetry in a given space group.\nThe property is a dictionary containing information about the multiplicity, oriented site-symmetry symbol, representative coordinate, full orbit, and orbit factorized modulo centering translations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **letter**: REQUIRED; String.\n      Wyckoff letter for this position in the setting.\n\n    - **multiplicity**: REQUIRED; Integer.\n      Multiplicity of the Wyckoff position in the conventional cell.\n\n    - **sitesym**: REQUIRED; String.\n      Oriented site-symmetry symbol.\n\n    - **hasfreedom**: REQUIRED; List of booleans.\n      Flags indicating whether each fractional coordinate has a free parameter.\n\n    - **first\\_orbit**: REQUIRED; String.\n      First representative coordinate expression used by the generator.\n\n    - **orbit**: REQUIRED; List.\n      Full orbit as a list of affine transformations from Wyckoff-position parameters to fractional coordinates.\n\n    - **orbit\\_mod\\_centering**: REQUIRED; List.\n      Orbit representatives modulo centering translations, represented in the same form as `orbit`.",
                     "properties": {
                         "letter": {
-                            "x-optimade-type": "string",
-                            "x-optimade-unit": "inapplicable",
+                            "$id": "https://schemas.optimade.org/defs/v1.3/properties/optimade/structures/wyckoff_positions",
+                            "title": "Wyckoff positions",
+                            "x-optimade-type": "list",
+                            "x-optimade-definition": {
+                                "label": "wyckoff_positions_optimade_structures",
+                                "kind": "property",
+                                "version": "1.3.0",
+                                "format": "1.2",
+                                "name": "wyckoff_positions"
+                            },
+                            "x-optimade-dimensions": {
+                                "names": [
+                                    "dim_sites"
+                                ],
+                                "sizes": [
+                                    null
+                                ]
+                            },
                             "type": [
-                                "string",
+                                "array",
                                 "null"
                             ],
-                            "description": "Wyckoff letter for this position in the setting."
+                            "description": "A list of Wyckoff symbols of sites (where values for sites are specified with the same order of the property `cartesian_site_positions` and/or `fractional_site_positions`).\n\n**Requirements/Conventions**:\n\n- MUST have length equal to the number of sites in the structure (first dimension of the list properties `cartesian_site_positions` and/or `fractional_site_positions`).\n- If provided, MUST list a single letter (`a`-`z` or `\u03b1`) Wyckoff position for each site in the structure according to the International Tables for Crystallography vol. A (IUCr, 2016).\n\n**Bibliographic References**:\n\n- IUCr (2016). International Tables for Crystallography vol. A. Space-group Symmetry, Ed. M. I. Aroyo, 6-th edition. Chichester, John Wiley & Sons.",
+                            "x-optimade-unit": "inapplicable",
+                            "items": {
+                                "$id": "https://schemas.optimade.org/defs/v1.3/properties/optimade/common/wyckoff_position",
+                                "title": "Wyckoff position",
+                                "x-optimade-type": "string",
+                                "x-optimade-definition": {
+                                    "label": "wyckoff_position_optimade_common",
+                                    "kind": "property",
+                                    "version": "1.3.0",
+                                    "format": "1.2",
+                                    "name": "wyckoff_position"
+                                },
+                                "description": "The Wyckoff symbol for a site.",
+                                "x-optimade-unit": "inapplicable",
+                                "type": [
+                                    "string"
+                                ],
+                                "maxLength": 1,
+                                "enum": [
+                                    "a",
+                                    "b",
+                                    "c",
+                                    "d",
+                                    "e",
+                                    "f",
+                                    "g",
+                                    "h",
+                                    "i",
+                                    "j",
+                                    "k",
+                                    "l",
+                                    "m",
+                                    "n",
+                                    "o",
+                                    "p",
+                                    "q",
+                                    "r",
+                                    "s",
+                                    "t",
+                                    "u",
+                                    "v",
+                                    "w",
+                                    "x",
+                                    "y",
+                                    "z",
+                                    "\u03b1"
+                                ]
+                            }
                         },
                         "multiplicity": {
                             "x-optimade-type": "integer",
                             "x-optimade-unit": "inapplicable",
+                            "x-compatible": [
+                                "https://www.iucr.org/__data/iucr/cifdic_html/3/CORE_DIC/Ispace_group_Wyckoff.multiplicity.html"
+                            ],
                             "type": [
                                 "integer",
                                 "null"
@@ -4925,11 +5632,14 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "sitesym": {
                             "x-optimade-type": "string",
                             "x-optimade-unit": "inapplicable",
+                            "x-compatible": [
+                                "https://www.iucr.org/__data/iucr/cifdic_html/3/CORE_DIC/Ispace_group_Wyckoff.site_symmetry.html"
+                            ],
                             "type": [
                                 "string",
                                 "null"
                             ],
-                            "description": "Oriented site-symmetry symbol."
+                            "description": "The site-symmetry symbol for the subgroup of the space group that leaves the point fixed.\nThe symmetry direction is determined by the Hermann-Mauguin symbol of the space group, as given in International Tables for Crystallography Volume A, Section 2.2.12 (2006)."
                         },
                         "hasfreedom": {
                             "x-optimade-type": "list",
@@ -4946,14 +5656,14 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "array",
                                 "null"
                             ],
-                            "description": "Three flags indicating whether each fractional coordinate contains a free parameter.",
+                            "description": "A list of three booleans indicating whether each fractional coordinate contains a free parameter.",
                             "items": {
                                 "x-optimade-type": "boolean",
                                 "x-optimade-unit": "inapplicable",
                                 "type": [
                                     "boolean"
                                 ],
-                                "description": "Whether the corresponding coordinate is free."
+                                "description": "A boolean indicating if the corresponding coordinate is free."
                             }
                         },
                         "first_orbit_ita": {
@@ -4963,7 +5673,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "string",
                                 "null"
                             ],
-                            "description": "Representative coordinate expression following the ITA source convention, when distinct from `first_orbit`."
+                            "description": "Representative coordinate expression following the source convention in the International Tables of Crystallography Volume A (2006), when distinct from `first_orbit`."
                         },
                         "first_orbit": {
                             "x-optimade-type": "string",
@@ -4972,138 +5682,412 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 "string",
                                 "null"
                             ],
-                            "description": "Representative coordinate expression for the Wyckoff position."
+                            "description": "Representative coordinate expression for the Wyckoff position chosen such that the degrees of freedom can be chosen to place it inside the asymmetric unit obtained from cctbx."
                         },
-                        "orbit_affine": {
+                        "orbit": {
                             "x-optimade-type": "list",
                             "x-optimade-unit": "inapplicable",
                             "type": [
                                 "array",
                                 "null"
                             ],
-                            "description": "Full orbit represented as affine matrix/vector data.",
+                            "description": "Full orbit of the Wyckoff position.\nEach item is an affine transformation from the Wyckoff-position parameter vector `(x, y, z)` to one fractional coordinate in the orbit.\nThe matrix part may be singular because special Wyckoff positions can constrain or identify parameters.",
                             "items": {
-                                "x-optimade-type": "list",
+                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+                                "title": "Affine transformation",
+                                "x-optimade-type": "dictionary",
+                                "x-optimade-definition": {
+                                    "kind": "property",
+                                    "version": "0.1.0",
+                                    "format": "1.3",
+                                    "name": "affine_transformation",
+                                    "label": "affine_transformation_symmetry"
+                                },
                                 "x-optimade-unit": "inapplicable",
                                 "type": [
-                                    "array"
+                                    "object",
+                                    "null"
                                 ],
-                                "description": "One generator-emitted affine orbit operation represented as nested exact lists.",
-                                "items": {
-                                    "x-optimade-type": "list",
-                                    "x-optimade-unit": "inapplicable",
-                                    "type": [
-                                        "array"
-                                    ],
-                                    "description": "One row or component list of the affine orbit representation.",
-                                    "items": {
-                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                "properties": {
+                                    "matrix": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "x-optimade-dimensions": {
+                                            "names": [
+                                                "dim_lattice",
+                                                "dim_lattice"
+                                            ],
+                                            "sizes": [
+                                                3,
+                                                3
+                                            ]
+                                        },
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Exact 3 by 3 matrix part of the affine transformation.",
+                                        "items": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array"
+                                            ],
+                                            "description": "One row of the exact 3 by 3 matrix.",
+                                            "items": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                "title": "fraction",
+                                                "x-optimade-type": "string",
+                                                "x-optimade-definition": {
+                                                    "label": "fraction_core",
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "fraction"
+                                                },
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
+                                                "examples": [
+                                                    "2/3",
+                                                    "5/42",
+                                                    "10",
+                                                    "0"
+                                                ],
+                                                "x-optimade-unit": "inapplicable"
+                                            }
+                                        }
+                                    },
+                                    "vector": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "x-optimade-dimensions": {
+                                            "names": [
+                                                "dim_lattice"
+                                            ],
+                                            "sizes": [
+                                                3
+                                            ]
+                                        },
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Exact fractional-coordinate vector part of the affine transformation.",
+                                        "items": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                            "title": "fraction",
+                                            "x-optimade-type": "string",
+                                            "x-optimade-definition": {
+                                                "label": "fraction_core",
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "fraction"
+                                            },
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
+                                            "examples": [
+                                                "2/3",
+                                                "5/42",
+                                                "10",
+                                                "0"
+                                            ],
+                                            "x-optimade-unit": "inapplicable"
+                                        }
+                                    },
+                                    "xyz": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                        "title": "Operation xyz",
                                         "x-optimade-type": "string",
+                                        "x-compatibility": [
+                                            "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                            "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                        ],
                                         "x-optimade-definition": {
-                                            "label": "fraction_core",
                                             "kind": "property",
                                             "version": "0.1.0",
                                             "format": "1.3",
-                                            "name": "fraction"
+                                            "name": "op_xyz",
+                                            "label": "op_xyz_symmetry"
                                         },
+                                        "x-optimade-unit": "inapplicable",
                                         "type": [
                                             "string",
                                             "null"
                                         ],
-                                        "description": "A fraction represented as a string.",
+                                        "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                        "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
                                         "examples": [
-                                            "2/3",
-                                            "5/42",
-                                            "10",
+                                            "-x,-y,z",
+                                            "x,1/2-y,1/2+z"
+                                        ]
+                                    },
+                                    "det": {
+                                        "x-optimade-type": "integer",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "integer",
+                                            "null"
+                                        ],
+                                        "description": "Determinant of the matrix part when emitted by the generator."
+                                    },
+                                    "is_orthogonal": {
+                                        "x-optimade-type": "boolean",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ],
+                                        "description": "Whether the matrix part is orthogonal."
+                                    }
+                                },
+                                "examples": [
+                                    {
+                                        "matrix": [
+                                            [
+                                                "-1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "-1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "1"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
                                             "0"
                                         ],
-                                        "x-optimade-unit": "inapplicable"
+                                        "xyz": "-x,-y,z",
+                                        "det": 1,
+                                        "is_orthogonal": true
                                     }
-                                }
+                                ]
                             }
                         },
-                        "orbit_xyz": {
+                        "orbit_mod_centering": {
                             "x-optimade-type": "list",
                             "x-optimade-unit": "inapplicable",
                             "type": [
                                 "array",
                                 "null"
                             ],
-                            "description": "Full orbit represented as `x,y,z` coordinate expressions.",
+                            "description": "Representatives of the Wyckoff-position orbit modulo centering translations.\nEach item has the same affine-transformation representation as an item in `orbit`.",
                             "items": {
-                                "x-optimade-type": "string",
+                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
+                                "title": "Affine transformation",
+                                "x-optimade-type": "dictionary",
+                                "x-optimade-definition": {
+                                    "kind": "property",
+                                    "version": "0.1.0",
+                                    "format": "1.3",
+                                    "name": "affine_transformation",
+                                    "label": "affine_transformation_symmetry"
+                                },
                                 "x-optimade-unit": "inapplicable",
                                 "type": [
-                                    "string"
+                                    "object",
+                                    "null"
                                 ],
-                                "description": "One coordinate expression."
-                            }
-                        },
-                        "orbit_mod_centering_affine": {
-                            "x-optimade-type": "list",
-                            "x-optimade-unit": "inapplicable",
-                            "type": [
-                                "array",
-                                "null"
-                            ],
-                            "description": "Orbit representatives modulo centering translations in affine matrix/vector representation.",
-                            "items": {
-                                "x-optimade-type": "list",
-                                "x-optimade-unit": "inapplicable",
-                                "type": [
-                                    "array"
-                                ],
-                                "description": "One generator-emitted affine orbit operation represented as nested exact lists.",
-                                "items": {
-                                    "x-optimade-type": "list",
-                                    "x-optimade-unit": "inapplicable",
-                                    "type": [
-                                        "array"
-                                    ],
-                                    "description": "One row or component list of the affine orbit representation.",
-                                    "items": {
-                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
-                                        "title": "fraction",
+                                "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                "properties": {
+                                    "matrix": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "x-optimade-dimensions": {
+                                            "names": [
+                                                "dim_lattice",
+                                                "dim_lattice"
+                                            ],
+                                            "sizes": [
+                                                3,
+                                                3
+                                            ]
+                                        },
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Exact 3 by 3 matrix part of the affine transformation.",
+                                        "items": {
+                                            "x-optimade-type": "list",
+                                            "x-optimade-unit": "inapplicable",
+                                            "x-optimade-dimensions": {
+                                                "names": [
+                                                    "dim_lattice"
+                                                ],
+                                                "sizes": [
+                                                    3
+                                                ]
+                                            },
+                                            "type": [
+                                                "array"
+                                            ],
+                                            "description": "One row of the exact 3 by 3 matrix.",
+                                            "items": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                                "title": "fraction",
+                                                "x-optimade-type": "string",
+                                                "x-optimade-definition": {
+                                                    "label": "fraction_core",
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "fraction"
+                                                },
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ],
+                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
+                                                "examples": [
+                                                    "2/3",
+                                                    "5/42",
+                                                    "10",
+                                                    "0"
+                                                ],
+                                                "x-optimade-unit": "inapplicable"
+                                            }
+                                        }
+                                    },
+                                    "vector": {
+                                        "x-optimade-type": "list",
+                                        "x-optimade-unit": "inapplicable",
+                                        "x-optimade-dimensions": {
+                                            "names": [
+                                                "dim_lattice"
+                                            ],
+                                            "sizes": [
+                                                3
+                                            ]
+                                        },
+                                        "type": [
+                                            "array",
+                                            "null"
+                                        ],
+                                        "description": "Exact fractional-coordinate vector part of the affine transformation.",
+                                        "items": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/fraction",
+                                            "title": "fraction",
+                                            "x-optimade-type": "string",
+                                            "x-optimade-definition": {
+                                                "label": "fraction_core",
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "fraction"
+                                            },
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
+                                            "examples": [
+                                                "2/3",
+                                                "5/42",
+                                                "10",
+                                                "0"
+                                            ],
+                                            "x-optimade-unit": "inapplicable"
+                                        }
+                                    },
+                                    "xyz": {
+                                        "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                        "title": "Operation xyz",
                                         "x-optimade-type": "string",
+                                        "x-compatibility": [
+                                            "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                            "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                        ],
                                         "x-optimade-definition": {
-                                            "label": "fraction_core",
                                             "kind": "property",
                                             "version": "0.1.0",
                                             "format": "1.3",
-                                            "name": "fraction"
+                                            "name": "op_xyz",
+                                            "label": "op_xyz_symmetry"
                                         },
+                                        "x-optimade-unit": "inapplicable",
                                         "type": [
                                             "string",
                                             "null"
                                         ],
-                                        "description": "A fraction represented as a string.",
+                                        "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                        "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
                                         "examples": [
-                                            "2/3",
-                                            "5/42",
-                                            "10",
+                                            "-x,-y,z",
+                                            "x,1/2-y,1/2+z"
+                                        ]
+                                    },
+                                    "det": {
+                                        "x-optimade-type": "integer",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "integer",
+                                            "null"
+                                        ],
+                                        "description": "Determinant of the matrix part when emitted by the generator."
+                                    },
+                                    "is_orthogonal": {
+                                        "x-optimade-type": "boolean",
+                                        "x-optimade-unit": "inapplicable",
+                                        "type": [
+                                            "boolean",
+                                            "null"
+                                        ],
+                                        "description": "Whether the matrix part is orthogonal."
+                                    }
+                                },
+                                "examples": [
+                                    {
+                                        "matrix": [
+                                            [
+                                                "-1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "-1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "1"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
                                             "0"
                                         ],
-                                        "x-optimade-unit": "inapplicable"
+                                        "xyz": "-x,-y,z",
+                                        "det": 1,
+                                        "is_orthogonal": true
                                     }
-                                }
-                            }
-                        },
-                        "orbit_mod_centering_xyz": {
-                            "x-optimade-type": "list",
-                            "x-optimade-unit": "inapplicable",
-                            "type": [
-                                "array",
-                                "null"
-                            ],
-                            "description": "Orbit representatives modulo centering translations as `x,y,z` coordinate expressions.",
-                            "items": {
-                                "x-optimade-type": "string",
-                                "x-optimade-unit": "inapplicable",
-                                "type": [
-                                    "string"
-                                ],
-                                "description": "One coordinate expression."
+                                ]
                             }
                         }
                     },
@@ -5118,21 +6102,109 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 true
                             ],
                             "first_orbit": "x,y,z",
-                            "orbit_xyz": [
-                                "x",
-                                "y",
-                                "z",
-                                "-x",
-                                "y",
-                                "-z"
+                            "orbit": [
+                                {
+                                    "matrix": [
+                                        [
+                                            "1",
+                                            "0",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "1",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "0",
+                                            "1"
+                                        ]
+                                    ],
+                                    "vector": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "xyz": "x,y,z"
+                                },
+                                {
+                                    "matrix": [
+                                        [
+                                            "-1",
+                                            "0",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "1",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "0",
+                                            "-1"
+                                        ]
+                                    ],
+                                    "vector": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "xyz": "-x,y,-z"
+                                }
                             ],
-                            "orbit_mod_centering_xyz": [
-                                "x",
-                                "y",
-                                "z",
-                                "-x",
-                                "y",
-                                "-z"
+                            "orbit_mod_centering": [
+                                {
+                                    "matrix": [
+                                        [
+                                            "1",
+                                            "0",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "1",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "0",
+                                            "1"
+                                        ]
+                                    ],
+                                    "vector": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "xyz": "x,y,z"
+                                },
+                                {
+                                    "matrix": [
+                                        [
+                                            "-1",
+                                            "0",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "1",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "0",
+                                            "-1"
+                                        ]
+                                    ],
+                                    "vector": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "xyz": "-x,y,-z"
+                                }
                             ]
                         }
                     ]
@@ -5149,21 +6221,59 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                                 true
                             ],
                             "first_orbit": "x,y,z",
-                            "orbit_xyz": [
-                                "x",
-                                "y",
-                                "z",
-                                "-x",
-                                "y",
-                                "-z"
+                            "orbit": [
+                                {
+                                    "matrix": [
+                                        [
+                                            "1",
+                                            "0",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "1",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "0",
+                                            "1"
+                                        ]
+                                    ],
+                                    "vector": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "xyz": "x,y,z"
+                                }
                             ],
-                            "orbit_mod_centering_xyz": [
-                                "x",
-                                "y",
-                                "z",
-                                "-x",
-                                "y",
-                                "-z"
+                            "orbit_mod_centering": [
+                                {
+                                    "matrix": [
+                                        [
+                                            "1",
+                                            "0",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "1",
+                                            "0"
+                                        ],
+                                        [
+                                            "0",
+                                            "0",
+                                            "1"
+                                        ]
+                                    ],
+                                    "vector": [
+                                        "0",
+                                        "0",
+                                        "0"
+                                    ],
+                                    "xyz": "x,y,z"
+                                }
                             ]
                         }
                     ]
@@ -5178,7 +6288,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Wyckoff Sets",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -5191,7 +6300,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Sets of Wyckoff letters related by normalizer operations. Each inner list groups Wyckoff positions that can be interchanged by the relevant normalizer action.",
+                "description": "Sets of Wyckoff letters related by normalizer operations.\n\nEach inner list groups Wyckoff positions that can be interchanged by the relevant normalizer action.",
                 "x-optimade-unit": "inapplicable",
                 "items": {
                     "x-optimade-type": "list",
@@ -5239,7 +6348,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Asymmetric unit markups",
-                "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
                 "x-optimade-definition": {
                     "kind": "property",
                     "version": "0.1.0",
@@ -5247,7 +6355,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "name": "asu_markup",
                     "label": "asu_markup_spacegroups"
                 },
-                "description": "Display-oriented renderings of the plain-string asymmetric-unit restrictions in `asu_str`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                "description": "Display-oriented renderings of the plain-string asymmetric-unit restrictions in `asu_str`.\n\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-unit": "inapplicable",
                 "type": [
@@ -5300,7 +6408,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Shape-only asymmetric unit markups",
-                "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
                 "x-optimade-definition": {
                     "kind": "property",
                     "version": "0.1.0",
@@ -5308,7 +6415,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "name": "asu_shape_only_markup",
                     "label": "asu_shape_only_markup_spacegroups"
                 },
-                "description": "Display-oriented renderings of the plain-string shape-only asymmetric-unit restrictions in `asu_shape_only_str`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                "description": "Display-oriented renderings of the plain-string shape-only asymmetric-unit restrictions in `asu_shape_only_str`.\n\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-unit": "inapplicable",
                 "type": [
@@ -5361,7 +6468,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hall symbol markups",
-                "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
                 "x-optimade-definition": {
                     "kind": "property",
                     "version": "0.1.0",
@@ -5369,7 +6475,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "name": "hall_markup",
                     "label": "hall_markup_spacegroups"
                 },
-                "description": "Display-oriented renderings of the Hall symbol in `hall`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                "description": "Display-oriented renderings of the Hall symbol in `hall`.\n\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-unit": "inapplicable",
                 "type": [
@@ -5422,7 +6528,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Hall alias markups",
-                "$comment": "Anyterial symmetry property definition using the common string markup object for each list item.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -5436,11 +6541,10 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Display-oriented renderings corresponding element-by-element to the alternate Hall symbols in `hall_aliases`.\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
+                "description": "Display-oriented renderings corresponding element-by-element to the alternate Hall symbols in `hall_aliases`.\n\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
                     "title": "String markups",
-                    "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
                     "x-optimade-type": "dictionary",
                     "x-optimade-definition": {
                         "kind": "property",
@@ -5454,7 +6558,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "object",
                         "null"
                     ],
-                    "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+                    "description": "Strings with alternate markup and/or encoding for display rendering.\n\nThe object is intended for display-oriented variants only, a sibling property should be used for canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
                     "properties": {
                         "html": {
                             "x-optimade-type": "string",
@@ -5511,7 +6615,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Short Hermann-Mauguin symbol markups",
-                "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
                 "x-optimade-definition": {
                     "kind": "property",
                     "version": "0.1.0",
@@ -5519,7 +6622,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "name": "hm_short_markup",
                     "label": "hm_short_markup_spacegroups"
                 },
-                "description": "Display-oriented renderings of the setting-specific short Hermann-Mauguin symbol in `hm_short`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                "description": "Display-oriented renderings of the setting-specific short Hermann-Mauguin symbol in `hm_short`.\n\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-unit": "inapplicable",
                 "type": [
@@ -5572,7 +6675,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Standard short Hermann-Mauguin symbol markups",
-                "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
                 "x-optimade-definition": {
                     "kind": "property",
                     "version": "0.1.0",
@@ -5580,7 +6682,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "name": "hm_short_std_markup",
                     "label": "hm_short_std_markup_spacegroups"
                 },
-                "description": "Display-oriented renderings of the ITA-standard short Hermann-Mauguin symbol in `hm_short_std`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                "description": "Display-oriented renderings of the ITA-standard short Hermann-Mauguin symbol in `hm_short_std`.\n\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-unit": "inapplicable",
                 "type": [
@@ -5633,7 +6735,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Full Hermann-Mauguin symbol markups",
-                "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
                 "x-optimade-definition": {
                     "kind": "property",
                     "version": "0.1.0",
@@ -5641,7 +6742,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "name": "hm_full_markup",
                     "label": "hm_full_markup_spacegroups"
                 },
-                "description": "Display-oriented renderings of the setting-specific full Hermann-Mauguin symbol in `hm_full`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                "description": "Display-oriented renderings of the setting-specific full Hermann-Mauguin symbol in `hm_full`.\n\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-unit": "inapplicable",
                 "type": [
@@ -5694,7 +6795,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Standard full Hermann-Mauguin symbol markups",
-                "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
                 "x-optimade-definition": {
                     "kind": "property",
                     "version": "0.1.0",
@@ -5702,7 +6802,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "name": "hm_full_std_markup",
                     "label": "hm_full_std_markup_spacegroups"
                 },
-                "description": "Display-oriented renderings of the ITA-standard full Hermann-Mauguin symbol in `hm_full_std`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                "description": "Display-oriented renderings of the ITA-standard full Hermann-Mauguin symbol in `hm_full_std`.\n\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-unit": "inapplicable",
                 "type": [
@@ -5755,7 +6855,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Extended Hermann-Mauguin symbol markups",
-                "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
                 "x-optimade-definition": {
                     "kind": "property",
                     "version": "0.1.0",
@@ -5763,7 +6862,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "name": "hm_extended_markup",
                     "label": "hm_extended_markup_spacegroups"
                 },
-                "description": "Display-oriented renderings of the extended Hermann-Mauguin symbol in `hm_extended`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+                "description": "Display-oriented renderings of the extended Hermann-Mauguin symbol in `hm_extended`.\n\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-unit": "inapplicable",
                 "type": [
@@ -5816,7 +6915,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Short Hermann-Mauguin alias markups",
-                "$comment": "Anyterial symmetry property definition using the common string markup object for each list item.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -5830,11 +6928,10 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Display-oriented renderings corresponding element-by-element to the alternate short Hermann-Mauguin symbols in `hm_short_aliases`.\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
+                "description": "Display-oriented renderings corresponding element-by-element to the alternate short Hermann-Mauguin symbols in `hm_short_aliases`.\n\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
                     "title": "String markups",
-                    "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
                     "x-optimade-type": "dictionary",
                     "x-optimade-definition": {
                         "kind": "property",
@@ -5848,7 +6945,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "object",
                         "null"
                     ],
-                    "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+                    "description": "Strings with alternate markup and/or encoding for display rendering.\n\nThe object is intended for display-oriented variants only, a sibling property should be used for canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
                     "properties": {
                         "html": {
                             "x-optimade-type": "string",
@@ -5905,7 +7002,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Full Hermann-Mauguin alias markups",
-                "$comment": "Anyterial symmetry property definition using the common string markup object for each list item.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -5919,11 +7015,10 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Display-oriented renderings corresponding element-by-element to the alternate full Hermann-Mauguin symbols in `hm_full_aliases`.\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
+                "description": "Display-oriented renderings corresponding element-by-element to the alternate full Hermann-Mauguin symbols in `hm_full_aliases`.\n\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
                     "title": "String markups",
-                    "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
                     "x-optimade-type": "dictionary",
                     "x-optimade-definition": {
                         "kind": "property",
@@ -5937,7 +7032,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "object",
                         "null"
                     ],
-                    "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+                    "description": "Strings with alternate markup and/or encoding for display rendering.\n\nThe object is intended for display-oriented variants only, a sibling property should be used for canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
                     "properties": {
                         "html": {
                             "x-optimade-type": "string",
@@ -5994,7 +7089,6 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Extended Hermann-Mauguin alias markups",
-                "$comment": "Anyterial symmetry property definition using the common string markup object for each list item.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -6008,11 +7102,10 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "array",
                     "null"
                 ],
-                "description": "Display-oriented renderings corresponding element-by-element to the alternate extended Hermann-Mauguin symbols in `hm_extended_aliases`.\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
+                "description": "Display-oriented renderings corresponding element-by-element to the alternate extended Hermann-Mauguin symbols in `hm_extended_aliases`.\n\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
                     "title": "String markups",
-                    "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
                     "x-optimade-type": "dictionary",
                     "x-optimade-definition": {
                         "kind": "property",
@@ -6026,7 +7119,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                         "object",
                         "null"
                     ],
-                    "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+                    "description": "Strings with alternate markup and/or encoding for display rendering.\n\nThe object is intended for display-oriented variants only, a sibling property should be used for canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
                     "properties": {
                         "html": {
                             "x-optimade-type": "string",
@@ -6075,7 +7168,7 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                 ]
             },
             "schoenflies_markup": {
-                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies_markup",
+                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies_markup",
                 "x-optimade-requirements": {
                     "support": "may",
                     "sortable": false,
@@ -6083,13 +7176,12 @@ The companion top-level `indicies.index_hall_entry_to_spacegroups` lookup maps n
                     "response-level": "may"
                 },
                 "title": "Schoenflies symbol markups",
-                "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
                 "x-optimade-definition": {
                     "kind": "property",
                     "version": "0.1.0",
                     "format": "1.3",
                     "name": "schoenflies_markup",
-                    "label": "schoenflies_markup_spacegroups"
+                    "label": "schoenflies_markup_pointgroups"
                 },
                 "description": "Display-oriented renderings of the Schoenflies symbol in `schoenflies`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
                 "x-optimade-type": "dictionary",

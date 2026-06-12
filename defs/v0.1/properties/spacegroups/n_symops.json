@@ -1,8 +1,7 @@
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "N Symops",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+    "title": "number of symops",
     "x-optimade-type": "integer",
     "x-optimade-definition": {
         "kind": "property",

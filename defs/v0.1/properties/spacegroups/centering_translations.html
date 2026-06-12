@@ -95,10 +95,10 @@ overflow-wrap: break-word;
 <p><strong>ID: <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations</code></a></strong><br>
 <strong>Definition name:</strong> <code>centering_translations</code></p>
 <p><strong>Property name:</strong> Centering translations<br>
-<strong>Description:</strong> Centering translations of the conventional cell.
-Each list member is one exact fractional-coordinate centering translation as defined by <code>/properties/symmetry/centering_translation</code>.
-The zero translation <code>(0,0,0)</code> is listed first.<br>
+<strong>Description:</strong> Centering translations of the conventional cell.<br>
 <strong>Type:</strong> list  </p>
+<p>Each list member is one exact fractional-coordinate centering translation as defined by <code>/properties/symmetry/centering_translation</code>.
+The zero translation <code>(0,0,0)</code> is listed first.</p>
 <p><strong>Examples:</strong></p>
 <ul>
 <li><code>[["0", "0", "0"]]</code></li>
@@ -110,7 +110,6 @@ The zero translation <code>(0,0,0)</code> is listed first.<br>
 <span class="w">    </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Centering translations&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;$comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Anyterial property definition using the common reusable centering-translation definition.&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;property&quot;</span><span class="p">,</span>
@@ -124,11 +123,10 @@ The zero translation <code>(0,0,0)</code> is listed first.<br>
 <span class="w">        </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="s2">&quot;null&quot;</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Centering translations of the conventional cell.\nEach list member is one exact fractional-coordinate centering translation as defined by `/properties/symmetry/centering_translation`.\nThe zero translation `(0,0,0)` is listed first.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Centering translations of the conventional cell.\n\nEach list member is one exact fractional-coordinate centering translation as defined by `/properties/symmetry/centering_translation`.\nThe zero translation `(0,0,0)` is listed first.&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;$id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://schemas.anyterial.se/defs/v0.1/properties/symmetry/centering_translation&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Centering translation&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;$comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reusable Anyterial definition for one conventional-cell centering translation.&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;x-optimade-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;list&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;x-optimade-definition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;property&quot;</span><span class="p">,</span>
@@ -142,7 +140,7 @@ The zero translation <code>(0,0,0)</code> is listed first.<br>
 <span class="w">            </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;null&quot;</span>
 <span class="w">        </span><span class="p">],</span>
-<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One centering translation of a conventional crystallographic cell.\nThe translation is represented in fractional coordinates using exact fraction strings.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of three exact fractional-coordinate components.\n- The zero translation is included in centering-translation lists and is normally listed first.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One centering translation of a conventional crystallographic cell.\n\nThe translation is represented in fractional coordinates using exact fraction strings.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of three exact fractional-coordinate components.\n- The zero translation is included in centering-translation lists and is normally listed first.&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;x-optimade-dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;names&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                </span><span class="s2">&quot;dim_lattice&quot;</span>
@@ -166,7 +164,7 @@ The zero translation <code>(0,0,0)</code> is listed first.<br>
 <span class="w">                </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="s2">&quot;null&quot;</span>
 <span class="w">            </span><span class="p">],</span>
-<span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A fraction represented as a string.&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A numerical representation formed as the quotient of two numbers represented as a string.&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nt">&quot;examples&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                </span><span class="s2">&quot;2/3&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="s2">&quot;5/42&quot;</span><span class="p">,</span>

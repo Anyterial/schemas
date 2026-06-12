@@ -6,10 +6,10 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `centering_translations_xyz`
 
 **Property name:** Centering translations as xyz strings  
-**Description:** Centering translations of the conventional cell, represented as `x,y,z`-style coordinate shifts. The zero translation is listed first.  
+**Description:** Centering translations of the conventional cell, represented as `x,y,z`-style coordinate shifts.  
 **Type:** list  
 
-
+The zero translation is listed first.
 
 **Examples:**
 
@@ -25,7 +25,6 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations_xyz",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Centering translations as xyz strings",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -38,7 +37,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "array",
         "null"
     ],
-    "description": "Centering translations of the conventional cell, represented as `x,y,z`-style coordinate shifts. The zero translation is listed first.",
+    "description": "Centering translations of the conventional cell, represented as `x,y,z`-style coordinate shifts.\n\nThe zero translation is listed first.",
     "x-optimade-unit": "inapplicable",
     "items": {
         "x-optimade-type": "string",

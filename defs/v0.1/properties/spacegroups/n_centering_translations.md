@@ -1,11 +1,11 @@
-# N Centering Translations (property)
+# Number of centering translations (property)
 
 This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
 
 **ID: [`https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_centering_translations`](https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_centering_translations.md)**  
 **Definition name:** `n_centering_translations`
 
-**Property name:** N Centering Translations  
+**Property name:** Number of centering translations  
 **Description:** Number of centering translations in the conventional cell of the space-group setting.  
 **Type:** integer  
 
@@ -24,8 +24,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 {
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_centering_translations",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
-    "title": "N Centering Translations",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+    "title": "Number of centering translations",
     "x-optimade-type": "integer",
     "x-optimade-definition": {
         "kind": "property",

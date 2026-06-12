@@ -6,11 +6,10 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `hm_full_std_markup`
 
 **Property name:** Standard full Hermann-Mauguin symbol markups  
-**Description:** Display-oriented renderings of the ITA-standard full Hermann-Mauguin symbol in `hm_full_std`.
-The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.  
+**Description:** Display-oriented renderings of the ITA-standard full Hermann-Mauguin symbol in `hm_full_std`.  
 **Type:** dictionary  
 
-
+The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.
 
 **Examples:**
 
@@ -25,7 +24,6 @@ The plain string value is stored in the corresponding unsuffixed property; this 
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_std_markup",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Standard full Hermann-Mauguin symbol markups",
-    "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
     "x-optimade-definition": {
         "kind": "property",
         "version": "0.1.0",
@@ -33,7 +31,7 @@ The plain string value is stored in the corresponding unsuffixed property; this 
         "name": "hm_full_std_markup",
         "label": "hm_full_std_markup_spacegroups"
     },
-    "description": "Display-oriented renderings of the ITA-standard full Hermann-Mauguin symbol in `hm_full_std`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+    "description": "Display-oriented renderings of the ITA-standard full Hermann-Mauguin symbol in `hm_full_std`.\n\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
     "x-optimade-type": "dictionary",
     "x-optimade-unit": "inapplicable",
     "type": [

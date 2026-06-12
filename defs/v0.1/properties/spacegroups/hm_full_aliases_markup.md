@@ -6,11 +6,10 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `hm_full_aliases_markup`
 
 **Property name:** Full Hermann-Mauguin alias markups  
-**Description:** Display-oriented renderings corresponding element-by-element to the alternate full Hermann-Mauguin symbols in `hm_full_aliases`.
-The plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.  
+**Description:** Display-oriented renderings corresponding element-by-element to the alternate full Hermann-Mauguin symbols in `hm_full_aliases`.  
 **Type:** list  
 
-
+The plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.
 
 **Examples:**
 
@@ -25,7 +24,6 @@ The plain string values are stored in the corresponding unsuffixed alias list; t
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_aliases_markup",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Full Hermann-Mauguin alias markups",
-    "$comment": "Anyterial symmetry property definition using the common string markup object for each list item.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -39,11 +37,10 @@ The plain string values are stored in the corresponding unsuffixed alias list; t
         "array",
         "null"
     ],
-    "description": "Display-oriented renderings corresponding element-by-element to the alternate full Hermann-Mauguin symbols in `hm_full_aliases`.\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
+    "description": "Display-oriented renderings corresponding element-by-element to the alternate full Hermann-Mauguin symbols in `hm_full_aliases`.\n\nThe plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.",
     "items": {
         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
         "title": "String markups",
-        "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
         "x-optimade-type": "dictionary",
         "x-optimade-definition": {
             "kind": "property",
@@ -57,7 +54,7 @@ The plain string values are stored in the corresponding unsuffixed alias list; t
             "object",
             "null"
         ],
-        "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+        "description": "Strings with alternate markup and/or encoding for display rendering.\n\nThe object is intended for display-oriented variants only, a sibling property should be used for canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
         "properties": {
             "html": {
                 "x-optimade-type": "string",

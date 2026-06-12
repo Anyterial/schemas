@@ -2,7 +2,6 @@
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/hall_to_it_std_transform",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Hall to IT standard transform",
-    "$comment": "Hall-keyed exact change-of-basis transforms to the IT standard Hall setting.",
     "x-optimade-type": "dictionary",
     "x-optimade-definition": {
         "kind": "property",
@@ -16,12 +15,11 @@
         "object",
         "null"
     ],
-    "description": "Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.\nThis transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.\nThe transform is represented by `matrix` and `vector`, following the same affine-transformation convention as the other generated transformation tables.\n\nIf `x_to_ref_hall` is a fractional coordinate column vector in the target IT-standard Hall setting, and `x_from_hall` is the corresponding fractional coordinate column vector in the source Hall setting keyed by the containing map, then the stored transform satisfies:\n`x_from_hall = matrix * x_to_ref_hall + vector`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary describing one exact transform from the containing Hall setting to the IT-standard Hall setting of the same `it_number`.\n- The `index` value is always `1`, because this is a same-space-group setting transform rather than a proper subgroup transform.\n- Matrix and vector entries MUST be exact strings, using integer strings or fraction strings as appropriate.\n- It MUST be a dictionary with the following keys:\n\n    - **hall\\_entry**: REQUIRED; String.\n      Source Hall-entry key for the setting transformed by this object.\n\n    - **it\\_number**: REQUIRED; Integer.\n      International Tables space-group number shared by the source and target Hall settings.\n\n    - **to\\_hall**: REQUIRED; String.\n      Target Hall-entry key for the IT-standard Hall setting of the same space-group type.\n\n    - **to\\_hall\\_symbol**: REQUIRED; String.\n      Display Hall symbol corresponding to `to_hall`, using spaces rather than the normalized Hall-entry key syntax.\n\n    - **index**: REQUIRED; Integer.\n      Transform index.\n      For this table the value is `1` because the transform maps between settings of the same space group.\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for this setting transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`, where `matrix` and `vector` are the fields inside `affine_transformation`.",
+    "description": "Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.\n\nThis transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.\nThe transform is represented by `matrix` and `vector`, following the same affine-transformation convention as the other generated transformation tables.\n\nIf `x_to_ref_hall` is a fractional coordinate column vector in the target IT-standard Hall setting, and `x_from_hall` is the corresponding fractional coordinate column vector in the source Hall setting keyed by the containing map, then the stored transform satisfies:\n`x_from_hall = matrix * x_to_ref_hall + vector`.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary describing one exact transform from the containing Hall setting to the IT-standard Hall setting of the same `it_number`.\n- The `index` value is always `1`, because this is a same-space-group setting transform rather than a proper subgroup transform.\n- Matrix and vector entries MUST be exact strings, using integer strings or fraction strings as appropriate.\n- It MUST be a dictionary with the following keys:\n\n    - **hall\\_entry**: REQUIRED; String.\n      Source Hall-entry key for the setting transformed by this object.\n\n    - **it\\_number**: REQUIRED; Integer.\n      International Tables space-group number shared by the source and target Hall settings.\n\n    - **to\\_hall**: REQUIRED; String.\n      Target Hall-entry key for the IT-standard Hall setting of the same space-group type.\n\n    - **to\\_hall\\_symbol**: REQUIRED; String.\n      Display Hall symbol corresponding to `to_hall`, using spaces rather than the normalized Hall-entry key syntax.\n\n    - **index**: REQUIRED; Integer.\n      Transform index.\n      For this table the value is `1` because the transform maps between settings of the same space group.\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for this setting transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n      The transform convention is `x_from_hall = matrix * x_to_ref_hall + vector`, where `matrix` and `vector` are the fields inside `affine_transformation`.",
     "properties": {
         "hall_entry": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
             "title": "Hall entry",
-            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
             "x-optimade-type": "string",
             "x-optimade-definition": {
                 "kind": "property",
@@ -44,7 +42,6 @@
         "it_number": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
             "title": "International Tables Space-Group Number",
-            "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
             "x-optimade-type": "integer",
             "x-compatibility": [
                 "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -70,7 +67,6 @@
         "to_hall": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall",
             "title": "To Hall",
-            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
             "x-optimade-type": "string",
             "x-optimade-definition": {
                 "kind": "property",
@@ -93,7 +89,6 @@
         "to_hall_symbol": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall_symbol",
             "title": "To Hall Symbol",
-            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
             "x-optimade-type": "string",
             "x-optimade-definition": {
                 "kind": "property",
@@ -116,7 +111,6 @@
         "index": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/index",
             "title": "Index",
-            "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
             "x-optimade-type": "integer",
             "x-optimade-definition": {
                 "kind": "property",
@@ -129,7 +123,7 @@
                 "integer",
                 "null"
             ],
-            "description": "Subgroup or transform index. For subgroup transforms it is the crystallographic subgroup index `[G:H]`, equal to the determinant factor of the basis transformation when applicable.",
+            "description": "Subgroup or transform index.\n\nFor subgroup transforms it is the crystallographic subgroup index `[G:H]`, equal to the determinant factor of the basis transformation when applicable.",
             "x-optimade-unit": "inapplicable",
             "examples": [
                 2,
@@ -139,7 +133,6 @@
         "affine_transformation": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
             "title": "Affine transformation",
-            "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
             "x-optimade-type": "dictionary",
             "x-optimade-definition": {
                 "kind": "property",
@@ -153,7 +146,7 @@
                 "object",
                 "null"
             ],
-            "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+            "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
             "properties": {
                 "matrix": {
                     "x-optimade-type": "list",
@@ -203,7 +196,7 @@
                                 "string",
                                 "null"
                             ],
-                            "description": "A fraction represented as a string.",
+                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                             "examples": [
                                 "2/3",
                                 "5/42",
@@ -245,7 +238,7 @@
                             "string",
                             "null"
                         ],
-                        "description": "A fraction represented as a string.",
+                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                         "examples": [
                             "2/3",
                             "5/42",
@@ -256,13 +249,31 @@
                     }
                 },
                 "xyz": {
+                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                    "title": "Operation xyz",
                     "x-optimade-type": "string",
+                    "x-compatibility": [
+                        "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                        "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                    ],
+                    "x-optimade-definition": {
+                        "kind": "property",
+                        "version": "0.1.0",
+                        "format": "1.3",
+                        "name": "op_xyz",
+                        "label": "op_xyz_symmetry"
+                    },
                     "x-optimade-unit": "inapplicable",
                     "type": [
                         "string",
                         "null"
                     ],
-                    "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                    "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                    "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                    "examples": [
+                        "-x,-y,z",
+                        "x,1/2-y,1/2+z"
+                    ]
                 },
                 "det": {
                     "x-optimade-type": "integer",

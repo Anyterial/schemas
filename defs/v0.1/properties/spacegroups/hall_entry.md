@@ -30,7 +30,6 @@ The value is derived from the Hall symbol by using lowercase letters and undersc
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Hall entry",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",

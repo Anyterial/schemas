@@ -25,7 +25,6 @@ The full symbol expands the short Hermann-Mauguin notation to include the symmet
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Full Hermann-Mauguin Symbol",
-    "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_H-M_full.html"

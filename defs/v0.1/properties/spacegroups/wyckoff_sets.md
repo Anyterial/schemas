@@ -6,10 +6,10 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `wyckoff_sets`
 
 **Property name:** Wyckoff Sets  
-**Description:** Sets of Wyckoff letters related by normalizer operations. Each inner list groups Wyckoff positions that can be interchanged by the relevant normalizer action.  
+**Description:** Sets of Wyckoff letters related by normalizer operations.  
 **Type:** list  
 
-
+Each inner list groups Wyckoff positions that can be interchanged by the relevant normalizer action.
 
 **Examples:**
 
@@ -25,7 +25,6 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_sets",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Wyckoff Sets",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -38,7 +37,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "array",
         "null"
     ],
-    "description": "Sets of Wyckoff letters related by normalizer operations. Each inner list groups Wyckoff positions that can be interchanged by the relevant normalizer action.",
+    "description": "Sets of Wyckoff letters related by normalizer operations.\n\nEach inner list groups Wyckoff positions that can be interchanged by the relevant normalizer action.",
     "x-optimade-unit": "inapplicable",
     "items": {
         "x-optimade-type": "list",

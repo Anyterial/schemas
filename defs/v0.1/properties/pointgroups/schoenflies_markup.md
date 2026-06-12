@@ -25,7 +25,6 @@ The plain string value is stored in the corresponding unsuffixed property; this 
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies_markup",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Schoenflies symbol markups",
-    "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
     "x-optimade-definition": {
         "kind": "property",
         "version": "0.1.0",

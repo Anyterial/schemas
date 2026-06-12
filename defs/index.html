@@ -139,12 +139,11 @@ In <code>transformations_hm_entry.json.gz</code>, items are keyed for lookup by 
 <ul>
 <li>
 <p><strong><a href="v0.1/properties/core/fraction">fraction</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/core/fraction"><code>https://schemas.anyterial.se/defs/v0.1/properties/core/fraction</code></a></p>
-<p>A fraction represented as a string.</p>
+<p>A numerical representation formed as the quotient of two numbers represented as a string.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/core/string_markups">String markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups"><code>https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups</code></a></p>
-<p>Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.
-The object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.</p>
+<p>Strings with alternate markup and/or encoding for display rendering.</p>
 </li>
 </ul>
 </li>
@@ -184,6 +183,10 @@ The object is intended for display-oriented variants only; the corresponding uns
 <p>Number of conjugacy classes in the crystallographic point group.</p>
 </li>
 <li>
+<p><strong><a href="v0.1/properties/pointgroups/n_pointgroup_symops">number of pointgroup symops</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops"><code>https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops</code></a></p>
+<p>Number of point-group symmetry operations.</p>
+</li>
+<li>
 <p><strong><a href="v0.1/properties/pointgroups/order">Order</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order"><code>https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/order</code></a></p>
 <p>Order of the point group, i.e. the number of operations in the finite point group.</p>
 </li>
@@ -209,27 +212,19 @@ For point-group operations, generated data currently uses <code>matrix</code> an
 <ul>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/asu">Asymmetric unit</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu</code></a></p>
-<p>Direct-space asymmetric unit for the space-group setting, represented as a bounded non-recursive set of half-space cuts and boundary ownership rules.
-The representation is equivalent to the recursive cctbx direct-space ASU cut expression documented by Grosse-Kunstleve et al., Acta Cryst. A67, 269 (2011), but stores the volume, face, edge, and vertex rules in separate fixed-depth tables.
-A point is inside the ASU volume only if all <code>volume_cuts</code> pass.
-Each volume cut tests an oriented plane from <code>planes</code>: a positive plane value includes the point, a negative value excludes it, and an exactly zero value uses <code>when_zero</code>.
-Boundary rules are disjunctive normal form rule tables: the outer <code>dnf</code> list is OR, each inner list is AND, and each term tests one oriented plane and uses its own <code>on_zero</code> action.
-Face rules may descend to edge rules on equality, edge rules may descend to vertex rules on equality, and vertex rules terminate with include or exclude actions.</p>
+<p>Direct-space asymmetric unit for the space-group setting, represented as a bounded non-recursive set of half-space cuts and boundary ownership rules.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/asu_cut">Asymmetric-unit cut</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_cut"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_cut</code></a></p>
-<p>One serialized asymmetric-unit half-space cut or logical cut expression.
-Cut objects may recursively refer to other cut objects through <code>condition</code>, <code>lhs</code>, and <code>rhs</code>.</p>
+<p>One serialized asymmetric-unit half-space cut or logical cut expression.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/asu_markup">Asymmetric unit markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_markup</code></a></p>
-<p>Display-oriented renderings of the plain-string asymmetric-unit restrictions in <code>asu_str</code>.
-The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.</p>
+<p>Display-oriented renderings of the plain-string asymmetric-unit restrictions in <code>asu_str</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/asu_shape_only_markup">Shape-only asymmetric unit markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_shape_only_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_shape_only_markup</code></a></p>
-<p>Display-oriented renderings of the plain-string shape-only asymmetric-unit restrictions in <code>asu_shape_only_str</code>.
-The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.</p>
+<p>Display-oriented renderings of the plain-string shape-only asymmetric-unit restrictions in <code>asu_shape_only_str</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/asu_shape_only_str">Shape-only asymmetric unit string</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_shape_only_str"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_shape_only_str</code></a></p>
@@ -249,13 +244,11 @@ The plain string value is stored in the corresponding unsuffixed property; this 
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/centering_translations">Centering translations</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations</code></a></p>
-<p>Centering translations of the conventional cell.
-Each list member is one exact fractional-coordinate centering translation as defined by <code>/properties/symmetry/centering_translation</code>.
-The zero translation <code>(0,0,0)</code> is listed first.</p>
+<p>Centering translations of the conventional cell.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/centering_translations_xyz">Centering translations as xyz strings</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations_xyz"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations_xyz</code></a></p>
-<p>Centering translations of the conventional cell, represented as <code>x,y,z</code>-style coordinate shifts. The zero translation is listed first.</p>
+<p>Centering translations of the conventional cell, represented as <code>x,y,z</code>-style coordinate shifts.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/centring_type">Centring Type</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centring_type"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centring_type</code></a></p>
@@ -275,8 +268,7 @@ The zero translation <code>(0,0,0)</code> is listed first.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hall_aliases_markup">Hall alias markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_aliases_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_aliases_markup</code></a></p>
-<p>Display-oriented renderings corresponding element-by-element to the alternate Hall symbols in <code>hall_aliases</code>.
-The plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.</p>
+<p>Display-oriented renderings corresponding element-by-element to the alternate Hall symbols in <code>hall_aliases</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hall_entry">Hall entry</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry</code></a></p>
@@ -284,13 +276,11 @@ The plain string values are stored in the corresponding unsuffixed alias list; t
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hall_markup">Hall symbol markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_markup</code></a></p>
-<p>Display-oriented renderings of the Hall symbol in <code>hall</code>.
-The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.</p>
+<p>Display-oriented renderings of the Hall symbol in <code>hall</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/harker_planes">Harker planes</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/harker_planes"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/harker_planes</code></a></p>
-<p>Harker planes of the space group in fractional Patterson coordinates, as generated by cctbx.
-Each entry describes one plane or special-position condition with an expression and optional exact normal, point, and constant data.</p>
+<p>Harker planes of the space group in fractional Patterson coordinates.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_cctbx_universal">Hermann-Mauguin Cctbx Universal</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal</code></a></p>
@@ -306,9 +296,7 @@ Each entry describes one plane or special-position condition with an expression 
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_entry_markup">Hermann-Mauguin entry markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_markup</code></a></p>
-<p>Display-oriented renderings of the Hermann-Mauguin entry label in <code>hm_entry</code>.
-The plain string value is stored in <code>hm_entry</code>; this object only provides alternate markup forms for display.
-These renderings follow the same typographic conventions as <code>hm_full_markup</code>.</p>
+<p>Display-oriented renderings of the Hermann-Mauguin entry label in <code>hm_entry</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_extended">Extended Hermann-Mauguin Symbol</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended</code></a></p>
@@ -316,17 +304,15 @@ These renderings follow the same typographic conventions as <code>hm_full_markup
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_extended_aliases">Hermann-Mauguin Extended Aliases</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_aliases"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_aliases</code></a></p>
-<p>Alternate ASCII forms of <code>hm_extended</code> that are accepted for the same generated setting. The preferred symbol is stored in <code>hm_extended</code>.</p>
+<p>Alternate ASCII forms of <code>hm_extended</code> that are accepted for the same generated setting.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_extended_aliases_markup">Extended Hermann-Mauguin alias markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_aliases_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_aliases_markup</code></a></p>
-<p>Display-oriented renderings corresponding element-by-element to the alternate extended Hermann-Mauguin symbols in <code>hm_extended_aliases</code>.
-The plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.</p>
+<p>Display-oriented renderings corresponding element-by-element to the alternate extended Hermann-Mauguin symbols in <code>hm_extended_aliases</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_extended_markup">Extended Hermann-Mauguin symbol markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_markup</code></a></p>
-<p>Display-oriented renderings of the extended Hermann-Mauguin symbol in <code>hm_extended</code>.
-The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.</p>
+<p>Display-oriented renderings of the extended Hermann-Mauguin symbol in <code>hm_extended</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_extended_old">Hermann-Mauguin Extended Old</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_old"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_old</code></a></p>
@@ -338,17 +324,15 @@ The plain string value is stored in the corresponding unsuffixed property; this 
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_full_aliases">Hermann-Mauguin Full Aliases</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_aliases"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_aliases</code></a></p>
-<p>Alternate ASCII forms of <code>hm_full</code> that are accepted for the same generated setting. The preferred symbol is stored in <code>hm_full</code>.</p>
+<p>Alternate ASCII forms of <code>hm_full</code> that are accepted for the same generated setting.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_full_aliases_markup">Full Hermann-Mauguin alias markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_aliases_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_aliases_markup</code></a></p>
-<p>Display-oriented renderings corresponding element-by-element to the alternate full Hermann-Mauguin symbols in <code>hm_full_aliases</code>.
-The plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.</p>
+<p>Display-oriented renderings corresponding element-by-element to the alternate full Hermann-Mauguin symbols in <code>hm_full_aliases</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_full_markup">Full Hermann-Mauguin symbol markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_markup</code></a></p>
-<p>Display-oriented renderings of the setting-specific full Hermann-Mauguin symbol in <code>hm_full</code>.
-The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.</p>
+<p>Display-oriented renderings of the setting-specific full Hermann-Mauguin symbol in <code>hm_full</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_full_old">Hermann-Mauguin Full Old</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_old"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_old</code></a></p>
@@ -360,8 +344,7 @@ The plain string value is stored in the corresponding unsuffixed property; this 
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_full_std_markup">Standard full Hermann-Mauguin symbol markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_std_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_std_markup</code></a></p>
-<p>Display-oriented renderings of the ITA-standard full Hermann-Mauguin symbol in <code>hm_full_std</code>.
-The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.</p>
+<p>Display-oriented renderings of the ITA-standard full Hermann-Mauguin symbol in <code>hm_full_std</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_short">Short Hermann-Mauguin Symbol</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short</code></a></p>
@@ -369,34 +352,31 @@ The plain string value is stored in the corresponding unsuffixed property; this 
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_short_aliases">Hermann-Mauguin Short Aliases</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_aliases"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_aliases</code></a></p>
-<p>Alternate ASCII forms of <code>hm_short</code> that are accepted for the same generated setting. The preferred symbol is stored in <code>hm_short</code>.</p>
+<p>Alternate ASCII forms of <code>hm_short</code> that are accepted for the same generated setting.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_short_aliases_markup">Short Hermann-Mauguin alias markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_aliases_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_aliases_markup</code></a></p>
-<p>Display-oriented renderings corresponding element-by-element to the alternate short Hermann-Mauguin symbols in <code>hm_short_aliases</code>.
-The plain string values are stored in the corresponding unsuffixed alias list; this list only provides alternate markup forms for display.</p>
+<p>Display-oriented renderings corresponding element-by-element to the alternate short Hermann-Mauguin symbols in <code>hm_short_aliases</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_short_markup">Short Hermann-Mauguin symbol markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_markup</code></a></p>
-<p>Display-oriented renderings of the setting-specific short Hermann-Mauguin symbol in <code>hm_short</code>.
-The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.</p>
+<p>Display-oriented renderings of the setting-specific short Hermann-Mauguin symbol in <code>hm_short</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_short_old">Hermann-Mauguin Short Old</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_old"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_old</code></a></p>
 <p>The older short Hermann-Mauguin symbol retained as an alias for symbols superseded by newer <code>e</code>-glide notation.</p>
 </li>
 <li>
-<p><strong><a href="v0.1/properties/spacegroups/hm_short_std">Hermann-Mauguin Short Std</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std</code></a></p>
+<p><strong><a href="v0.1/properties/spacegroups/hm_short_std">Hermann-Mauguin Short Standard</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std</code></a></p>
 <p>The International Tables standard short Hermann-Mauguin symbol for the space-group type.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/hm_short_std_markup">Standard short Hermann-Mauguin symbol markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_std_markup</code></a></p>
-<p>Display-oriented renderings of the ITA-standard short Hermann-Mauguin symbol in <code>hm_short_std</code>.
-The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.</p>
+<p>Display-oriented renderings of the ITA-standard short Hermann-Mauguin symbol in <code>hm_short_std</code>.</p>
 </li>
 <li>
-<p><strong><a href="v0.1/properties/spacegroups/is_centric">Is Centric</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_centric"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_centric</code></a></p>
-<p>Boolean flag indicating whether the cctbx space group is centric.</p>
+<p><strong><a href="v0.1/properties/spacegroups/is_centric">is centric</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_centric"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_centric</code></a></p>
+<p>Boolean flag indicating whether the space group is centric.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/is_chiral">Is Chiral</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_chiral"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/is_chiral</code></a></p>
@@ -420,22 +400,22 @@ The plain string value is stored in the corresponding unsuffixed property; this 
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/it_number_enantiomorphic">It Number Enantiomorphic</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number_enantiomorphic"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number_enantiomorphic</code></a></p>
-<p>International Tables number of the enantiomorphic partner space group, when one exists. The value is null for space groups without a distinct enantiomorphic partner.</p>
+<p>International Tables number of the enantiomorphic partner space group, when one exists.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/laue_class">Laue Class</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/laue_class"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/laue_class</code></a></p>
 <p>The Laue class associated with the space group or point group.</p>
 </li>
 <li>
-<p><strong><a href="v0.1/properties/spacegroups/n_centering_translations">N Centering Translations</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_centering_translations"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_centering_translations</code></a></p>
+<p><strong><a href="v0.1/properties/spacegroups/n_centering_translations">Number of centering translations</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_centering_translations"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_centering_translations</code></a></p>
 <p>Number of centering translations in the conventional cell of the space-group setting.</p>
 </li>
 <li>
-<p><strong><a href="v0.1/properties/spacegroups/n_pointgroup_symops">N Pointgroup Symops</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_pointgroup_symops"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_pointgroup_symops</code></a></p>
-<p>Number of point-group symmetry operations represented by the space group, excluding centering translations.</p>
+<p><strong><a href="v0.1/properties/spacegroups/n_pointgroup_symops">number of pointgroup symops</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops"><code>https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/n_pointgroup_symops</code></a></p>
+<p>Number of point-group symmetry operations.</p>
 </li>
 <li>
-<p><strong><a href="v0.1/properties/spacegroups/n_symops">N Symops</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops</code></a></p>
+<p><strong><a href="v0.1/properties/spacegroups/n_symops">number of symops</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops</code></a></p>
 <p>Number of symmetry operations in the finite operation list of the generated entry.</p>
 </li>
 <li>
@@ -443,11 +423,11 @@ The plain string value is stored in the corresponding unsuffixed property; this 
 <p>The Hermann-Mauguin point-group symbol associated with the space group.</p>
 </li>
 <li>
-<p><strong><a href="v0.1/properties/spacegroups/schoenflies">Schoenflies Symbol</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies</code></a></p>
+<p><strong><a href="v0.1/properties/spacegroups/schoenflies">Schoenflies Symbol</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies"><code>https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies</code></a></p>
 <p>The Schoenflies symbol for the space-group type.</p>
 </li>
 <li>
-<p><strong><a href="v0.1/properties/spacegroups/schoenflies_markup">Schoenflies symbol markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/schoenflies_markup</code></a></p>
+<p><strong><a href="v0.1/properties/spacegroups/schoenflies_markup">Schoenflies symbol markups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies_markup"><code>https://schemas.anyterial.se/defs/v0.1/properties/pointgroups/schoenflies_markup</code></a></p>
 <p>Display-oriented renderings of the Schoenflies symbol in <code>schoenflies</code>.
 The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.</p>
 </li>
@@ -461,7 +441,7 @@ The plain string value is stored in the corresponding unsuffixed property; this 
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/setting_it_nc_aliases">International Tables setting-code aliases</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc_aliases"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc_aliases</code></a></p>
-<p>Alternative International Tables <code>n:c</code> setting identifiers that refer to the same Hall setting or are otherwise treated as aliases of <code>setting_it_nc</code> by the generator. This field is used only when the source tables expose more than one conventional label for the same generated setting.</p>
+<p>A list of International Tables <code>n:c</code> setting identifiers that are alternatives to the one designated as the main one.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/setting_plaintext">Setting Plaintext</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_plaintext"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_plaintext</code></a></p>
@@ -469,42 +449,35 @@ The plain string value is stored in the corresponding unsuffixed property; this 
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/spacegroup_symbols">Space-group symbols</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroup_symbols"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroup_symbols</code></a></p>
-<p>Ordered table of conventional space-group symbol rows.
-Each row describes one Hall setting where the International Tables symbol data is available, including the IT coordinate-system code, Hall symbol, IT number, and Hermann-Mauguin symbols.</p>
+<p>Ordered table of conventional space-group symbol rows.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/spglib_hall">Spglib Hall</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall</code></a></p>
-<p>Hall setting selected by spglib for the space-group type or setting, represented as a normalized Hall key.</p>
+<p>The standard Hall setting used in spglib, e.g., for a space group number.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/spglib_hall_numbers">Spglib Hall Numbers</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall_numbers"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall_numbers</code></a></p>
-<p>spglib Hall numbers corresponding to the generated setting.</p>
+<p>A "Hall number" as assigned by spglib.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/structure_seminvariants">Structure Seminvariants</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/structure_seminvariants"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/structure_seminvariants</code></a></p>
-<p>Structure seminvariant vectors and moduli for the space-group setting. These characterize phase restrictions and FFT grid constraints associated with the symmetry.</p>
+<p>Structure seminvariant vectors and moduli for the space-group setting.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/symops">Symmetry operations</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops</code></a></p>
-<p>Full list of symmetry-operation descriptors for a space-group setting.
-Each list member is a <code>op</code> object as defined by <code>/properties/symmetry/op</code>.
-For space-group operations, generated data currently uses <code>rot_type</code>, <code>axis</code>, <code>sense</code>, <code>screw_glide</code>, and <code>origin_shift</code>.</p>
+<p>Full list of symmetry-operation descriptors for a space-group setting.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/symops_generators">Symmetry operation generators</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators</code></a></p>
-<p>Minimal generator subset of the full symmetry-operation group for a space-group setting.
-Each list member is a <code>op</code> object as defined by <code>/properties/symmetry/op</code>.
-For space-group operations, generated data currently uses <code>rot_type</code>, <code>axis</code>, <code>sense</code>, <code>screw_glide</code>, and <code>origin_shift</code>.</p>
+<p>Minimal generator subset of the full symmetry-operation group for a space-group setting.</p>
 </li>
 <li>
-<p><strong><a href="v0.1/properties/spacegroups/symops_generators_xyz">Symops Generators Xyz</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators_xyz"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators_xyz</code></a></p>
+<p><strong><a href="v0.1/properties/spacegroups/symops_generators_xyz">Symops Generators xyz</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators_xyz"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_generators_xyz</code></a></p>
 <p>Minimal generator subset of the full symmetry-operation group in fractional <code>x,y,z</code> notation, ordered consistently with <code>symops_generators</code>.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/symops_mod_centering">Symmetry operations modulo centering translations</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering</code></a></p>
-<p>Representative symmetry-operation descriptors modulo centering translations.
-Each list member is a <code>op</code> object as defined by <code>/properties/symmetry/op</code>.
-For space-group operations, generated data currently uses <code>rot_type</code>, <code>axis</code>, <code>sense</code>, <code>screw_glide</code>, and <code>origin_shift</code>.</p>
+<p>Representative symmetry-operation descriptors modulo centering translations.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/symops_mod_centering_xyz">Symmetry operations modulo centering in x,y,z notation</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering_xyz"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_mod_centering_xyz</code></a></p>
@@ -512,9 +485,7 @@ For space-group operations, generated data currently uses <code>rot_type</code>,
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/symops_representative">Representative symmetry operations</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative</code></a></p>
-<p>Representative symmetry-operation descriptors modulo centering translations.
-Each list member is a <code>op</code> object as defined by <code>/properties/symmetry/op</code>.
-For space-group operations, generated data currently uses <code>rot_type</code>, <code>axis</code>, <code>sense</code>, <code>screw_glide</code>, and <code>origin_shift</code>.</p>
+<p>Representative symmetry-operation descriptors modulo centering translations.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/symops_representative_xyz">Symops Representative Xyz</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative_xyz"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_representative_xyz</code></a></p>
@@ -522,18 +493,15 @@ For space-group operations, generated data currently uses <code>rot_type</code>,
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/symops_xyz">Symmetry operations in x,y,z notation</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_xyz"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/symops_xyz</code></a></p>
-<p>Full list of symmetry operations for the space-group setting written in fractional <code>x,y,z</code> coordinate notation. Each expression acts on fractional coordinates in the setting represented by the containing Hall entry.</p>
+<p>A list of symmetry operations given as general position x, y and z coordinates in algebraic form.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/wyckoff">Wyckoff positions</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff</code></a></p>
-<p>Wyckoff-position table for a specific space-group setting.
-Each list item describes one Wyckoff position and includes the Wyckoff letter as ordinary data.
-This list representation avoids using JSON dictionary keys as crystallographic data.
-Items follow <code>/properties/symmetry/wyckoff_position</code>.</p>
+<p>Wyckoff-position table for a specific space-group setting.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/spacegroups/wyckoff_sets">Wyckoff Sets</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_sets"><code>https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/wyckoff_sets</code></a></p>
-<p>Sets of Wyckoff letters related by normalizer operations. Each inner list groups Wyckoff positions that can be interchanged by the relevant normalizer action.</p>
+<p>Sets of Wyckoff letters related by normalizer operations.</p>
 </li>
 </ul>
 </li>
@@ -542,31 +510,27 @@ Items follow <code>/properties/symmetry/wyckoff_position</code>.</p>
 <ul>
 <li>
 <p><strong><a href="v0.1/properties/symmetry/affine_transformation">Affine transformation</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation</code></a></p>
-<p>One exact affine transformation acting on fractional crystallographic coordinates.
-The transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.
-Parent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.</p>
+<p>An affine transformation acting on fractional crystallographic coordinates.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/symmetry/basis_transform">Basis transformation</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform</code></a></p>
-<p>One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.
-The affine map itself is stored in the embedded <code>affine_transformation</code> field.
-Parent tables use this object for Hall-to-standard transforms, Bärnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.</p>
+<p>One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/symmetry/centering_translation">Centering translation</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/centering_translation"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/centering_translation</code></a></p>
-<p>One centering translation of a conventional crystallographic cell.
-The translation is represented in fractional coordinates using exact fraction strings.</p>
+<p>One centering translation of a conventional crystallographic cell.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/symmetry/op">Operation</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op</code></a></p>
-<p>A classified crystallographic operation acting within one coordinate setting.
-The affine map itself is stored in the embedded <code>affine_transformation</code> field.
-The remaining fields classify the operation crystallographically, for example by rotation type, axis, sense, and screw or glide component.</p>
+<p>Information related to a crystallographic operation acting within one coordinate setting.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/symmetry/op_xyz">Operation xyz</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz</code></a></p>
+<p>Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley &amp; Cracknell, 1972: pp. 35-37; adapted for computer strings).</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/symmetry/wyckoff_position">Wyckoff position</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/symmetry/wyckoff_position"><code>https://schemas.anyterial.se/defs/v0.1/properties/symmetry/wyckoff_position</code></a></p>
-<p>One Wyckoff position in a space-group setting.
-The record gives the multiplicity, oriented site-symmetry symbol, representative coordinate, full orbit, and orbit factorized modulo centering translations.</p>
+<p>Information related to a Wyckoff position in a space-group setting.</p>
 </li>
 </ul>
 </li>
@@ -575,81 +539,59 @@ The record gives the multiplicity, oriented site-symmetry symbol, representative
 <ul>
 <li>
 <p><strong><a href="v0.1/properties/transformations/affine_images">Affine images</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/affine_images"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/affine_images</code></a></p>
-<p>Same-space-group affine images for a standard setting.
-The list combines Euclidean normalizer operations and isomorphic subgroup transforms to enumerate alternative affine images of the same space group used by runtime search code.
-Matrix/vector transform fields follow <code>/properties/symmetry/basis_transform</code>.</p>
+<p>Same-space-group affine images for a standard setting.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/affine_normalizer">Affine normalizer</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/affine_normalizer"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/affine_normalizer</code></a></p>
-<p>Affine normalizer coset representatives for one crystallographic space-group setting.
-The representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.
-This property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.</p>
+<p>Affine normalizer coset representatives for one crystallographic space-group setting.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/affine_normalizer_coset_data">Affine normalizer coset data</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/affine_normalizer_coset_data"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/affine_normalizer_coset_data</code></a></p>
-<p>Ordered table of bounded affine normalizer coset-representative data for crystallographic space groups, with one item for each Hall setting.
-The affine normalizer of a space group describes affine mappings that send the space group to itself.
-In practical algorithms this information is useful after a candidate space-group setting has been identified, because additional normalizer representatives can be applied to explore equivalent descriptions, equivalent origin choices, or equivalent embeddings without changing the underlying space group.
-The representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of normalizer operations rather than every operation in that class.</p>
+<p>Ordered table of bounded affine normalizer coset-representative data for crystallographic space groups, with one item for each Hall setting.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/affine_normalizer_cosets">Affine normalizer cosets</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/affine_normalizer_cosets"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/affine_normalizer_cosets</code></a></p>
-<p>Runtime list of bounded affine normalizer coset representatives modulo the space group.
-Each item is one finite listed representative and follows <code>/properties/symmetry/basis_transform</code>.
-The list is a bounded representative table, not a complete infinite affine normalizer.</p>
+<p>Runtime list of bounded affine normalizer coset representatives modulo the space group.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/backward_lift_criteria">Backward lift criteria</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/backward_lift_criteria"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/backward_lift_criteria</code></a></p>
-<p>Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen Bärnighausen transform.
-Each list item groups transform records for one target subgroup IT number.
-The target subgroup IT number is stored in <code>target_it_number</code> rather than as a JSON dictionary key.</p>
+<p>Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen Bärnighausen transform.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/baernighausen">Bärnighausen subgroup transforms</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/baernighausen"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/baernighausen</code></a></p>
-<p>Bärnighausen subgroup transform table for one parent setting or space-group type.
-Entries describe generated embeddings of subgroup settings into the containing parent setting.
-Each list item groups transform records for one target subgroup, with the target stored as ordinary data rather than as a JSON dictionary key.
-Transform records follow <code>/properties/symmetry/basis_transform</code>.</p>
+<p>Bärnighausen subgroup transform table for one parent setting or space-group type.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/continuous_euclidean_normalizer">Continuous Euclidean normalizer</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/continuous_euclidean_normalizer"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/continuous_euclidean_normalizer</code></a></p>
-<p>Continuous Euclidean normalizer subspace before aggregation into the public transformation tables. It records the dimension and basis vectors of allowed continuous origin shifts.</p>
+<p>Continuous Euclidean normalizer subspace before aggregation into the public transformation tables.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/continuous_normalizer">Continuous normalizer</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/continuous_normalizer"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/continuous_normalizer</code></a></p>
-<p>Parameterized continuous normalizer subspace for a setting. It describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.</p>
+<p>Parameterized continuous normalizer subspace for a setting.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/euclidean_normalizer">Euclidean normalizer</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/euclidean_normalizer"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/euclidean_normalizer</code></a></p>
-<p>Finite Euclidean normalizer operations for one crystallographic space-group setting.
-The Euclidean normalizer consists of metric-preserving affine operations that normalize the space group in the chosen setting.
-These operations are useful for algorithms that need to compare or enumerate equivalent descriptions of the same setting under rigid crystallographic changes of coordinates.</p>
+<p>Finite Euclidean normalizer operations for one crystallographic space-group setting.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/hall_to_it_std_transform">Hall to IT standard transform</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/hall_to_it_std_transform"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/hall_to_it_std_transform</code></a></p>
-<p>Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.
-This transform is useful when data generated or detected in an arbitrary Hall setting needs to be compared with a conventional IT-standard reference setting.
-The transform is represented by <code>matrix</code> and <code>vector</code>, following the same affine-transformation convention as the other generated transformation tables.</p>
+<p>Exact basis and origin transform from one stored Hall setting to the International Tables standard Hall setting of the same space-group type.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/index">Index</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/index"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/index</code></a></p>
-<p>Subgroup or transform index. For subgroup transforms it is the crystallographic subgroup index <code>[G:H]</code>, equal to the determinant factor of the basis transformation when applicable.</p>
+<p>Subgroup or transform index.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/isomorphic_subgroups">Isomorphic subgroup transforms</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/isomorphic_subgroups"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/isomorphic_subgroups</code></a></p>
-<p>Isomorphic subgroup transforms of bounded index for one parent setting or space-group type.
-An isomorphic subgroup has the same space-group type as the parent but is embedded with a finite index, usually corresponding to an enlarged unit cell or a sublattice choice.
-These transforms are useful for algorithms that need to enumerate same-type subgroup embeddings, compare structures under supercell changes, or construct bounded same-space-group refinement paths.</p>
+<p>Isomorphic subgroup transforms of bounded index for one parent setting or space-group type.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/k_subtype">Klassengleiche subgroup subtype</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/k_subtype"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/k_subtype</code></a></p>
-<p>Subtype of a klassengleiche (<code>k</code>) subgroup relation. Values distinguish loss of centering translations from enlarged-unit-cell subgroups; the value is null for non-<code>k</code> relations.</p>
+<p>Subtype of a klassengleiche (<code>k</code>) subgroup relation.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/maximal_subgroup_relations">Maximal subgroup relations</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/maximal_subgroup_relations"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/maximal_subgroup_relations</code></a></p>
-<p>Maximal non-isomorphic subgroup relations for International Tables space-group types.
-Each list item describes all known maximal non-isomorphic subgroup relations for one supergroup IT number.
-The supergroup IT number is stored in <code>supergroup_it_number</code> rather than as a JSON dictionary key.</p>
+<p>Maximal non-isomorphic subgroup relations for International Tables space-group types.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/n_coset_representatives">N Coset Representatives</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_coset_representatives"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_coset_representatives</code></a></p>
@@ -677,15 +619,11 @@ The supergroup IT number is stored in <code>supergroup_it_number</code> rather t
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/orthogonal_affine_normalizer">Orthogonal affine normalizer</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/orthogonal_affine_normalizer"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/orthogonal_affine_normalizer</code></a></p>
-<p>Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.
-The representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.
-This property contains the signed-permutation subset of affine normalizer representatives.</p>
+<p>Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/orthogonal_affine_normalizer_cosets">Orthogonal affine normalizer cosets</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/orthogonal_affine_normalizer_cosets"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/orthogonal_affine_normalizer_cosets</code></a></p>
-<p>Runtime list of orthogonal signed-permutation affine normalizer coset representatives modulo the space group.
-Each item is one finite listed representative and follows <code>/properties/symmetry/basis_transform</code>.
-The list is a bounded representative table, not a complete infinite affine normalizer.</p>
+<p>Runtime list of orthogonal signed-permutation affine normalizer coset representatives modulo the space group.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/same_space_group_affine_images_std">Same space group affine images std</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/same_space_group_affine_images_std"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/same_space_group_affine_images_std</code></a></p>
@@ -693,13 +631,11 @@ The list is a bounded representative table, not a complete infinite affine norma
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/subgroup_type">Maximal subgroup type</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/subgroup_type"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/subgroup_type</code></a></p>
-<p>International Tables maximal subgroup class: <code>t</code> for translationengleiche or <code>k</code> for klassengleiche.</p>
+<p>International Tables maximal subgroup class.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/target">Target</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/target"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/target</code></a></p>
-<p>Target vector or target value in a generated linear criterion.
-In current generated criteria it is usually represented as exact rational components serialized as strings.
-The semantic meaning of <code>target</code> is parent-specific and should not be reused as a broad standalone concept.</p>
+<p>Target vector or target value in a generated linear criterion.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/to_hall">To Hall</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/to_hall</code></a></p>
@@ -711,23 +647,15 @@ The semantic meaning of <code>target</code> is parent-specific and should not be
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/transformations_per_hm_entry">Transformations per H-M entry</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/transformations_per_hm_entry"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/transformations_per_hm_entry</code></a></p>
-<p>Transformation data grouped by H-M entry.
-Each list item contains the H-M entry as ordinary data together with all transformation sections generated for that setting.
-This representation avoids using H-M entries as JSON dictionary keys in the OPTIMADE-described payload.
-The accompanying <code>hall_entry</code> field identifies the Hall symbol used to compute the symmetry operations and normalizer data.
-The <code>centering_translations</code> and <code>centering_translations_xyz</code> fields give the setting's centering translations directly in each record, so modulo-centering operation lists can be interpreted without joining against another dataset.</p>
+<p>Transformation data grouped by H-M entry.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/transformations_per_it_number">Transformations per IT number</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/transformations_per_it_number"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/transformations_per_it_number</code></a></p>
-<p>Standard-setting transformation data grouped by International Tables space-group number.
-Each list item contains the IT number as ordinary data together with all standard-setting transformation sections generated for that space-group type.
-This representation avoids using IT numbers as JSON dictionary keys in the OPTIMADE-described payload.</p>
+<p>Standard-setting transformation data grouped by International Tables space-group number.</p>
 </li>
 <li>
 <p><strong><a href="v0.1/properties/transformations/wyckoff_splitting">Wyckoff splitting</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting"><code>https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting</code></a></p>
-<p>Wyckoff-position splitting data associated with a subgroup or same-space-group transform.
-Each list item gives the split of one parent Wyckoff position.
-The parent Wyckoff letter is stored in the <code>parent</code> field rather than as a JSON dictionary key.</p>
+<p>Wyckoff-position splitting data associated with a subgroup or same-space-group transform.</p>
 </li>
 </ul>
 </li>

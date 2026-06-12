@@ -6,11 +6,10 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `asu_shape_only_markup`
 
 **Property name:** Shape-only asymmetric unit markups  
-**Description:** Display-oriented renderings of the plain-string shape-only asymmetric-unit restrictions in `asu_shape_only_str`.
-The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.  
+**Description:** Display-oriented renderings of the plain-string shape-only asymmetric-unit restrictions in `asu_shape_only_str`.  
 **Type:** dictionary  
 
-
+The plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.
 
 **Examples:**
 
@@ -25,7 +24,6 @@ The plain string value is stored in the corresponding unsuffixed property; this 
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/asu_shape_only_markup",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Shape-only asymmetric unit markups",
-    "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
     "x-optimade-definition": {
         "kind": "property",
         "version": "0.1.0",
@@ -33,7 +31,7 @@ The plain string value is stored in the corresponding unsuffixed property; this 
         "name": "asu_shape_only_markup",
         "label": "asu_shape_only_markup_spacegroups"
     },
-    "description": "Display-oriented renderings of the plain-string shape-only asymmetric-unit restrictions in `asu_shape_only_str`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+    "description": "Display-oriented renderings of the plain-string shape-only asymmetric-unit restrictions in `asu_shape_only_str`.\n\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
     "x-optimade-type": "dictionary",
     "x-optimade-unit": "inapplicable",
     "type": [

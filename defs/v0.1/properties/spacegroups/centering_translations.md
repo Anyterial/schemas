@@ -6,12 +6,11 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `centering_translations`
 
 **Property name:** Centering translations  
-**Description:** Centering translations of the conventional cell.
-Each list member is one exact fractional-coordinate centering translation as defined by `/properties/symmetry/centering_translation`.
-The zero translation `(0,0,0)` is listed first.  
+**Description:** Centering translations of the conventional cell.  
 **Type:** list  
 
-
+Each list member is one exact fractional-coordinate centering translation as defined by `/properties/symmetry/centering_translation`.
+The zero translation `(0,0,0)` is listed first.
 
 **Examples:**
 
@@ -27,7 +26,6 @@ The zero translation `(0,0,0)` is listed first.
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/centering_translations",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Centering translations",
-    "$comment": "Anyterial property definition using the common reusable centering-translation definition.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -41,11 +39,10 @@ The zero translation `(0,0,0)` is listed first.
         "array",
         "null"
     ],
-    "description": "Centering translations of the conventional cell.\nEach list member is one exact fractional-coordinate centering translation as defined by `/properties/symmetry/centering_translation`.\nThe zero translation `(0,0,0)` is listed first.",
+    "description": "Centering translations of the conventional cell.\n\nEach list member is one exact fractional-coordinate centering translation as defined by `/properties/symmetry/centering_translation`.\nThe zero translation `(0,0,0)` is listed first.",
     "items": {
         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/centering_translation",
         "title": "Centering translation",
-        "$comment": "Reusable Anyterial definition for one conventional-cell centering translation.",
         "x-optimade-type": "list",
         "x-optimade-definition": {
             "kind": "property",
@@ -59,7 +56,7 @@ The zero translation `(0,0,0)` is listed first.
             "array",
             "null"
         ],
-        "description": "One centering translation of a conventional crystallographic cell.\nThe translation is represented in fractional coordinates using exact fraction strings.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of three exact fractional-coordinate components.\n- The zero translation is included in centering-translation lists and is normally listed first.",
+        "description": "One centering translation of a conventional crystallographic cell.\n\nThe translation is represented in fractional coordinates using exact fraction strings.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of three exact fractional-coordinate components.\n- The zero translation is included in centering-translation lists and is normally listed first.",
         "x-optimade-dimensions": {
             "names": [
                 "dim_lattice"
@@ -83,7 +80,7 @@ The zero translation `(0,0,0)` is listed first.
                 "string",
                 "null"
             ],
-            "description": "A fraction represented as a string.",
+            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
             "examples": [
                 "2/3",
                 "5/42",

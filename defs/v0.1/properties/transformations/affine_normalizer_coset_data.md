@@ -6,11 +6,12 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `affine_normalizer_coset_data`
 
 **Property name:** Affine normalizer coset data  
-**Description:** Ordered table of bounded affine normalizer coset-representative data for crystallographic space groups, with one item for each Hall setting.
+**Description:** Ordered table of bounded affine normalizer coset-representative data for crystallographic space groups, with one item for each Hall setting.  
+**Type:** list  
+
 The affine normalizer of a space group describes affine mappings that send the space group to itself.
 In practical algorithms this information is useful after a candidate space-group setting has been identified, because additional normalizer representatives can be applied to explore equivalent descriptions, equivalent origin choices, or equivalent embeddings without changing the underlying space group.
-The representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of normalizer operations rather than every operation in that class.  
-**Type:** list  
+The representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of normalizer operations rather than every operation in that class.
 
 The `orthogonal_affine_normalizer_cosets` list is the signed-permutation subset of representatives.
 The `affine_normalizer_cosets` list is generated from a bounded set of unimodular integer linear parts and may include non-orthogonal representatives.
@@ -40,7 +41,6 @@ Each listed representative carries `compatible_systems`, which states the crysta
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/affine_normalizer_coset_data",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Affine normalizer coset data",
-    "$comment": "Ordered Anyterial table of bounded affine normalizer coset-representative data by Hall setting.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -54,7 +54,7 @@ Each listed representative carries `compatible_systems`, which states the crysta
         "array",
         "null"
     ],
-    "description": "Ordered table of bounded affine normalizer coset-representative data for crystallographic space groups, with one item for each Hall setting.\nThe affine normalizer of a space group describes affine mappings that send the space group to itself.\nIn practical algorithms this information is useful after a candidate space-group setting has been identified, because additional normalizer representatives can be applied to explore equivalent descriptions, equivalent origin choices, or equivalent embeddings without changing the underlying space group.\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of normalizer operations rather than every operation in that class.\n\nThe `orthogonal_affine_normalizer_cosets` list is the signed-permutation subset of representatives.\nThe `affine_normalizer_cosets` list is generated from a bounded set of unimodular integer linear parts and may include non-orthogonal representatives.\nBoth lists are finite bounded tables and MUST NOT be interpreted as complete infinite affine normalizers.\nEach listed representative carries `compatible_systems`, which states the crystal metric systems for which the representative preserves the metric constraints.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- The list order MUST match the generator's Hall-setting order.\n- The companion top-level `indicies.hall_symbol_to_affine_normalizer_coset_data` lookup maps normalized Hall entries to zero-based positions in this list; it is not an OPTIMADE property.\n- Each dictionary MUST contain a `hall_entry` value equal to the Hall-entry key used by the companion index.\n- Count fields MUST equal the length of their corresponding representative lists.\n- Matrix and vector entries inside representatives MUST be exact strings, using integer strings or fraction strings as appropriate.\n- The `candidate_sets` dictionary records generation bookkeeping for the finite candidate searches and is not itself a crystallographic normalizer object.",
+    "description": "Ordered table of bounded affine normalizer coset-representative data for crystallographic space groups, with one item for each Hall setting.\n\nThe affine normalizer of a space group describes affine mappings that send the space group to itself.\nIn practical algorithms this information is useful after a candidate space-group setting has been identified, because additional normalizer representatives can be applied to explore equivalent descriptions, equivalent origin choices, or equivalent embeddings without changing the underlying space group.\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of normalizer operations rather than every operation in that class.\n\nThe `orthogonal_affine_normalizer_cosets` list is the signed-permutation subset of representatives.\nThe `affine_normalizer_cosets` list is generated from a bounded set of unimodular integer linear parts and may include non-orthogonal representatives.\nBoth lists are finite bounded tables and MUST NOT be interpreted as complete infinite affine normalizers.\nEach listed representative carries `compatible_systems`, which states the crystal metric systems for which the representative preserves the metric constraints.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- The list order MUST match the generator's Hall-setting order.\n- The companion top-level `indicies.hall_symbol_to_affine_normalizer_coset_data` lookup maps normalized Hall entries to zero-based positions in this list; it is not an OPTIMADE property.\n- Each dictionary MUST contain a `hall_entry` value equal to the Hall-entry key used by the companion index.\n- Count fields MUST equal the length of their corresponding representative lists.\n- Matrix and vector entries inside representatives MUST be exact strings, using integer strings or fraction strings as appropriate.\n- The `candidate_sets` dictionary records generation bookkeeping for the finite candidate searches and is not itself a crystallographic normalizer object.",
     "items": {
         "x-optimade-type": "dictionary",
         "x-optimade-unit": "inapplicable",
@@ -67,7 +67,6 @@ Each listed representative carries `compatible_systems`, which states the crysta
             "hall_entry": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
                 "title": "Hall entry",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -90,7 +89,6 @@ Each listed representative carries `compatible_systems`, which states the crysta
             "it_number": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
                 "title": "International Tables Space-Group Number",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "integer",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -116,7 +114,6 @@ Each listed representative carries `compatible_systems`, which states the crysta
             "crystal_system": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/crystal_system",
                 "title": "Crystal System",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.crystal_system.html"
@@ -142,7 +139,6 @@ Each listed representative carries `compatible_systems`, which states the crysta
             "orthogonal_affine_normalizer_cosets": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/orthogonal_affine_normalizer_cosets",
                 "title": "Orthogonal affine normalizer cosets",
-                "$comment": "Anyterial normalizer-coset list property using the common normalizer-representative definition.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -156,11 +152,10 @@ Each listed representative carries `compatible_systems`, which states the crysta
                     "array",
                     "null"
                 ],
-                "description": "Runtime list of orthogonal signed-permutation affine normalizer coset representatives modulo the space group.\nEach item is one finite listed representative and follows `/properties/symmetry/basis_transform`.\nThe list is a bounded representative table, not a complete infinite affine normalizer.",
+                "description": "Runtime list of orthogonal signed-permutation affine normalizer coset representatives modulo the space group.\n\nEach item is one finite listed representative and follows `/properties/symmetry/basis_transform`.\nThe list is a bounded representative table, not a complete infinite affine normalizer.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
                     "title": "Basis transformation",
-                    "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
                     "x-optimade-type": "dictionary",
                     "x-optimade-definition": {
                         "kind": "property",
@@ -174,12 +169,11 @@ Each listed representative carries `compatible_systems`, which states the crysta
                         "object",
                         "null"
                     ],
-                    "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                    "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\n\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe parent property defines the source and target coordinate systems and the precise role of the transform.\nUseful, for example, for representing setting changes, subgroup embeddings, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\nThis property is not limited to symmetry operations within one fixed setting; the matrix may be non-orthogonal or have determinant different from one when the transform changes cell or basis.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform, using exact rational matrix and vector entries.\n      The coordinate convention and source/target interpretation are supplied by the parent property.\n\n    - **index**: OPTIONAL; Integer or null.\n      Index metadata whose interpretation is defined by the parent property.\n      Common uses include the subgroup index for subgroup embeddings, the cell index for isomorphic subgroup transforms, or an ordinal representative index in a finite transform table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a maximal subgroup embedding.\n      The value MUST be `t` for a translationengleiche subgroup or `k` for a klassengleiche subgroup.\n      It MUST be omitted when the transform is not a maximal subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n      The value MUST be `loss_of_centering_translation` or `enlarged_unit_cell` for klassengleiche relations and null or omitted otherwise.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Categorical label for normalizer-type representatives.\n      The value MUST be `euclidean` for Euclidean normalizer operations, `orthogonal_affine` for the signed-permutation affine normalizer subset, or `affine` for the bounded unimodular affine normalizer table.\n      It MUST be omitted when the transform is a setting transform, subgroup embedding, or other transform for which no normalizer operation class applies.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.",
                     "properties": {
                         "affine_transformation": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
                             "title": "Affine transformation",
-                            "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
                             "x-optimade-type": "dictionary",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -193,7 +187,7 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                 "object",
                                 "null"
                             ],
-                            "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                            "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
                             "properties": {
                                 "matrix": {
                                     "x-optimade-type": "list",
@@ -243,7 +237,7 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "A fraction represented as a string.",
+                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                             "examples": [
                                                 "2/3",
                                                 "5/42",
@@ -285,7 +279,7 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                             "string",
                                             "null"
                                         ],
-                                        "description": "A fraction represented as a string.",
+                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                         "examples": [
                                             "2/3",
                                             "5/42",
@@ -296,13 +290,31 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                     }
                                 },
                                 "xyz": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                    "title": "Operation xyz",
                                     "x-optimade-type": "string",
+                                    "x-compatibility": [
+                                        "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                        "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                    ],
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "op_xyz",
+                                        "label": "op_xyz_symmetry"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "string",
                                         "null"
                                     ],
-                                    "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                    "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                    "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                                    "examples": [
+                                        "-x,-y,z",
+                                        "x,1/2-y,1/2+z"
+                                    ]
                                 },
                                 "det": {
                                     "x-optimade-type": "integer",
@@ -366,10 +378,13 @@ Each listed representative carries `compatible_systems`, which states the crysta
                             "x-optimade-type": "string",
                             "x-optimade-unit": "inapplicable",
                             "type": [
-                                "string",
-                                "null"
+                                "string"
                             ],
-                            "description": "International Tables subgroup-type label when applicable."
+                            "description": "International Tables subgroup-type label when applicable.",
+                            "enum": [
+                                "t",
+                                "k"
+                            ]
                         },
                         "k_subtype": {
                             "x-optimade-type": "string",
@@ -394,17 +409,30 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                 "type": [
                                     "string"
                                 ],
-                                "description": "One compatible crystal-system label."
+                                "description": "One compatible crystal-system label.",
+                                "enum": [
+                                    "triclinic",
+                                    "monoclinic",
+                                    "orthorhombic",
+                                    "tetragonal",
+                                    "trigonal",
+                                    "hexagonal",
+                                    "cubic"
+                                ]
                             }
                         },
                         "operation_kind": {
                             "x-optimade-type": "string",
                             "x-optimade-unit": "inapplicable",
                             "type": [
-                                "string",
-                                "null"
+                                "string"
                             ],
-                            "description": "Generator classification of the transform or representative."
+                            "description": "Categorical label for normalizer-type representatives.",
+                            "enum": [
+                                "euclidean",
+                                "orthogonal_affine",
+                                "affine"
+                            ]
                         },
                         "wyckoff_splitting": {
                             "x-optimade-type": "list",
@@ -499,7 +527,7 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                                                 "string",
                                                                 "null"
                                                             ],
-                                                            "description": "A fraction represented as a string.",
+                                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                             "examples": [
                                                                 "2/3",
                                                                 "5/42",
@@ -633,7 +661,7 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                                                     "string",
                                                                     "null"
                                                                 ],
-                                                                "description": "A fraction represented as a string.",
+                                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                 "examples": [
                                                                     "2/3",
                                                                     "5/42",
@@ -667,7 +695,7 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                                             "string",
                                                             "null"
                                                         ],
-                                                        "description": "A fraction represented as a string.",
+                                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                         "examples": [
                                                             "2/3",
                                                             "5/42",
@@ -708,9 +736,111 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                     "0",
                                     "0",
                                     "0"
-                                ]
+                                ],
+                                "xyz": "x,y,2z",
+                                "det": 2,
+                                "is_orthogonal": false
                             },
-                            "index": 2
+                            "index": 2,
+                            "subgroup_type": "k",
+                            "k_subtype": "enlarged_unit_cell",
+                            "wyckoff_splitting": [
+                                {
+                                    "parent": "a",
+                                    "splits": [
+                                        {
+                                            "letter": "a",
+                                            "xyz": "x,y,z",
+                                            "affine": [
+                                                [
+                                                    "1",
+                                                    "0",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "1",
+                                                    "0"
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "criteria": [
+                                {
+                                    "parent": "a",
+                                    "constraints": [
+                                        {
+                                            "roles": [
+                                                {
+                                                    "letter": "a",
+                                                    "index": 0
+                                                }
+                                            ],
+                                            "coeffs": [
+                                                [
+                                                    [
+                                                        "1",
+                                                        "0",
+                                                        "0"
+                                                    ]
+                                                ]
+                                            ],
+                                            "target": [
+                                                "0"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "affine_transformation": {
+                                "matrix": [
+                                    [
+                                        "-1",
+                                        "0",
+                                        "0"
+                                    ],
+                                    [
+                                        "0",
+                                        "-1",
+                                        "0"
+                                    ],
+                                    [
+                                        "0",
+                                        "0",
+                                        "-1"
+                                    ]
+                                ],
+                                "vector": [
+                                    "0",
+                                    "0",
+                                    "0"
+                                ],
+                                "xyz": "-x,-y,-z",
+                                "det": -1,
+                                "is_orthogonal": true
+                            },
+                            "compatible_systems": [
+                                "triclinic",
+                                "monoclinic",
+                                "orthorhombic",
+                                "tetragonal",
+                                "trigonal",
+                                "hexagonal",
+                                "cubic"
+                            ],
+                            "operation_kind": "affine"
                         }
                     ]
                 },
@@ -751,7 +881,6 @@ Each listed representative carries `compatible_systems`, which states the crysta
             "affine_normalizer_cosets": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/affine_normalizer_cosets",
                 "title": "Affine normalizer cosets",
-                "$comment": "Anyterial normalizer-coset list property using the common normalizer-representative definition.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -765,11 +894,10 @@ Each listed representative carries `compatible_systems`, which states the crysta
                     "array",
                     "null"
                 ],
-                "description": "Runtime list of bounded affine normalizer coset representatives modulo the space group.\nEach item is one finite listed representative and follows `/properties/symmetry/basis_transform`.\nThe list is a bounded representative table, not a complete infinite affine normalizer.",
+                "description": "Runtime list of bounded affine normalizer coset representatives modulo the space group.\n\nEach item is one finite listed representative and follows `/properties/symmetry/basis_transform`.\nThe list is a bounded representative table, not a complete infinite affine normalizer.",
                 "items": {
                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
                     "title": "Basis transformation",
-                    "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
                     "x-optimade-type": "dictionary",
                     "x-optimade-definition": {
                         "kind": "property",
@@ -783,12 +911,11 @@ Each listed representative carries `compatible_systems`, which states the crysta
                         "object",
                         "null"
                     ],
-                    "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                    "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\n\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe parent property defines the source and target coordinate systems and the precise role of the transform.\nUseful, for example, for representing setting changes, subgroup embeddings, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\nThis property is not limited to symmetry operations within one fixed setting; the matrix may be non-orthogonal or have determinant different from one when the transform changes cell or basis.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform, using exact rational matrix and vector entries.\n      The coordinate convention and source/target interpretation are supplied by the parent property.\n\n    - **index**: OPTIONAL; Integer or null.\n      Index metadata whose interpretation is defined by the parent property.\n      Common uses include the subgroup index for subgroup embeddings, the cell index for isomorphic subgroup transforms, or an ordinal representative index in a finite transform table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a maximal subgroup embedding.\n      The value MUST be `t` for a translationengleiche subgroup or `k` for a klassengleiche subgroup.\n      It MUST be omitted when the transform is not a maximal subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n      The value MUST be `loss_of_centering_translation` or `enlarged_unit_cell` for klassengleiche relations and null or omitted otherwise.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Categorical label for normalizer-type representatives.\n      The value MUST be `euclidean` for Euclidean normalizer operations, `orthogonal_affine` for the signed-permutation affine normalizer subset, or `affine` for the bounded unimodular affine normalizer table.\n      It MUST be omitted when the transform is a setting transform, subgroup embedding, or other transform for which no normalizer operation class applies.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.",
                     "properties": {
                         "affine_transformation": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
                             "title": "Affine transformation",
-                            "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
                             "x-optimade-type": "dictionary",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -802,7 +929,7 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                 "object",
                                 "null"
                             ],
-                            "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                            "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
                             "properties": {
                                 "matrix": {
                                     "x-optimade-type": "list",
@@ -852,7 +979,7 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "A fraction represented as a string.",
+                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                             "examples": [
                                                 "2/3",
                                                 "5/42",
@@ -894,7 +1021,7 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                             "string",
                                             "null"
                                         ],
-                                        "description": "A fraction represented as a string.",
+                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                         "examples": [
                                             "2/3",
                                             "5/42",
@@ -905,13 +1032,31 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                     }
                                 },
                                 "xyz": {
+                                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                    "title": "Operation xyz",
                                     "x-optimade-type": "string",
+                                    "x-compatibility": [
+                                        "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                        "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                    ],
+                                    "x-optimade-definition": {
+                                        "kind": "property",
+                                        "version": "0.1.0",
+                                        "format": "1.3",
+                                        "name": "op_xyz",
+                                        "label": "op_xyz_symmetry"
+                                    },
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
                                         "string",
                                         "null"
                                     ],
-                                    "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                    "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                    "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                                    "examples": [
+                                        "-x,-y,z",
+                                        "x,1/2-y,1/2+z"
+                                    ]
                                 },
                                 "det": {
                                     "x-optimade-type": "integer",
@@ -975,10 +1120,13 @@ Each listed representative carries `compatible_systems`, which states the crysta
                             "x-optimade-type": "string",
                             "x-optimade-unit": "inapplicable",
                             "type": [
-                                "string",
-                                "null"
+                                "string"
                             ],
-                            "description": "International Tables subgroup-type label when applicable."
+                            "description": "International Tables subgroup-type label when applicable.",
+                            "enum": [
+                                "t",
+                                "k"
+                            ]
                         },
                         "k_subtype": {
                             "x-optimade-type": "string",
@@ -1003,17 +1151,30 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                 "type": [
                                     "string"
                                 ],
-                                "description": "One compatible crystal-system label."
+                                "description": "One compatible crystal-system label.",
+                                "enum": [
+                                    "triclinic",
+                                    "monoclinic",
+                                    "orthorhombic",
+                                    "tetragonal",
+                                    "trigonal",
+                                    "hexagonal",
+                                    "cubic"
+                                ]
                             }
                         },
                         "operation_kind": {
                             "x-optimade-type": "string",
                             "x-optimade-unit": "inapplicable",
                             "type": [
-                                "string",
-                                "null"
+                                "string"
                             ],
-                            "description": "Generator classification of the transform or representative."
+                            "description": "Categorical label for normalizer-type representatives.",
+                            "enum": [
+                                "euclidean",
+                                "orthogonal_affine",
+                                "affine"
+                            ]
                         },
                         "wyckoff_splitting": {
                             "x-optimade-type": "list",
@@ -1108,7 +1269,7 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                                                 "string",
                                                                 "null"
                                                             ],
-                                                            "description": "A fraction represented as a string.",
+                                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                             "examples": [
                                                                 "2/3",
                                                                 "5/42",
@@ -1242,7 +1403,7 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                                                     "string",
                                                                     "null"
                                                                 ],
-                                                                "description": "A fraction represented as a string.",
+                                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                 "examples": [
                                                                     "2/3",
                                                                     "5/42",
@@ -1276,7 +1437,7 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                                             "string",
                                                             "null"
                                                         ],
-                                                        "description": "A fraction represented as a string.",
+                                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                         "examples": [
                                                             "2/3",
                                                             "5/42",
@@ -1317,9 +1478,111 @@ Each listed representative carries `compatible_systems`, which states the crysta
                                     "0",
                                     "0",
                                     "0"
-                                ]
+                                ],
+                                "xyz": "x,y,2z",
+                                "det": 2,
+                                "is_orthogonal": false
                             },
-                            "index": 2
+                            "index": 2,
+                            "subgroup_type": "k",
+                            "k_subtype": "enlarged_unit_cell",
+                            "wyckoff_splitting": [
+                                {
+                                    "parent": "a",
+                                    "splits": [
+                                        {
+                                            "letter": "a",
+                                            "xyz": "x,y,z",
+                                            "affine": [
+                                                [
+                                                    "1",
+                                                    "0",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "1",
+                                                    "0"
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "criteria": [
+                                {
+                                    "parent": "a",
+                                    "constraints": [
+                                        {
+                                            "roles": [
+                                                {
+                                                    "letter": "a",
+                                                    "index": 0
+                                                }
+                                            ],
+                                            "coeffs": [
+                                                [
+                                                    [
+                                                        "1",
+                                                        "0",
+                                                        "0"
+                                                    ]
+                                                ]
+                                            ],
+                                            "target": [
+                                                "0"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "affine_transformation": {
+                                "matrix": [
+                                    [
+                                        "-1",
+                                        "0",
+                                        "0"
+                                    ],
+                                    [
+                                        "0",
+                                        "-1",
+                                        "0"
+                                    ],
+                                    [
+                                        "0",
+                                        "0",
+                                        "-1"
+                                    ]
+                                ],
+                                "vector": [
+                                    "0",
+                                    "0",
+                                    "0"
+                                ],
+                                "xyz": "-x,-y,-z",
+                                "det": -1,
+                                "is_orthogonal": true
+                            },
+                            "compatible_systems": [
+                                "triclinic",
+                                "monoclinic",
+                                "orthorhombic",
+                                "tetragonal",
+                                "trigonal",
+                                "hexagonal",
+                                "cubic"
+                            ],
+                            "operation_kind": "affine"
                         }
                     ]
                 },
@@ -1360,7 +1623,6 @@ Each listed representative carries `compatible_systems`, which states the crysta
             "n_orthogonal_cosets": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_orthogonal_cosets",
                 "title": "N Orthogonal Cosets",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1383,7 +1645,6 @@ Each listed representative carries `compatible_systems`, which states the crysta
             "n_cosets": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_cosets",
                 "title": "N Cosets",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "integer",
                 "x-optimade-definition": {
                     "kind": "property",

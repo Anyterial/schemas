@@ -6,7 +6,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `spglib_hall`
 
 **Property name:** Spglib Hall  
-**Description:** Hall setting selected by spglib for the space-group type or setting, represented as a normalized Hall key.  
+**Description:** The standard Hall setting used in spglib, e.g., for a space group number.  
 **Type:** string  
 
 
@@ -25,7 +25,6 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spglib_hall",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Spglib Hall",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",
@@ -38,7 +37,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "string",
         "null"
     ],
-    "description": "Hall setting selected by spglib for the space-group type or setting, represented as a normalized Hall key.",
+    "description": "The standard Hall setting used in spglib, e.g., for a space group number.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         "P 1",

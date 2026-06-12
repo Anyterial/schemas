@@ -25,7 +25,6 @@ The symbol consists of a lower-case crystal-system letter followed by an upper-c
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/bravais_type",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Bravais Type",
-    "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.Bravais_type.html"

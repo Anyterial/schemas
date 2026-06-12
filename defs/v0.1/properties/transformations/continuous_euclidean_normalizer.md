@@ -6,8 +6,10 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `continuous_euclidean_normalizer`
 
 **Property name:** Continuous Euclidean normalizer  
-**Description:** Continuous Euclidean normalizer subspace before aggregation into the public transformation tables. It records the dimension and basis vectors of allowed continuous origin shifts.  
+**Description:** Continuous Euclidean normalizer subspace before aggregation into the public transformation tables.  
 **Type:** dictionary  
+
+It records the dimension and basis vectors of allowed continuous origin shifts.
 
 **Requirements/Conventions**:
 
@@ -39,7 +41,6 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/continuous_euclidean_normalizer",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Continuous Euclidean normalizer",
-    "$comment": "Anyterial continuous-normalizer property definition.",
     "x-optimade-type": "dictionary",
     "x-optimade-definition": {
         "kind": "property",
@@ -53,7 +54,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "object",
         "null"
     ],
-    "description": "Continuous Euclidean normalizer subspace before aggregation into the public transformation tables. It records the dimension and basis vectors of allowed continuous origin shifts.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
+    "description": "Continuous Euclidean normalizer subspace before aggregation into the public transformation tables.\n\nIt records the dimension and basis vectors of allowed continuous origin shifts.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
     "properties": {
         "dimension": {
             "x-optimade-type": "integer",
@@ -102,7 +103,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
                         "string",
                         "null"
                     ],
-                    "description": "A fraction represented as a string.",
+                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                     "examples": [
                         "2/3",
                         "5/42",

@@ -30,7 +30,6 @@ Aliases capture duplicate or equivalent Hall-table forms that identify the same 
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_aliases",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Hall Aliases",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",

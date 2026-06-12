@@ -6,9 +6,10 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `string_markups`
 
 **Property name:** String markups  
-**Description:** Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.
-The object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.  
+**Description:** Strings with alternate markup and/or encoding for display rendering.  
 **Type:** dictionary  
+
+The object is intended for display-oriented variants only, a sibling property should be used for canonical plain string value.
 
 **Requirements/Conventions**:
 
@@ -36,7 +37,6 @@ The object is intended for display-oriented variants only; the corresponding uns
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/core/string_markups",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "String markups",
-    "$comment": "Reusable Anyterial definition for alternate display renderings of an ASCII/text string.",
     "x-optimade-type": "dictionary",
     "x-optimade-definition": {
         "kind": "property",
@@ -50,7 +50,7 @@ The object is intended for display-oriented variants only; the corresponding uns
         "object",
         "null"
     ],
-    "description": "Alternate markup renderings of a string whose plain-text or ASCII value is provided by a sibling property.\nThe object is intended for display-oriented variants only; the corresponding unsuffixed sibling property remains the canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
+    "description": "Strings with alternate markup and/or encoding for display rendering.\n\nThe object is intended for display-oriented variants only, a sibling property should be used for canonical plain string value.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **html**: OPTIONAL; String.\n      HTML rendering of the sibling string, using inline HTML elements where needed for typographic structure such as subscripts, superscripts, overlines, fractions, and line breaks.\n\n    - **latex**: OPTIONAL; String.\n      LaTeX rendering of the sibling string, suitable for use with a LaTeX or MathJax-like renderer.\n\n    - **unicode**: OPTIONAL; String.\n      Unicode rendering of the sibling string, using Unicode code points for display features where practical.",
     "properties": {
         "html": {
             "x-optimade-type": "string",

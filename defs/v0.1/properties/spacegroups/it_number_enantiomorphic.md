@@ -6,10 +6,10 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `it_number_enantiomorphic`
 
 **Property name:** It Number Enantiomorphic  
-**Description:** International Tables number of the enantiomorphic partner space group, when one exists. The value is null for space groups without a distinct enantiomorphic partner.  
+**Description:** International Tables number of the enantiomorphic partner space group, when one exists.  
 **Type:** integer  
 
-
+The value is null for space groups without a distinct enantiomorphic partner.
 
 **Examples:**
 
@@ -25,7 +25,6 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number_enantiomorphic",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "It Number Enantiomorphic",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "integer",
     "x-optimade-definition": {
         "kind": "property",
@@ -38,7 +37,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "integer",
         "null"
     ],
-    "description": "International Tables number of the enantiomorphic partner space group, when one exists. The value is null for space groups without a distinct enantiomorphic partner.",
+    "description": "International Tables number of the enantiomorphic partner space group, when one exists.\n\nThe value is null for space groups without a distinct enantiomorphic partner.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         78,

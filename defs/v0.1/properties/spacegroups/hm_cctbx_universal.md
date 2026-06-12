@@ -25,7 +25,6 @@ This field records the cctbx-internal universal symbol used during generation. I
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_cctbx_universal",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Hermann-Mauguin Cctbx Universal",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",

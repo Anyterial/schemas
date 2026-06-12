@@ -25,7 +25,6 @@ This field identifies the crystallographic point group obtained from the space g
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/point_group",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Point-Group Hermann-Mauguin Symbol",
-    "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.point_group_H-M.html"

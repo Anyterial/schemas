@@ -25,7 +25,6 @@ The code distinguishes setting choices such as monoclinic unique-axis and cell c
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_coordinate_system_code",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "International Tables Coordinate-System Code",
-    "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.IT_coordinate_system_code.html"

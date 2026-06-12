@@ -6,44 +6,56 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `basis_transform`
 
 **Property name:** Basis transformation  
-**Description:** One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.
-The affine map itself is stored in the embedded `affine_transformation` field.
-Parent tables use this object for Hall-to-standard transforms, Bärnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.  
+**Description:** One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.  
 **Type:** dictionary  
+
+The affine map itself is stored in the embedded `affine_transformation` field.
+The parent property defines the source and target coordinate systems and the precise role of the transform.
+Useful, for example, for representing setting changes, subgroup embeddings, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.
+This property is not limited to symmetry operations within one fixed setting; the matrix may be non-orthogonal or have determinant different from one when the transform changes cell or basis.
 
 **Requirements/Conventions**:
 
 - It MUST be a dictionary with the following keys:
 
     - **affine\_transformation**: REQUIRED; Dictionary.
-      Exact affine map for the transform.
-      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.
+      Exact affine map for the transform, using exact rational matrix and vector entries.
+      The coordinate convention and source/target interpretation are supplied by the parent property.
 
-    - **index**: OPTIONAL; Integer.
-      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.
+    - **index**: OPTIONAL; Integer or null.
+      Index metadata whose interpretation is defined by the parent property.
+      Common uses include the subgroup index for subgroup embeddings, the cell index for isomorphic subgroup transforms, or an ordinal representative index in a finite transform table.
 
     - **subgroup\_type**: OPTIONAL; String.
-      International Tables subgroup-type label when the transform describes a subgroup embedding.
+      International Tables subgroup-type label when the transform describes a maximal subgroup embedding.
+      The value MUST be `t` for a translationengleiche subgroup or `k` for a klassengleiche subgroup.
+      It MUST be omitted when the transform is not a maximal subgroup embedding.
 
     - **k\_subtype**: OPTIONAL; String or null.
       Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.
+      The value MUST be `loss_of_centering_translation` or `enlarged_unit_cell` for klassengleiche relations and null or omitted otherwise.
 
     - **compatible\_systems**: OPTIONAL; List of strings.
       Crystal metric systems for which the transform is compatible.
       This is used for bounded affine normalizer representatives.
 
     - **operation\_kind**: OPTIONAL; String.
-      Generator classification of the transform or representative.
+      Categorical label for normalizer-type representatives.
+      The value MUST be `euclidean` for Euclidean normalizer operations, `orthogonal_affine` for the signed-permutation affine normalizer subset, or `affine` for the bounded unimodular affine normalizer table.
+      It MUST be omitted when the transform is a setting transform, subgroup embedding, or other transform for which no normalizer operation class applies.
 
     - **wyckoff\_splitting**: OPTIONAL; List.
       Wyckoff-position splitting metadata induced by the transform when available.
+      The list is grouped by explicit parent Wyckoff letter.
 
     - **criteria**: OPTIONAL; List.
       Backward-lift constraint metadata induced by the transform when available.
+      The list is grouped by explicit parent Wyckoff letter.
 
 **Examples:**
 
-- `{"affine_transformation": {"matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "vector": ["0", "0", "0"]}, "index": 2}`
+- `{"affine_transformation": {"matrix": [["1", "0", "0"], ["0", "1", "0"], ["0", "0", "2"]], "vector": ["0", "0", "0"], "xyz": "x,y,2z", "det": 2, "is_orthogonal": false}, "index": 2, "subgroup_type": "k", "k_subtype": "enlarged_unit_cell", "wyckoff_splitting": [{"parent": "a", "splits": [{"letter": "a", "xyz": "x,y,z", "affine": [["1", "0", "0", "0"], ["0", "1", "0", "0"], ["0", "0", "1", "0"]]}]}], "criteria": [{"parent": "a", "constraints": [{"roles": [{"letter": "a", "index": 0}], "coeffs": [[["1", "0", "0"]]], "target": ["0"]}]}]}`
+- `{"affine_transformation": {"matrix": [["-1", "0", "0"], ["0", "-1", "0"], ["0", "0", "-1"]], "vector": ["0", "0", "0"], "xyz": "-x,-y,-z", "det": -1, "is_orthogonal": true}, "compatible_systems": ["triclinic", "monoclinic", "orthorhombic", "tetragonal", "trigonal", "hexagonal", "cubic"], "operation_kind": "affine"}`
 
 **Formats:** [[JSON](basis_transform.json)] [[MD](basis_transform.md)]
 
@@ -54,7 +66,6 @@ Parent tables use this object for Hall-to-standard transforms, Bärnighausen sub
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Basis transformation",
-    "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
     "x-optimade-type": "dictionary",
     "x-optimade-definition": {
         "kind": "property",
@@ -68,12 +79,11 @@ Parent tables use this object for Hall-to-standard transforms, Bärnighausen sub
         "object",
         "null"
     ],
-    "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+    "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\n\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe parent property defines the source and target coordinate systems and the precise role of the transform.\nUseful, for example, for representing setting changes, subgroup embeddings, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\nThis property is not limited to symmetry operations within one fixed setting; the matrix may be non-orthogonal or have determinant different from one when the transform changes cell or basis.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform, using exact rational matrix and vector entries.\n      The coordinate convention and source/target interpretation are supplied by the parent property.\n\n    - **index**: OPTIONAL; Integer or null.\n      Index metadata whose interpretation is defined by the parent property.\n      Common uses include the subgroup index for subgroup embeddings, the cell index for isomorphic subgroup transforms, or an ordinal representative index in a finite transform table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a maximal subgroup embedding.\n      The value MUST be `t` for a translationengleiche subgroup or `k` for a klassengleiche subgroup.\n      It MUST be omitted when the transform is not a maximal subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n      The value MUST be `loss_of_centering_translation` or `enlarged_unit_cell` for klassengleiche relations and null or omitted otherwise.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Categorical label for normalizer-type representatives.\n      The value MUST be `euclidean` for Euclidean normalizer operations, `orthogonal_affine` for the signed-permutation affine normalizer subset, or `affine` for the bounded unimodular affine normalizer table.\n      It MUST be omitted when the transform is a setting transform, subgroup embedding, or other transform for which no normalizer operation class applies.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.",
     "properties": {
         "affine_transformation": {
             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
             "title": "Affine transformation",
-            "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
             "x-optimade-type": "dictionary",
             "x-optimade-definition": {
                 "kind": "property",
@@ -87,7 +97,7 @@ Parent tables use this object for Hall-to-standard transforms, Bärnighausen sub
                 "object",
                 "null"
             ],
-            "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+            "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
             "properties": {
                 "matrix": {
                     "x-optimade-type": "list",
@@ -137,7 +147,7 @@ Parent tables use this object for Hall-to-standard transforms, Bärnighausen sub
                                 "string",
                                 "null"
                             ],
-                            "description": "A fraction represented as a string.",
+                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                             "examples": [
                                 "2/3",
                                 "5/42",
@@ -179,7 +189,7 @@ Parent tables use this object for Hall-to-standard transforms, Bärnighausen sub
                             "string",
                             "null"
                         ],
-                        "description": "A fraction represented as a string.",
+                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                         "examples": [
                             "2/3",
                             "5/42",
@@ -190,13 +200,31 @@ Parent tables use this object for Hall-to-standard transforms, Bärnighausen sub
                     }
                 },
                 "xyz": {
+                    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                    "title": "Operation xyz",
                     "x-optimade-type": "string",
+                    "x-compatibility": [
+                        "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                        "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                    ],
+                    "x-optimade-definition": {
+                        "kind": "property",
+                        "version": "0.1.0",
+                        "format": "1.3",
+                        "name": "op_xyz",
+                        "label": "op_xyz_symmetry"
+                    },
                     "x-optimade-unit": "inapplicable",
                     "type": [
                         "string",
                         "null"
                     ],
-                    "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                    "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                    "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                    "examples": [
+                        "-x,-y,z",
+                        "x,1/2-y,1/2+z"
+                    ]
                 },
                 "det": {
                     "x-optimade-type": "integer",
@@ -260,10 +288,13 @@ Parent tables use this object for Hall-to-standard transforms, Bärnighausen sub
             "x-optimade-type": "string",
             "x-optimade-unit": "inapplicable",
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "description": "International Tables subgroup-type label when applicable."
+            "description": "International Tables subgroup-type label when applicable.",
+            "enum": [
+                "t",
+                "k"
+            ]
         },
         "k_subtype": {
             "x-optimade-type": "string",
@@ -288,17 +319,30 @@ Parent tables use this object for Hall-to-standard transforms, Bärnighausen sub
                 "type": [
                     "string"
                 ],
-                "description": "One compatible crystal-system label."
+                "description": "One compatible crystal-system label.",
+                "enum": [
+                    "triclinic",
+                    "monoclinic",
+                    "orthorhombic",
+                    "tetragonal",
+                    "trigonal",
+                    "hexagonal",
+                    "cubic"
+                ]
             }
         },
         "operation_kind": {
             "x-optimade-type": "string",
             "x-optimade-unit": "inapplicable",
             "type": [
-                "string",
-                "null"
+                "string"
             ],
-            "description": "Generator classification of the transform or representative."
+            "description": "Categorical label for normalizer-type representatives.",
+            "enum": [
+                "euclidean",
+                "orthogonal_affine",
+                "affine"
+            ]
         },
         "wyckoff_splitting": {
             "x-optimade-type": "list",
@@ -393,7 +437,7 @@ Parent tables use this object for Hall-to-standard transforms, Bärnighausen sub
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "A fraction represented as a string.",
+                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                             "examples": [
                                                 "2/3",
                                                 "5/42",
@@ -527,7 +571,7 @@ Parent tables use this object for Hall-to-standard transforms, Bärnighausen sub
                                                     "string",
                                                     "null"
                                                 ],
-                                                "description": "A fraction represented as a string.",
+                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                 "examples": [
                                                     "2/3",
                                                     "5/42",
@@ -561,7 +605,7 @@ Parent tables use this object for Hall-to-standard transforms, Bärnighausen sub
                                             "string",
                                             "null"
                                         ],
-                                        "description": "A fraction represented as a string.",
+                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                         "examples": [
                                             "2/3",
                                             "5/42",
@@ -602,9 +646,111 @@ Parent tables use this object for Hall-to-standard transforms, Bärnighausen sub
                     "0",
                     "0",
                     "0"
-                ]
+                ],
+                "xyz": "x,y,2z",
+                "det": 2,
+                "is_orthogonal": false
             },
-            "index": 2
+            "index": 2,
+            "subgroup_type": "k",
+            "k_subtype": "enlarged_unit_cell",
+            "wyckoff_splitting": [
+                {
+                    "parent": "a",
+                    "splits": [
+                        {
+                            "letter": "a",
+                            "xyz": "x,y,z",
+                            "affine": [
+                                [
+                                    "1",
+                                    "0",
+                                    "0",
+                                    "0"
+                                ],
+                                [
+                                    "0",
+                                    "1",
+                                    "0",
+                                    "0"
+                                ],
+                                [
+                                    "0",
+                                    "0",
+                                    "1",
+                                    "0"
+                                ]
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "criteria": [
+                {
+                    "parent": "a",
+                    "constraints": [
+                        {
+                            "roles": [
+                                {
+                                    "letter": "a",
+                                    "index": 0
+                                }
+                            ],
+                            "coeffs": [
+                                [
+                                    [
+                                        "1",
+                                        "0",
+                                        "0"
+                                    ]
+                                ]
+                            ],
+                            "target": [
+                                "0"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "affine_transformation": {
+                "matrix": [
+                    [
+                        "-1",
+                        "0",
+                        "0"
+                    ],
+                    [
+                        "0",
+                        "-1",
+                        "0"
+                    ],
+                    [
+                        "0",
+                        "0",
+                        "-1"
+                    ]
+                ],
+                "vector": [
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "xyz": "-x,-y,-z",
+                "det": -1,
+                "is_orthogonal": true
+            },
+            "compatible_systems": [
+                "triclinic",
+                "monoclinic",
+                "orthorhombic",
+                "tetragonal",
+                "trigonal",
+                "hexagonal",
+                "cubic"
+            ],
+            "operation_kind": "affine"
         }
     ]
 }

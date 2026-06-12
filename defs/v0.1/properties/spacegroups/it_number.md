@@ -25,7 +25,6 @@ This integer identifies the space-group type numbered 1 through 230 in Internati
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "International Tables Space-Group Number",
-    "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
     "x-optimade-type": "integer",
     "x-compatibility": [
         "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"

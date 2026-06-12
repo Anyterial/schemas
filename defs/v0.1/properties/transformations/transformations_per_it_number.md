@@ -6,10 +6,11 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `transformations_per_it_number`
 
 **Property name:** Transformations per IT number  
-**Description:** Standard-setting transformation data grouped by International Tables space-group number.
-Each list item contains the IT number as ordinary data together with all standard-setting transformation sections generated for that space-group type.
-This representation avoids using IT numbers as JSON dictionary keys in the OPTIMADE-described payload.  
+**Description:** Standard-setting transformation data grouped by International Tables space-group number.  
 **Type:** list  
+
+Each list item contains the IT number as ordinary data together with all standard-setting transformation sections generated for that space-group type.
+This representation avoids using IT numbers as JSON dictionary keys in the OPTIMADE-described payload.
 
 **Requirements/Conventions**:
 
@@ -30,7 +31,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/transformations_per_it_number",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Transformations per IT number",
-    "$comment": "Anyterial property definition for IT-number grouped transformation records.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -44,7 +44,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
         "array",
         "null"
     ],
-    "description": "Standard-setting transformation data grouped by International Tables space-group number.\nEach list item contains the IT number as ordinary data together with all standard-setting transformation sections generated for that space-group type.\nThis representation avoids using IT numbers as JSON dictionary keys in the OPTIMADE-described payload.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `it_number`.\n- Each dictionary SHOULD contain the generated standard-setting transformation sections for that IT number.",
+    "description": "Standard-setting transformation data grouped by International Tables space-group number.\n\nEach list item contains the IT number as ordinary data together with all standard-setting transformation sections generated for that space-group type.\nThis representation avoids using IT numbers as JSON dictionary keys in the OPTIMADE-described payload.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `it_number`.\n- Each dictionary SHOULD contain the generated standard-setting transformation sections for that IT number.",
     "items": {
         "x-optimade-type": "dictionary",
         "x-optimade-unit": "inapplicable",
@@ -59,7 +59,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
             "it_number": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
                 "title": "International Tables Space-Group Number",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "integer",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -85,7 +84,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
             "baernighausen": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/baernighausen",
                 "title": "B\u00e4rnighausen subgroup transforms",
-                "$comment": "Anyterial transform collection property using the common basis-transform definition for transform items.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -99,7 +97,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     "array",
                     "null"
                 ],
-                "description": "B\u00e4rnighausen subgroup transform table for one parent setting or space-group type.\nEntries describe generated embeddings of subgroup settings into the containing parent setting.\nEach list item groups transform records for one target subgroup, with the target stored as ordinary data rather than as a JSON dictionary key.\nTransform records follow `/properties/symmetry/basis_transform`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain either `target_hall_entry` or `target_it_number`, depending on whether the containing dataset is Hall-setting keyed or IT-number keyed.\n- Each dictionary MUST contain `transforms`, a list of basis-transform records.",
+                "description": "B\u00e4rnighausen subgroup transform table for one parent setting or space-group type.\n\nEntries describe generated embeddings of subgroup settings into the containing parent setting.\nEach list item groups transform records for one target subgroup, with the target stored as ordinary data rather than as a JSON dictionary key.\nTransform records follow `/properties/symmetry/basis_transform`.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain either `target_hall_entry` or `target_it_number`, depending on whether the containing dataset is Hall-setting keyed or IT-number keyed.\n- Each dictionary MUST contain `transforms`, a list of basis-transform records.",
                 "items": {
                     "x-optimade-type": "dictionary",
                     "x-optimade-unit": "inapplicable",
@@ -139,7 +137,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                             "items": {
                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
                                 "title": "Basis transformation",
-                                "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
                                 "x-optimade-type": "dictionary",
                                 "x-optimade-definition": {
                                     "kind": "property",
@@ -153,12 +150,11 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                     "object",
                                     "null"
                                 ],
-                                "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                                "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\n\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe parent property defines the source and target coordinate systems and the precise role of the transform.\nUseful, for example, for representing setting changes, subgroup embeddings, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\nThis property is not limited to symmetry operations within one fixed setting; the matrix may be non-orthogonal or have determinant different from one when the transform changes cell or basis.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform, using exact rational matrix and vector entries.\n      The coordinate convention and source/target interpretation are supplied by the parent property.\n\n    - **index**: OPTIONAL; Integer or null.\n      Index metadata whose interpretation is defined by the parent property.\n      Common uses include the subgroup index for subgroup embeddings, the cell index for isomorphic subgroup transforms, or an ordinal representative index in a finite transform table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a maximal subgroup embedding.\n      The value MUST be `t` for a translationengleiche subgroup or `k` for a klassengleiche subgroup.\n      It MUST be omitted when the transform is not a maximal subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n      The value MUST be `loss_of_centering_translation` or `enlarged_unit_cell` for klassengleiche relations and null or omitted otherwise.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Categorical label for normalizer-type representatives.\n      The value MUST be `euclidean` for Euclidean normalizer operations, `orthogonal_affine` for the signed-permutation affine normalizer subset, or `affine` for the bounded unimodular affine normalizer table.\n      It MUST be omitted when the transform is a setting transform, subgroup embedding, or other transform for which no normalizer operation class applies.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.",
                                 "properties": {
                                     "affine_transformation": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
                                         "title": "Affine transformation",
-                                        "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
                                         "x-optimade-type": "dictionary",
                                         "x-optimade-definition": {
                                             "kind": "property",
@@ -172,7 +168,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             "object",
                                             "null"
                                         ],
-                                        "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                        "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
                                         "properties": {
                                             "matrix": {
                                                 "x-optimade-type": "list",
@@ -222,7 +218,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                             "string",
                                                             "null"
                                                         ],
-                                                        "description": "A fraction represented as a string.",
+                                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                         "examples": [
                                                             "2/3",
                                                             "5/42",
@@ -264,7 +260,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                         "string",
                                                         "null"
                                                     ],
-                                                    "description": "A fraction represented as a string.",
+                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                     "examples": [
                                                         "2/3",
                                                         "5/42",
@@ -275,13 +271,31 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 }
                                             },
                                             "xyz": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                                "title": "Operation xyz",
                                                 "x-optimade-type": "string",
+                                                "x-compatibility": [
+                                                    "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                                    "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                                ],
+                                                "x-optimade-definition": {
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "op_xyz",
+                                                    "label": "op_xyz_symmetry"
+                                                },
                                                 "x-optimade-unit": "inapplicable",
                                                 "type": [
                                                     "string",
                                                     "null"
                                                 ],
-                                                "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                                "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                                "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                                                "examples": [
+                                                    "-x,-y,z",
+                                                    "x,1/2-y,1/2+z"
+                                                ]
                                             },
                                             "det": {
                                                 "x-optimade-type": "integer",
@@ -345,10 +359,13 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                         "x-optimade-type": "string",
                                         "x-optimade-unit": "inapplicable",
                                         "type": [
-                                            "string",
-                                            "null"
+                                            "string"
                                         ],
-                                        "description": "International Tables subgroup-type label when applicable."
+                                        "description": "International Tables subgroup-type label when applicable.",
+                                        "enum": [
+                                            "t",
+                                            "k"
+                                        ]
                                     },
                                     "k_subtype": {
                                         "x-optimade-type": "string",
@@ -373,17 +390,30 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             "type": [
                                                 "string"
                                             ],
-                                            "description": "One compatible crystal-system label."
+                                            "description": "One compatible crystal-system label.",
+                                            "enum": [
+                                                "triclinic",
+                                                "monoclinic",
+                                                "orthorhombic",
+                                                "tetragonal",
+                                                "trigonal",
+                                                "hexagonal",
+                                                "cubic"
+                                            ]
                                         }
                                     },
                                     "operation_kind": {
                                         "x-optimade-type": "string",
                                         "x-optimade-unit": "inapplicable",
                                         "type": [
-                                            "string",
-                                            "null"
+                                            "string"
                                         ],
-                                        "description": "Generator classification of the transform or representative."
+                                        "description": "Categorical label for normalizer-type representatives.",
+                                        "enum": [
+                                            "euclidean",
+                                            "orthogonal_affine",
+                                            "affine"
+                                        ]
                                     },
                                     "wyckoff_splitting": {
                                         "x-optimade-type": "list",
@@ -478,7 +508,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                             "string",
                                                                             "null"
                                                                         ],
-                                                                        "description": "A fraction represented as a string.",
+                                                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                         "examples": [
                                                                             "2/3",
                                                                             "5/42",
@@ -612,7 +642,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                                 "string",
                                                                                 "null"
                                                                             ],
-                                                                            "description": "A fraction represented as a string.",
+                                                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                             "examples": [
                                                                                 "2/3",
                                                                                 "5/42",
@@ -646,7 +676,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                         "string",
                                                                         "null"
                                                                     ],
-                                                                    "description": "A fraction represented as a string.",
+                                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                     "examples": [
                                                                         "2/3",
                                                                         "5/42",
@@ -687,9 +717,111 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 "0",
                                                 "0",
                                                 "0"
-                                            ]
+                                            ],
+                                            "xyz": "x,y,2z",
+                                            "det": 2,
+                                            "is_orthogonal": false
                                         },
-                                        "index": 2
+                                        "index": 2,
+                                        "subgroup_type": "k",
+                                        "k_subtype": "enlarged_unit_cell",
+                                        "wyckoff_splitting": [
+                                            {
+                                                "parent": "a",
+                                                "splits": [
+                                                    {
+                                                        "letter": "a",
+                                                        "xyz": "x,y,z",
+                                                        "affine": [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "0",
+                                                                "1",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "criteria": [
+                                            {
+                                                "parent": "a",
+                                                "constraints": [
+                                                    {
+                                                        "roles": [
+                                                            {
+                                                                "letter": "a",
+                                                                "index": 0
+                                                            }
+                                                        ],
+                                                        "coeffs": [
+                                                            [
+                                                                [
+                                                                    "1",
+                                                                    "0",
+                                                                    "0"
+                                                                ]
+                                                            ]
+                                                        ],
+                                                        "target": [
+                                                            "0"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "affine_transformation": {
+                                            "matrix": [
+                                                [
+                                                    "-1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "-1",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "-1"
+                                                ]
+                                            ],
+                                            "vector": [
+                                                "0",
+                                                "0",
+                                                "0"
+                                            ],
+                                            "xyz": "-x,-y,-z",
+                                            "det": -1,
+                                            "is_orthogonal": true
+                                        },
+                                        "compatible_systems": [
+                                            "triclinic",
+                                            "monoclinic",
+                                            "orthorhombic",
+                                            "tetragonal",
+                                            "trigonal",
+                                            "hexagonal",
+                                            "cubic"
+                                        ],
+                                        "operation_kind": "affine"
                                     }
                                 ]
                             }
@@ -736,7 +868,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
             "backward_lift_criteria": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/backward_lift_criteria",
                 "title": "Backward lift criteria",
-                "$comment": "Anyterial property definition for backward-lift criteria grouped by target subgroup IT number.",
                 "x-optimade-type": "list",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -750,7 +881,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     "array",
                     "null"
                 ],
-                "description": "Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen B\u00e4rnighausen transform.\nEach list item groups transform records for one target subgroup IT number.\nThe target subgroup IT number is stored in `target_it_number` rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `target_it_number`, the subgroup IT number.\n- Each dictionary MUST contain `transforms`, a list of basis-transform records carrying backward-lift criteria.",
+                "description": "Criteria table for one supergroup IT number used to lift occupied Wyckoff data from a subgroup back to that supergroup along a chosen B\u00e4rnighausen transform.\n\nEach list item groups transform records for one target subgroup IT number.\nThe target subgroup IT number is stored in `target_it_number` rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `target_it_number`, the subgroup IT number.\n- Each dictionary MUST contain `transforms`, a list of basis-transform records carrying backward-lift criteria.",
                 "items": {
                     "x-optimade-type": "dictionary",
                     "x-optimade-unit": "inapplicable",
@@ -781,7 +912,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                             "items": {
                                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
                                 "title": "Basis transformation",
-                                "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
                                 "x-optimade-type": "dictionary",
                                 "x-optimade-definition": {
                                     "kind": "property",
@@ -795,12 +925,11 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                     "object",
                                     "null"
                                 ],
-                                "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                                "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\n\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe parent property defines the source and target coordinate systems and the precise role of the transform.\nUseful, for example, for representing setting changes, subgroup embeddings, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\nThis property is not limited to symmetry operations within one fixed setting; the matrix may be non-orthogonal or have determinant different from one when the transform changes cell or basis.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform, using exact rational matrix and vector entries.\n      The coordinate convention and source/target interpretation are supplied by the parent property.\n\n    - **index**: OPTIONAL; Integer or null.\n      Index metadata whose interpretation is defined by the parent property.\n      Common uses include the subgroup index for subgroup embeddings, the cell index for isomorphic subgroup transforms, or an ordinal representative index in a finite transform table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a maximal subgroup embedding.\n      The value MUST be `t` for a translationengleiche subgroup or `k` for a klassengleiche subgroup.\n      It MUST be omitted when the transform is not a maximal subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n      The value MUST be `loss_of_centering_translation` or `enlarged_unit_cell` for klassengleiche relations and null or omitted otherwise.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Categorical label for normalizer-type representatives.\n      The value MUST be `euclidean` for Euclidean normalizer operations, `orthogonal_affine` for the signed-permutation affine normalizer subset, or `affine` for the bounded unimodular affine normalizer table.\n      It MUST be omitted when the transform is a setting transform, subgroup embedding, or other transform for which no normalizer operation class applies.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.",
                                 "properties": {
                                     "affine_transformation": {
                                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
                                         "title": "Affine transformation",
-                                        "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
                                         "x-optimade-type": "dictionary",
                                         "x-optimade-definition": {
                                             "kind": "property",
@@ -814,7 +943,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             "object",
                                             "null"
                                         ],
-                                        "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                        "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
                                         "properties": {
                                             "matrix": {
                                                 "x-optimade-type": "list",
@@ -864,7 +993,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                             "string",
                                                             "null"
                                                         ],
-                                                        "description": "A fraction represented as a string.",
+                                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                         "examples": [
                                                             "2/3",
                                                             "5/42",
@@ -906,7 +1035,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                         "string",
                                                         "null"
                                                     ],
-                                                    "description": "A fraction represented as a string.",
+                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                     "examples": [
                                                         "2/3",
                                                         "5/42",
@@ -917,13 +1046,31 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 }
                                             },
                                             "xyz": {
+                                                "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                                "title": "Operation xyz",
                                                 "x-optimade-type": "string",
+                                                "x-compatibility": [
+                                                    "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                                    "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                                ],
+                                                "x-optimade-definition": {
+                                                    "kind": "property",
+                                                    "version": "0.1.0",
+                                                    "format": "1.3",
+                                                    "name": "op_xyz",
+                                                    "label": "op_xyz_symmetry"
+                                                },
                                                 "x-optimade-unit": "inapplicable",
                                                 "type": [
                                                     "string",
                                                     "null"
                                                 ],
-                                                "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                                "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                                "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                                                "examples": [
+                                                    "-x,-y,z",
+                                                    "x,1/2-y,1/2+z"
+                                                ]
                                             },
                                             "det": {
                                                 "x-optimade-type": "integer",
@@ -987,10 +1134,13 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                         "x-optimade-type": "string",
                                         "x-optimade-unit": "inapplicable",
                                         "type": [
-                                            "string",
-                                            "null"
+                                            "string"
                                         ],
-                                        "description": "International Tables subgroup-type label when applicable."
+                                        "description": "International Tables subgroup-type label when applicable.",
+                                        "enum": [
+                                            "t",
+                                            "k"
+                                        ]
                                     },
                                     "k_subtype": {
                                         "x-optimade-type": "string",
@@ -1015,17 +1165,30 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             "type": [
                                                 "string"
                                             ],
-                                            "description": "One compatible crystal-system label."
+                                            "description": "One compatible crystal-system label.",
+                                            "enum": [
+                                                "triclinic",
+                                                "monoclinic",
+                                                "orthorhombic",
+                                                "tetragonal",
+                                                "trigonal",
+                                                "hexagonal",
+                                                "cubic"
+                                            ]
                                         }
                                     },
                                     "operation_kind": {
                                         "x-optimade-type": "string",
                                         "x-optimade-unit": "inapplicable",
                                         "type": [
-                                            "string",
-                                            "null"
+                                            "string"
                                         ],
-                                        "description": "Generator classification of the transform or representative."
+                                        "description": "Categorical label for normalizer-type representatives.",
+                                        "enum": [
+                                            "euclidean",
+                                            "orthogonal_affine",
+                                            "affine"
+                                        ]
                                     },
                                     "wyckoff_splitting": {
                                         "x-optimade-type": "list",
@@ -1120,7 +1283,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                             "string",
                                                                             "null"
                                                                         ],
-                                                                        "description": "A fraction represented as a string.",
+                                                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                         "examples": [
                                                                             "2/3",
                                                                             "5/42",
@@ -1254,7 +1417,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                                 "string",
                                                                                 "null"
                                                                             ],
-                                                                            "description": "A fraction represented as a string.",
+                                                                            "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                             "examples": [
                                                                                 "2/3",
                                                                                 "5/42",
@@ -1288,7 +1451,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                         "string",
                                                                         "null"
                                                                     ],
-                                                                    "description": "A fraction represented as a string.",
+                                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                     "examples": [
                                                                         "2/3",
                                                                         "5/42",
@@ -1329,9 +1492,111 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                 "0",
                                                 "0",
                                                 "0"
-                                            ]
+                                            ],
+                                            "xyz": "x,y,2z",
+                                            "det": 2,
+                                            "is_orthogonal": false
                                         },
-                                        "index": 2
+                                        "index": 2,
+                                        "subgroup_type": "k",
+                                        "k_subtype": "enlarged_unit_cell",
+                                        "wyckoff_splitting": [
+                                            {
+                                                "parent": "a",
+                                                "splits": [
+                                                    {
+                                                        "letter": "a",
+                                                        "xyz": "x,y,z",
+                                                        "affine": [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ],
+                                                            [
+                                                                "0",
+                                                                "0",
+                                                                "1",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "criteria": [
+                                            {
+                                                "parent": "a",
+                                                "constraints": [
+                                                    {
+                                                        "roles": [
+                                                            {
+                                                                "letter": "a",
+                                                                "index": 0
+                                                            }
+                                                        ],
+                                                        "coeffs": [
+                                                            [
+                                                                [
+                                                                    "1",
+                                                                    "0",
+                                                                    "0"
+                                                                ]
+                                                            ]
+                                                        ],
+                                                        "target": [
+                                                            "0"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "affine_transformation": {
+                                            "matrix": [
+                                                [
+                                                    "-1",
+                                                    "0",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "-1",
+                                                    "0"
+                                                ],
+                                                [
+                                                    "0",
+                                                    "0",
+                                                    "-1"
+                                                ]
+                                            ],
+                                            "vector": [
+                                                "0",
+                                                "0",
+                                                "0"
+                                            ],
+                                            "xyz": "-x,-y,-z",
+                                            "det": -1,
+                                            "is_orthogonal": true
+                                        },
+                                        "compatible_systems": [
+                                            "triclinic",
+                                            "monoclinic",
+                                            "orthorhombic",
+                                            "tetragonal",
+                                            "trigonal",
+                                            "hexagonal",
+                                            "cubic"
+                                        ],
+                                        "operation_kind": "affine"
                                     }
                                 ]
                             }
@@ -1407,7 +1672,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
             "isomorphic_subgroups": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/isomorphic_subgroups",
                 "title": "Isomorphic subgroup transforms",
-                "$comment": "Anyterial keyed table of bounded-index isomorphic subgroup transforms.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -1421,7 +1685,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     "object",
                     "null"
                 ],
-                "description": "Isomorphic subgroup transforms of bounded index for one parent setting or space-group type.\nAn isomorphic subgroup has the same space-group type as the parent but is embedded with a finite index, usually corresponding to an enlarged unit cell or a sublattice choice.\nThese transforms are useful for algorithms that need to enumerate same-type subgroup embeddings, compare structures under supercell changes, or construct bounded same-space-group refinement paths.\n\nThe transform records use the basis-transform convention represented by `matrix` and `vector`.\nThe `index` field is the subgroup index and equals the determinant factor of the basis transformation.\nThe generator currently searches indices up to its configured maximum index and deduplicates equivalent transforms under normalizer equivalence.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary containing an `items` list.\n- Each item in `items` MUST describe one exact isomorphic subgroup transform.\n- Matrix and vector entries MUST be exact strings, using integer strings or fraction strings as appropriate.",
+                "description": "Isomorphic subgroup transforms of bounded index for one parent setting or space-group type.\n\nAn isomorphic subgroup has the same space-group type as the parent but is embedded with a finite index, usually corresponding to an enlarged unit cell or a sublattice choice.\nThese transforms are useful for algorithms that need to enumerate same-type subgroup embeddings, compare structures under supercell changes, or construct bounded same-space-group refinement paths.\n\nThe transform records use the basis-transform convention represented by `matrix` and `vector`.\nThe `index` field is the subgroup index and equals the determinant factor of the basis transformation.\nThe generator currently searches indices up to its configured maximum index and deduplicates equivalent transforms under normalizer equivalence.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary containing an `items` list.\n- Each item in `items` MUST describe one exact isomorphic subgroup transform.\n- Matrix and vector entries MUST be exact strings, using integer strings or fraction strings as appropriate.",
                 "properties": {
                     "items": {
                         "x-optimade-type": "list",
@@ -1434,7 +1698,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                         "items": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
                             "title": "Basis transformation",
-                            "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
                             "x-optimade-type": "dictionary",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -1448,12 +1711,11 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                 "object",
                                 "null"
                             ],
-                            "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                            "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\n\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe parent property defines the source and target coordinate systems and the precise role of the transform.\nUseful, for example, for representing setting changes, subgroup embeddings, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\nThis property is not limited to symmetry operations within one fixed setting; the matrix may be non-orthogonal or have determinant different from one when the transform changes cell or basis.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform, using exact rational matrix and vector entries.\n      The coordinate convention and source/target interpretation are supplied by the parent property.\n\n    - **index**: OPTIONAL; Integer or null.\n      Index metadata whose interpretation is defined by the parent property.\n      Common uses include the subgroup index for subgroup embeddings, the cell index for isomorphic subgroup transforms, or an ordinal representative index in a finite transform table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a maximal subgroup embedding.\n      The value MUST be `t` for a translationengleiche subgroup or `k` for a klassengleiche subgroup.\n      It MUST be omitted when the transform is not a maximal subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n      The value MUST be `loss_of_centering_translation` or `enlarged_unit_cell` for klassengleiche relations and null or omitted otherwise.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Categorical label for normalizer-type representatives.\n      The value MUST be `euclidean` for Euclidean normalizer operations, `orthogonal_affine` for the signed-permutation affine normalizer subset, or `affine` for the bounded unimodular affine normalizer table.\n      It MUST be omitted when the transform is a setting transform, subgroup embedding, or other transform for which no normalizer operation class applies.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.",
                             "properties": {
                                 "affine_transformation": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
                                     "title": "Affine transformation",
-                                    "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
                                     "x-optimade-type": "dictionary",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -1467,7 +1729,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                         "object",
                                         "null"
                                     ],
-                                    "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                    "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
                                     "properties": {
                                         "matrix": {
                                             "x-optimade-type": "list",
@@ -1517,7 +1779,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                         "string",
                                                         "null"
                                                     ],
-                                                    "description": "A fraction represented as a string.",
+                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                     "examples": [
                                                         "2/3",
                                                         "5/42",
@@ -1559,7 +1821,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                     "string",
                                                     "null"
                                                 ],
-                                                "description": "A fraction represented as a string.",
+                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                 "examples": [
                                                     "2/3",
                                                     "5/42",
@@ -1570,13 +1832,31 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             }
                                         },
                                         "xyz": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                            "title": "Operation xyz",
                                             "x-optimade-type": "string",
+                                            "x-compatibility": [
+                                                "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                                "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                            ],
+                                            "x-optimade-definition": {
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "op_xyz",
+                                                "label": "op_xyz_symmetry"
+                                            },
                                             "x-optimade-unit": "inapplicable",
                                             "type": [
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                            "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                            "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                                            "examples": [
+                                                "-x,-y,z",
+                                                "x,1/2-y,1/2+z"
+                                            ]
                                         },
                                         "det": {
                                             "x-optimade-type": "integer",
@@ -1640,10 +1920,13 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                     "x-optimade-type": "string",
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
-                                        "string",
-                                        "null"
+                                        "string"
                                     ],
-                                    "description": "International Tables subgroup-type label when applicable."
+                                    "description": "International Tables subgroup-type label when applicable.",
+                                    "enum": [
+                                        "t",
+                                        "k"
+                                    ]
                                 },
                                 "k_subtype": {
                                     "x-optimade-type": "string",
@@ -1668,17 +1951,30 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                         "type": [
                                             "string"
                                         ],
-                                        "description": "One compatible crystal-system label."
+                                        "description": "One compatible crystal-system label.",
+                                        "enum": [
+                                            "triclinic",
+                                            "monoclinic",
+                                            "orthorhombic",
+                                            "tetragonal",
+                                            "trigonal",
+                                            "hexagonal",
+                                            "cubic"
+                                        ]
                                     }
                                 },
                                 "operation_kind": {
                                     "x-optimade-type": "string",
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
-                                        "string",
-                                        "null"
+                                        "string"
                                     ],
-                                    "description": "Generator classification of the transform or representative."
+                                    "description": "Categorical label for normalizer-type representatives.",
+                                    "enum": [
+                                        "euclidean",
+                                        "orthogonal_affine",
+                                        "affine"
+                                    ]
                                 },
                                 "wyckoff_splitting": {
                                     "x-optimade-type": "list",
@@ -1773,7 +2069,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                         "string",
                                                                         "null"
                                                                     ],
-                                                                    "description": "A fraction represented as a string.",
+                                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                     "examples": [
                                                                         "2/3",
                                                                         "5/42",
@@ -1907,7 +2203,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                             "string",
                                                                             "null"
                                                                         ],
-                                                                        "description": "A fraction represented as a string.",
+                                                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                         "examples": [
                                                                             "2/3",
                                                                             "5/42",
@@ -1941,7 +2237,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                     "string",
                                                                     "null"
                                                                 ],
-                                                                "description": "A fraction represented as a string.",
+                                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                 "examples": [
                                                                     "2/3",
                                                                     "5/42",
@@ -1982,9 +2278,111 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             "0",
                                             "0",
                                             "0"
-                                        ]
+                                        ],
+                                        "xyz": "x,y,2z",
+                                        "det": 2,
+                                        "is_orthogonal": false
                                     },
-                                    "index": 2
+                                    "index": 2,
+                                    "subgroup_type": "k",
+                                    "k_subtype": "enlarged_unit_cell",
+                                    "wyckoff_splitting": [
+                                        {
+                                            "parent": "a",
+                                            "splits": [
+                                                {
+                                                    "letter": "a",
+                                                    "xyz": "x,y,z",
+                                                    "affine": [
+                                                        [
+                                                            "1",
+                                                            "0",
+                                                            "0",
+                                                            "0"
+                                                        ],
+                                                        [
+                                                            "0",
+                                                            "1",
+                                                            "0",
+                                                            "0"
+                                                        ],
+                                                        [
+                                                            "0",
+                                                            "0",
+                                                            "1",
+                                                            "0"
+                                                        ]
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "criteria": [
+                                        {
+                                            "parent": "a",
+                                            "constraints": [
+                                                {
+                                                    "roles": [
+                                                        {
+                                                            "letter": "a",
+                                                            "index": 0
+                                                        }
+                                                    ],
+                                                    "coeffs": [
+                                                        [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    ],
+                                                    "target": [
+                                                        "0"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "-1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "-1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "-1"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ],
+                                        "xyz": "-x,-y,-z",
+                                        "det": -1,
+                                        "is_orthogonal": true
+                                    },
+                                    "compatible_systems": [
+                                        "triclinic",
+                                        "monoclinic",
+                                        "orthorhombic",
+                                        "tetragonal",
+                                        "trigonal",
+                                        "hexagonal",
+                                        "cubic"
+                                    ],
+                                    "operation_kind": "affine"
                                 }
                             ]
                         }
@@ -2079,7 +2477,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
             "same_space_group_affine_images_std": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/same_space_group_affine_images_std",
                 "title": "Same space group affine images std",
-                "$comment": "IT-number keyed same-space-group affine-image records for standard settings.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2098,7 +2495,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     "it_number": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
                         "title": "International Tables Space-Group Number",
-                        "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                         "x-optimade-type": "integer",
                         "x-compatibility": [
                             "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -2124,7 +2520,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     "hall": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
                         "title": "Hall entry",
-                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                         "x-optimade-type": "string",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -2155,7 +2550,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                         "items": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
                             "title": "Basis transformation",
-                            "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
                             "x-optimade-type": "dictionary",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -2169,12 +2563,11 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                 "object",
                                 "null"
                             ],
-                            "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                            "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\n\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe parent property defines the source and target coordinate systems and the precise role of the transform.\nUseful, for example, for representing setting changes, subgroup embeddings, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\nThis property is not limited to symmetry operations within one fixed setting; the matrix may be non-orthogonal or have determinant different from one when the transform changes cell or basis.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform, using exact rational matrix and vector entries.\n      The coordinate convention and source/target interpretation are supplied by the parent property.\n\n    - **index**: OPTIONAL; Integer or null.\n      Index metadata whose interpretation is defined by the parent property.\n      Common uses include the subgroup index for subgroup embeddings, the cell index for isomorphic subgroup transforms, or an ordinal representative index in a finite transform table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a maximal subgroup embedding.\n      The value MUST be `t` for a translationengleiche subgroup or `k` for a klassengleiche subgroup.\n      It MUST be omitted when the transform is not a maximal subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n      The value MUST be `loss_of_centering_translation` or `enlarged_unit_cell` for klassengleiche relations and null or omitted otherwise.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Categorical label for normalizer-type representatives.\n      The value MUST be `euclidean` for Euclidean normalizer operations, `orthogonal_affine` for the signed-permutation affine normalizer subset, or `affine` for the bounded unimodular affine normalizer table.\n      It MUST be omitted when the transform is a setting transform, subgroup embedding, or other transform for which no normalizer operation class applies.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.",
                             "properties": {
                                 "affine_transformation": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
                                     "title": "Affine transformation",
-                                    "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
                                     "x-optimade-type": "dictionary",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -2188,7 +2581,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                         "object",
                                         "null"
                                     ],
-                                    "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                    "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
                                     "properties": {
                                         "matrix": {
                                             "x-optimade-type": "list",
@@ -2238,7 +2631,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                         "string",
                                                         "null"
                                                     ],
-                                                    "description": "A fraction represented as a string.",
+                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                     "examples": [
                                                         "2/3",
                                                         "5/42",
@@ -2280,7 +2673,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                     "string",
                                                     "null"
                                                 ],
-                                                "description": "A fraction represented as a string.",
+                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                 "examples": [
                                                     "2/3",
                                                     "5/42",
@@ -2291,13 +2684,31 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             }
                                         },
                                         "xyz": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                            "title": "Operation xyz",
                                             "x-optimade-type": "string",
+                                            "x-compatibility": [
+                                                "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                                "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                            ],
+                                            "x-optimade-definition": {
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "op_xyz",
+                                                "label": "op_xyz_symmetry"
+                                            },
                                             "x-optimade-unit": "inapplicable",
                                             "type": [
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                            "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                            "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                                            "examples": [
+                                                "-x,-y,z",
+                                                "x,1/2-y,1/2+z"
+                                            ]
                                         },
                                         "det": {
                                             "x-optimade-type": "integer",
@@ -2361,10 +2772,13 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                     "x-optimade-type": "string",
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
-                                        "string",
-                                        "null"
+                                        "string"
                                     ],
-                                    "description": "International Tables subgroup-type label when applicable."
+                                    "description": "International Tables subgroup-type label when applicable.",
+                                    "enum": [
+                                        "t",
+                                        "k"
+                                    ]
                                 },
                                 "k_subtype": {
                                     "x-optimade-type": "string",
@@ -2389,17 +2803,30 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                         "type": [
                                             "string"
                                         ],
-                                        "description": "One compatible crystal-system label."
+                                        "description": "One compatible crystal-system label.",
+                                        "enum": [
+                                            "triclinic",
+                                            "monoclinic",
+                                            "orthorhombic",
+                                            "tetragonal",
+                                            "trigonal",
+                                            "hexagonal",
+                                            "cubic"
+                                        ]
                                     }
                                 },
                                 "operation_kind": {
                                     "x-optimade-type": "string",
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
-                                        "string",
-                                        "null"
+                                        "string"
                                     ],
-                                    "description": "Generator classification of the transform or representative."
+                                    "description": "Categorical label for normalizer-type representatives.",
+                                    "enum": [
+                                        "euclidean",
+                                        "orthogonal_affine",
+                                        "affine"
+                                    ]
                                 },
                                 "wyckoff_splitting": {
                                     "x-optimade-type": "list",
@@ -2494,7 +2921,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                         "string",
                                                                         "null"
                                                                     ],
-                                                                    "description": "A fraction represented as a string.",
+                                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                     "examples": [
                                                                         "2/3",
                                                                         "5/42",
@@ -2628,7 +3055,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                             "string",
                                                                             "null"
                                                                         ],
-                                                                        "description": "A fraction represented as a string.",
+                                                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                         "examples": [
                                                                             "2/3",
                                                                             "5/42",
@@ -2662,7 +3089,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                     "string",
                                                                     "null"
                                                                 ],
-                                                                "description": "A fraction represented as a string.",
+                                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                 "examples": [
                                                                     "2/3",
                                                                     "5/42",
@@ -2703,9 +3130,111 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             "0",
                                             "0",
                                             "0"
-                                        ]
+                                        ],
+                                        "xyz": "x,y,2z",
+                                        "det": 2,
+                                        "is_orthogonal": false
                                     },
-                                    "index": 2
+                                    "index": 2,
+                                    "subgroup_type": "k",
+                                    "k_subtype": "enlarged_unit_cell",
+                                    "wyckoff_splitting": [
+                                        {
+                                            "parent": "a",
+                                            "splits": [
+                                                {
+                                                    "letter": "a",
+                                                    "xyz": "x,y,z",
+                                                    "affine": [
+                                                        [
+                                                            "1",
+                                                            "0",
+                                                            "0",
+                                                            "0"
+                                                        ],
+                                                        [
+                                                            "0",
+                                                            "1",
+                                                            "0",
+                                                            "0"
+                                                        ],
+                                                        [
+                                                            "0",
+                                                            "0",
+                                                            "1",
+                                                            "0"
+                                                        ]
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "criteria": [
+                                        {
+                                            "parent": "a",
+                                            "constraints": [
+                                                {
+                                                    "roles": [
+                                                        {
+                                                            "letter": "a",
+                                                            "index": 0
+                                                        }
+                                                    ],
+                                                    "coeffs": [
+                                                        [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    ],
+                                                    "target": [
+                                                        "0"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "-1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "-1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "-1"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ],
+                                        "xyz": "-x,-y,-z",
+                                        "det": -1,
+                                        "is_orthogonal": true
+                                    },
+                                    "compatible_systems": [
+                                        "triclinic",
+                                        "monoclinic",
+                                        "orthorhombic",
+                                        "tetragonal",
+                                        "trigonal",
+                                        "hexagonal",
+                                        "cubic"
+                                    ],
+                                    "operation_kind": "affine"
                                 }
                             ]
                         }
@@ -2749,7 +3278,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
             "continuous_normalizer": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/continuous_normalizer",
                 "title": "Continuous normalizer",
-                "$comment": "Anyterial continuous-normalizer property definition.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2763,7 +3291,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     "object",
                     "null"
                 ],
-                "description": "Parameterized continuous normalizer subspace for a setting. It describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
+                "description": "Parameterized continuous normalizer subspace for a setting.\n\nIt describes continuous origin-shift freedoms by dimension and fractional-coordinate basis vectors rather than by enumerating infinitely many operations.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **dimension**: OPTIONAL; Integer.\n      Dimension of the continuous parameter subspace.\n\n    - **basis\\_vectors**: REQUIRED; List of vectors.\n      Basis vectors spanning the continuous normalizer parameter space.\n      Each basis vector is represented as exact fractional-coordinate components.\n\n    - **coordinate\\_system**: OPTIONAL; String.\n      Coordinate system used for the parameter vectors.\n\n    - **representation**: OPTIONAL; String.\n      Textual description of the parameterized representation.",
                 "properties": {
                     "dimension": {
                         "x-optimade-type": "integer",
@@ -2812,7 +3340,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                     "string",
                                     "null"
                                 ],
-                                "description": "A fraction represented as a string.",
+                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                 "examples": [
                                     "2/3",
                                     "5/42",
@@ -2869,7 +3397,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
             "orthogonal_affine_normalizer": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/orthogonal_affine_normalizer",
                 "title": "Orthogonal affine normalizer",
-                "$comment": "Anyterial signed-permutation affine normalizer coset representatives for one space-group setting.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -2883,7 +3410,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     "object",
                     "null"
                 ],
-                "description": "Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains the signed-permutation subset of affine normalizer representatives.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `signed_permutation_matrices`, meaning 3 by 3 integer matrices with exactly one nonzero entry in each row and column and each nonzero entry equal to `-1` or `1`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds satisfied by the signed-permutation candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed orthogonal affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
+                "description": "Orthogonal affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains the signed-permutation subset of affine normalizer representatives.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `signed_permutation_matrices`, meaning 3 by 3 integer matrices with exactly one nonzero entry in each row and column and each nonzero entry equal to `-1` or `1`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds satisfied by the signed-permutation candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed orthogonal affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
                 "properties": {
                     "normalizer_kind": {
                         "x-optimade-type": "string",
@@ -2914,8 +3441,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     },
                     "n_symops": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-                        "title": "N Symops",
-                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "title": "number of symops",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -2938,7 +3464,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     "n_linear_parts": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
                         "title": "N Linear Parts",
-                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -3025,7 +3550,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                         "items": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
                             "title": "Basis transformation",
-                            "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
                             "x-optimade-type": "dictionary",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -3039,12 +3563,11 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                 "object",
                                 "null"
                             ],
-                            "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                            "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\n\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe parent property defines the source and target coordinate systems and the precise role of the transform.\nUseful, for example, for representing setting changes, subgroup embeddings, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\nThis property is not limited to symmetry operations within one fixed setting; the matrix may be non-orthogonal or have determinant different from one when the transform changes cell or basis.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform, using exact rational matrix and vector entries.\n      The coordinate convention and source/target interpretation are supplied by the parent property.\n\n    - **index**: OPTIONAL; Integer or null.\n      Index metadata whose interpretation is defined by the parent property.\n      Common uses include the subgroup index for subgroup embeddings, the cell index for isomorphic subgroup transforms, or an ordinal representative index in a finite transform table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a maximal subgroup embedding.\n      The value MUST be `t` for a translationengleiche subgroup or `k` for a klassengleiche subgroup.\n      It MUST be omitted when the transform is not a maximal subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n      The value MUST be `loss_of_centering_translation` or `enlarged_unit_cell` for klassengleiche relations and null or omitted otherwise.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Categorical label for normalizer-type representatives.\n      The value MUST be `euclidean` for Euclidean normalizer operations, `orthogonal_affine` for the signed-permutation affine normalizer subset, or `affine` for the bounded unimodular affine normalizer table.\n      It MUST be omitted when the transform is a setting transform, subgroup embedding, or other transform for which no normalizer operation class applies.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.",
                             "properties": {
                                 "affine_transformation": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
                                     "title": "Affine transformation",
-                                    "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
                                     "x-optimade-type": "dictionary",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -3058,7 +3581,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                         "object",
                                         "null"
                                     ],
-                                    "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                    "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
                                     "properties": {
                                         "matrix": {
                                             "x-optimade-type": "list",
@@ -3108,7 +3631,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                         "string",
                                                         "null"
                                                     ],
-                                                    "description": "A fraction represented as a string.",
+                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                     "examples": [
                                                         "2/3",
                                                         "5/42",
@@ -3150,7 +3673,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                     "string",
                                                     "null"
                                                 ],
-                                                "description": "A fraction represented as a string.",
+                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                 "examples": [
                                                     "2/3",
                                                     "5/42",
@@ -3161,13 +3684,31 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             }
                                         },
                                         "xyz": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                            "title": "Operation xyz",
                                             "x-optimade-type": "string",
+                                            "x-compatibility": [
+                                                "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                                "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                            ],
+                                            "x-optimade-definition": {
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "op_xyz",
+                                                "label": "op_xyz_symmetry"
+                                            },
                                             "x-optimade-unit": "inapplicable",
                                             "type": [
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                            "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                            "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                                            "examples": [
+                                                "-x,-y,z",
+                                                "x,1/2-y,1/2+z"
+                                            ]
                                         },
                                         "det": {
                                             "x-optimade-type": "integer",
@@ -3231,10 +3772,13 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                     "x-optimade-type": "string",
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
-                                        "string",
-                                        "null"
+                                        "string"
                                     ],
-                                    "description": "International Tables subgroup-type label when applicable."
+                                    "description": "International Tables subgroup-type label when applicable.",
+                                    "enum": [
+                                        "t",
+                                        "k"
+                                    ]
                                 },
                                 "k_subtype": {
                                     "x-optimade-type": "string",
@@ -3259,17 +3803,30 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                         "type": [
                                             "string"
                                         ],
-                                        "description": "One compatible crystal-system label."
+                                        "description": "One compatible crystal-system label.",
+                                        "enum": [
+                                            "triclinic",
+                                            "monoclinic",
+                                            "orthorhombic",
+                                            "tetragonal",
+                                            "trigonal",
+                                            "hexagonal",
+                                            "cubic"
+                                        ]
                                     }
                                 },
                                 "operation_kind": {
                                     "x-optimade-type": "string",
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
-                                        "string",
-                                        "null"
+                                        "string"
                                     ],
-                                    "description": "Generator classification of the transform or representative."
+                                    "description": "Categorical label for normalizer-type representatives.",
+                                    "enum": [
+                                        "euclidean",
+                                        "orthogonal_affine",
+                                        "affine"
+                                    ]
                                 },
                                 "wyckoff_splitting": {
                                     "x-optimade-type": "list",
@@ -3364,7 +3921,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                         "string",
                                                                         "null"
                                                                     ],
-                                                                    "description": "A fraction represented as a string.",
+                                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                     "examples": [
                                                                         "2/3",
                                                                         "5/42",
@@ -3498,7 +4055,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                             "string",
                                                                             "null"
                                                                         ],
-                                                                        "description": "A fraction represented as a string.",
+                                                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                         "examples": [
                                                                             "2/3",
                                                                             "5/42",
@@ -3532,7 +4089,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                     "string",
                                                                     "null"
                                                                 ],
-                                                                "description": "A fraction represented as a string.",
+                                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                 "examples": [
                                                                     "2/3",
                                                                     "5/42",
@@ -3573,9 +4130,111 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             "0",
                                             "0",
                                             "0"
-                                        ]
+                                        ],
+                                        "xyz": "x,y,2z",
+                                        "det": 2,
+                                        "is_orthogonal": false
                                     },
-                                    "index": 2
+                                    "index": 2,
+                                    "subgroup_type": "k",
+                                    "k_subtype": "enlarged_unit_cell",
+                                    "wyckoff_splitting": [
+                                        {
+                                            "parent": "a",
+                                            "splits": [
+                                                {
+                                                    "letter": "a",
+                                                    "xyz": "x,y,z",
+                                                    "affine": [
+                                                        [
+                                                            "1",
+                                                            "0",
+                                                            "0",
+                                                            "0"
+                                                        ],
+                                                        [
+                                                            "0",
+                                                            "1",
+                                                            "0",
+                                                            "0"
+                                                        ],
+                                                        [
+                                                            "0",
+                                                            "0",
+                                                            "1",
+                                                            "0"
+                                                        ]
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "criteria": [
+                                        {
+                                            "parent": "a",
+                                            "constraints": [
+                                                {
+                                                    "roles": [
+                                                        {
+                                                            "letter": "a",
+                                                            "index": 0
+                                                        }
+                                                    ],
+                                                    "coeffs": [
+                                                        [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    ],
+                                                    "target": [
+                                                        "0"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "-1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "-1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "-1"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ],
+                                        "xyz": "-x,-y,-z",
+                                        "det": -1,
+                                        "is_orthogonal": true
+                                    },
+                                    "compatible_systems": [
+                                        "triclinic",
+                                        "monoclinic",
+                                        "orthorhombic",
+                                        "tetragonal",
+                                        "trigonal",
+                                        "hexagonal",
+                                        "cubic"
+                                    ],
+                                    "operation_kind": "affine"
                                 }
                             ]
                         }
@@ -3642,7 +4301,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
             "affine_normalizer": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/affine_normalizer",
                 "title": "Affine normalizer",
-                "$comment": "Anyterial bounded affine normalizer coset representatives for one space-group setting.",
                 "x-optimade-type": "dictionary",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -3656,7 +4314,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     "object",
                     "null"
                 ],
-                "description": "Affine normalizer coset representatives for one crystallographic space-group setting.\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
+                "description": "Affine normalizer coset representatives for one crystallographic space-group setting.\n\nThe representatives are listed modulo the space group itself, so each listed operation represents an equivalence class of affine normalizer operations rather than every operation in that class.\nThis property contains representatives generated from bounded unimodular integer linear parts. It is a finite bounded representative table, not a complete infinite affine normalizer.\n\nThe `candidate_set` field belongs in this property because the listed representatives are produced from a deliberately restricted finite candidate set.\nFor this property `candidate_set` is `bounded_unimodular_integer_matrices`, meaning unimodular 3 by 3 integer matrices satisfying the recorded `bounds`.\nThe plural field `candidate_sets` is not part of the emitted data and MUST NOT be used here.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **normalizer\\_kind**: REQUIRED; String.\n      Kind label for this normalizer contribution.\n\n    - **representation**: REQUIRED; String.\n      Representation label for the listed data.\n\n    - **candidate\\_set**: REQUIRED; String.\n      Name of the finite linear candidate set used for generation.\n\n    - **n\\_symops**: REQUIRED; Integer.\n      Number of listed coset representatives after metric-compatibility filtering.\n\n    - **n\\_linear\\_parts**: REQUIRED; Integer.\n      Number of distinct linear matrix parts represented in `symops`.\n\n    - **n\\_raw\\_candidates**: REQUIRED; Integer.\n      Number of affine candidates found before deduplication modulo the space group.\n\n    - **n\\_unique\\_candidates**: REQUIRED; Integer.\n      Number of unique affine candidates before quotienting by the space group.\n\n    - **n\\_coset\\_representatives**: REQUIRED; Integer.\n      Number of non-trivial coset representatives before metric-compatibility filtering.\n\n    - **bounds**: REQUIRED; Dictionary.\n      Simple numerical bounds defining the bounded unimodular integer candidate matrices.\n\n    - **symops**: REQUIRED; List of dictionaries.\n      Listed affine normalizer coset representatives.\n      Each item follows `/defs/v0.1/properties/symmetry/basis_transform`.",
                 "properties": {
                     "normalizer_kind": {
                         "x-optimade-type": "string",
@@ -3687,8 +4345,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     },
                     "n_symops": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/n_symops",
-                        "title": "N Symops",
-                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
+                        "title": "number of symops",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -3711,7 +4368,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                     "n_linear_parts": {
                         "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/n_linear_parts",
                         "title": "N Linear Parts",
-                        "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                         "x-optimade-type": "integer",
                         "x-optimade-definition": {
                             "kind": "property",
@@ -3798,7 +4454,6 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                         "items": {
                             "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/basis_transform",
                             "title": "Basis transformation",
-                            "$comment": "Reusable Anyterial definition for one crystallographic basis, setting, cell, or embedding transform.",
                             "x-optimade-type": "dictionary",
                             "x-optimade-definition": {
                                 "kind": "property",
@@ -3812,12 +4467,11 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                 "object",
                                 "null"
                             ],
-                            "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\nThe affine map itself is stored in the embedded `affine_transformation` field.\nParent tables use this object for Hall-to-standard transforms, B\u00e4rnighausen subgroup transforms, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform.\n      It MUST follow `/defs/v0.1/properties/symmetry/affine_transformation`.\n\n    - **index**: OPTIONAL; Integer.\n      Subgroup index, same-setting transform index, or cell-index metadata whose interpretation is defined by the parent table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Generator classification of the transform or representative.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.",
+                            "description": "One crystallographic transform between coordinate descriptions, settings, cells, or related group embeddings.\n\nThe affine map itself is stored in the embedded `affine_transformation` field.\nThe parent property defines the source and target coordinate systems and the precise role of the transform.\nUseful, for example, for representing setting changes, subgroup embeddings, isomorphic subgroup transforms, normalizer representatives, and same-space-group affine images.\nThis property is not limited to symmetry operations within one fixed setting; the matrix may be non-orthogonal or have determinant different from one when the transform changes cell or basis.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **affine\\_transformation**: REQUIRED; Dictionary.\n      Exact affine map for the transform, using exact rational matrix and vector entries.\n      The coordinate convention and source/target interpretation are supplied by the parent property.\n\n    - **index**: OPTIONAL; Integer or null.\n      Index metadata whose interpretation is defined by the parent property.\n      Common uses include the subgroup index for subgroup embeddings, the cell index for isomorphic subgroup transforms, or an ordinal representative index in a finite transform table.\n\n    - **subgroup\\_type**: OPTIONAL; String.\n      International Tables subgroup-type label when the transform describes a maximal subgroup embedding.\n      The value MUST be `t` for a translationengleiche subgroup or `k` for a klassengleiche subgroup.\n      It MUST be omitted when the transform is not a maximal subgroup embedding.\n\n    - **k\\_subtype**: OPTIONAL; String or null.\n      Klassengleiche subtype when the transform describes a klassengleiche subgroup relation.\n      The value MUST be `loss_of_centering_translation` or `enlarged_unit_cell` for klassengleiche relations and null or omitted otherwise.\n\n    - **compatible\\_systems**: OPTIONAL; List of strings.\n      Crystal metric systems for which the transform is compatible.\n      This is used for bounded affine normalizer representatives.\n\n    - **operation\\_kind**: OPTIONAL; String.\n      Categorical label for normalizer-type representatives.\n      The value MUST be `euclidean` for Euclidean normalizer operations, `orthogonal_affine` for the signed-permutation affine normalizer subset, or `affine` for the bounded unimodular affine normalizer table.\n      It MUST be omitted when the transform is a setting transform, subgroup embedding, or other transform for which no normalizer operation class applies.\n\n    - **wyckoff\\_splitting**: OPTIONAL; List.\n      Wyckoff-position splitting metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.\n\n    - **criteria**: OPTIONAL; List.\n      Backward-lift constraint metadata induced by the transform when available.\n      The list is grouped by explicit parent Wyckoff letter.",
                             "properties": {
                                 "affine_transformation": {
                                     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/affine_transformation",
                                     "title": "Affine transformation",
-                                    "$comment": "Reusable Anyterial definition for the pure affine-map part of crystallographic transformation records.",
                                     "x-optimade-type": "dictionary",
                                     "x-optimade-definition": {
                                         "kind": "property",
@@ -3831,7 +4485,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                         "object",
                                         "null"
                                     ],
-                                    "description": "One exact affine transformation acting on fractional crystallographic coordinates.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nParent properties define the coordinate convention and semantic role of the transformation, for example whether it is an operation within one setting, a setting transform, a subgroup embedding, or a normalizer representative.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
+                                    "description": "An affine transformation acting on fractional crystallographic coordinates.\n\nAn affine transformation is a geometric transformation preserving points, straight lines, and parallelism (collinearity), but may not preserve Euclidean distances and angles.\nThe transformation is represented by a 3 by 3 matrix and a 3-vector, both serialized with exact string entries.\nThe transformation may, for example, represent an operation within one setting, a setting transform, a subgroup embedding, a normalizer representative, or a parametric coordinate map for a Wyckoff-position orbit representative.\nWhen used as a parametric coordinate map, the matrix may be singular because special Wyckoff positions can constrain or identify parameters.\n\n**Requirements/Conventions**:\n\n- It MUST be a dictionary with the following keys:\n\n    - **matrix**: REQUIRED; Exact 3x3 matrix.\n      Matrix part of the affine transformation.\n      It MUST be represented as a list of three row lists, each containing three exact rational entries represented as strings.\n\n    - **vector**: REQUIRED; List of 3 Fractions (String).\n      Translation or origin-shift vector of the affine transformation in fractional coordinates.\n\n    - **xyz**: OPTIONAL; String.\n      Coordinate expression for the affine transformation in `x,y,z` notation when available.\n\n    - **det**: OPTIONAL; Integer.\n      Determinant of `matrix` when the generator emits it.\n\n    - **is\\_orthogonal**: OPTIONAL; Boolean.\n      Whether `matrix` is orthogonal in the exact representation used by the generator.",
                                     "properties": {
                                         "matrix": {
                                             "x-optimade-type": "list",
@@ -3881,7 +4535,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                         "string",
                                                         "null"
                                                     ],
-                                                    "description": "A fraction represented as a string.",
+                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                     "examples": [
                                                         "2/3",
                                                         "5/42",
@@ -3923,7 +4577,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                     "string",
                                                     "null"
                                                 ],
-                                                "description": "A fraction represented as a string.",
+                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                 "examples": [
                                                     "2/3",
                                                     "5/42",
@@ -3934,13 +4588,31 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             }
                                         },
                                         "xyz": {
+                                            "$id": "https://schemas.anyterial.se/defs/v0.1/properties/symmetry/op_xyz",
+                                            "title": "Operation xyz",
                                             "x-optimade-type": "string",
+                                            "x-compatibility": [
+                                                "https://schemas.optimade.org/defs/v1.2/properties/optimade/common/symmetry_operation_xyz",
+                                                "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html"
+                                            ],
+                                            "x-optimade-definition": {
+                                                "kind": "property",
+                                                "version": "0.1.0",
+                                                "format": "1.3",
+                                                "name": "op_xyz",
+                                                "label": "op_xyz_symmetry"
+                                            },
                                             "x-optimade-unit": "inapplicable",
                                             "type": [
                                                 "string",
                                                 "null"
                                             ],
-                                            "description": "Coordinate expression for the affine transformation in `x,y,z` notation."
+                                            "description": "Coordinate operation expressed in the algebraic xyz form, also known as Jones' faithful representation (Bradley & Cracknell, 1972: pp. 35-37; adapted for computer strings).\n\nThe following definition is adapted from (and meant to be compatible with) the IUCr symCIF version 1.0.1 dictionary definition of `_space_group_symop.operation_xyz` referenced to: International Tables for Crystallography (2002). Volume A, Space-group symmetry, edited by Th. Hahn, 5th. ed. (Kluwer Academic Publishers).\nIt is available at: https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group_symop.operation_xyz.html\n\nIf W is a matrix representation of the rotational part of the symmetry operation defined by the positions and signs of x, y and z, and w is a column of translations defined by the fractions, an equivalent position X' is generated from a given position X by the equation: X' = WX + w.",
+                                            "x-undef-pattern": "^([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?),([-+]?[xyz]([-+][xyz])?([-+](1/2|[12]/3|[1-3]/4|[1-5]/6))?|[-+]?(1/2|[12]/3|[1-3]/4|[1-5]/6)([-+][xyz]([-+][xyz])?)?)$",
+                                            "examples": [
+                                                "-x,-y,z",
+                                                "x,1/2-y,1/2+z"
+                                            ]
                                         },
                                         "det": {
                                             "x-optimade-type": "integer",
@@ -4004,10 +4676,13 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                     "x-optimade-type": "string",
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
-                                        "string",
-                                        "null"
+                                        "string"
                                     ],
-                                    "description": "International Tables subgroup-type label when applicable."
+                                    "description": "International Tables subgroup-type label when applicable.",
+                                    "enum": [
+                                        "t",
+                                        "k"
+                                    ]
                                 },
                                 "k_subtype": {
                                     "x-optimade-type": "string",
@@ -4032,17 +4707,30 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                         "type": [
                                             "string"
                                         ],
-                                        "description": "One compatible crystal-system label."
+                                        "description": "One compatible crystal-system label.",
+                                        "enum": [
+                                            "triclinic",
+                                            "monoclinic",
+                                            "orthorhombic",
+                                            "tetragonal",
+                                            "trigonal",
+                                            "hexagonal",
+                                            "cubic"
+                                        ]
                                     }
                                 },
                                 "operation_kind": {
                                     "x-optimade-type": "string",
                                     "x-optimade-unit": "inapplicable",
                                     "type": [
-                                        "string",
-                                        "null"
+                                        "string"
                                     ],
-                                    "description": "Generator classification of the transform or representative."
+                                    "description": "Categorical label for normalizer-type representatives.",
+                                    "enum": [
+                                        "euclidean",
+                                        "orthogonal_affine",
+                                        "affine"
+                                    ]
                                 },
                                 "wyckoff_splitting": {
                                     "x-optimade-type": "list",
@@ -4137,7 +4825,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                         "string",
                                                                         "null"
                                                                     ],
-                                                                    "description": "A fraction represented as a string.",
+                                                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                     "examples": [
                                                                         "2/3",
                                                                         "5/42",
@@ -4271,7 +4959,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                             "string",
                                                                             "null"
                                                                         ],
-                                                                        "description": "A fraction represented as a string.",
+                                                                        "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                         "examples": [
                                                                             "2/3",
                                                                             "5/42",
@@ -4305,7 +4993,7 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                                                     "string",
                                                                     "null"
                                                                 ],
-                                                                "description": "A fraction represented as a string.",
+                                                                "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                                                 "examples": [
                                                                     "2/3",
                                                                     "5/42",
@@ -4346,9 +5034,111 @@ This representation avoids using IT numbers as JSON dictionary keys in the OPTIM
                                             "0",
                                             "0",
                                             "0"
-                                        ]
+                                        ],
+                                        "xyz": "x,y,2z",
+                                        "det": 2,
+                                        "is_orthogonal": false
                                     },
-                                    "index": 2
+                                    "index": 2,
+                                    "subgroup_type": "k",
+                                    "k_subtype": "enlarged_unit_cell",
+                                    "wyckoff_splitting": [
+                                        {
+                                            "parent": "a",
+                                            "splits": [
+                                                {
+                                                    "letter": "a",
+                                                    "xyz": "x,y,z",
+                                                    "affine": [
+                                                        [
+                                                            "1",
+                                                            "0",
+                                                            "0",
+                                                            "0"
+                                                        ],
+                                                        [
+                                                            "0",
+                                                            "1",
+                                                            "0",
+                                                            "0"
+                                                        ],
+                                                        [
+                                                            "0",
+                                                            "0",
+                                                            "1",
+                                                            "0"
+                                                        ]
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "criteria": [
+                                        {
+                                            "parent": "a",
+                                            "constraints": [
+                                                {
+                                                    "roles": [
+                                                        {
+                                                            "letter": "a",
+                                                            "index": 0
+                                                        }
+                                                    ],
+                                                    "coeffs": [
+                                                        [
+                                                            [
+                                                                "1",
+                                                                "0",
+                                                                "0"
+                                                            ]
+                                                        ]
+                                                    ],
+                                                    "target": [
+                                                        "0"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "affine_transformation": {
+                                        "matrix": [
+                                            [
+                                                "-1",
+                                                "0",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "-1",
+                                                "0"
+                                            ],
+                                            [
+                                                "0",
+                                                "0",
+                                                "-1"
+                                            ]
+                                        ],
+                                        "vector": [
+                                            "0",
+                                            "0",
+                                            "0"
+                                        ],
+                                        "xyz": "-x,-y,-z",
+                                        "det": -1,
+                                        "is_orthogonal": true
+                                    },
+                                    "compatible_systems": [
+                                        "triclinic",
+                                        "monoclinic",
+                                        "orthorhombic",
+                                        "tetragonal",
+                                        "trigonal",
+                                        "hexagonal",
+                                        "cubic"
+                                    ],
+                                    "operation_kind": "affine"
                                 }
                             ]
                         }

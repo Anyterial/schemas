@@ -6,9 +6,10 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `spacegroup_symbols`
 
 **Property name:** Space-group symbols  
-**Description:** Ordered table of conventional space-group symbol rows.
-Each row describes one Hall setting where the International Tables symbol data is available, including the IT coordinate-system code, Hall symbol, IT number, and Hermann-Mauguin symbols.  
+**Description:** Ordered table of conventional space-group symbol rows.  
 **Type:** list  
+
+Each row describes one Hall setting where the International Tables symbol data is available, including the IT coordinate-system code, Hall symbol, IT number, and Hermann-Mauguin symbols.
 
 **Requirements/Conventions**:
 
@@ -29,7 +30,6 @@ Each row describes one Hall setting where the International Tables symbol data i
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/spacegroup_symbols",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Space-group symbols",
-    "$comment": "Ordered Anyterial table of conventional space-group symbols.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -43,7 +43,7 @@ Each row describes one Hall setting where the International Tables symbol data i
         "array",
         "null"
     ],
-    "description": "Ordered table of conventional space-group symbol rows.\nEach row describes one Hall setting where the International Tables symbol data is available, including the IT coordinate-system code, Hall symbol, IT number, and Hermann-Mauguin symbols.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary SHOULD contain the setting identifier `setting_it_nc`, the Hall symbol `hall`, the International Tables number `it_number`, and the setting-specific Hermann-Mauguin symbols `hm_short`, `hm_full`, and `hm_extended` when available.\n- The order SHOULD follow the conventional ITA/Hall setting order used by the generated `symmetry_basics` space-group table.",
+    "description": "Ordered table of conventional space-group symbol rows.\n\nEach row describes one Hall setting where the International Tables symbol data is available, including the IT coordinate-system code, Hall symbol, IT number, and Hermann-Mauguin symbols.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary SHOULD contain the setting identifier `setting_it_nc`, the Hall symbol `hall`, the International Tables number `it_number`, and the setting-specific Hermann-Mauguin symbols `hm_short`, `hm_full`, and `hm_extended` when available.\n- The order SHOULD follow the conventional ITA/Hall setting order used by the generated `symmetry_basics` space-group table.",
     "items": {
         "x-optimade-type": "dictionary",
         "x-optimade-unit": "inapplicable",
@@ -56,7 +56,6 @@ Each row describes one Hall setting where the International Tables symbol data i
             "setting_it_nc": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc",
                 "title": "International Tables setting code n:c",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -69,7 +68,7 @@ Each row describes one Hall setting where the International Tables symbol data i
                     "string",
                     "null"
                 ],
-                "description": "International Tables setting identifier in `n:c` notation.\n\nThe part before the colon is the International Tables space-group number. The part after the colon is the coordinate-system or origin-choice qualifier used to distinguish settings that share the same IT number.\n\n**Requirements/Conventions**:\n\n- Triclinic, hexagonal, and many unique settings use only the IT number, for example `1`.\n- Monoclinic settings use qualifiers such as `b1`, `-b1`, `c2`, or `a3`.\n- Orthorhombic settings use qualifiers such as `abc`, `cab`, `1abc`, or `2bca` when needed.\n- Tetragonal and cubic origin choices use qualifiers such as `1` and `2`; trigonal axis choices use qualifiers such as `h` and `r`.",
+                "description": "International Tables setting identifier in `n:c` notation.\n\nThe part before the colon is the International Tables space-group number.\nThe part after the colon is the coordinate-system or origin-choice qualifier used to distinguish settings that share the same IT number.\n\n**Requirements/Conventions**:\n\n- Triclinic, hexagonal, and many unique settings use only the IT number, for example `1`.\n- Monoclinic settings use qualifiers such as `b1`, `-b1`, `c2`, or `a3`.\n- Orthorhombic settings use qualifiers such as `abc`, `cab`, `1abc`, or `2bca` when needed.\n- Tetragonal and cubic origin choices use qualifiers such as `1` and `2`; trigonal axis choices use qualifiers such as `h` and `r`.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "1",
@@ -79,7 +78,6 @@ Each row describes one Hall setting where the International Tables symbol data i
             "hall_entry": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_entry",
                 "title": "Hall entry",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -102,7 +100,6 @@ Each row describes one Hall setting where the International Tables symbol data i
             "hall": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall",
                 "title": "Hall Symbol",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hall"
@@ -118,7 +115,7 @@ Each row describes one Hall setting where the International Tables symbol data i
                     "string",
                     "null"
                 ],
-                "description": "The Hall symbol for a crystallographic space-group setting.\n\nHall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously. In the Anyterial symmetry data, this property is the plain ASCII Hall symbol corresponding to the Hall-keyed record.",
+                "description": "The Hall symbol for a crystallographic space-group setting.\n\nHall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "P 1",
@@ -128,7 +125,6 @@ Each row describes one Hall setting where the International Tables symbol data i
             "it_number": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/it_number",
                 "title": "International Tables Space-Group Number",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "integer",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_it_number"
@@ -154,7 +150,6 @@ Each row describes one Hall setting where the International Tables symbol data i
             "hm_short": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short",
                 "title": "Short Hermann-Mauguin Symbol",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin"
@@ -170,7 +165,7 @@ Each row describes one Hall setting where the International Tables symbol data i
                     "string",
                     "null"
                 ],
-                "description": "The setting-specific short Hermann-Mauguin symbol for the space-group setting.\n\nThis field gives the concise Hermann-Mauguin notation used for the concrete Hall setting represented by the containing record. It is compatible with OPTIMADE's `space_group_symbol_hermann_mauguin` when used as the conventional short Hermann-Mauguin symbol.",
+                "description": "The setting-specific short Hermann-Mauguin symbol for the space-group setting.\n\nThis field gives the concise Hermann-Mauguin notation used for the concrete Hall setting represented by the containing record.\nIt is compatible with OPTIMADE's `space_group_symbol_hermann_mauguin`.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "P 1",
@@ -180,7 +175,6 @@ Each row describes one Hall setting where the International Tables symbol data i
             "hm_full": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full",
                 "title": "Full Hermann-Mauguin Symbol",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.name_H-M_full.html"
@@ -206,7 +200,6 @@ Each row describes one Hall setting where the International Tables symbol data i
             "hm_extended": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended",
                 "title": "Extended Hermann-Mauguin Symbol",
-                "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
                 "x-optimade-type": "string",
                 "x-compatibility": [
                     "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin_extended"
@@ -222,7 +215,7 @@ Each row describes one Hall setting where the International Tables symbol data i
                     "string",
                     "null"
                 ],
-                "description": "The setting-specific extended Hermann-Mauguin symbol for the space-group setting.\n\nExtended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol. Multi-line values preserve line breaks and spacing used to align the extended symbol components.",
+                "description": "The setting-specific extended Hermann-Mauguin symbol for the space-group setting.\n\nExtended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol.\nMulti-line values preserve line breaks and spacing used to align the extended symbol components.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "P 1",
@@ -232,7 +225,6 @@ Each row describes one Hall setting where the International Tables symbol data i
             "hm_extended_old": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended_old",
                 "title": "Hermann-Mauguin Extended Old",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -255,7 +247,6 @@ Each row describes one Hall setting where the International Tables symbol data i
             "hm_short_old": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_old",
                 "title": "Hermann-Mauguin Short Old",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -268,7 +259,7 @@ Each row describes one Hall setting where the International Tables symbol data i
                     "string",
                     "null"
                 ],
-                "description": "The older short Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- The extended symbol MAY contain multiple lines; line breaks and spacing encode the alignment used in International Tables extended symbols.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
+                "description": "The older short Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols.\nThe setting-specific fields describe the concrete Hall/International Tables setting of the current record.\nThe `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "A b m 2",
@@ -278,7 +269,6 @@ Each row describes one Hall setting where the International Tables symbol data i
             "hm_full_old": {
                 "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_full_old",
                 "title": "Hermann-Mauguin Full Old",
-                "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
                 "x-optimade-type": "string",
                 "x-optimade-definition": {
                     "kind": "property",
@@ -291,7 +281,7 @@ Each row describes one Hall setting where the International Tables symbol data i
                     "string",
                     "null"
                 ],
-                "description": "The older full Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- The extended symbol MAY contain multiple lines; line breaks and spacing encode the alignment used in International Tables extended symbols.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
+                "description": "The older full Hermann-Mauguin symbol retained as an alias for symbols superseded by newer `e`-glide notation.\n\nHermann-Mauguin symbols describe crystallographic space groups using lattice-centering symbols and symmetry-element symbols. The setting-specific fields describe the concrete Hall/International Tables setting of the current record. The `*_std` fields describe the IT-standard setting for the space-group type and can therefore be identical across multiple settings with the same IT number.\n\n**Requirements/Conventions**:\n\n- The plain string form uses spaces between symbol parts where this is needed for unambiguous parsing.\n- Older-symbol fields are present only where an older International Tables form is retained for comparison or aliasing.",
                 "x-optimade-unit": "inapplicable",
                 "examples": [
                     "A b m 2",

@@ -2,7 +2,6 @@
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall_markup",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Hall symbol markups",
-    "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
     "x-optimade-definition": {
         "kind": "property",
         "version": "0.1.0",
@@ -10,7 +9,7 @@
         "name": "hall_markup",
         "label": "hall_markup_spacegroups"
     },
-    "description": "Display-oriented renderings of the Hall symbol in `hall`.\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
+    "description": "Display-oriented renderings of the Hall symbol in `hall`.\n\nThe plain string value is stored in the corresponding unsuffixed property; this object only provides alternate markup forms for display.",
     "x-optimade-type": "dictionary",
     "x-optimade-unit": "inapplicable",
     "type": [

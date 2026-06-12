@@ -6,10 +6,10 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `setting_it_nc_aliases`
 
 **Property name:** International Tables setting-code aliases  
-**Description:** Alternative International Tables `n:c` setting identifiers that refer to the same Hall setting or are otherwise treated as aliases of `setting_it_nc` by the generator. This field is used only when the source tables expose more than one conventional label for the same generated setting.  
+**Description:** A list of International Tables `n:c` setting identifiers that are alternatives to the one designated as the main one.  
 **Type:** list  
 
-
+This field is used only when the source tables expose more than one conventional label for the same setting.
 
 **Examples:**
 
@@ -25,7 +25,6 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc_aliases",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "International Tables setting-code aliases",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -38,7 +37,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "array",
         "null"
     ],
-    "description": "Alternative International Tables `n:c` setting identifiers that refer to the same Hall setting or are otherwise treated as aliases of `setting_it_nc` by the generator. This field is used only when the source tables expose more than one conventional label for the same generated setting.",
+    "description": "A list of International Tables `n:c` setting identifiers that are alternatives to the one designated as the main one.\n\nThis field is used only when the source tables expose more than one conventional label for the same setting.",
     "x-optimade-unit": "inapplicable",
     "items": {
         "x-optimade-type": "string",

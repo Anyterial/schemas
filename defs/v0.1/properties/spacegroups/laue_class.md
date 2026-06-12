@@ -25,7 +25,6 @@ The Laue class groups point groups that become equivalent when inversion symmetr
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/laue_class",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Laue Class",
-    "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://www.iucr.org/__data/iucr/cifdic_html/2/cif_sym.dic/Ispace_group.Laue_class.html"

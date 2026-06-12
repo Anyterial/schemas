@@ -6,7 +6,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `fraction`
 
 **Property name:** fraction  
-**Description:** A fraction represented as a string.  
+**Description:** A numerical representation formed as the quotient of two numbers represented as a string.  
 **Type:** string  
 
 
@@ -39,7 +39,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "string",
         "null"
     ],
-    "description": "A fraction represented as a string.",
+    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
     "examples": [
         "2/3",
         "5/42",

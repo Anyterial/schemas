@@ -25,7 +25,6 @@ This field expands `setting_it_nc` into a short phrase such as a monoclinic uniq
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_plaintext",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Setting Plaintext",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",

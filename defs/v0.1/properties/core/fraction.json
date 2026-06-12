@@ -14,7 +14,7 @@
         "string",
         "null"
     ],
-    "description": "A fraction represented as a string.",
+    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
     "examples": [
         "2/3",
         "5/42",

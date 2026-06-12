@@ -6,10 +6,11 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `wyckoff_splitting`
 
 **Property name:** Wyckoff splitting  
-**Description:** Wyckoff-position splitting data associated with a subgroup or same-space-group transform.
-Each list item gives the split of one parent Wyckoff position.
-The parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.  
+**Description:** Wyckoff-position splitting data associated with a subgroup or same-space-group transform.  
 **Type:** list  
+
+Each list item gives the split of one parent Wyckoff position.
+The parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.
 
 **Requirements/Conventions**:
 
@@ -30,7 +31,6 @@ The parent Wyckoff letter is stored in the `parent` field rather than as a JSON 
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/transformations/wyckoff_splitting",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Wyckoff splitting",
-    "$comment": "Anyterial property definition for Wyckoff-position splitting data attached to transforms.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -44,7 +44,7 @@ The parent Wyckoff letter is stored in the `parent` field rather than as a JSON 
         "array",
         "null"
     ],
-    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
+    "description": "Wyckoff-position splitting data associated with a subgroup or same-space-group transform.\n\nEach list item gives the split of one parent Wyckoff position.\nThe parent Wyckoff letter is stored in the `parent` field rather than as a JSON dictionary key.\n\n**Requirements/Conventions**:\n\n- It MUST be a list of dictionaries.\n- Each dictionary MUST contain `parent`, the Wyckoff letter in the parent setting.\n- Each dictionary MUST contain `splits`, an ordered list of subgroup Wyckoff-position assignments or coordinate expressions emitted by the generator.",
     "items": {
         "x-optimade-type": "dictionary",
         "x-optimade-unit": "inapplicable",
@@ -130,7 +130,7 @@ The parent Wyckoff letter is stored in the `parent` field rather than as a JSON 
                                         "string",
                                         "null"
                                     ],
-                                    "description": "A fraction represented as a string.",
+                                    "description": "A numerical representation formed as the quotient of two numbers represented as a string.",
                                     "examples": [
                                         "2/3",
                                         "5/42",

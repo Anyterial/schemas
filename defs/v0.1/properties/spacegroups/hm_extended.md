@@ -9,7 +9,8 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Description:** The setting-specific extended Hermann-Mauguin symbol for the space-group setting.  
 **Type:** string  
 
-Extended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol. Multi-line values preserve line breaks and spacing used to align the extended symbol components.
+Extended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol.
+Multi-line values preserve line breaks and spacing used to align the extended symbol components.
 
 **Examples:**
 
@@ -25,7 +26,6 @@ Extended Hermann-Mauguin symbols give additional symmetry-element information co
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_extended",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Extended Hermann-Mauguin Symbol",
-    "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hermann_mauguin_extended"
@@ -41,7 +41,7 @@ Extended Hermann-Mauguin symbols give additional symmetry-element information co
         "string",
         "null"
     ],
-    "description": "The setting-specific extended Hermann-Mauguin symbol for the space-group setting.\n\nExtended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol. Multi-line values preserve line breaks and spacing used to align the extended symbol components.",
+    "description": "The setting-specific extended Hermann-Mauguin symbol for the space-group setting.\n\nExtended Hermann-Mauguin symbols give additional symmetry-element information compared with the short symbol.\nMulti-line values preserve line breaks and spacing used to align the extended symbol components.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         "P 1",

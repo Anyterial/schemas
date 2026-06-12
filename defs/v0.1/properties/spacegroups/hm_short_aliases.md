@@ -6,10 +6,10 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `hm_short_aliases`
 
 **Property name:** Hermann-Mauguin Short Aliases  
-**Description:** Alternate ASCII forms of `hm_short` that are accepted for the same generated setting. The preferred symbol is stored in `hm_short`.  
+**Description:** Alternate ASCII forms of `hm_short` that are accepted for the same generated setting.  
 **Type:** list  
 
-
+The preferred symbol is stored in `hm_short`.
 
 **Examples:**
 
@@ -25,7 +25,6 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_short_aliases",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Hermann-Mauguin Short Aliases",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -38,7 +37,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "array",
         "null"
     ],
-    "description": "Alternate ASCII forms of `hm_short` that are accepted for the same generated setting. The preferred symbol is stored in `hm_short`.",
+    "description": "Alternate ASCII forms of `hm_short` that are accepted for the same generated setting.\n\nThe preferred symbol is stored in `hm_short`.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         [

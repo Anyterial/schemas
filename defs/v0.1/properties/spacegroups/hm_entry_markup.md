@@ -6,12 +6,11 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `hm_entry_markup`
 
 **Property name:** Hermann-Mauguin entry markups  
-**Description:** Display-oriented renderings of the Hermann-Mauguin entry label in `hm_entry`.
-The plain string value is stored in `hm_entry`; this object only provides alternate markup forms for display.
-These renderings follow the same typographic conventions as `hm_full_markup`.  
+**Description:** Display-oriented renderings of the Hermann-Mauguin entry label in `hm_entry`.  
 **Type:** dictionary  
 
-
+The plain string value is stored in `hm_entry`; this object only provides alternate markup forms for display.
+These renderings follow the same typographic conventions as `hm_full_markup`.
 
 **Examples:**
 
@@ -26,7 +25,6 @@ These renderings follow the same typographic conventions as `hm_full_markup`.
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hm_entry_markup",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Hermann-Mauguin entry markups",
-    "$comment": "Anyterial symmetry property definition inheriting the common string markup object.",
     "x-optimade-definition": {
         "kind": "property",
         "version": "0.1.0",
@@ -34,7 +32,7 @@ These renderings follow the same typographic conventions as `hm_full_markup`.
         "name": "hm_entry_markup",
         "label": "hm_entry_markup_spacegroups"
     },
-    "description": "Display-oriented renderings of the Hermann-Mauguin entry label in `hm_entry`.\nThe plain string value is stored in `hm_entry`; this object only provides alternate markup forms for display.\nThese renderings follow the same typographic conventions as `hm_full_markup`.",
+    "description": "Display-oriented renderings of the Hermann-Mauguin entry label in `hm_entry`.\n\nThe plain string value is stored in `hm_entry`; this object only provides alternate markup forms for display.\nThese renderings follow the same typographic conventions as `hm_full_markup`.",
     "x-optimade-type": "dictionary",
     "x-optimade-unit": "inapplicable",
     "type": [

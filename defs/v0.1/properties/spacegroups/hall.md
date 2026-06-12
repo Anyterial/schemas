@@ -9,7 +9,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Description:** The Hall symbol for a crystallographic space-group setting.  
 **Type:** string  
 
-Hall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously. In the Anyterial symmetry data, this property is the plain ASCII Hall symbol corresponding to the Hall-keyed record.
+Hall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously.
 
 **Examples:**
 
@@ -25,7 +25,6 @@ Hall symbols encode the generators and origin choice of a space-group setting in
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/hall",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Hall Symbol",
-    "$comment": "Anyterial symmetry property definition with compatible external crystallographic definition IRIs.",
     "x-optimade-type": "string",
     "x-compatibility": [
         "https://schemas.optimade.org/defs/v1.2/properties/optimade/structures/space_group_symbol_hall"
@@ -41,7 +40,7 @@ Hall symbols encode the generators and origin choice of a space-group setting in
         "string",
         "null"
     ],
-    "description": "The Hall symbol for a crystallographic space-group setting.\n\nHall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously. In the Anyterial symmetry data, this property is the plain ASCII Hall symbol corresponding to the Hall-keyed record.",
+    "description": "The Hall symbol for a crystallographic space-group setting.\n\nHall symbols encode the generators and origin choice of a space-group setting in a form intended to identify the setting unambiguously.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         "P 1",

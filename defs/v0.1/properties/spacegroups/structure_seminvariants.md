@@ -6,10 +6,15 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Definition name:** `structure_seminvariants`
 
 **Property name:** Structure Seminvariants  
-**Description:** Structure seminvariant vectors and moduli for the space-group setting. These characterize phase restrictions and FFT grid constraints associated with the symmetry.  
+**Description:** Structure seminvariant vectors and moduli for the space-group setting.  
 **Type:** list  
 
+These characterize phase restrictions and FFT grid constraints associated with the symmetry.
+They are on format of a list of dictionaries.
+The dictionaries MUST contain the fields:
 
+- vector: List of Integer. One structure-seminvariant condition vector.
+- modulus: Integer. Modulus for the seminvariant congruence.
 
 **Examples:**
 
@@ -25,7 +30,6 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/structure_seminvariants",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "Structure Seminvariants",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "list",
     "x-optimade-definition": {
         "kind": "property",
@@ -38,7 +42,7 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
         "array",
         "null"
     ],
-    "description": "Structure seminvariant vectors and moduli for the space-group setting. These characterize phase restrictions and FFT grid constraints associated with the symmetry.",
+    "description": "Structure seminvariant vectors and moduli for the space-group setting.\n\nThese characterize phase restrictions and FFT grid constraints associated with the symmetry.\nThey are on format of a list of dictionaries.\nThe dictionaries MUST contain the fields:\n\n- vector: List of Integer. One structure-seminvariant condition vector.\n- modulus: Integer. Modulus for the seminvariant congruence. ",
     "x-optimade-unit": "inapplicable",
     "items": {
         "x-optimade-type": "dictionary",

@@ -9,7 +9,8 @@ This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definitio
 **Description:** International Tables setting identifier in `n:c` notation.  
 **Type:** string  
 
-The part before the colon is the International Tables space-group number. The part after the colon is the coordinate-system or origin-choice qualifier used to distinguish settings that share the same IT number.
+The part before the colon is the International Tables space-group number.
+The part after the colon is the coordinate-system or origin-choice qualifier used to distinguish settings that share the same IT number.
 
 **Requirements/Conventions**:
 
@@ -32,7 +33,6 @@ The part before the colon is the International Tables space-group number. The pa
     "$id": "https://schemas.anyterial.se/defs/v0.1/properties/spacegroups/setting_it_nc",
     "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
     "title": "International Tables setting code n:c",
-    "$comment": "Generated from data-generators JSON-LD fields without external definition URLs.",
     "x-optimade-type": "string",
     "x-optimade-definition": {
         "kind": "property",
@@ -45,7 +45,7 @@ The part before the colon is the International Tables space-group number. The pa
         "string",
         "null"
     ],
-    "description": "International Tables setting identifier in `n:c` notation.\n\nThe part before the colon is the International Tables space-group number. The part after the colon is the coordinate-system or origin-choice qualifier used to distinguish settings that share the same IT number.\n\n**Requirements/Conventions**:\n\n- Triclinic, hexagonal, and many unique settings use only the IT number, for example `1`.\n- Monoclinic settings use qualifiers such as `b1`, `-b1`, `c2`, or `a3`.\n- Orthorhombic settings use qualifiers such as `abc`, `cab`, `1abc`, or `2bca` when needed.\n- Tetragonal and cubic origin choices use qualifiers such as `1` and `2`; trigonal axis choices use qualifiers such as `h` and `r`.",
+    "description": "International Tables setting identifier in `n:c` notation.\n\nThe part before the colon is the International Tables space-group number.\nThe part after the colon is the coordinate-system or origin-choice qualifier used to distinguish settings that share the same IT number.\n\n**Requirements/Conventions**:\n\n- Triclinic, hexagonal, and many unique settings use only the IT number, for example `1`.\n- Monoclinic settings use qualifiers such as `b1`, `-b1`, `c2`, or `a3`.\n- Orthorhombic settings use qualifiers such as `abc`, `cab`, `1abc`, or `2bca` when needed.\n- Tetragonal and cubic origin choices use qualifiers such as `1` and `2`; trigonal axis choices use qualifiers such as `h` and `r`.",
     "x-optimade-unit": "inapplicable",
     "examples": [
         "1",
