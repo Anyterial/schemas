@@ -1,0 +1,54 @@
+# Wave class (property)
+
+This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
+
+**ID: [`https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/wave_class`](https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/wave_class.md)**  
+**Definition name:** `wave_class`
+
+**Property name:** Wave class  
+**Description:** The simplified spin-momentum wave class of the altermagnetic order.  
+**Type:** string  
+
+The vocabulary contains `s`, `d`, and `g`, denoting the corresponding anisotropy of the spin-split Fermi surface, and `d/g`, denoting a class that is ambiguous between `d` and `g`.
+A null value means no wave class is available or recorded for this material.
+
+**Examples:**
+
+- `"d"`
+- `"g"`
+
+**Formats:** [[JSON](wave_class.json)] [[MD](wave_class.md)]
+
+**JSON definition:**
+
+``` json
+{
+    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/wave_class",
+    "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
+    "title": "Wave class",
+    "x-optimade-type": "string",
+    "x-optimade-definition": {
+        "kind": "property",
+        "version": "0.1.0",
+        "format": "1.3",
+        "name": "wave_class",
+        "label": "wave_class_altermagnets"
+    },
+    "x-optimade-unit": "inapplicable",
+    "type": [
+        "string",
+        "null"
+    ],
+    "description": "The simplified spin-momentum wave class of the altermagnetic order.\n\nThe vocabulary contains `s`, `d`, and `g`, denoting the corresponding anisotropy of the spin-split Fermi surface, and `d/g`, denoting a class that is ambiguous between `d` and `g`.\nA null value means no wave class is available or recorded for this material.",
+    "enum": [
+        "s",
+        "d",
+        "g",
+        "d/g"
+    ],
+    "examples": [
+        "d",
+        "g"
+    ]
+}
+```
