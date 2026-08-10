@@ -1,0 +1,160 @@
+# Material figures (property)
+
+This page documents an [OPTIMADE](https://www.optimade.org/) [Property Definition](https://schemas.optimade.org/#definitions). See [https://schemas.optimade.org/](https://schemas.optimade.org/) for more information.
+
+**ID: [`https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/figures`](https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/figures.md)**  
+**Definition name:** `figures`
+
+**Property name:** Material figures  
+**Description:** Data-only figure metadata for the fixed band-structure, crystal-structure, and Brillouin-zone figures of the material.  
+**Type:** list  
+**Implementation requirements:**  
+- **Support:** OPTIONAL support in implementations, i.e., MAY be `null`.  
+
+- **Query:** Support for queries on this property is OPTIONAL.  
+- **Response:**  
+
+URLs are absolute URLs on the serving OPTIMADE host; presentation text such as captions remains site-local and is not part of this property.
+
+**Requirements/Conventions**:
+
+- The list MUST contain exactly one item per figure key, in the fixed order `band`, `structure`, `bz`.
+
+- Each item MUST be a dictionary with the following keys:
+
+    - **key**: REQUIRED; String.
+      Identifies the figure: `band` is the electronic band structure, `structure` is the crystal structure, and `bz` is the Brillouin zone.
+
+    - **url**: OPTIONAL; String.
+      The absolute URL of the figure image on the serving OPTIMADE host.
+      It MUST be null when `available` is `false`.
+
+    - **dark\_url**: OPTIONAL; String.
+      The absolute URL of a dark-mode variant of the figure image.
+      It is null when no dark-mode variant is available.
+
+    - **media\_type**: OPTIONAL; String.
+      The media type of the image referenced by `url`, e.g. `image/svg+xml`.
+      It MUST be null when `available` is `false`.
+
+    - **available**: REQUIRED; Boolean.
+      States whether the figure exists and is servable; when `false` the URL and media-type members are null.
+
+A null value means no figure metadata is recorded for this material.
+
+**Examples:**
+
+- `[{"key": "band", "url": "https://optimade.example.org/figures/anyt:am-1-0001/band.svg", "dark_url": "https://optimade.example.org/figures/anyt:am-1-0001/dark--band.svg", "media_type": "image/svg+xml", "available": true}, {"key": "structure", "url": "https://optimade.example.org/figures/anyt:am-1-0001/structure.png", "media_type": "image/png", "available": true}, {"key": "bz", "available": false}]`
+
+**Formats:** [[JSON](figures.json)] [[MD](figures.md)]
+
+**JSON definition:**
+
+``` json
+{
+    "$id": "https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/figures",
+    "$schema": "https://schemas.optimade.org/meta/v1.3/optimade/property_definition.json",
+    "title": "Material figures",
+    "x-optimade-type": "list",
+    "x-optimade-definition": {
+        "kind": "property",
+        "version": "0.1.0",
+        "format": "1.3",
+        "name": "figures",
+        "label": "figures_altermagnets"
+    },
+    "x-optimade-unit": "inapplicable",
+    "x-optimade-requirements": {
+        "support": "may",
+        "query-support": "none",
+        "response-level": "should not"
+    },
+    "type": [
+        "array",
+        "null"
+    ],
+    "items": {
+        "x-optimade-type": "dictionary",
+        "x-optimade-unit": "inapplicable",
+        "type": [
+            "object"
+        ],
+        "required": [
+            "key",
+            "available"
+        ],
+        "properties": {
+            "key": {
+                "x-optimade-type": "string",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "string"
+                ],
+                "enum": [
+                    "band",
+                    "structure",
+                    "bz"
+                ],
+                "description": "Which of the three fixed figures the item describes."
+            },
+            "url": {
+                "x-optimade-type": "string",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Absolute URL of the figure image, or null when unavailable."
+            },
+            "dark_url": {
+                "x-optimade-type": "string",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Absolute URL of the dark-mode variant of the figure image, or null when none is available."
+            },
+            "media_type": {
+                "x-optimade-type": "string",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Media type of the figure image, or null when unavailable."
+            },
+            "available": {
+                "x-optimade-type": "boolean",
+                "x-optimade-unit": "inapplicable",
+                "type": [
+                    "boolean"
+                ],
+                "description": "Whether the figure can be fetched from the served URLs."
+            }
+        }
+    },
+    "description": "Data-only figure metadata for the fixed band-structure, crystal-structure, and Brillouin-zone figures of the material.\n\nURLs are absolute URLs on the serving OPTIMADE host; presentation text such as captions remains site-local and is not part of this property.\n\n**Requirements/Conventions**:\n\n- The list MUST contain exactly one item per figure key, in the fixed order `band`, `structure`, `bz`.\n\n- Each item MUST be a dictionary with the following keys:\n\n    - **key**: REQUIRED; String.\n      Identifies the figure: `band` is the electronic band structure, `structure` is the crystal structure, and `bz` is the Brillouin zone.\n\n    - **url**: OPTIONAL; String.\n      The absolute URL of the figure image on the serving OPTIMADE host.\n      It MUST be null when `available` is `false`.\n\n    - **dark\\_url**: OPTIONAL; String.\n      The absolute URL of a dark-mode variant of the figure image.\n      It is null when no dark-mode variant is available.\n\n    - **media\\_type**: OPTIONAL; String.\n      The media type of the image referenced by `url`, e.g. `image/svg+xml`.\n      It MUST be null when `available` is `false`.\n\n    - **available**: REQUIRED; Boolean.\n      States whether the figure exists and is servable; when `false` the URL and media-type members are null.\n\nA null value means no figure metadata is recorded for this material.",
+    "examples": [
+        [
+            {
+                "key": "band",
+                "url": "https://optimade.example.org/figures/anyt:am-1-0001/band.svg",
+                "dark_url": "https://optimade.example.org/figures/anyt:am-1-0001/dark--band.svg",
+                "media_type": "image/svg+xml",
+                "available": true
+            },
+            {
+                "key": "structure",
+                "url": "https://optimade.example.org/figures/anyt:am-1-0001/structure.png",
+                "media_type": "image/png",
+                "available": true
+            },
+            {
+                "key": "bz",
+                "available": false
+            }
+        ]
+    ]
+}
+```

@@ -92,11 +92,113 @@ overflow-wrap: break-word;
 <body>
 <header class="anyterial-header"><div class="anyterial-brand"><a class="anyterial-logo-link" href="https://www.anyterial.se"><img src="https://www.anyterial.se/img/anyterial_logo_color.svg" alt="Anyterial"></a><div class="anyterial-title"><a href="http://schemas.anyterial.se">Anyterial property definitions</a><small><a href="https://schemas.optimade.org/">OPTIMADE property definitions</a></small></div></div><div class="theme-switch" role="group" aria-label="Theme"><button type="button" class="theme-btn" data-theme-option="dark" aria-label="Use dark theme" title="Dark mode"><svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.171 19 18.1395 17.1814 19 14.2899"/><path d="M19 14C18.8319 14 18.6652 13.9941 18.5 13.9824C12.5 15 9.50001 11.5 12 5"/></svg></button><button type="button" class="theme-btn" data-theme-option="twilight" aria-label="Use twilight theme" title="Twilight mode"><svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 15C8 12.7909 9.79086 11 12 11C14.2091 11 16 12.7909 16 15"/><line x1="12" y1="8" x2="12" y2="6"/><line x1="5" y1="15" x2="3" y2="15"/><line x1="21" y1="15" x2="19" y2="15"/><line x1="19.071" y1="8.34317" x2="17.6568" y2="9.75738"/><line x1="5.41421" y1="9" x2="6.82843" y2="10.4142"/></svg></button><button type="button" class="theme-btn" data-theme-option="light" aria-label="Use light theme" title="Light mode"><svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="8" height="8" rx="4"/><line x1="12" y1="5" x2="12" y2="3"/><line x1="5" y1="12" x2="3" y2="12"/><line x1="7.75739" y1="16.6569" x2="6.34317" y2="18.0711"/><line x1="16.728" y1="17.3137" x2="18.1422" y2="18.7279"/><line x1="12" y1="21" x2="12" y2="19"/><line x1="21" y1="12" x2="19" y2="12"/><line x1="19.071" y1="5.34317" x2="17.6568" y2="6.75738"/><line x1="5.41421" y1="6" x2="6.82843" y2="7.41421"/></svg></button></div></header><div class="anyterial-prerelease-note">Note: prerelease version v0.1, subject to change</div><script>(function(){var K="anyterial_theme",D="twilight",O={dark:1,twilight:1,light:1};var r=document.documentElement;var btns=Array.from(document.querySelectorAll("[data-theme-option]"));function n(v){if(typeof v!=="string")return D;var l=v.trim().toLowerCase();return O[l]?l:D;}function apply(t){var a=n(t);r.setAttribute("data-theme",a);btns.forEach(function(b){var o=n(b.getAttribute("data-theme-option"));b.classList.toggle("is-active",o===a);b.setAttribute("aria-pressed",o===a?"true":"false");});}var s=null;try{s=window.localStorage.getItem(K);}catch(e){}apply(s||r.getAttribute("data-theme")||D);btns.forEach(function(b){b.addEventListener("click",function(){var x=n(b.getAttribute("data-theme-option"));apply(x);try{window.localStorage.setItem(K,x);}catch(e){}});});})();</script><h1>Index</h1>
 <ul>
-<li><strong>v0.1</strong><ul>
-<li><strong>standards</strong><ul>
+<li>
+<p><strong>v0.1</strong></p>
+<ul>
+<li>
+<p><strong>properties</strong></p>
+<ul>
+<li>
+<p><strong>altermagnets</strong></p>
+<ul>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/avg_spin_splitting">Average spin splitting</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/avg_spin_splitting"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/avg_spin_splitting</code></a></p>
+<p>The Brillouin-zone average of the per-k-point largest spin splitting, evaluated within an energy window of plus or minus 3 eV around the Fermi level.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/classification">Screening source classification</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/classification"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/classification</code></a></p>
+<p>The source classification assigned to the material by the altermagnet material store from the kinds of its linked symmetry-variant sources.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/electronic_type">Electronic type</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/electronic_type"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/electronic_type</code></a></p>
+<p>A qualitative classification of the electronic structure of the material.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/elements_present">Screening elements</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/elements_present"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/elements_present</code></a></p>
+<p>The alphabetized chemical element symbols extracted from the formula recorded by the altermagnet screening workflow.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/figures">Material figures</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/figures"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/figures</code></a></p>
+<p>Data-only figure metadata for the fixed band-structure, crystal-structure, and Brillouin-zone figures of the material.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/formula">Screening formula</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/formula"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/formula</code></a></p>
+<p>The chemical formula recorded by the altermagnet screening workflow, served verbatim as a display string.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/icsd_ids">ICSD identifiers</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/icsd_ids"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/icsd_ids</code></a></p>
+<p>The ordered, deduplicated Inorganic Crystal Structure Database identifiers collected from the material's linked symmetry variants.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/magndata_variants">MAGNDATA symmetry variants</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/magndata_variants"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/magndata_variants</code></a></p>
+<p>The ordered list of symmetry variants resolved for the material from its linked MAGNDATA records, one item per record and symmetry-detection tolerance.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/magnetic_phase">Magnetic phase</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/magnetic_phase"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/magnetic_phase</code></a></p>
+<p>The magnetic phase assigned to the material by collinear/noncollinear symmetry analysis.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/magnetic_phases">Magnetic phases</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/magnetic_phases"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/magnetic_phases</code></a></p>
+<p>The full ordered, deduplicated magnetic-phase list collected from the material's linked symmetry variants.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/max_spin_splitting">Maximum spin splitting</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/max_spin_splitting"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/max_spin_splitting</code></a></p>
+<p>The largest spin splitting of the electronic bands found within an energy window of plus or minus 3 eV around the Fermi level.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/min_crustal_abundance">Minimum crustal abundance</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/min_crustal_abundance"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/min_crustal_abundance</code></a></p>
+<p>The minimum crustal abundance among the constituent elements of the material, given in parts per million by mass.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/parent_spacegroups">Parent space groups</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/parent_spacegroups"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/parent_spacegroups</code></a></p>
+<p>The full ordered, deduplicated parent-space-group list collected from the material's linked symmetry variants.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/search_text">Normalized search text</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/search_text"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/search_text</code></a></p>
+<p>The normalized lowercase free-text aggregate maintained by the altermagnet material store, concatenating the formula, MAGNDATA identifiers, space groups, elements, magnetic phases, wave classes, and the source classification.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/space_group">Screening space group</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/space_group"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/space_group</code></a></p>
+<p>The space-group display string recorded by the altermagnet screening workflow, served verbatim.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/space_group_search">Normalized screening space group</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/space_group_search"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/space_group_search</code></a></p>
+<p>The screening space-group display string normalized by stripping surrounding whitespace and lowercasing.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/spin_splitting_fraction">Spin splitting fraction</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/spin_splitting_fraction"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/spin_splitting_fraction</code></a></p>
+<p>A dimensionless relative spin-splitting measure in the range 0 to 1.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/wave_class">Wave class</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/wave_class"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/wave_class</code></a></p>
+<p>The simplified spin-momentum wave class of the altermagnetic order.</p>
+</li>
+<li>
+<p><strong><a href="v0.1/properties/altermagnets/wave_classes">Wave classes</a></strong> (property) - <a href="https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/wave_classes"><code>https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/wave_classes</code></a></p>
+<p>The full ordered, deduplicated spin-momentum wave-class list collected from the material's linked symmetry variants.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>standards</strong></p>
+<ul>
 <li>
 <p><strong><a href="v0.1/standards/anyterial">Anyterial definition provider standard</a></strong> (standard) - <a href="https://schemas.anyterial.se/defs/v0.1/standards/anyterial"><code>https://schemas.anyterial.se/defs/v0.1/standards/anyterial</code></a></p>
 <p>The Anyterial definition provider standard. The crystallographic symmetry entry types formerly defined here (spacegroups, pointgroups, and transformations) have been upstreamed to the httk definition provider standard at https://schemas.httk.org/.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>units</strong></p>
+<ul>
+<li><strong>general</strong><ul>
+<li>
+<p><strong><a href="v0.1/units/general/ppm">parts per million</a></strong> (unit) - <a href="https://schemas.anyterial.se/defs/v0.1/units/general/ppm"><code>https://schemas.anyterial.se/defs/v0.1/units/general/ppm</code></a></p>
+<p>A dimensionless ratio of one part in one million.</p>
+</li>
+</ul>
 </li>
 </ul>
 </li>
