@@ -44,7 +44,7 @@ A null value means no figure metadata is recorded for this material.
 
 **Examples:**
 
-- `[{"key": "band", "url": "https://optimade.example.org/figures/anyt:am-1-0001/band.svg", "dark_url": "https://optimade.example.org/figures/anyt:am-1-0001/dark--band.svg", "media_type": "image/svg+xml", "available": true}, {"key": "structure", "url": "https://optimade.example.org/figures/anyt:am-1-0001/structure.png", "media_type": "image/png", "available": true}, {"key": "bz", "available": false}]`
+- `[{"key": "band", "url": "https://optimade.example.org/extensions/figures/anyt:am-1-0001/band.svg", "dark_url": "https://optimade.example.org/extensions/figures/anyt:am-1-0001/dark--band.svg", "media_type": "image/svg+xml", "available": true}, {"key": "structure", "url": "https://optimade.example.org/extensions/figures/anyt:am-1-0001/structure.png", "media_type": "image/png", "available": true}, {"key": "bz", "available": false}]`
 
 **Formats:** [[JSON](figures.json)] [[MD](figures.md)]
 
@@ -139,14 +139,14 @@ A null value means no figure metadata is recorded for this material.
         [
             {
                 "key": "band",
-                "url": "https://optimade.example.org/figures/anyt:am-1-0001/band.svg",
-                "dark_url": "https://optimade.example.org/figures/anyt:am-1-0001/dark--band.svg",
+                "url": "https://optimade.example.org/extensions/figures/anyt:am-1-0001/band.svg",
+                "dark_url": "https://optimade.example.org/extensions/figures/anyt:am-1-0001/dark--band.svg",
                 "media_type": "image/svg+xml",
                 "available": true
             },
             {
                 "key": "structure",
-                "url": "https://optimade.example.org/figures/anyt:am-1-0001/structure.png",
+                "url": "https://optimade.example.org/extensions/figures/anyt:am-1-0001/structure.png",
                 "media_type": "image/png",
                 "available": true
             },
