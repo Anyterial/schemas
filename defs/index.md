@@ -55,6 +55,10 @@
                 
                 The full ordered, deduplicated parent-space-group list collected from the material's linked symmetry variants.
 
+            * **[Screening rank](v0.1/properties/altermagnets/screening_rank.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/screening_rank`](https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/screening_rank.md)
+                
+                The material's ordinal position in the published high-throughput screening table, starting at 1.
+
             * **[Normalized search text](v0.1/properties/altermagnets/search_text.md)** (property) - [`https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/search_text`](https://schemas.anyterial.se/defs/v0.1/properties/altermagnets/search_text.md)
                 
                 The normalized lowercase free-text aggregate maintained by the altermagnet material store, concatenating the formula, MAGNDATA identifiers, space groups, elements, magnetic phases, wave classes, and the source classification.
