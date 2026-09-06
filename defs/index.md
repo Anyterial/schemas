@@ -2,7 +2,7 @@
 
 * **v0.1**
     * **entrytypes**
-        * **[Anyterial altermagnet screening result entry type](v0.1/entrytypes/altermagnet_screening_result.md)** (entrytype) - [`https://schemas.anyterial.se/defs/v0.1/entrytypes/altermagnet_screening_result`](https://schemas.anyterial.se/defs/v0.1/entrytypes/altermagnet_screening_result.md)
+        * **[Anyterial altermagnet screening result entry type](v0.1/entrytypes/altermagnet_screening_results.md)** (entrytype) - [`https://schemas.anyterial.se/defs/v0.1/entrytypes/altermagnet_screening_results`](https://schemas.anyterial.se/defs/v0.1/entrytypes/altermagnet_screening_results.md)
             
             An altermagnet screening result is the Anyterial altermagnets database's provider-specific main entity: one screened candidate material together with the high-throughput screening science determined for it (classification, spin-splitting metrics, electronic type, crustal abundance, magnetic phase and wave-class assignments, and the linked MAGNDATA symmetry variants), its generated band-structure/crystal-structure/Brillouin-zone figures, and the total energy of the workflow run that produced it.
             The screened crystal structure itself is a separate standard OPTIMADE structures entry, linked from this entry through a structures relationship; the reference DOIs are linked through a references relationship.
